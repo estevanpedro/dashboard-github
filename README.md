@@ -11,7 +11,7 @@ yarn start
 
 ## How to autofix code on VScode
 
-Add this on your VScode confog:
+Add this on your VScode config:
 
 ```json
 "editor.formatOnSave": true,
