@@ -9,7 +9,7 @@ yarn
 yarn start
 ```
 
-## How to autofix code on vscoe
+## How to autofix code on VScode
 
 Add this on your VScode confog:
 
