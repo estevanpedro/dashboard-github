@@ -15,6 +15,8 @@ export default {
   },
   fontSize: {
     small: '20px',
+    regular: '22px',
     big: '28px',
+    title: '40px',
   },
 }
