@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import ds from '../../style/designSystem'
+import ds from '../../design/designSystem'
 
 export const Container = styled.div`
   display: flex;

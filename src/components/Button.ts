@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import ds from '../style/designSystem'
+import ds from '../design/designSystem'
 
 export default styled.button<ButtonProps>`
   width: 217px;
