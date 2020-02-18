@@ -13,6 +13,7 @@ export const Label = styled.label<LabelProps>`
   font-size: ${ds.fontSize.small};
   color: ${props =>
     !props.isFocused ? ds.colors.contrast : ds.colors.primary};
+  transition: 0.3s ease color;
 `
 
 interface LabelProps {
@@ -27,6 +28,7 @@ export const InputField = styled.input<InputFieldProps>`
       : `1px solid ${ds.colors.primary}`};
   font-size: ${ds.fontSize.big};
   outline: none;
+  transition: 0.3s ease border-bottom;
 `
 
 interface InputFieldProps {
