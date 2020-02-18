@@ -4,18 +4,23 @@ import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 
 import store, { persistor } from './redux/store'
-import GlobalStyle from './style/GlobalStyle'
+import GlobalStyle from './design/GlobalStyle'
 import { Route } from './utils/routerUtils'
+import Container from './components/Container'
+
+import Login from './containers/Login'
 
 const App = (): JSX.Element => (
   <>
     <GlobalStyle />
     <Provider store={store}>
       <PersistGate persistor={persistor} loading={null}>
-        <Router>
-          {/* <Route path="/" component={}/> */}
-          {/* <Route path="/" component={}/> */}
-        </Router>
+        <Container>
+          <Router>
+            <Route path='/login' component={<Login />} />
+            {/* <Route path="/" component={}/> */}
+          </Router>
+        </Container>
       </PersistGate>
     </Provider>
   </>

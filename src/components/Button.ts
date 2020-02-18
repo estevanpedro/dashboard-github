@@ -12,6 +12,7 @@ export default styled.button<ButtonProps>`
   font-size: ${ds.fontSize.regular};
   font-weight: bold;
   box-shadow: 2px 3px 4px rgba(0, 0, 0, 0.25);
+  margin: ${props => props.margin || 0};
   cursor: pointer;
   &:active {
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.25);
@@ -20,4 +21,5 @@ export default styled.button<ButtonProps>`
 
 interface ButtonProps {
   isSecondary?: boolean
+  margin?: string
 }
