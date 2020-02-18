@@ -1,14 +1,16 @@
 import React, { useState } from 'react'
-import { Container, Label, InputField } from './style'
+import { Container, Label, InputField, Error } from './style'
 
 interface Props {
   label: string
   value: string
-  onChange?: () => void
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+  type: string
+  error?: string
   placeholder?: string
 }
 
-const Input = ({ label, value, onChange, placeholder }: Props) => {
+const Input = ({ label, value, onChange, placeholder, type, error }: Props) => {
   const [isFocused, setIsFocused] = useState(false)
 
   return (
@@ -21,7 +23,9 @@ const Input = ({ label, value, onChange, placeholder }: Props) => {
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         isFocused={isFocused}
+        type={type}
       />
+      {error && error.length && <Error>{error}</Error>}
     </Container>
   )
 }
