@@ -5,7 +5,7 @@ import Input from '../../components/Input'
 import Link from '../../components/Link'
 import { SubTitle } from '../../components/Title'
 
-import { LoginContainer, LoginForm, SocialButtons } from './elements'
+import { LoginContainer, LoginForm } from './elements'
 
 const Login = () => {
   const [usernameValue, setUsernameValue] = useState('')
@@ -26,17 +26,6 @@ const Login = () => {
       }
       // TODO: send data to the backend
       console.log(userData)
-    }
-  }
-
-  const handleSocialLogin = (socialType: 'facebook' | 'google') => {
-    // TODO: social login
-    switch (socialType) {
-      case 'facebook':
-        console.log('FACEBOOK')
-
-      case 'google':
-        console.log('GOOGLE')
     }
   }
 
@@ -81,14 +70,6 @@ const Login = () => {
         <Button type='submit'>Login</Button>
         <Link>Create an account</Link>
       </LoginForm>
-      <SocialButtons>
-        <Button isSecondary onClick={() => handleSocialLogin('facebook')}>
-          Facebook
-        </Button>
-        <Button isSecondary onClick={() => handleSocialLogin('google')}>
-          Google
-        </Button>
-      </SocialButtons>
     </LoginContainer>
   )
 }

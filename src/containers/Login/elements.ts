@@ -15,10 +15,3 @@ export const LoginForm = styled.form`
   flex-direction: column;
   align-items: center;
 `
-
-export const SocialButtons = styled.div`
-  height: 120px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-`
