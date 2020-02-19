@@ -21,7 +21,7 @@ const Login = () => {
       setPasswordError('')
 
       const userData = {
-        email: usernameValue,
+        username: usernameValue,
         password: passwordValue,
       }
 
