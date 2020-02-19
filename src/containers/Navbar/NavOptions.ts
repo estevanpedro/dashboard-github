@@ -27,6 +27,6 @@ export default [
     id: 5,
     title: 'Logout',
     needsLogin: true,
-    to: '/logout',
+    to: '/login',
   },
 ]
