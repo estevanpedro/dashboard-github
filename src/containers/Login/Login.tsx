@@ -5,8 +5,6 @@ import Input from '../../components/Input'
 import Link from '../../components/Link'
 import { SubTitle } from '../../components/Title'
 
-import Api from '../../Api'
-
 import { LoginContainer, LoginForm } from './elements'
 
 const Login = () => {
@@ -27,12 +25,6 @@ const Login = () => {
         password: passwordValue,
       }
       // TODO: send data to the backend
-      try {
-        const response = await Api.login(userData)
-        console.log(response)
-      } catch (e) {
-        console.error(e)
-      }
     }
   }
 
