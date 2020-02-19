@@ -1,7 +1,7 @@
 import React from 'react'
 import { navigate } from '@reach/router'
 
-import { NavbarContainer, LinksWrapper, Link } from './elements'
+import { NavbarContainer, LinksWrapper, NavLink } from './elements'
 import NavOptions from './NavOptions'
 const isLogged = true
 
@@ -17,7 +17,7 @@ const Navbar = () => {
       <LinksWrapper>
         {NavOptions.map(option =>
           renderLink(
-            <Link onClick={() => navigate(option.to)}>{option.title}</Link>,
+            <NavLink to={option.to}>{option.title}</NavLink>,
             option.needsLogin
           )
         )}

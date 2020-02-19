@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Link } from '@reach/router'
 
 import ds from '../../design/designSystem'
 
@@ -19,10 +20,11 @@ export const LinksWrapper = styled.span`
   justify-content: space-between;
 `
 
-export const Link = styled.a`
+export const NavLink = styled(Link)`
   margin-left: 35px;
   color: ${ds.colors.background};
   font-size: ${ds.fontSize.small};
+  text-decoration: none;
   cursor: pointer;
   transition: 0.2s ease color;
   &:hover {
