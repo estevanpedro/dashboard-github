@@ -8,22 +8,24 @@ import { SubTitle } from '../../components/Title'
 import { LoginContainer, LoginForm } from './elements'
 
 const Login = () => {
-  const [emailValue, setEmailValue] = useState('')
+  const [usernameValue, setUsernameValue] = useState('')
   const [passwordValue, setPasswordValue] = useState('')
-  const [emailError, setEmailError] = useState('')
+  const [usernameError, setUsernameError] = useState('')
   const [passwordError, setPasswordError] = useState('')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
     if (loginValidation()) {
-      setEmailError('')
+      setUsernameError('')
       setPasswordError('')
 
       const userData = {
-        email: emailValue,
+        email: usernameValue,
         password: passwordValue,
       }
+
+      console.log(userData)
       // TODO: send data to the backend
     }
   }
@@ -32,8 +34,8 @@ const Login = () => {
     // TODO: improve validation
     let isValid = true
 
-    if (!emailValue.length) {
-      setEmailError('Your username needs to have at least 3 characters')
+    if (!usernameValue.length) {
+      setUsernameError('Your username needs to have at least 3 characters')
       isValid = false
     }
 
@@ -50,13 +52,13 @@ const Login = () => {
       <SubTitle>Login with your Splitcoin account</SubTitle>
       <LoginForm>
         <Input
-          label='Email'
-          value={emailValue}
+          label='Username'
+          value={usernameValue}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setEmailValue(e.target.value)
+            setUsernameValue(e.target.value)
           }
-          type='email'
-          error={emailError}
+          type='text'
+          error={usernameError}
         />
         <Input
           label='Password'
