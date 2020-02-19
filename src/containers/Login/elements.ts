@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const LoginContainer = styled.div`
-  height: 100vh;
+  height: calc(100vh - 60px);
   display: flex;
   flex-direction: column;
   align-items: center;

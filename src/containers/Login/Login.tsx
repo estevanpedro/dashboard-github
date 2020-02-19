@@ -5,27 +5,34 @@ import Input from '../../components/Input'
 import Link from '../../components/Link'
 import { SubTitle } from '../../components/Title'
 
+import Api from '../../Api'
+
 import { LoginContainer, LoginForm } from './elements'
 
 const Login = () => {
-  const [usernameValue, setUsernameValue] = useState('')
+  const [emailValue, setEmailValue] = useState('')
   const [passwordValue, setPasswordValue] = useState('')
-  const [usernameError, setUsernameError] = useState('')
+  const [emailError, setEmailError] = useState('')
   const [passwordError, setPasswordError] = useState('')
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
     if (loginValidation()) {
-      setUsernameError('')
+      setEmailError('')
       setPasswordError('')
 
       const userData = {
-        username: usernameValue,
+        email: emailValue,
         password: passwordValue,
       }
       // TODO: send data to the backend
-      console.log(userData)
+      try {
+        const response = await Api.login(userData)
+        console.log(response)
+      } catch (e) {
+        console.error(e)
+      }
     }
   }
 
@@ -33,8 +40,8 @@ const Login = () => {
     // TODO: improve validation
     let isValid = true
 
-    if (!usernameValue.length) {
-      setUsernameError('Your username needs to have at least 3 characters')
+    if (!emailValue.length) {
+      setEmailError('Your username needs to have at least 3 characters')
       isValid = false
     }
 
@@ -42,6 +49,7 @@ const Login = () => {
       setPasswordError('Your password needs to have at least 6 characters')
       isValid = false
     }
+
     return isValid
   }
 
@@ -50,13 +58,13 @@ const Login = () => {
       <SubTitle>Login with your Splitcoin account</SubTitle>
       <LoginForm>
         <Input
-          label='Username'
-          value={usernameValue}
+          label='Email'
+          value={emailValue}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setUsernameValue(e.target.value)
+            setEmailValue(e.target.value)
           }
-          type='text'
-          error={usernameError}
+          type='email'
+          error={emailError}
         />
         <Input
           label='Password'
