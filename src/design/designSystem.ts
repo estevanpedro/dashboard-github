@@ -14,9 +14,10 @@ export default {
     vertical: '30px',
   },
   fontSize: {
-    small: '20px',
-    regular: '22px',
-    big: '28px',
-    title: '40px',
+    small: '18px',
+    regular: '20px',
+    medium: '22px',
+    big: '26px',
+    title: '38px',
   },
 }

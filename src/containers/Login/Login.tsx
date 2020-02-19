@@ -13,7 +13,7 @@ const Login = () => {
   const [usernameError, setUsernameError] = useState('')
   const [passwordError, setPasswordError] = useState('')
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
     if (loginValidation()) {
@@ -24,8 +24,9 @@ const Login = () => {
         username: usernameValue,
         password: passwordValue,
       }
-      // TODO: send data to the backend
+
       console.log(userData)
+      // TODO: send data to the backend
     }
   }
 
@@ -42,6 +43,7 @@ const Login = () => {
       setPasswordError('Your password needs to have at least 6 characters')
       isValid = false
     }
+
     return isValid
   }
 
