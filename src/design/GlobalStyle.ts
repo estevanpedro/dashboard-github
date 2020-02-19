@@ -7,15 +7,6 @@ export default createGlobalStyle`
     box-sizing: 'border-box';
     font-family: 'Source Sans Pro', sans-serif;
   }
-  html {
-    height: 100%;
-    body {
-      height: 100%;
-      #root {
-        height: 100%;
-      }
-    }
-  }
   button {
     background: none;
     border: none;
