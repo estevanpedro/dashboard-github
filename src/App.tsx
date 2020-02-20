@@ -19,7 +19,7 @@ const App = (): JSX.Element => (
     <GlobalStyle />
     <Provider store={store}>
       <PersistGate persistor={persistor} loading={null}>
-        <Router primary={false}>
+        <Router>
           <Route path='/login' component={<Login />} />
           <Route path='/sign-up' component={<SignUp />} />
           <Route path='/my-schemes' component={<MySchemes />} />
