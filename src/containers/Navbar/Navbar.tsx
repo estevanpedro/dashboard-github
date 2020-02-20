@@ -1,5 +1,4 @@
 import React from 'react'
-import { navigate } from '@reach/router'
 
 import { NavbarContainer, LinksWrapper, NavLink } from './elements'
 import NavOptions from './NavOptions'

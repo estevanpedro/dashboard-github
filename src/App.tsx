@@ -2,6 +2,7 @@ import React from 'react'
 import { Router } from '@reach/router'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
+import dotenv from 'dotenv'
 
 import store, { persistor } from './redux/store'
 import GlobalStyle from './design/GlobalStyle'
@@ -15,6 +16,8 @@ import MySchemes from './containers/MySchemes'
 import Library from './containers/Library'
 import Api from './containers/Api'
 import Profile from './containers/Profile'
+
+dotenv.config()
 
 const App = (): JSX.Element => (
   <>
