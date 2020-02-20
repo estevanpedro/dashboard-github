@@ -13,6 +13,8 @@ class Api {
     }
   }
 
+  // TODO: methods documentation
+
   login = async (loginData: { username: string; password: string }) => {
     return await axios.post(
       `${this.url}/login`,
