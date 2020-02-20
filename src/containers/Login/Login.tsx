@@ -72,7 +72,7 @@ const Login = () => {
         <Button type='submit' margin='0 0 20px 0'>
           Login
         </Button>
-        <Link>Create an account</Link>
+        <Link to='/sign-up'>Create an account</Link>
       </LoginForm>
     </LoginContainer>
   )
