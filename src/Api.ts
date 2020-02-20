@@ -3,13 +3,13 @@ import axios from 'axios'
 class Api {
   url: string
   options: {
-    headers: string
+    headers: Object
   }
 
   constructor() {
     this.url = 'https://splitmaster.herokuapp.com'
     this.options = {
-      headers: 'Access-Control-Allow-Origin',
+      headers: { 'Access-Control-Allow-Origin': '*' },
     }
   }
 
