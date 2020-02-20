@@ -7,7 +7,7 @@ class Api {
   }
 
   constructor() {
-    this.url = 'https://splitmaster.herokuapp.com'
+    this.url = process.env.REACT_APP_API_ENDPOINT as string
     this.options = {
       headers: { 'Access-Control-Allow-Origin': '*' },
     }
