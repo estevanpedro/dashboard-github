@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 
 import Button from '../../components/Button'
 import Input from '../../components/Input'
@@ -6,6 +7,8 @@ import Link from '../../components/Link'
 import Title from '../../components/Title'
 
 import Api from '../../Api'
+
+import { changeSecretToken } from '../../redux/ducks/auth'
 
 import { SignUpContainer, SignUpForm, ReturnText } from './elements'
 
@@ -20,6 +23,8 @@ const SignUp = () => {
   const [userNameError, setUsernameError] = useState('')
   const [emailError, setEmailError] = useState('')
   const [passwordError, setPasswordError] = useState('')
+
+  const dispatch = useDispatch()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -40,7 +45,7 @@ const SignUp = () => {
       try {
         const response = await Api.createUser(signUpData)
         console.log(response)
-        // TODO: consume data
+        dispatch(changeSecretToken(response.data.secret_token))
       } catch (e) {
         console.error(e)
       }
@@ -48,6 +53,7 @@ const SignUp = () => {
   }
 
   const signUpvalidation = () => {
+    // TODO: improve signup validation
     let isValid = true
 
     if (fullNameValue.length < 3) {
