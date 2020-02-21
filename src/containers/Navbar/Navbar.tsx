@@ -16,7 +16,9 @@ const Navbar = () => {
       <LinksWrapper>
         {NavOptions.map(option =>
           renderLink(
-            <NavLink to={option.to}>{option.title}</NavLink>,
+            <NavLink to={option.to} key={option.id}>
+              {option.title}
+            </NavLink>,
             option.needsLogin
           )
         )}

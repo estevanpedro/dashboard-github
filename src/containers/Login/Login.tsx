@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import Button from '../../components/Button'
 import Input from '../../components/Input'
 import Link from '../../components/Link'
+
 import { SubTitle } from '../../components/Title'
 
 import Api from '../../Api'
@@ -78,7 +79,7 @@ const Login = () => {
         <Button type='submit' margin='0 0 20px 0'>
           Login
         </Button>
-        <Link>Create an account</Link>
+        <Link to='/sign-up'>Create an account</Link>
       </LoginForm>
     </LoginContainer>
   )
