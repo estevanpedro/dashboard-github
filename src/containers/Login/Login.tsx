@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 
 import Button from '../../components/Button'
 import Input from '../../components/Input'
@@ -7,6 +8,9 @@ import Link from '../../components/Link'
 import { SubTitle } from '../../components/Title'
 
 import Api from '../../Api'
+
+import { changeSecretToken } from '../../redux/ducks/auth'
+
 import { LoginContainer, LoginForm } from './elements'
 
 const Login = () => {
@@ -14,6 +18,8 @@ const Login = () => {
   const [passwordValue, setPasswordValue] = useState('')
   const [usernameError, setUsernameError] = useState('')
   const [passwordError, setPasswordError] = useState('')
+
+  const dispatch = useDispatch()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -30,7 +36,7 @@ const Login = () => {
       try {
         const response = await Api.login(userData)
         console.log(response)
-        // TODO: consume data
+        dispatch(changeSecretToken(response.data.secret_token))
       } catch (e) {
         console.error(e)
       }
