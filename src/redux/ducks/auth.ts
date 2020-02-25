@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export interface AuthState {
-  secret_token: string
+  secretToken: string
 }
 
 const initialState: AuthState = {
-  secret_token: '',
+  secretToken: '',
 }
 
 const reducer = createSlice({
@@ -13,7 +13,7 @@ const reducer = createSlice({
   initialState,
   reducers: {
     changeSecretToken(state: AuthState, action: PayloadAction<string>) {
-      state.secret_token = action.payload
+      state.secretToken = action.payload
     },
   },
 })
