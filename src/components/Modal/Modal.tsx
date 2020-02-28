@@ -4,7 +4,6 @@ import Title from '../../components/Title'
 import Text from '../../components/Text'
 import { Container, ModalField, Button, Close, IconButton } from '../../components/Modal/style'
 
-
 const Modal = ({tool, description, Functions}:{tool: string; description: string; Functions: any}) => {
 
   return (
@@ -16,26 +15,20 @@ const Modal = ({tool, description, Functions}:{tool: string; description: string
       {close => (
         <Container>
           <Close onClick={close}> &times; </Close>
-        
           <ModalField align={'center'}>
           <Title> {tool} </Title>
           </ModalField>
-
-
           <ModalField >
             <Text size={'regular'}> {description} </Text>
           </ModalField>
-
           <ModalField >
             <Functions />
           </ModalField>
-
           <ModalField align={'center'}>
             <Button onClick={() => { close(); }} >
               Confirm
             </Button>
           </ModalField>
-
         </Container>
       )}
     </Popup>

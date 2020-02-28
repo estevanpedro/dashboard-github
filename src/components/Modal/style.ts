@@ -11,17 +11,14 @@ border-color: ${ds.colors.secondaryBg};
 border-width: 0.1;
 width: 300px;
 height: 25px;
-
 `
 interface InputProps {
 }
 
 export const ModalField = styled.div<ModalField>`
-
   width: 100%;
   margin-top: 10px;
   text-align: ${props => props.align ? props.align : 'left'}
-
 `
 interface ModalField {
     align?: 'left' | 'center' | 'right'
