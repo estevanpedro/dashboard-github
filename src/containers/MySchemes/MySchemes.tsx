@@ -1,10 +1,16 @@
 import React from 'react'
+import Modal from '../../components/Modal'
+import Text from '../../components/Text'
+
 
 const MySchemes = () => {
+
+  function ToolFunctions() {
+    return <Text>(TODO) Functions to show components</Text>
+  }
+
   return (
-    <div>
-      <h1>My Schemes</h1>
-    </div>
+    <Modal tool={'Tool'} description={'Description'} Functions={ToolFunctions}/>
   )
 }
 
