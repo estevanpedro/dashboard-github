@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { navigate } from '@reach/router'
 
 import Button from '../../components/Button'
 import Input from '../../components/Input'
@@ -35,8 +36,8 @@ const Login = () => {
 
       try {
         const response = await Api.login(userData)
-        console.log(response)
         dispatch(changeSecretToken(response.data.secret_token))
+        navigate('/profile')
       } catch (e) {
         console.error(e)
       }

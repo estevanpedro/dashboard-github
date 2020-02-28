@@ -1,9 +1,11 @@
 import React from 'react'
+import Modal from '../../components/Modal'
+import Text from '../../components/Text'
 
 const MySchemes = () => {
   return (
     <div>
-      <h1>My Schemes</h1>
+      <h1>MySchemes</h1>
     </div>
   )
 }
