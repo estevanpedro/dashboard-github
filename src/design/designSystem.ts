@@ -14,6 +14,7 @@ export default {
     vertical: '30px',
   },
   fontSize: {
+    verySmall: '16px;',
     small: '18px',
     regular: '20px',
     medium: '22px',

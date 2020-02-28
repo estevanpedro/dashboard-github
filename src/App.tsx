@@ -14,6 +14,7 @@ import MySchemes from './containers/MySchemes'
 import Library from './containers/Library'
 import Api from './containers/Api'
 import Profile from './containers/Profile'
+import SchemeMap from './containers/SchemeMap'
 
 dotenv.config()
 
@@ -29,6 +30,7 @@ const App = (): JSX.Element => (
           <Route path='/library' component={<Library />} />
           <Route path='/api' component={<Api />} />
           <Route path='/profile' component={<Profile />} />
+          <Route path='/scheme' component={<SchemeMap />} />
           {/* <Route path="/" component={}/> */}
         </Router>
       </PersistGate>
