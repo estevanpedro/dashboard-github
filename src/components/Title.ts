@@ -6,6 +6,6 @@ export default styled.h1`
   font-size: ${ds.fontSize.title};
 `
 
-export const SubTitle = styled.h2`
+export const SubTitle = styled.h1`
   font-size: ${ds.fontSize.big};
 `

@@ -45,6 +45,10 @@ class Api {
       this.options
     )
   }
+
+  getProfile = async (secretToken: string) => {
+    return await axios.get(`${this.url}/profile?secret_token=${secretToken}`)
+  }
 }
 
 export default new Api()
