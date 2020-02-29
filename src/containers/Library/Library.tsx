@@ -3,7 +3,7 @@ import Title from '../../components/Title'
 const Library = () => {
   return (
     <div>
-    <Title>Profile</Title>
+      <Title>Profile</Title>
     </div>
   )
 }

@@ -5,6 +5,15 @@ export const Container = styled.div`
   padding: 10px 10px;
 `
 
+export const Input = styled.input<InputProps>`
+  border-radius: 4px;
+  border-color: ${ds.colors.secondaryBg};
+  border-width: 0.1;
+  width: 300px;
+  height: 25px;
+`
+interface InputProps { }
+
 export const ModalField = styled.div<ModalField>`
   width: 100%;
   margin-top: 10px;
@@ -50,10 +59,12 @@ export const IconButton = styled.button`
 //Stylesheet para o contentStyle do Popup
 export const ModalLight = {
   width: 400,
-  borderRadius: 20,
+  borderRadius: 4,
+  border: 'none',
 }
 export const ModalDark = {
   width: 400,
-  borderRadius: 20,
+  borderRadius: 4,
   backgroundColor: '#262E33',
+  border: 'none',
 }
