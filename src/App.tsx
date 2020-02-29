@@ -14,13 +14,14 @@ import MySchemes from './containers/MySchemes'
 import Library from './containers/Library'
 import Api from './containers/Api'
 import Profile from './containers/Profile'
-
+import {MyThemeProvider} from './design/Theme/context/ThemeContext'
 dotenv.config()
 
 const App = (): JSX.Element => (
   <>
     <GlobalStyle />
     <Provider store={store}>
+    <MyThemeProvider>
       <PersistGate persistor={persistor} loading={null}>
         <Router>
           <Route path='/login' component={<Login />} />
@@ -32,6 +33,8 @@ const App = (): JSX.Element => (
           {/* <Route path="/" component={}/> */}
         </Router>
       </PersistGate>
+      </MyThemeProvider>
+
     </Provider>
   </>
 )

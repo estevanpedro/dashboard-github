@@ -1,15 +1,17 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import Popup from "reactjs-popup";
 import Title from '../../components/Title'
 import Text from '../../components/Text'
-import { Container, ModalField, Button, Close, IconButton } from '../../components/Modal/style'
+import { Container, ModalField, Button, Close, IconButton, ModalLight, ModalDark } from '../../components/Modal/style'
 
+import {ThemeContext} from 'styled-components'
 
 const Modal = ({tool, description, Functions}:{tool: string; description: string; Functions: any}) => {
 
+  const themeContext = useContext(ThemeContext);
   return (
     <Popup 
-    contentStyle={{width: 400, borderRadius: 20}}
+    contentStyle={themeContext.mode === 'light' ? ModalLight : ModalDark}
     trigger={ <IconButton>  {tool}  </IconButton> } 
     modal
     >

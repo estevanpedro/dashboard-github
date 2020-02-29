@@ -8,7 +8,7 @@ export const NavbarContainer = styled.nav`
   height: 60px;
   padding: 0 60px;
   position: fixed;
-  background-color: ${ds.colors.contrast};
+  background-color: ${ds.colors.header};
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -22,7 +22,18 @@ export const LinksWrapper = styled.span`
 
 export const NavLink = styled(Link)`
   margin-left: 35px;
-  color: ${ds.colors.background};
+  color: ${ds.colors.white};
+  font-size: ${ds.fontSize.small};
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.2s ease color;
+  &:hover {
+    color: ${ds.colors.primary};
+  }
+`
+export const ThemeButton = styled.button`
+  margin-left: 35px;
+  color: ${ds.colors.white};
   font-size: ${ds.fontSize.small};
   text-decoration: none;
   cursor: pointer;

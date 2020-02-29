@@ -83,9 +83,11 @@ const Login = () => {
           type='password'
           error={passwordError}
         />
+
         <Button type='submit' margin='0 0 20px 0'>
           Login
         </Button>
+
         <Link to='/sign-up'>Create an account</Link>
       </LoginForm>
     </LoginContainer>
