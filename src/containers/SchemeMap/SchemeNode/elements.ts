@@ -29,6 +29,6 @@ export const Node = styled.button<NodeProps>`
   }
 `
 
-interface NodeProps {
+export interface NodeProps {
   primary?: boolean
 }

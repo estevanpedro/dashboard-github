@@ -5,19 +5,14 @@ export const PopupStyle = {
   width: 400,
   borderRadius: 4,
   border: 'none',
+  display: 'flex',
+  padding: '15px 30px',
 }
 
 export const Container = styled.div`
   padding: 10px 10px;
 `
 
-export const Input = styled.input<InputProps>`
-  border-radius: 4px;
-  border-color: ${ds.colors.secondaryBg};
-  border-width: 0.1;
-  width: 300px;
-  height: 25px;
-`
 interface InputProps {}
 
 export const ModalField = styled.div<ModalField>`
