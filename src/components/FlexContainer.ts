@@ -10,7 +10,7 @@ export default styled.div<FlexContainer>`
   flex-direction: ${props => props.direction || 'row'};
   justify-content: ${props => props.justify || 'center'};
   align-items: ${props => props.align || 'stretch'};
-`;
+`
 
 interface FlexContainer {
   width?: string
@@ -26,5 +26,5 @@ interface FlexContainer {
     | 'space-between'
     | 'space-around'
     | 'space-evenly'
-  align?: 'stretch' | 'center' | 'flex-start' | 'flex-end
+  align?: 'stretch' | 'center' | 'flex-start' | 'flex-end'
 }
