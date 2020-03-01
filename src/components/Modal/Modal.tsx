@@ -5,16 +5,17 @@ import Title from '../../components/Title'
 import Text from '../../components/Text'
 import Button from '../../components/Button'
 
-import { PopupStyle, Container, ModalField, Close } from './elements'
+import { PopupStyle, Container, ModalField, Close } from './style'
 
 interface Props {
   trigger: ReactElement
   title: string
   description: string
   children: ReactElement
+  onSubmit?: () => {}
 }
 
-const Modal = ({ trigger, title, description, children }: Props) => {
+const Modal = ({ trigger, title, description, children, onSubmit }: Props) => {
   return (
     <Popup contentStyle={PopupStyle} trigger={trigger} modal>
       {close => (
@@ -27,9 +28,10 @@ const Modal = ({ trigger, title, description, children }: Props) => {
             <Text size={'regular'}> {description} </Text>
           </ModalField>
           <ModalField>{children}</ModalField>
-          <ModalField align={'center'}>
+          <ModalField align={'right'}>
             <Button
               onClick={() => {
+                // onSubmit()
                 close()
               }}
             >

@@ -11,13 +11,14 @@ export const PopupStyle = {
 
 export const Container = styled.div`
   padding: 10px 10px;
+  width: 100%;
 `
 
 interface InputProps {}
 
 export const ModalField = styled.div<ModalField>`
   width: 100%;
-  margin-top: 10px;
+  margin-top: 20px;
   text-align: ${props => (props.align ? props.align : 'left')};
 `
 interface ModalField {

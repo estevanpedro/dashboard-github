@@ -1,9 +1,17 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+
+import { RootState } from '../../../redux/rootReducer'
 
 import { addSplit, removeSplit } from '../../../redux/ducks/nodeOptions/split'
+import {
+  updateNameValue,
+  updateHoursValue,
+  updateSecondsValue,
+} from '../../../redux/ducks/nodeOptions/timer'
 
 import Input from '../../../components/Input'
+import FlexContainer from '../../../components/FlexContainer'
 import Text from '../../../components/Text'
 
 export const SplitContent = () => {
@@ -15,9 +23,42 @@ export const SplitContent = () => {
 }
 
 export const TimerContent = () => {
+  const { name, hours, seconds } = useSelector(
+    (state: RootState) => state.timer
+  )
+  const dispatch = useDispatch()
+
   return (
     <>
-      <h1>TimerContentt</h1>
+      <Input
+        label='Name'
+        value={name}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          dispatch(updateNameValue(e.target.value))
+        }
+        type='text'
+        width={300}
+      />
+      <FlexContainer width='70%' justify='space-between'>
+        <Input
+          label='Hours'
+          value={String(hours)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            dispatch(updateHoursValue(Number(e.target.value)))
+          }
+          type='number'
+          width={100}
+        />
+        <Input
+          label='Seconds'
+          value={String(seconds)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            dispatch(updateSecondsValue(Number(e.target.value)))
+          }
+          type='number'
+          width={100}
+        />
+      </FlexContainer>
     </>
   )
 }

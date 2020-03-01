@@ -2,13 +2,17 @@ import styled from 'styled-components'
 
 import ds from '../../design/designSystem'
 
-export const Container = styled.div`
+export const Container = styled.div<ContainerProps>`
   display: flex;
   flex-direction: column;
-  width: 460px;
+  width: ${props => props.width}px;
   height: 86px;
   margin-bottom: 20px;
 `
+
+interface ContainerProps {
+  width: number
+}
 
 export const Label = styled.label<LabelProps>`
   margin-bottom: 10px;
