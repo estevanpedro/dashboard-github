@@ -1,7 +1,9 @@
 import React from 'react'
 
-import { NavbarContainer, LinksWrapper, NavLink } from './elements'
+import { NavbarContainer, LinksWrapper, NavLink, ThemeButton } from './elements'
 import NavOptions from './NavOptions'
+import { useTheme } from '../../design/Theme/context/ThemeContext';
+
 const isLogged = true
 
 const Navbar = () => {
@@ -10,7 +12,7 @@ const Navbar = () => {
 
     return element
   }
-
+  const themeToggle = useTheme();
   return (
     <NavbarContainer>
       <LinksWrapper>
@@ -23,6 +25,9 @@ const Navbar = () => {
           )
         )}
       </LinksWrapper>
+      <ThemeButton  onClick={() => themeToggle.toggle()} >
+          Theme
+      </ThemeButton>
     </NavbarContainer>
   )
 }
