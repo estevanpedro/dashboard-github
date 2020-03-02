@@ -5,13 +5,13 @@ import ds from '../../design/designSystem'
 export const Container = styled.div<ContainerProps>`
   display: flex;
   flex-direction: column;
-  width: ${props => props.width}px;
+  width: ${props => props.width};
   height: 86px;
   margin-bottom: 20px;
 `
 
 interface ContainerProps {
-  width: number
+  width: string
 }
 
 export const Label = styled.label<LabelProps>`

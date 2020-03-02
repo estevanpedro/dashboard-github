@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'react'
+
 import splitIcon from '../../../assets/icons/split.svg'
 import timerIcon from '../../../assets/icons/stopwatch.svg'
 import notificationIcon from '../../../assets/icons/bell.svg'
@@ -16,7 +18,15 @@ import {
   EditContent,
 } from './ModalContents'
 
-export default [
+export interface NodeOption {
+  id: number
+  title: 'Split' | 'Timer' | 'Notification' | 'Send' | 'Swap' | 'Event' | 'Edit'
+  description: string
+  icon: string
+  content: FunctionComponent
+}
+
+const options: NodeOption[] = [
   {
     id: 1,
     title: 'Split',
@@ -67,3 +77,5 @@ export default [
     content: EditContent,
   },
 ]
+
+export default options

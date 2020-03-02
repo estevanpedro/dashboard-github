@@ -12,7 +12,7 @@ interface Props {
   title: string
   description: string
   children: ReactElement
-  onSubmit?: () => {}
+  onSubmit: () => void
 }
 
 const Modal = ({ trigger, title, description, children, onSubmit }: Props) => {
@@ -31,7 +31,7 @@ const Modal = ({ trigger, title, description, children, onSubmit }: Props) => {
           <ModalField align={'right'}>
             <Button
               onClick={() => {
-                // onSubmit()
+                onSubmit()
                 close()
               }}
             >
