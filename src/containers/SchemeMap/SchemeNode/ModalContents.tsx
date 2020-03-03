@@ -4,12 +4,19 @@ import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../../redux/rootReducer'
 
 import { addSplit, removeSplit } from '../../../redux/ducks/nodeOptions/split'
+
 import {
   updateNameValue,
   updateHoursValue,
   updateMinutesValue,
   updateSecondsValue,
 } from '../../../redux/ducks/nodeOptions/timer'
+
+import {
+  addEmail,
+  removeEmail,
+  updateEmail,
+} from '../../../redux/ducks/nodeOptions/notify'
 
 import Input from '../../../components/Input'
 import FlexContainer from '../../../components/FlexContainer'
@@ -73,10 +80,23 @@ export const TimerContent = () => {
   )
 }
 
-export const NotificationContent = () => {
+export const NotifyContent = () => {
+  const { emails } = useSelector((state: RootState) => state.notify)
+  const dispatch = useDispatch()
+
   return (
     <>
-      <h1>NotificationContent</h1>
+      {emails.map((email, i) => (
+        <Input
+          label={`Email ${i + 1}`}
+          value={email.email}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            dispatch(updateEmail({ id: email.id, email: e.target.value }))
+          }
+          type='email'
+          width='100%'
+        />
+      ))}
     </>
   )
 }

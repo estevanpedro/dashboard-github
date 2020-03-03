@@ -33,7 +33,7 @@ const SchemeNode = ({ nodeData }: Props) => {
 
       console.log(timerData)
     },
-    Notification: () => {},
+    Notify: () => {},
     Send: () => {},
     Swap: () => {},
     Event: () => {},

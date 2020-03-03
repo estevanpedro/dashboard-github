@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react'
 
 import splitIcon from '../../../assets/icons/split.svg'
 import timerIcon from '../../../assets/icons/stopwatch.svg'
-import notificationIcon from '../../../assets/icons/bell.svg'
+import notifyIcon from '../../../assets/icons/bell.svg'
 import sendIcon from '../../../assets/icons/share.svg'
 import swapIcon from '../../../assets/icons/sort.svg'
 import eventIcon from '../../../assets/icons/tick.svg'
@@ -11,7 +11,7 @@ import editIcon from '../../../assets/icons/edit.svg'
 import {
   SplitContent,
   TimerContent,
-  NotificationContent,
+  NotifyContent,
   SendContent,
   SwapContent,
   EventContent,
@@ -20,7 +20,7 @@ import {
 
 export interface NodeOption {
   id: number
-  title: 'Split' | 'Timer' | 'Notification' | 'Send' | 'Swap' | 'Event' | 'Edit'
+  title: 'Split' | 'Timer' | 'Notify' | 'Send' | 'Swap' | 'Event' | 'Edit'
   description: string
   icon: string
   content: FunctionComponent
@@ -43,10 +43,10 @@ const options: NodeOption[] = [
   },
   {
     id: 3,
-    title: 'Notification',
+    title: 'Notify',
     description: '',
-    icon: notificationIcon,
-    content: NotificationContent,
+    icon: notifyIcon,
+    content: NotifyContent,
   },
   {
     id: 4,
