@@ -10,6 +10,7 @@ export default styled.div<FlexContainer>`
   flex-direction: ${props => props.direction || 'row'};
   justify-content: ${props => props.justify || 'center'};
   align-items: ${props => props.align || 'stretch'};
+  overflow: ${props => props.overflow || 'hidden'};
 `
 
 interface FlexContainer {
@@ -27,4 +28,5 @@ interface FlexContainer {
     | 'space-around'
     | 'space-evenly'
   align?: 'stretch' | 'center' | 'flex-start' | 'flex-end'
+  overflow?: 'scroll' | 'hidden' | 'auto'
 }

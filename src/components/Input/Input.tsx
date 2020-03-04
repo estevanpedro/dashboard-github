@@ -9,6 +9,7 @@ interface Props {
   width?: string
   error?: string
   placeholder?: string
+  marginBottom?: number
 }
 
 const Input = ({
@@ -19,11 +20,12 @@ const Input = ({
   placeholder,
   type,
   error,
+  marginBottom,
 }: Props) => {
   const [isFocused, setIsFocused] = useState(false)
 
   return (
-    <Container width={width ? width : '460px'}>
+    <Container width={width || '460px'} marginBottom={marginBottom || 20}>
       <Label isFocused={isFocused}>{label}</Label>
       <InputField
         placeholder={placeholder}

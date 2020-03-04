@@ -22,7 +22,7 @@ const reducer = createSlice({
   name: 'notify',
   initialState,
   reducers: {
-    addEmail(state: NotifyState, action: PayloadAction<string>) {
+    addEmail(state: NotifyState) {
       state.emails = [
         ...state.emails,
         {

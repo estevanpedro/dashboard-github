@@ -7,11 +7,12 @@ export const Container = styled.div<ContainerProps>`
   flex-direction: column;
   width: ${props => props.width};
   height: 86px;
-  margin-bottom: 20px;
+  margin-bottom: ${props => props.marginBottom}px;
 `
 
 interface ContainerProps {
   width: string
+  marginBottom: number
 }
 
 export const Label = styled.label<LabelProps>`

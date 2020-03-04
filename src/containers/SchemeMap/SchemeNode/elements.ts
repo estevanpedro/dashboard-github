@@ -32,3 +32,9 @@ export const Node = styled.button<NodeProps>`
 export interface NodeProps {
   primary?: boolean
 }
+
+export const InputContainer = styled.div`
+  width: 400px;
+  height: 400px;
+  overflow: scroll;
+`
