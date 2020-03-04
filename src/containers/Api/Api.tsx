@@ -1,9 +1,10 @@
 import React from 'react'
+import Title from '../../components/Title'
 
 const Api = () => {
   return (
     <div>
-      <h1>Api</h1>
+      <Title>Profile</Title>
     </div>
   )
 }

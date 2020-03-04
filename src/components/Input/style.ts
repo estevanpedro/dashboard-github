@@ -28,16 +28,16 @@ interface LabelProps {
 }
 
 export const InputField = styled.input<InputFieldProps>`
-  font-size: ${ds.fontSize.regular};
-  border: none;
-  border-bottom: ${props =>
-    !props.isFocused
-      ? `1px solid ${ds.colors.line}`
-      : `1px solid ${ds.colors.primary}`};
+  border-bottom-width: 1px;
+  border-bottom-color: ${props =>
+    !props.isFocused ? ds.colors.contrast : ds.colors.primary};
   font-size: ${ds.fontSize.big};
   background: transparent;
   outline: none;
   transition: 0.3s ease border-bottom;
+  border-top: none;
+  border-left: none;
+  border-right: none;
 `
 
 interface InputFieldProps {

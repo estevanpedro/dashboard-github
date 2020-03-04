@@ -1,9 +1,9 @@
 import React from 'react'
-
+import Title from '../../components/Title'
 const Library = () => {
   return (
     <div>
-      <h1>Library</h1>
+      <Title>Profile</Title>
     </div>
   )
 }

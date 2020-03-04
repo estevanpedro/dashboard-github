@@ -1,12 +1,20 @@
-import React, { ReactElement } from 'react'
+import React, { ReactElement, useContext } from 'react'
 import Popup from 'reactjs-popup'
 
 import Title from '../../components/Title'
 import Text from '../../components/Text'
 import Button from '../../components/Button'
 
-import { PopupStyle, Container, ModalField, Close } from './style'
+import {
+  Container,
+  ModalField,
+  Close,
+  IconButton,
+  PopupStyleLight,
+  PopupStyleDark,
+} from './elements'
 
+import { ThemeContext } from 'styled-components'
 interface Props {
   trigger: ReactElement
   title: string
@@ -16,8 +24,16 @@ interface Props {
 }
 
 const Modal = ({ trigger, title, description, children, onSubmit }: Props) => {
+  const themeContext = useContext(ThemeContext)
+
   return (
-    <Popup contentStyle={PopupStyle} trigger={trigger} modal>
+    <Popup
+      contentStyle={
+        themeContext.mode === 'light' ? PopupStyleLight : PopupStyleDark
+      }
+      trigger={trigger}
+      modal
+    >
       {close => (
         <Container>
           <Close onClick={close}> &times; </Close>
