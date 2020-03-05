@@ -15,11 +15,12 @@ export const SignUpForm = styled.form`
   flex-direction: column;
   button {
     margin-top: 30px;
-    align-self: flex-end;
+    margin-bottom: 10px;
+    align-self: center;
   }
 `
 
 export const ReturnText = styled(Text)`
   margin-top: 10px;
-  align-self: flex-end;
+  align-self: center;
 `
