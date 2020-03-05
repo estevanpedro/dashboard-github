@@ -1,8 +1,26 @@
 import styled from 'styled-components'
 import ds from '../../design/designSystem'
 
+export const PopupStyleLight = {
+  width: 400,
+  borderRadius: 4,
+  border: 'none',
+  display: 'flex',
+  padding: '15px 30px',
+}
+
+export const PopupStyleDark = {
+  width: 400,
+  borderRadius: 4,
+  border: 'none',
+  display: 'flex',
+  padding: '15px 30px',
+  backgroundColor: '#262E33',
+}
+
 export const Container = styled.div`
   padding: 10px 10px;
+  width: 100%;
 `
 
 export const Input = styled.input<InputProps>`
@@ -12,29 +30,29 @@ export const Input = styled.input<InputProps>`
   width: 300px;
   height: 25px;
 `
-interface InputProps { }
+interface InputProps {}
 
 export const ModalField = styled.div<ModalField>`
   width: 100%;
   margin-top: 10px;
-  text-align: ${props => props.align ? props.align : 'left'}
+  text-align: ${props => (props.align ? props.align : 'left')};
 `
 interface ModalField {
   align?: 'left' | 'center' | 'right'
 }
 
 export const Button = styled.button`
-width: 150px;
-height: 40px;
-background-color: ${ds.colors.confirm};
-color: ${ds.colors.background};
-font-size: ${ds.fontSize.regular};
-font-weight: bold;
-border-radius: 50px;
-font-size: 16px;
-box-shadow: 2px 3px 4px rgba(0, 0, 0, 0.25);
-cursor: pointer;
-&:active {
+  width: 150px;
+  height: 40px;
+  background-color: ${ds.colors.confirm};
+  color: ${ds.colors.background};
+  font-size: ${ds.fontSize.regular};
+  font-weight: bold;
+  border-radius: 50px;
+  font-size: 16px;
+  box-shadow: 2px 3px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  &:active {
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.25);
   }
 `
@@ -53,18 +71,4 @@ export const Close = styled.a`
   border: 1px solid #cfcece;
 `
 
-export const IconButton = styled.button`
-`
-
-//Stylesheet para o contentStyle do Popup
-export const ModalLight = {
-  width: 400,
-  borderRadius: 4,
-  border: 'none',
-}
-export const ModalDark = {
-  width: 400,
-  borderRadius: 4,
-  backgroundColor: '#262E33',
-  border: 'none',
-}
+export const IconButton = styled.button``

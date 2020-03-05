@@ -1,11 +1,9 @@
-import React, { useContext, useEffect } from 'react'
-import Title from '../../components/Title'
+import React from 'react'
 
 const MySchemes = () => {
-
   return (
     <div>
-      <Title>MySchemes</Title>
+      <h1>MySchemes</h1>
     </div>
   )
 }

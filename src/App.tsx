@@ -14,8 +14,9 @@ import MySchemes from './containers/MySchemes'
 import Library from './containers/Library'
 import Api from './containers/Api'
 import Profile from './containers/Profile'
-import { MyThemeProvider } from './design/Theme/context/ThemeContext'
 import SchemeMap from './containers/SchemeMap'
+
+import { MyThemeProvider } from './design/Theme/context/ThemeContext'
 
 dotenv.config()
 
@@ -37,7 +38,6 @@ const App = (): JSX.Element => (
           </Router>
         </PersistGate>
       </MyThemeProvider>
-
     </Provider>
   </>
 )

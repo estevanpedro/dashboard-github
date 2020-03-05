@@ -1,40 +1,56 @@
-import React, { useContext } from 'react'
-import Popup from "reactjs-popup";
+import React, { ReactElement, useContext } from 'react'
+import Popup from 'reactjs-popup'
+
 import Title from '../../components/Title'
 import Text from '../../components/Text'
-import { Container, ModalField, Button, Close, IconButton, ModalLight, ModalDark } from './elements'
+import Button from '../../components/Button'
+
+import {
+  Container,
+  ModalField,
+  Close,
+  IconButton,
+  PopupStyleLight,
+  PopupStyleDark,
+} from './elements'
 
 import { ThemeContext } from 'styled-components'
 interface Props {
+  trigger: ReactElement
   title: string
   description: string
-  Functions: any
+  children: ReactElement
+  onSubmit: () => void
 }
 
-const Modal = ({ title, description, Functions }: Props) => {
-
-  const themeContext = useContext(ThemeContext);
+const Modal = ({ trigger, title, description, children, onSubmit }: Props) => {
+  const themeContext = useContext(ThemeContext)
 
   return (
     <Popup
-      contentStyle={themeContext.mode === 'light' ? ModalLight : ModalDark}
-      trigger={<IconButton>  {title}  </IconButton>}
+      contentStyle={
+        themeContext.mode === 'light' ? PopupStyleLight : PopupStyleDark
+      }
+      trigger={trigger}
       modal
     >
       {close => (
         <Container>
           <Close onClick={close}> &times; </Close>
-          <ModalField align={'center'}>
-            <Title> {Title} </Title>
+          <ModalField>
+            <Title> {title} </Title>
           </ModalField>
-          <ModalField >
+          <ModalField>
             <Text size={'regular'}> {description} </Text>
           </ModalField>
-          <ModalField >
-            <Functions />
-          </ModalField>
-          <ModalField align={'center'}>
-            <Button onClick={() => { close(); }} >
+          <ModalField>{children}</ModalField>
+          <ModalField align={'right'}>
+            <Button
+              onClick={() => {
+                onSubmit()
+                close()
+              }}
+            >
               Confirm
             </Button>
           </ModalField>

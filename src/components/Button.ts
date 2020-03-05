@@ -11,9 +11,9 @@ export default styled.button<ButtonProps>`
   color: ${ds.colors.background};
   font-size: ${ds.fontSize.regular};
   font-weight: bold;
-  box-shadow: 2px 3px 4px rgba(0, 0, 0, 0.25);
   margin: ${props => props.margin || 0};
   cursor: pointer;
+  box-shadow: 2px 3px 4px rgba(0, 0, 0, 0.25);
   &:active {
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.25);
   }

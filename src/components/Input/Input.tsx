@@ -6,15 +6,26 @@ interface Props {
   value: string
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
   type: string
+  width?: string
   error?: string
   placeholder?: string
+  marginBottom?: number
 }
 
-const Input = ({ label, value, onChange, placeholder, type, error }: Props) => {
+const Input = ({
+  width,
+  label,
+  value,
+  onChange,
+  placeholder,
+  type,
+  error,
+  marginBottom,
+}: Props) => {
   const [isFocused, setIsFocused] = useState(false)
 
   return (
-    <Container>
+    <Container width={width || '460px'} marginBottom={marginBottom || 20}>
       <Label isFocused={isFocused}>{label}</Label>
       <InputField
         placeholder={placeholder}
