@@ -128,16 +128,10 @@ const SignUp = () => {
           }
           type='password'
         />
-
-
-
         <Button type='submit'>Create now</Button>
         <ReturnText size='regular'>
           If you already have an account, <Link to='/login'>login</Link>
         </ReturnText>
-
-
-
       </SignUpForm>
     </SignUpContainer>
   )
