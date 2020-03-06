@@ -11,6 +11,7 @@ export default styled.div<FlexContainer>`
   justify-content: ${props => props.justify || 'center'};
   align-items: ${props => props.align || 'stretch'};
   overflow: ${props => props.overflow || 'hidden'};
+  box-sizing: border-box;
 `
 
 interface FlexContainer {

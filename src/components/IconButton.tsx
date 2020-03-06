@@ -20,14 +20,16 @@ interface Props {
   margin?: string
   icon: string
   onClick: () => void
+  align?: 'stretch' | 'center' | 'flex-start' | 'flex-end'
 }
 
-const IconButton = ({ isSecondary, margin, icon, onClick }: Props) => {
+const IconButton = ({ isSecondary, margin, icon, onClick, align }: Props) => {
   return (
     <ButtonContainer
       margin={margin}
       isSecondary={isSecondary}
       onClick={onClick}
+      align={align}
     >
       <img src={icon} />
     </ButtonContainer>

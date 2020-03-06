@@ -1,11 +1,16 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { InputContainer } from './elements'
+import { OverflowContainer } from './elements'
 
 import { RootState } from '../../../redux/rootReducer'
 
-import { addSplit, removeSplit } from '../../../redux/ducks/nodeOptions/split'
+import {
+  addSplit,
+  removeSplit,
+  updateSplitAddress,
+  updateSplitShare,
+} from '../../../redux/ducks/nodeOptions/split'
 
 import {
   updateNameValue,
@@ -22,18 +27,68 @@ import {
 
 import IconButton from '../../../components/IconButton'
 import Input from '../../../components/Input'
+import Line from '../../../components/Line'
 import FlexContainer from '../../../components/FlexContainer'
+import { SubTitle } from '../../../components/Title'
 import Slider from '../../../components/Slider'
-import Text from '../../../components/Text'
 
 import minus from '../../../assets/icons/minus.svg'
 import plus from '../../../assets/icons/plus.svg'
 
 export const SplitContent = () => {
+  const { splits } = useSelector((state: RootState) => state.split)
+  const dispatch = useDispatch()
+
   return (
     <>
-      <h1>SplitContent</h1>
-      <Slider value={0} maxValue={100} onChange={() => {}} />
+      <OverflowContainer>
+        {splits.map((split, i) => (
+          <>
+            <FlexContainer
+              width='100%'
+              justify='space-between'
+              padding='0 5px 0 0'
+            >
+              <SubTitle>{`Address ${i + 1}`}</SubTitle>
+              {i > 0 && (
+                <IconButton
+                  margin='30px 0'
+                  icon={minus}
+                  onClick={() => dispatch(removeSplit(split.id))}
+                />
+              )}
+            </FlexContainer>
+
+            <Input
+              label={`Address`}
+              value={split.address}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                dispatch(
+                  updateSplitAddress({ id: split.id, address: e.target.value })
+                )
+              }
+              type='text'
+              width='100%'
+            />
+            <FlexContainer align='center'>
+              <Slider
+                minValue={0}
+                maxValue={100}
+                value={split.share}
+                onChange={value => {
+                  dispatch(
+                    updateSplitShare({ id: split.id, share: Number(value) })
+                  )
+                }}
+                formatLabel={value => `${value}%`}
+              />
+            </FlexContainer>
+
+            <Line margin='40px 0' />
+          </>
+        ))}
+      </OverflowContainer>
+      <IconButton icon={plus} onClick={() => dispatch(addSplit())} />
     </>
   )
 }
@@ -64,6 +119,7 @@ export const TimerContent = () => {
           }
           type='number'
           width={'100px'}
+          min={0}
         />
         <Input
           label='Minutes'
@@ -73,6 +129,7 @@ export const TimerContent = () => {
           }
           type='number'
           width={'100px'}
+          min={0}
         />
         <Input
           label='Seconds'
@@ -82,6 +139,7 @@ export const TimerContent = () => {
           }
           type='number'
           width={'100px'}
+          min={0}
         />
       </FlexContainer>
     </>
@@ -94,7 +152,7 @@ export const NotifyContent = () => {
 
   return (
     <FlexContainer direction='column' height='500px'>
-      <InputContainer>
+      <OverflowContainer>
         {emails.map((email, i) => (
           <FlexContainer
             key={email.id}
@@ -122,7 +180,7 @@ export const NotifyContent = () => {
             )}
           </FlexContainer>
         ))}
-      </InputContainer>
+      </OverflowContainer>
 
       <IconButton icon={plus} onClick={() => dispatch(addEmail())} />
     </FlexContainer>

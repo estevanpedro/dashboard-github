@@ -30,7 +30,7 @@ interface LabelProps {
 export const InputField = styled.input<InputFieldProps>`
   border-bottom-width: 1px;
   border-bottom-color: ${props =>
-    !props.isFocused ? ds.colors.contrast : ds.colors.primary};
+    !props.isFocused ? ds.colors.contrastOpacity : ds.colors.primary};
   font-size: ${ds.fontSize.big};
   background: transparent;
   outline: none;

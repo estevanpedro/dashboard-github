@@ -33,8 +33,8 @@ export interface NodeProps {
   primary?: boolean
 }
 
-export const InputContainer = styled.div`
-  width: 400px;
+export const OverflowContainer = styled.div`
+  width: 100%;
   height: 400px;
   overflow: scroll;
 `

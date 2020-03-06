@@ -22,4 +22,5 @@ export default styled.button<ButtonProps>`
 interface ButtonProps {
   isSecondary?: boolean
   margin?: string
+  align?: 'stretch' | 'center' | 'flex-start' | 'flex-end'
 }
