@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import uniqid from 'uniqid'
-import { Share } from 'react-native'
 
 interface Split {
   id: string

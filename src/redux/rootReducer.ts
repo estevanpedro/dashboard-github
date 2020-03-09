@@ -5,6 +5,7 @@ import userReducer from './ducks/user'
 
 // Node Options
 import notifyReducer from './ducks/nodeOptions/notify'
+import sendReducer from './ducks/nodeOptions/send'
 import splitReducer from './ducks/nodeOptions/split'
 import timerReducer from './ducks/nodeOptions/timer'
 
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   notify: notifyReducer,
   split: splitReducer,
   timer: timerReducer,
+  send: sendReducer,
 })
 
 export type RootState = ReturnType<typeof rootReducer>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { OverflowContainer } from './elements'
+import { OverflowContainer, SplitContainer } from './elements'
 
 import { RootState } from '../../../redux/rootReducer'
 
@@ -25,9 +25,16 @@ import {
   updateEmail,
 } from '../../../redux/ducks/nodeOptions/notify'
 
+import {
+  addSend,
+  removeSend,
+  updateSendAddress,
+  updateSendValue,
+  updateSendPercentage,
+} from '../../../redux/ducks/nodeOptions/send'
+
 import IconButton from '../../../components/IconButton'
 import Input from '../../../components/Input'
-import Line from '../../../components/Line'
 import FlexContainer from '../../../components/FlexContainer'
 import { SubTitle } from '../../../components/Title'
 import Slider from '../../../components/Slider'
@@ -43,7 +50,7 @@ export const SplitContent = () => {
     <>
       <OverflowContainer>
         {splits.map((split, i) => (
-          <>
+          <SplitContainer key={split.id}>
             <FlexContainer
               width='100%'
               justify='space-between'
@@ -83,9 +90,7 @@ export const SplitContent = () => {
                 formatLabel={value => `${value}%`}
               />
             </FlexContainer>
-
-            <Line margin='40px 0' />
-          </>
+          </SplitContainer>
         ))}
       </OverflowContainer>
       <IconButton icon={plus} onClick={() => dispatch(addSplit())} />
@@ -188,9 +193,76 @@ export const NotifyContent = () => {
 }
 
 export const SendContent = () => {
+  const { addresses } = useSelector((state: RootState) => state.send)
+  const dispatch = useDispatch()
+
   return (
     <>
-      <h1>SendContent </h1>
+      <OverflowContainer>
+        {addresses.map((address, i) => (
+          <SplitContainer key={address.id}>
+            <FlexContainer
+              width='100%'
+              justify='space-between'
+              padding='0 5px 0 0'
+            >
+              <SubTitle>{`Address ${i + 1}`}</SubTitle>
+              {i > 0 && (
+                <IconButton
+                  margin='30px 0'
+                  icon={minus}
+                  onClick={() => dispatch(removeSend(address.id))}
+                />
+              )}
+            </FlexContainer>
+            <Input
+              label={`Address`}
+              value={address.address}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                dispatch(
+                  updateSendAddress({
+                    id: address.id,
+                    address: e.target.value,
+                  })
+                )
+              }
+              type='text'
+              width='100%'
+            />
+            <Input
+              label={`Value`}
+              value={String(address.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                dispatch(
+                  updateSendValue({
+                    id: address.id,
+                    value: Number(e.target.value),
+                  })
+                )
+              }
+              type='number'
+              width='100%'
+            />
+            <FlexContainer align='center'>
+              <Slider
+                minValue={0}
+                maxValue={100}
+                value={address.percentage}
+                onChange={value => {
+                  dispatch(
+                    updateSendPercentage({
+                      id: address.id,
+                      percentage: Number(value),
+                    })
+                  )
+                }}
+                formatLabel={value => `${value}%`}
+              />
+            </FlexContainer>
+          </SplitContainer>
+        ))}
+      </OverflowContainer>
+      <IconButton icon={plus} onClick={() => dispatch(addSend())} />
     </>
   )
 }

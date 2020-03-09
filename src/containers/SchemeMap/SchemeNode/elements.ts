@@ -38,3 +38,10 @@ export const OverflowContainer = styled.div`
   height: 400px;
   overflow: scroll;
 `
+
+export const SplitContainer = styled.div`
+  border: 1px solid ${ds.colors.primary};
+  padding: 20px;
+  margin-bottom: ${ds.spacing.vertical};
+  border-radius: 4px;
+`

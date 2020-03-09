@@ -20,10 +20,14 @@ const SchemeNode = ({ nodeData }: Props) => {
   const { name, hours, minutes, seconds } = useSelector(
     (state: RootState) => state.timer
   )
+  const { splits } = useSelector((state: RootState) => state.split)
   const { emails } = useSelector((state: RootState) => state.notify)
+  const { addresses } = useSelector((state: RootState) => state.send)
 
   const ModalFunctions = {
-    Split: () => {},
+    Split: () => {
+      console.log(splits)
+    },
     Timer: () => {
       const timerData = {
         name,
@@ -37,7 +41,9 @@ const SchemeNode = ({ nodeData }: Props) => {
     Notify: () => {
       console.log(emails)
     },
-    Send: () => {},
+    Send: () => {
+      console.log(addresses)
+    },
     Swap: () => {},
     Event: () => {},
     Edit: () => {},
