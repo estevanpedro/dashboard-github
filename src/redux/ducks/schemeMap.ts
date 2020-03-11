@@ -8,7 +8,7 @@ export declare type SchemeNode = {
   id: string
   type: NodeType
   children: SchemeNode[]
-  info: {}
+  info: any
 }
 
 export interface SchemeMapState {
@@ -36,10 +36,13 @@ const reducer = createSlice({
     ) {
       const { id, node } = action.payload
       const rootAux = addTreeNode(id, state.rootNode, node)
-      console.log(rootAux)
       if (rootAux) {
         state.rootNode = rootAux
       }
+    },
+
+    removeNode(state: SchemeMapState, action: PayloadAction<{ id: string }>) {
+      const { id } = action.payload
     },
   },
 })
