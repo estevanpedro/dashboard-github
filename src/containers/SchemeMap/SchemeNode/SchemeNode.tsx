@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import uniqid from 'uniqid'
 
 import { RootState } from '../../../redux/rootReducer'
 
@@ -9,6 +10,8 @@ import { Container, Node } from './elements'
 import OptionNode from './OptionNode'
 import options, { NodeOption } from './options'
 
+import { addNode } from '../../../redux/ducks/schemeMap'
+
 interface Props {
   nodeData: {
     name: string
@@ -17,6 +20,9 @@ interface Props {
 
 const SchemeNode = ({ nodeData }: Props) => {
   const [optionsActive, setOptionsActive] = useState(false)
+
+  const dispatch = useDispatch()
+
   const { name, hours, minutes, seconds } = useSelector(
     (state: RootState) => state.timer
   )
@@ -26,7 +32,13 @@ const SchemeNode = ({ nodeData }: Props) => {
 
   const ModalFunctions = {
     Split: () => {
-      console.log(splits)
+      console.log(splits[0].address)
+      dispatch(
+        addNode({
+          id: splits[0].address,
+          node: { id: uniqid(), type: 'split', children: [], info: {} },
+        })
+      )
     },
     Timer: () => {
       const timerData = {

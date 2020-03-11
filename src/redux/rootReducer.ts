@@ -2,6 +2,7 @@ import { combineReducers } from '@reduxjs/toolkit'
 
 import authReducer from './ducks/auth'
 import userReducer from './ducks/user'
+import schemeMapReducer from './ducks/schemeMap'
 
 // Node Options
 import notifyReducer from './ducks/nodeOptions/notify'
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   split: splitReducer,
   timer: timerReducer,
   send: sendReducer,
+  schemeMap: schemeMapReducer,
 })
 
 export type RootState = ReturnType<typeof rootReducer>
