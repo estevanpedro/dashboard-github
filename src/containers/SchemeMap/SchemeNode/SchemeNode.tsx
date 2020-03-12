@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import uniqid from 'uniqid'
 
 import { RootState } from '../../../redux/rootReducer'
+import { addNode } from '../../../redux/ducks/schemeMap'
 
 import Modal from '../../../components/Modal'
 
@@ -10,12 +11,10 @@ import { Container, Node } from './elements'
 import OptionNode from './OptionNode'
 import options, { NodeOption } from './options'
 
-import { addNode } from '../../../redux/ducks/schemeMap'
+import { SchemeNodeType } from './nodeType'
 
 interface Props {
-  nodeData: {
-    name: string
-  }
+  nodeData: SchemeNodeType
 }
 
 const SchemeNode = ({ nodeData }: Props) => {
@@ -64,7 +63,7 @@ const SchemeNode = ({ nodeData }: Props) => {
   return (
     <Container>
       <Node primary onClick={() => setOptionsActive(!optionsActive)}>
-        {nodeData.name}
+        {nodeData.info.name}
       </Node>
       {optionsActive &&
         options.map((option: NodeOption) => (

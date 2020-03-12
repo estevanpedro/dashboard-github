@@ -1,8 +1,6 @@
 import styled from 'styled-components'
-import ds from '../design/designSystem'
 
 export default styled.main`
   padding: 90px 60px;
-  background-color: ${ds.colors.background};
-  min-height: calc(100vh - 60px);
+  height: 100%;
 `

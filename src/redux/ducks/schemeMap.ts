@@ -6,17 +6,10 @@ import {
   updateTreeNode,
 } from '../../utils/treeUtils'
 
-export type NodeType = 'split' | 'timer' | 'notify' | 'send' | 'swap' | 'event'
-
-export declare type SchemeNode = {
-  id: string
-  type: NodeType
-  children: SchemeNode[]
-  info: any
-}
+import { SchemeNodeType } from '../../containers/SchemeMap/SchemeNode/nodeType'
 
 export interface SchemeMapState {
-  rootNode: SchemeNode
+  rootNode: SchemeNodeType
 }
 
 const initialState: SchemeMapState = {
@@ -25,7 +18,7 @@ const initialState: SchemeMapState = {
     type: 'split',
     children: [],
     info: {
-      name: '',
+      name: 'Split',
     },
   },
 }
@@ -36,7 +29,7 @@ const reducer = createSlice({
   reducers: {
     addNode(
       state: SchemeMapState,
-      action: PayloadAction<{ id: string; node: SchemeNode }>
+      action: PayloadAction<{ id: string; node: SchemeNodeType }>
     ) {
       const { id, node } = action.payload
       const newTree = addTreeNode(id, state.rootNode, node)

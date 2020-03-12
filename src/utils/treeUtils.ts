@@ -1,16 +1,16 @@
-import { SchemeNode } from '../redux/ducks/schemeMap'
+import { SchemeNodeType } from '../containers/SchemeMap/SchemeNode/nodeType'
 
 /**
  * Function used to find node on the tree and execute a callback function with it
  * @param {string} id Searched node id
- * @param {SchemeNode} root root node to start the search
+ * @param {SchemeNodeType} root root node to start the search
  * @param {function} callback callback function to be executed with the found node
  */
 export const findTreeNode = (
   id: string,
-  root: SchemeNode,
-  callback: (node: SchemeNode) => SchemeNode
-): SchemeNode | undefined => {
+  root: SchemeNodeType,
+  callback: (node: SchemeNodeType) => SchemeNodeType
+): SchemeNodeType | undefined => {
   if (root.id === id) {
     return callback(root)
   }
@@ -23,14 +23,14 @@ export const findTreeNode = (
 /**
  * Add a passed node to the tree
  * @param {string} id Node to be appended to
- * @param {SchemeNode }root Root node
- * @param {SchemeNode} node Node to be added
+ * @param {SchemeNodeType }root Root node
+ * @param {SchemeNodeType} node Node to be added
  */
 export const addTreeNode = (
   id: string,
-  root: SchemeNode,
-  node: SchemeNode
-): SchemeNode | undefined => {
+  root: SchemeNodeType,
+  node: SchemeNodeType
+): SchemeNodeType | undefined => {
   const rootCopy = JSON.parse(JSON.stringify(root))
 
   return findTreeNode(id, rootCopy, n => {
@@ -43,13 +43,13 @@ export const addTreeNode = (
  * Remove node from the tree
  * @param {string} parentId Parent id from node to be removed
  * @param {string} id Id from node to be removed
- * @param {SchemeNode} root Root node
+ * @param {SchemeNodeType} root Root node
  */
 export const removeTreeNode = (
   parentId: string,
   id: string,
-  root: SchemeNode
-): SchemeNode | undefined => {
+  root: SchemeNodeType
+): SchemeNodeType | undefined => {
   if (id === '0') return undefined
 
   const rootCopy = JSON.parse(JSON.stringify(root))
@@ -65,14 +65,14 @@ export const removeTreeNode = (
  * @param {string} id Id from node to be updated
  * @param {string }attr Node attribute to be updated
  * @param {string} value New attribute value
- * @param {SchemeNode} root Root node
+ * @param {SchemeNodeType} root Root node
  */
 export const updateTreeNode = (
   id: string,
   attr: string,
   value: string | number,
-  root: SchemeNode
-): SchemeNode | undefined => {
+  root: SchemeNodeType
+): SchemeNodeType | undefined => {
   const rootCopy = JSON.parse(JSON.stringify(root))
 
   return findTreeNode(id, rootCopy, n => {
@@ -84,12 +84,12 @@ export const updateTreeNode = (
 /**
  * Return a node from the tree
  * @param {string} id Id from node to be read
- * @param {SchemeNode} root Root node
+ * @param {SchemeNodeType} root Root node
  */
 export const readTreeNode = (
   id: string,
-  root: SchemeNode
-): SchemeNode | undefined => {
+  root: SchemeNodeType
+): SchemeNodeType | undefined => {
   const rootCopy = JSON.parse(JSON.stringify(root))
 
   return findTreeNode(id, rootCopy, n => {

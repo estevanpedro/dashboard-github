@@ -26,7 +26,7 @@ const App = (): JSX.Element => (
     <Provider store={store}>
       <MyThemeProvider>
         <PersistGate persistor={persistor} loading={null}>
-          <Router>
+          <Router id='router-container'>
             <Route path='/login' component={<Login />} />
             <Route path='/sign-up' component={<SignUp />} />
             <Route path='/my-schemes' component={<MySchemes />} />
