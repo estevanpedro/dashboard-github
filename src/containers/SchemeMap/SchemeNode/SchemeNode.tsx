@@ -16,16 +16,27 @@ import { SchemeNodeType } from './nodeType'
 import styled from 'styled-components' //TEMP
 
 const NodeContainer = styled(Container)<{ hasChildren?: boolean }>`
-  margin-left: 5rem;
-  margin-right: ${props => props.children && '5rem'};
+  /* margin-left: 5rem;
+  margin-right: ${props => props.children && '5rem'}; */
   margin-bottom: 5rem;
+  display: flex;
+  align-items: center;
 `
 
 interface Props {
   nodeData: SchemeNodeType
+  ignoreLeftArrow?: boolean
 }
 
-const SchemeNode = ({ nodeData }: Props) => {
+const Arrow = styled.div<{ margin: 'left' | 'right' }>`
+  height: 1px;
+  width: 2.5rem;
+  margin-left: ${props => props.margin === 'left' && '1rem'};
+  margin-right: ${props => props.margin === 'right' && '1rem'};
+  background-color: black;
+`
+
+const SchemeNode = ({ nodeData, ignoreLeftArrow }: Props) => {
   const [optionsActive, setOptionsActive] = useState(false)
 
   const dispatch = useDispatch()
@@ -67,8 +78,11 @@ const SchemeNode = ({ nodeData }: Props) => {
     Edit: () => {},
   }
 
+  const hasChildren = nodeData.children.length > 0
+
   return (
-    <NodeContainer hasChildren={nodeData.children.length > 0}>
+    <NodeContainer hasChildren={hasChildren}>
+      {!ignoreLeftArrow && <Arrow margin='right' />}
       <Node primary onClick={() => setOptionsActive(!optionsActive)}>
         {nodeData.info.name}
       </Node>
@@ -89,6 +103,7 @@ const SchemeNode = ({ nodeData }: Props) => {
             <option.content />
           </Modal>
         ))}
+      {hasChildren && <Arrow margin='left' />}
     </NodeContainer>
   )
 }

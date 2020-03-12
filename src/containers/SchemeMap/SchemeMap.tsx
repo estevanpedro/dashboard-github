@@ -16,21 +16,29 @@ const Row = styled.div`
   display: flex;
 `
 
-const Column = styled.div`
+const Column = styled.div<{ hasChildren: boolean }>`
   display: flex;
   flex-direction: column;
+
+  border-left: ${props => props.hasChildren && '1px solid black'};
 `
 
 // const mockData = {
 //   name: 'Split 01',
 // }
 
-const NodeColumn = ({ rootNode }: { rootNode: SchemeNodeType }) => {
+const NodeColumn = ({
+  rootNode,
+  ignoreLeftArrow,
+}: {
+  rootNode: SchemeNodeType
+  ignoreLeftArrow?: boolean
+}) => {
   return (
     <Row>
-      <SchemeNode nodeData={rootNode} />
+      <SchemeNode nodeData={rootNode} ignoreLeftArrow={ignoreLeftArrow} />
 
-      <Column>
+      <Column hasChildren={rootNode.children.length > 0}>
         {rootNode.children.map((node: SchemeNodeType) => (
           <NodeColumn rootNode={node} />
         ))}
@@ -46,7 +54,7 @@ const SchemeMap = () => {
     <>
       <Title>SchemeMap</Title>
       <SchemeContainer>
-        <NodeColumn rootNode={rootNode} />
+        <NodeColumn rootNode={rootNode} ignoreLeftArrow={true} />
         {/* <SchemeNode nodeData={rootNode} /> */}
       </SchemeContainer>
     </>
