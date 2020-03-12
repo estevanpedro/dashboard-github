@@ -39,10 +39,9 @@ const SchemeNode = ({ nodeData }: Props) => {
 
   const ModalFunctions = {
     Split: () => {
-      console.log(splits[0].address)
       dispatch(
         addNode({
-          id: splits[0].address,
+          id: nodeData.id,
           node: { id: uniqid(), type: 'split', children: [], info: {} },
         })
       )
