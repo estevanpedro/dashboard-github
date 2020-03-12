@@ -12,6 +12,7 @@ import OptionNode from './OptionNode'
 import options, { NodeOption } from './options'
 
 import { SchemeNodeType } from './nodeType'
+import FlexContainer from '../../../components/FlexContainer'
 
 interface Props {
   nodeData: SchemeNodeType
@@ -64,23 +65,26 @@ const SchemeNode = ({ nodeData }: Props) => {
       <Node primary onClick={() => setOptionsActive(!optionsActive)}>
         {nodeData.info.name}
       </Node>
-      {optionsActive &&
-        options.map((option: NodeOption) => (
-          <Modal
-            key={option.id}
-            trigger={
-              <OptionNode key={option.id} primary={option.title !== 'Edit'}>
-                <img src={option.icon} />
-                {option.title}
-              </OptionNode>
-            }
-            title={option.title}
-            description={option.description}
-            onSubmit={ModalFunctions[option.title]}
-          >
-            <option.content />
-          </Modal>
-        ))}
+      {optionsActive && (
+        <FlexContainer position='absolute' left='15%'>
+          {options.map((option: NodeOption) => (
+            <Modal
+              key={option.id}
+              trigger={
+                <OptionNode key={option.id} primary={option.title !== 'Edit'}>
+                  <img src={option.icon} />
+                  {option.title}
+                </OptionNode>
+              }
+              title={option.title}
+              description={option.description}
+              onSubmit={ModalFunctions[option.title]}
+            >
+              <option.content />
+            </Modal>
+          ))}
+        </FlexContainer>
+      )}
     </Container>
   )
 }
