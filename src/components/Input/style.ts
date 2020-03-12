@@ -38,6 +38,8 @@ export const InputField = styled.input<InputFieldProps>`
   border-top: none;
   border-left: none;
   border-right: none;
+  caret-color: ${ds.colors.contrast};
+  color: ${ds.colors.contrast};
 `
 
 interface InputFieldProps {
