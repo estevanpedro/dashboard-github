@@ -13,6 +13,14 @@ import options, { NodeOption } from './options'
 
 import { SchemeNodeType } from './nodeType'
 
+import styled from 'styled-components' //TEMP
+
+const NodeContainer = styled(Container)<{ hasChildren?: boolean }>`
+  margin-left: 5rem;
+  margin-right: ${props => props.children && '5rem'};
+  margin-bottom: 5rem;
+`
+
 interface Props {
   nodeData: SchemeNodeType
 }
@@ -61,7 +69,7 @@ const SchemeNode = ({ nodeData }: Props) => {
   }
 
   return (
-    <Container>
+    <NodeContainer hasChildren={nodeData.children.length > 0}>
       <Node primary onClick={() => setOptionsActive(!optionsActive)}>
         {nodeData.info.name}
       </Node>
@@ -82,7 +90,7 @@ const SchemeNode = ({ nodeData }: Props) => {
             <option.content />
           </Modal>
         ))}
-    </Container>
+    </NodeContainer>
   )
 }
 
