@@ -12,6 +12,7 @@ import OptionNode from './OptionNode'
 import options, { NodeOption } from './options'
 
 import { SchemeNodeType } from './nodeType'
+import FlexContainer from '../../../components/FlexContainer'
 
 import styled from 'styled-components' //TEMP
 
@@ -56,6 +57,7 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow }: Props) => {
           node: { id: uniqid(), type: 'split', children: [], info: {} },
         })
       )
+      setOptionsActive(false)
     },
     Timer: () => {
       const timerData = {
@@ -66,16 +68,25 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow }: Props) => {
       }
 
       console.log(timerData)
+      setOptionsActive(false)
     },
     Notify: () => {
       console.log(emails)
+      setOptionsActive(false)
     },
     Send: () => {
       console.log(addresses)
+      setOptionsActive(false)
     },
-    Swap: () => {},
-    Event: () => {},
-    Edit: () => {},
+    Swap: () => {
+      setOptionsActive(false)
+    },
+    Event: () => {
+      setOptionsActive(false)
+    },
+    Edit: () => {
+      setOptionsActive(false)
+    },
   }
 
   const hasChildren = nodeData.children.length > 0
@@ -86,23 +97,26 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow }: Props) => {
       <Node primary onClick={() => setOptionsActive(!optionsActive)}>
         {nodeData.info.name}
       </Node>
-      {optionsActive &&
-        options.map((option: NodeOption) => (
-          <Modal
-            key={option.id}
-            trigger={
-              <OptionNode key={option.id} primary={option.title !== 'Edit'}>
-                <img src={option.icon} />
-                {option.title}
-              </OptionNode>
-            }
-            title={option.title}
-            description={option.description}
-            onSubmit={ModalFunctions[option.title]}
-          >
-            <option.content />
-          </Modal>
-        ))}
+      {optionsActive && (
+        <FlexContainer position='absolute' left='10%'>
+          {options.map((option: NodeOption) => (
+            <Modal
+              key={option.id}
+              trigger={
+                <OptionNode key={option.id} primary={option.title !== 'Edit'}>
+                  <img src={option.icon} />
+                  {option.title}
+                </OptionNode>
+              }
+              title={option.title}
+              description={option.description}
+              onSubmit={ModalFunctions[option.title]}
+            >
+              <option.content />
+            </Modal>
+          ))}{' '}
+        </FlexContainer>
+      )}
       {hasChildren && <Arrow margin='left' />}
     </NodeContainer>
   )
