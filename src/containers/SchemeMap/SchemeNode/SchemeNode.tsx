@@ -38,6 +38,7 @@ const SchemeNode = ({ nodeData }: Props) => {
           node: { id: uniqid(), type: 'split', children: [], info: {} },
         })
       )
+      setOptionsActive(false)
     },
     Timer: () => {
       const timerData = {
@@ -48,16 +49,25 @@ const SchemeNode = ({ nodeData }: Props) => {
       }
 
       console.log(timerData)
+      setOptionsActive(false)
     },
     Notify: () => {
       console.log(emails)
+      setOptionsActive(false)
     },
     Send: () => {
       console.log(addresses)
+      setOptionsActive(false)
     },
-    Swap: () => {},
-    Event: () => {},
-    Edit: () => {},
+    Swap: () => {
+      setOptionsActive(false)
+    },
+    Event: () => {
+      setOptionsActive(false)
+    },
+    Edit: () => {
+      setOptionsActive(false)
+    },
   }
 
   return (
