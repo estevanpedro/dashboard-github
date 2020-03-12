@@ -1,6 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { addTreeNode } from '../../utils/treeUtils'
+import {
+  addTreeNode,
+  removeTreeNode,
+  updateTreeNode,
+} from '../../utils/treeUtils'
 
 export type NodeType = 'split' | 'timer' | 'notify' | 'send' | 'swap' | 'event'
 
@@ -35,14 +39,38 @@ const reducer = createSlice({
       action: PayloadAction<{ id: string; node: SchemeNode }>
     ) {
       const { id, node } = action.payload
-      const rootAux = addTreeNode(id, state.rootNode, node)
-      if (rootAux) {
-        state.rootNode = rootAux
+      const newTree = addTreeNode(id, state.rootNode, node)
+      if (newTree) {
+        state.rootNode = newTree
       }
     },
 
-    removeNode(state: SchemeMapState, action: PayloadAction<{ id: string }>) {
-      const { id } = action.payload
+    removeNode(
+      state: SchemeMapState,
+      action: PayloadAction<{ id: string; parentId: string }>
+    ) {
+      const { id, parentId } = action.payload
+      const newTree = removeTreeNode(parentId, id, state.rootNode)
+
+      if (newTree) {
+        state.rootNode = newTree
+      }
+    },
+
+    updateNode(
+      state: SchemeMapState,
+      action: PayloadAction<{
+        id: string
+        attr: string
+        value: string | number
+      }>
+    ) {
+      const { id, attr, value } = action.payload
+      const newTree = updateTreeNode(id, attr, value, state.rootNode)
+
+      if (newTree) {
+        state.rootNode = newTree
+      }
     },
   },
 })
