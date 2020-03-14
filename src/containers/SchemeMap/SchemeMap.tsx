@@ -14,13 +14,12 @@ import styled from 'styled-components' // TEMP
 const Row = styled.div`
   align-items: flex-start;
   display: flex;
+  position: relative;
 `
 
-const Column = styled.div<{ hasChildren: boolean }>`
+const Column = styled.div`
   display: flex;
   flex-direction: column;
-
-  border-left: ${props => props.hasChildren && '1px solid black'};
 `
 
 // const mockData = {
@@ -30,17 +29,26 @@ const Column = styled.div<{ hasChildren: boolean }>`
 const NodeColumn = ({
   rootNode,
   ignoreLeftArrow,
+  last,
 }: {
   rootNode: SchemeNodeType
   ignoreLeftArrow?: boolean
+  last?: boolean
 }) => {
   return (
     <Row>
-      <SchemeNode nodeData={rootNode} ignoreLeftArrow={ignoreLeftArrow} />
+      <SchemeNode
+        nodeData={rootNode}
+        ignoreLeftArrow={ignoreLeftArrow}
+        last={last}
+      />
 
-      <Column hasChildren={rootNode.children.length > 0}>
-        {rootNode.children.map((node: SchemeNodeType) => (
-          <NodeColumn rootNode={node} />
+      <Column>
+        {rootNode.children.map((node: SchemeNodeType, index) => (
+          <NodeColumn
+            rootNode={node}
+            last={index === rootNode.children.length - 1}
+          />
         ))}
       </Column>
     </Row>
@@ -54,7 +62,7 @@ const SchemeMap = () => {
     <>
       <Title>SchemeMap</Title>
       <SchemeContainer>
-        <NodeColumn rootNode={rootNode} ignoreLeftArrow={true} />
+        <NodeColumn rootNode={rootNode} ignoreLeftArrow={true} last={true} />
         {/* <SchemeNode nodeData={rootNode} /> */}
       </SchemeContainer>
     </>
