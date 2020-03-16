@@ -16,6 +16,7 @@ export default styled.div<FlexContainer>`
   bottom: ${props => props.bottom || 'auto'};
   left: ${props => props.left || 'auto'};
   right: ${props => props.right || 'auto'};
+  z-index: ${props => props.zIndex || '1'};
 `
 
 interface FlexContainer {
@@ -38,4 +39,5 @@ interface FlexContainer {
   bottom?: string
   left?: string
   right?: string
+  zIndex?: string
 }

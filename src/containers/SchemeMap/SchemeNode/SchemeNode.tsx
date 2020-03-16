@@ -22,6 +22,7 @@ const NodeContainer = styled(Container)<{ hasChildren?: boolean }>`
   margin-bottom: 5rem;
   display: flex;
   align-items: center;
+  position: relative;
 `
 
 interface Props {
@@ -98,7 +99,7 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow }: Props) => {
         {nodeData.info.name}
       </Node>
       {optionsActive && (
-        <FlexContainer position='absolute' left='10%'>
+        <FlexContainer position='absolute' left='100%' zIndex='2'>
           {options.map((option: NodeOption) => (
             <Modal
               key={option.id}
