@@ -25,11 +25,6 @@ const NodeContainer = styled(Container)<{ hasChildren?: boolean }>`
   position: relative;
 `
 
-interface Props {
-  nodeData: SchemeNodeType
-  ignoreLeftArrow?: boolean
-}
-
 const Arrow = styled.div<{ margin: 'left' | 'right' }>`
   height: 1px;
   width: 2.5rem;
@@ -38,7 +33,23 @@ const Arrow = styled.div<{ margin: 'left' | 'right' }>`
   background-color: black;
 `
 
-const SchemeNode = ({ nodeData, ignoreLeftArrow }: Props) => {
+const VerticalArrow = styled.div`
+  width: 1px;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 42px;
+
+  background-color: black;
+`
+
+interface Props {
+  nodeData: SchemeNodeType
+  ignoreLeftArrow?: boolean
+  last?: boolean
+}
+
+const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
   const [optionsActive, setOptionsActive] = useState(false)
 
   const dispatch = useDispatch()
@@ -95,6 +106,8 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow }: Props) => {
   return (
     <NodeContainer hasChildren={hasChildren}>
       {!ignoreLeftArrow && <Arrow margin='right' />}
+      {/* If not last, create line with height 100% and position relative minus button height / 2 */}
+      {!last && <VerticalArrow />}
       <Node primary onClick={() => setOptionsActive(!optionsActive)}>
         {nodeData.info.name}
       </Node>
