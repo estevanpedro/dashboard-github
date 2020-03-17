@@ -27,6 +27,16 @@ export const Node = styled.button<NodeProps>`
   &:active {
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.25);
   }
+  &.tool {
+    background-color: ${ds.colors.secondary};
+    border-radius: 50%;
+  }
+  &.address {
+    background-color: transparent;
+    border: 2px solid ${ds.colors.primary};
+    color: ${ds.colors.contrast};
+    font-weight: normal;
+  }
 `
 
 export interface NodeProps {
