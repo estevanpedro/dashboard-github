@@ -13,7 +13,7 @@ const OptionNode = styled(Node)<OptionNode>`
     height: 18px;
     margin-bottom: 4px;
   }
-  background-color: transparent;
+  background-color: ${ds.colors.white};
   color: ${props => (props.primary ? ds.colors.primary : ds.colors.secondary)};
   border: 2px solid
     ${props => (props.primary ? ds.colors.primary : ds.colors.secondary)};

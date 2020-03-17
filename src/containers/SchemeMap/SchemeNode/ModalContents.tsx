@@ -8,6 +8,8 @@ import { RootState } from '../../../redux/rootReducer'
 import {
   addSplit,
   removeSplit,
+  updateName,
+  updateSplitName,
   updateSplitAddress,
   updateSplitShare,
 } from '../../../redux/ducks/nodeOptions/split'
@@ -43,12 +45,21 @@ import minus from '../../../assets/icons/minus.svg'
 import plus from '../../../assets/icons/plus.svg'
 
 export const SplitContent = () => {
-  const { splits } = useSelector((state: RootState) => state.split)
+  const { name, splits } = useSelector((state: RootState) => state.split)
   const dispatch = useDispatch()
 
   return (
     <>
       <OverflowContainer>
+        <Input
+          label='Split Name'
+          value={name}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            dispatch(updateName(e.target.value))
+          }
+          type='text'
+          width='100'
+        />
         {splits.map((split, i) => (
           <SplitContainer key={split.id}>
             <FlexContainer
@@ -65,7 +76,17 @@ export const SplitContent = () => {
                 />
               )}
             </FlexContainer>
-
+            <Input
+              label={'Name'}
+              value={split.name}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                dispatch(
+                  updateSplitName({ id: split.id, name: e.target.value })
+                )
+              }
+              type='text'
+              width='100%'
+            />
             <Input
               label={`Address`}
               value={split.address}
