@@ -16,6 +16,8 @@ import FlexContainer from '../../../components/FlexContainer'
 
 import styled from 'styled-components' //TEMP
 
+// TODO: REFACTOR CODE
+
 const NodeContainer = styled(Container)<{ hasChildren?: boolean }>`
   /* margin-left: 5rem;
   margin-right: ${props => props.children && '5rem'}; */
@@ -52,14 +54,18 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
 
   const dispatch = useDispatch()
 
-  const { name, hours, minutes, seconds } = useSelector(
+  const { name: timerName, hours, minutes, seconds } = useSelector(
     (state: RootState) => state.timer
   )
   const { name: splitName, splits } = useSelector(
     (state: RootState) => state.split
   )
-  const { emails } = useSelector((state: RootState) => state.notify)
-  const { addresses } = useSelector((state: RootState) => state.send)
+  const { name: notifyName, emails } = useSelector(
+    (state: RootState) => state.notify
+  )
+  const { name: sendName, addresses } = useSelector(
+    (state: RootState) => state.send
+  )
 
   const ModalFunctions = {
     Split: () => {
@@ -88,22 +94,57 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
       setOptionsActive(false)
     },
     Timer: () => {
-      const timerData = {
-        name,
-        hours,
-        minutes,
-        seconds,
-      }
-
-      console.log(timerData)
+      dispatch(
+        addNode({
+          id: nodeData.id,
+          node: {
+            id: uniqid(),
+            type: 'timer',
+            children: [],
+            info: { name: timerName, timerInfo: { hours, minutes, seconds } },
+          },
+        })
+      )
       setOptionsActive(false)
     },
     Notify: () => {
-      console.log(emails)
+      dispatch(
+        addNode({
+          id: nodeData.id,
+          node: {
+            id: uniqid(),
+            type: 'notify',
+            children: [],
+            info: { name: notifyName, emails },
+          },
+        })
+      )
       setOptionsActive(false)
     },
     Send: () => {
-      console.log(addresses)
+      dispatch(
+        addNode({
+          id: nodeData.id,
+          node: {
+            id: uniqid(),
+            type: 'send',
+            children: addresses.map(address => {
+              return {
+                id: uniqid(),
+                type: 'address',
+                children: [],
+                info: {
+                  name: address.name,
+                  address: address.address,
+                  percentage: address.percentage,
+                  value: address.value,
+                },
+              }
+            }),
+            info: { name: sendName },
+          },
+        })
+      )
       setOptionsActive(false)
     },
     Swap: () => {
@@ -121,7 +162,11 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
 
   const nodeClass = () => {
     switch (nodeData.type) {
-      case 'timer' || 'notify' || 'send' || 'swap' || 'event':
+      case 'timer':
+      case 'notify':
+      case 'send':
+      case 'swap':
+      case 'event':
         return 'tool'
 
       case 'address':

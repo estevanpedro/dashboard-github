@@ -29,7 +29,8 @@ export const Node = styled.button<NodeProps>`
   }
   &.tool {
     background-color: ${ds.colors.secondary};
-    border-radius: 50%;
+    border-radius: 40px;
+    width: 200px;
   }
   &.address {
     background-color: transparent;

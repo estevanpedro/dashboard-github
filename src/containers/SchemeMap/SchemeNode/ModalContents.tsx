@@ -22,14 +22,17 @@ import {
 } from '../../../redux/ducks/nodeOptions/timer'
 
 import {
+  updateNotifyName,
   addEmail,
   removeEmail,
   updateEmail,
 } from '../../../redux/ducks/nodeOptions/notify'
 
 import {
+  updateSendName,
   addSend,
   removeSend,
+  updateSendAddressName,
   updateSendAddress,
   updateSendValue,
   updateSendPercentage,
@@ -40,6 +43,7 @@ import Input from '../../../components/Input'
 import FlexContainer from '../../../components/FlexContainer'
 import { SubTitle } from '../../../components/Title'
 import Slider from '../../../components/Slider'
+import Line from '../../../components/Line'
 
 import minus from '../../../assets/icons/minus.svg'
 import plus from '../../../assets/icons/plus.svg'
@@ -173,11 +177,21 @@ export const TimerContent = () => {
 }
 
 export const NotifyContent = () => {
-  const { emails } = useSelector((state: RootState) => state.notify)
+  const { name, emails } = useSelector((state: RootState) => state.notify)
   const dispatch = useDispatch()
 
   return (
     <FlexContainer direction='column' height='500px'>
+      <Input
+        label='Name'
+        value={name}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          dispatch(updateNotifyName(e.target.value))
+        }
+        type='text'
+        width='100%'
+      />
+      <Line />
       <OverflowContainer>
         {emails.map((email, i) => (
           <FlexContainer
@@ -214,11 +228,20 @@ export const NotifyContent = () => {
 }
 
 export const SendContent = () => {
-  const { addresses } = useSelector((state: RootState) => state.send)
+  const { name, addresses } = useSelector((state: RootState) => state.send)
   const dispatch = useDispatch()
 
   return (
     <>
+      <Input
+        label='Name'
+        value={name}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          dispatch(updateSendName(e.target.value))
+        }
+        type='text'
+        width='100%'
+      />
       <OverflowContainer>
         {addresses.map((address, i) => (
           <SplitContainer key={address.id}>
@@ -236,6 +259,20 @@ export const SendContent = () => {
                 />
               )}
             </FlexContainer>
+            <Input
+              label='Name'
+              value={address.name}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                dispatch(
+                  updateSendAddressName({
+                    id: address.id,
+                    name: e.target.value,
+                  })
+                )
+              }
+              type='text'
+              width='100%'
+            />
             <Input
               label={`Address`}
               value={address.address}

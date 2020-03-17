@@ -8,7 +8,7 @@ export interface TimerState {
 }
 
 const initialState: TimerState = {
-  name: '',
+  name: 'Timer',
   hours: 0,
   minutes: 0,
   seconds: 0,
