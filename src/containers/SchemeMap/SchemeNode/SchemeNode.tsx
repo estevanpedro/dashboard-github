@@ -14,7 +14,7 @@ import options, { NodeOption } from './options'
 import { SchemeNodeType } from './nodeType'
 import FlexContainer from '../../../components/FlexContainer'
 
-import styled from 'styled-components' //TEMP
+import styled, { css } from 'styled-components' //TEMP
 
 // TODO: REFACTOR CODE
 
@@ -26,11 +26,36 @@ const NodeContainer = styled(Container)<{ hasChildren?: boolean }>`
   align-items: center;
 `
 
+const arrowPointerMixin = css`
+  ::after {
+    content: '';
+    position: absolute;
+    right: 1rem;
+
+    border: solid black;
+    border-width: 0 1px 1px 0;
+    display: inline-block;
+
+    /* Change this to alter arrow pointer size */
+    padding: 3px;
+    top: -3px;
+
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+  }
+`
+
+const RelativeContainer = styled.div`
+  position: relative;
+`
+
 const Arrow = styled.div<{ margin: 'left' | 'right' }>`
   height: 1px;
   width: 2.5rem;
   margin-right: ${props => props.margin === 'right' && '1rem'};
   background-color: black;
+
+  ${props => props.margin === 'right' && arrowPointerMixin}
 `
 
 const VerticalArrow = styled.div`
@@ -179,7 +204,11 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
 
   return (
     <NodeContainer hasChildren={hasChildren}>
-      {!ignoreLeftArrow && <Arrow margin='right' />}
+      {!ignoreLeftArrow && (
+        <RelativeContainer>
+          <Arrow margin='right' />
+        </RelativeContainer>
+      )}
       {/* If not last, create line with height 100% and position relative minus button height / 2 */}
       {!last && <VerticalArrow />}
       <Node
