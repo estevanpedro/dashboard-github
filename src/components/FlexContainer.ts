@@ -10,7 +10,7 @@ export default styled.div<FlexContainer>`
   flex-direction: ${props => props.direction || 'row'};
   justify-content: ${props => props.justify || 'center'};
   align-items: ${props => props.align || 'stretch'};
-  overflow: ${props => props.overflow || 'hidden'};
+  overflow: ${props => props.overflow || 'visible'};
   box-sizing: border-box;
   top: ${props => props.top || 'auto'};
   bottom: ${props => props.bottom || 'auto'};

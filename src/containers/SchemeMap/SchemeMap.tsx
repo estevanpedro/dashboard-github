@@ -18,7 +18,7 @@ interface NodeColumnProps {
 
 const NodeColumn = ({ rootNode, ignoreLeftArrow, last }: NodeColumnProps) => {
   return (
-    <FlexContainer align='center' justify='flex-start' position='relative'>
+    <FlexContainer align='flex-start' justify='flex-start' position='relative'>
       <SchemeNode
         nodeData={rootNode}
         ignoreLeftArrow={ignoreLeftArrow}
