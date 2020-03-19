@@ -1,8 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import uniqid from 'uniqid'
-import { string } from 'prop-types'
 
-interface Split {
+export interface Split {
   name: string
   id: string
   address: string
@@ -44,10 +43,10 @@ const reducer = createSlice({
     removeSplit(state: SplitState, action: PayloadAction<string>) {
       state.splits = state.splits.filter(split => split.id !== action.payload)
     },
-    updateName(state: SplitState, action: PayloadAction<string>) {
+    updateSplitName(state: SplitState, action: PayloadAction<string>) {
       state.name = action.payload
     },
-    updateSplitName(
+    updateAddressName(
       state: SplitState,
       action: PayloadAction<{ id: string; name: string }>
     ) {
@@ -57,7 +56,7 @@ const reducer = createSlice({
           : split
       )
     },
-    updateSplitAddress(
+    updateAddressValue(
       state: SplitState,
       action: PayloadAction<{ id: string; address: string }>
     ) {
@@ -67,7 +66,7 @@ const reducer = createSlice({
           : split
       )
     },
-    updateSplitShare(
+    updateAddressShare(
       state: SplitState,
       action: PayloadAction<{ id: string; share: number }>
     ) {
@@ -83,10 +82,10 @@ const reducer = createSlice({
 export const {
   addSplit,
   removeSplit,
-  updateName,
   updateSplitName,
-  updateSplitAddress,
-  updateSplitShare,
+  updateAddressName,
+  updateAddressValue,
+  updateAddressShare,
 } = reducer.actions
 
 export default reducer.reducer

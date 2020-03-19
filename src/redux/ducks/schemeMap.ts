@@ -6,7 +6,7 @@ import {
   updateTreeNode,
 } from '../../utils/treeUtils'
 
-import { SchemeNodeType } from '../../containers/SchemeMap/SchemeNode/nodeType'
+import { SchemeNodeType } from '../../containers/SchemeMap/SchemeNode/utils/nodeType'
 
 export interface SchemeMapState {
   rootNode: SchemeNodeType

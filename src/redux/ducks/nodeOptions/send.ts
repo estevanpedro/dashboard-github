@@ -1,15 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import uniqid from 'uniqid'
 
+export interface Address {
+  id: string
+  name: string
+  address: string
+  value: number
+  percentage: number
+}
 export interface SendState {
   name: string
-  addresses: {
-    id: string
-    name: string
-    address: string
-    value: number
-    percentage: number
-  }[]
+  addresses: Address[]
 }
 
 const initialState: SendState = {

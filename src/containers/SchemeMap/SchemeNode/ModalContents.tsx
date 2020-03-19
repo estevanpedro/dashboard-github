@@ -8,14 +8,14 @@ import { RootState } from '../../../redux/rootReducer'
 import {
   addSplit,
   removeSplit,
-  updateName,
   updateSplitName,
-  updateSplitAddress,
-  updateSplitShare,
+  updateAddressName,
+  updateAddressValue,
+  updateAddressShare,
 } from '../../../redux/ducks/nodeOptions/split'
 
 import {
-  updateNameValue,
+  updateTimerName,
   updateHoursValue,
   updateMinutesValue,
   updateSecondsValue,
@@ -59,7 +59,7 @@ export const SplitContent = () => {
           label='Split Name'
           value={name}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            dispatch(updateName(e.target.value))
+            dispatch(updateSplitName(e.target.value))
           }
           type='text'
           width='100'
@@ -85,7 +85,7 @@ export const SplitContent = () => {
               value={split.name}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 dispatch(
-                  updateSplitName({ id: split.id, name: e.target.value })
+                  updateAddressName({ id: split.id, name: e.target.value })
                 )
               }
               type='text'
@@ -96,7 +96,7 @@ export const SplitContent = () => {
               value={split.address}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 dispatch(
-                  updateSplitAddress({ id: split.id, address: e.target.value })
+                  updateAddressValue({ id: split.id, address: e.target.value })
                 )
               }
               type='text'
@@ -109,7 +109,7 @@ export const SplitContent = () => {
                 value={split.share}
                 onChange={value => {
                   dispatch(
-                    updateSplitShare({ id: split.id, share: Number(value) })
+                    updateAddressShare({ id: split.id, share: Number(value) })
                   )
                 }}
                 formatLabel={value => `${value}%`}
@@ -135,7 +135,7 @@ export const TimerContent = () => {
         label='Name'
         value={name}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          dispatch(updateNameValue(e.target.value))
+          dispatch(updateTimerName(e.target.value))
         }
         type='text'
         width={'100%'}

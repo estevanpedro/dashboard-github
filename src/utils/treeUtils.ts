@@ -1,4 +1,4 @@
-import { SchemeNodeType } from '../containers/SchemeMap/SchemeNode/nodeType'
+import { SchemeNodeType } from '../containers/SchemeMap/SchemeNode/utils/nodeType'
 
 /**
  * Function used to find node on the tree and execute a callback function with it

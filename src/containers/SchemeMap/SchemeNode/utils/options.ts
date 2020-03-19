@@ -1,12 +1,12 @@
 import { FunctionComponent } from 'react'
 
-import splitIcon from '../../../assets/icons/split.svg'
-import timerIcon from '../../../assets/icons/stopwatch.svg'
-import notifyIcon from '../../../assets/icons/bell.svg'
-import sendIcon from '../../../assets/icons/share.svg'
-import swapIcon from '../../../assets/icons/sort.svg'
-import eventIcon from '../../../assets/icons/tick.svg'
-import editIcon from '../../../assets/icons/edit.svg'
+import splitIcon from '../../../../assets/icons/split.svg'
+import timerIcon from '../../../../assets/icons/stopwatch.svg'
+import notifyIcon from '../../../../assets/icons/bell.svg'
+import sendIcon from '../../../../assets/icons/share.svg'
+import swapIcon from '../../../../assets/icons/sort.svg'
+import eventIcon from '../../../../assets/icons/tick.svg'
+import editIcon from '../../../../assets/icons/edit.svg'
 
 import {
   SplitContent,
@@ -16,7 +16,7 @@ import {
   SwapContent,
   EventContent,
   EditContent,
-} from './ModalContents'
+} from '../ModalContents'
 
 export interface NodeOption {
   id: number

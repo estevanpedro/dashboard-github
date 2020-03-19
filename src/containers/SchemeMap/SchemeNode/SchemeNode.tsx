@@ -1,72 +1,22 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import uniqid from 'uniqid'
 
 import { RootState } from '../../../redux/rootReducer'
-import { addNode } from '../../../redux/ducks/schemeMap'
 
 import Modal from '../../../components/Modal'
-
-import { Container, Node, SplitContainer } from './elements'
-import OptionNode from './OptionNode'
-import options, { NodeOption } from './options'
-
-import { SchemeNodeType } from './nodeType'
 import FlexContainer from '../../../components/FlexContainer'
 
-import styled, { css } from 'styled-components' //TEMP
-
-// TODO: REFACTOR CODE
-
-const NodeContainer = styled(Container)<{ hasChildren?: boolean }>`
-  /* margin-left: 5rem;
-  margin-right: ${props => props.children && '5rem'}; */
-  margin-bottom: 5rem;
-  display: flex;
-  align-items: center;
-`
-
-const arrowPointerMixin = css`
-  ::after {
-    content: '';
-    position: absolute;
-    right: 1rem;
-
-    border: solid black;
-    border-width: 0 1px 1px 0;
-    display: inline-block;
-
-    /* Change this to alter arrow pointer size */
-    padding: 3px;
-    top: -3px;
-
-    transform: rotate(-45deg);
-    -webkit-transform: rotate(-45deg);
-  }
-`
-
-const RelativeContainer = styled.div`
-  position: relative;
-`
-
-const Arrow = styled.div<{ margin: 'left' | 'right' }>`
-  height: 1px;
-  width: 2.5rem;
-  margin-right: ${props => props.margin === 'right' && '1rem'};
-  background-color: black;
-
-  ${props => props.margin === 'right' && arrowPointerMixin}
-`
-
-const VerticalArrow = styled.div`
-  width: 1px;
-  height: 100%;
-  position: absolute;
-  left: 0;
-  top: 42px;
-
-  background-color: black;
-`
+import {
+  Container,
+  Node,
+  RelativeContainer,
+  VerticalArrow,
+  Arrow,
+  OptionNode,
+} from './elements'
+import options, { NodeOption } from './utils/options'
+import { SchemeNodeType } from './utils/nodeType'
+import { addSplit, addTimer, addNotify, addSend } from './utils/toolsFuncions'
 
 interface Props {
   nodeData: SchemeNodeType
@@ -94,82 +44,25 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
 
   const ModalFunctions = {
     Split: () => {
-      dispatch(
-        addNode({
-          id: nodeData.id,
-          node: {
-            id: uniqid(),
-            type: 'split',
-            children: splits.map(split => {
-              return {
-                id: uniqid(),
-                type: 'address',
-                children: [],
-                info: {
-                  name: split.name,
-                  address: split.address,
-                  share: split.share,
-                },
-              }
-            }),
-            info: { name: splitName },
-          },
-        })
-      )
+      dispatch(addSplit(nodeData, splitName, splits))
       setOptionsActive(false)
     },
     Timer: () => {
-      dispatch(
-        addNode({
-          id: nodeData.id,
-          node: {
-            id: uniqid(),
-            type: 'timer',
-            children: [],
-            info: { name: timerName, timerInfo: { hours, minutes, seconds } },
-          },
-        })
-      )
+      const timerInfo = {
+        hours,
+        minutes,
+        seconds,
+      }
+
+      dispatch(addTimer(nodeData, timerName, timerInfo))
       setOptionsActive(false)
     },
     Notify: () => {
-      dispatch(
-        addNode({
-          id: nodeData.id,
-          node: {
-            id: uniqid(),
-            type: 'notify',
-            children: [],
-            info: { name: notifyName, emails },
-          },
-        })
-      )
+      dispatch(addNotify(nodeData, notifyName, emails))
       setOptionsActive(false)
     },
     Send: () => {
-      dispatch(
-        addNode({
-          id: nodeData.id,
-          node: {
-            id: uniqid(),
-            type: 'send',
-            children: addresses.map(address => {
-              return {
-                id: uniqid(),
-                type: 'address',
-                children: [],
-                info: {
-                  name: address.name,
-                  address: address.address,
-                  percentage: address.percentage,
-                  value: address.value,
-                },
-              }
-            }),
-            info: { name: sendName },
-          },
-        })
-      )
+      dispatch(addSend(nodeData, sendName, addresses))
       setOptionsActive(false)
     },
     Swap: () => {
@@ -203,7 +96,7 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
   }
 
   return (
-    <NodeContainer hasChildren={hasChildren}>
+    <Container hasChildren={hasChildren}>
       {!ignoreLeftArrow && (
         <RelativeContainer>
           <Arrow margin='right' />
@@ -239,7 +132,7 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
         </FlexContainer>
       )}
       {hasChildren && <Arrow margin='left' />}
-    </NodeContainer>
+    </Container>
   )
 }
 

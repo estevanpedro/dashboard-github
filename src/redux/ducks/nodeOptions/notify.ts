@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import uniqid from 'uniqid'
 
-interface Email {
+export interface Email {
   id: string
   email: string
 }
