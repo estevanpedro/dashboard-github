@@ -2,13 +2,17 @@ import styled from 'styled-components'
 import ds from '../../design/designSystem'
 import Text from '../Text'
 
-export const Container = styled.div`
-  padding: 10px 10px;
-  border-top: 1px solid ${ds.colors.contrast};;
+export const Container = styled.div<ContainerProps>`
+  padding: 4px 4px;
+  border-top: 1px solid ${ds.colors.contrast};
   align-items: center;
   display: flex;
   justify-content: space-between;
+  background-color: ${props => (props.pair ? ds.colors.secondaryBg : ds.colors.background)};
 `
+interface ContainerProps {
+  pair: boolean
+}
 export const Colunm = styled.div<ColunmField>`
   width: ${props => (props.width ? props.width : '150px')};
   flex-direction: column;
