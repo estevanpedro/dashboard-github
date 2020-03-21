@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import ds from '../../../design/designSystem'
 
 export const Option = styled.button<OptionProps>`
   width: 150px;
@@ -7,10 +6,10 @@ export const Option = styled.button<OptionProps>`
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
   background-color: ${props =>
-    props.color ? ds.colors.contrast : ds.colors.primary};
+    props.color ? props.theme.colors.contrast : props.theme.colors.primary};
   outline: none;
-  color: ${ds.colors.background};
-  font-size: ${ds.fontSize.small};
+  color: ${props => props.theme.colors.background};
+  font-size: ${props => props.theme.fontSize.small};
   cursor: pointer;
   margin: 0 2px 0 2px;
 `

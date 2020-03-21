@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import FlexContainer from '../FlexContainer'
+import Text from '../Text'
 
 interface ColumnProps {
   width?: string
@@ -35,4 +36,16 @@ export const Column = styled(FlexContainer)<ColumnProps>`
   flex-direction: column;
   padding: 0 20px;
   margin: 5px;
+`
+
+export const Title = styled(Text)`
+  font-weight: bold;
+`
+export const PayloadText = styled(Text)`
+  color: ${props => props.theme.colors.primary};
+`
+
+export const Name = styled(Text)`
+  font-style: italic;
+  font-size: ${props => props.theme.fontSize.verySmall};
 `
