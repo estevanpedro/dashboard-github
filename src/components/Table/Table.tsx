@@ -12,7 +12,13 @@ export interface Props {
     id: number
 }
 
-const Table = ({ splitInfo, id }: { splitInfo: Props; id: number }) => {
+const Table = ({
+    splitInfo,
+    id
+}: {
+    splitInfo: Props;
+    id: number
+}) => {
     console.log(new Date(parseFloat(splitInfo.lastTransaction)).toLocaleString('en-GB'))
     return (
         <div>
