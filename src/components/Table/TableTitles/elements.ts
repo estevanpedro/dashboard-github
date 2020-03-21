@@ -1,10 +1,9 @@
 import styled from 'styled-components'
-import ds from '../../../design/designSystem'
 import Text from '../../Text'
 
 export const ContainerTitles = styled.div`
-  padding: 0 10px 0 10px;
-  border-top: 1px solid ${ds.colors.contrast};
+  padding: 0 10px;
+  border-top: 1px solid ${props => props.theme.colors.contrast};
   align-items: center;
   display: flex;
   justify-content: space-between;
@@ -19,9 +18,9 @@ export const Colunm = styled.div<ColunmField>`
   margin: 5px 5px 5px 5px;
 `
 interface ColunmField {
-  width?: string;
+  width?: string
 }
 
 export const Title = styled(Text)`
- font-weight: bold;
+  font-weight: bold;
 `

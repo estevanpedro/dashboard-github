@@ -1,8 +1,6 @@
 import styled from 'styled-components'
-import ds from '../../design/designSystem'
 
-export const Containner = styled.div`
-`
+export const Containner = styled.div``
 export const TableContainner = styled.div`
   border-bottom: 1px solid white;
 `
@@ -17,10 +15,12 @@ export const Option = styled.button<OptionProps>`
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
   background-color: ${props =>
-    !props.isFocused ? ds.colors.primary : ds.colors.contrast};
+    !props.isFocused
+      ? props.theme.colors.primary
+      : props.theme.colors.contrast};
   outline: none;
-  color: ${ds.colors.background};
-  font-size: ${ds.fontSize.regular};
+  color: ${props => props.theme.colors.background};
+  font-size: ${props => props.theme.fontSize.regular};
   font-weight: bold;
   cursor: pointer;
   margin: 0 2px 0 2px;

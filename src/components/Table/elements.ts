@@ -7,12 +7,14 @@ interface ColumnProps {
 
 export const Container = styled.div<ContainerProps>`
   padding: 4px 4px;
-  border-top: 1px solid ${ds.colors.contrast};
+  border-top: 1px solid ${props => props.theme.colors.contrast};
   align-items: center;
   display: flex;
   justify-content: space-between;
   background-color: ${props =>
-    props.pair ? ds.colors.secondaryBg : ds.colors.background};
+    props.pair
+      ? props.theme.colors.secondaryBg
+      : props.theme.colors.background};
 `
 interface ContainerProps {
   pair: boolean
