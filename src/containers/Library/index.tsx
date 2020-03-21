@@ -1,5 +1,6 @@
 import Library from './Library'
 import React, { useState } from 'react'
+import Table from '../../components/Table'
 
 interface Props {
     schemeName: string
@@ -12,7 +13,10 @@ interface Props {
 }
 
 const LibraryContainner = () => {
-
+    const [colorBalance, setcolorBalance] = useState()
+    const [colorCurrency, setcolorCurrency] = useState()
+    const [colorTransaction, setColorTransaction] = useState('#')
+    const [preference, setPreference] = useState('lastTransaction')
     const [libInfoExample, setLibInfoExample] = useState<Props[]>(
         [
             {
@@ -25,7 +29,7 @@ const LibraryContainner = () => {
                 currency: 'bitcoin',
             },
             {
-                schemeName: 'Payback 2',
+                schemeName: 'Money',
                 schemeCreator: 'Abraham',
                 balance: 0.10000000,
                 payout: 0.008,
@@ -34,7 +38,7 @@ const LibraryContainner = () => {
                 currency: 'bitcoin',
             },
             {
-                schemeName: 'Payback 3',
+                schemeName: 'Payback',
                 schemeCreator: 'Abraham',
                 balance: 0.10000000,
                 payout: 0.008,
@@ -43,7 +47,7 @@ const LibraryContainner = () => {
                 currency: 'bitcoin',
             },
             {
-                schemeName: 'Payback 4',
+                schemeName: 'Salary',
                 schemeCreator: 'Abraham',
                 balance: 0.10000000,
                 payout: 0.008,
@@ -52,7 +56,7 @@ const LibraryContainner = () => {
                 currency: 'bitcoin',
             },
             {
-                schemeName: 'Payback 4',
+                schemeName: 'Gamification',
                 schemeCreator: 'Abraham',
                 balance: 0.10000000,
                 payout: 0.008,
@@ -63,12 +67,67 @@ const LibraryContainner = () => {
         ]
     )
 
+    function Tab(preference: string) {
+        if (preference === 'balance') {
+            libInfoExample.sort(function compare(a: any, b: any) {
+                if (a.balance < b.balance) {
+                    return 1
+                }
+                if (a.balance > b.balance) {
+                    return -1
+                }
+                return 0
+            })
+            const balance = libInfoExample.map((info: Props, id: number) => {
+                return <Table splitInfo={info} id={id} />
+            })
+            return balance
+        }
 
+        else if (preference === 'currency') {
+            libInfoExample.sort(function compare(a: any, b: any) {
+                if (a.currency < b.currency) {
+                    return 1
+                }
+                if (a.currency > b.currency) {
+                    return -1
+                }
+                return 0
+            })
+            const currency = libInfoExample.map((info: Props, id: number) => {
+                return <Table splitInfo={info} id={id} />
+            })
+            return currency
+        }
 
+        else if (preference === 'lastTransaction') {
+            libInfoExample.sort(function compare(a: any, b: any) {
+                if (parseInt(a.lastTransaction) < parseInt(b.lastTransaction)) {
+                    return 1
+                }
+                if (parseInt(a.lastTransaction) > parseInt(b.lastTransaction)) {
+                    return -1
+                }
+                return 0
+            })
+            const lastTransaction = libInfoExample.map((info: Props, id: number) => {
+                return <Table splitInfo={info} id={id} />
+            })
+            return lastTransaction
+        }
+    }
 
-
-
-    return <Library libInfoExample={libInfoExample} />
+    return <Library
+        Tab={Tab}
+        colorBalance={colorBalance}
+        setcolorBalance={setcolorBalance}
+        colorCurrency={colorCurrency}
+        setcolorCurrency={setcolorCurrency}
+        colorTransaction={colorTransaction}
+        setColorTransaction={setColorTransaction}
+        preference={preference}
+        setPreference={setPreference}
+    />
 }
 
 export default LibraryContainner
