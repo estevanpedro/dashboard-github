@@ -2,19 +2,30 @@ import Library from './Library'
 import React, { useState } from 'react'
 import Table from '../../components/Table'
 
+export interface LibraryProps {
+    Tab: any //"JSX.Element[] | undefined" -not working
+    colorBalance: string
+    setcolorBalance: React.Dispatch<React.SetStateAction<string>>
+    colorCurrency: string
+    setcolorCurrency: React.Dispatch<React.SetStateAction<string>>
+    colorTransaction: string
+    setColorTransaction: React.Dispatch<React.SetStateAction<string>>
+    preference: string
+    setPreference: React.Dispatch<React.SetStateAction<string>>
+}
 interface Props {
     schemeName: string
     schemeCreator?: string
-    balance: number | any
-    payout: number | any
-    lastTransaction: number | string
+    balance: number
+    payout: number
+    lastTransaction: string
     id: number
     currency: string
 }
 
 const LibraryContainner = () => {
-    const [colorBalance, setcolorBalance] = useState()
-    const [colorCurrency, setcolorCurrency] = useState()
+    const [colorBalance, setcolorBalance] = useState('')
+    const [colorCurrency, setcolorCurrency] = useState('')
     const [colorTransaction, setColorTransaction] = useState('#')
     const [preference, setPreference] = useState('lastTransaction')
     const [libInfoExample, setLibInfoExample] = useState<Props[]>(
@@ -30,7 +41,7 @@ const LibraryContainner = () => {
             },
             {
                 schemeName: 'Money',
-                schemeCreator: 'Abraham',
+                schemeCreator: 'Einstein',
                 balance: 0.10000000,
                 payout: 0.008,
                 lastTransaction: '1584010434',
@@ -40,28 +51,10 @@ const LibraryContainner = () => {
             {
                 schemeName: 'Payback',
                 schemeCreator: 'Abraham',
-                balance: 0.10000000,
+                balance: 5.10000000,
                 payout: 0.008,
                 lastTransaction: '1584010437',
-                id: 2,
-                currency: 'bitcoin',
-            },
-            {
-                schemeName: 'Salary',
-                schemeCreator: 'Abraham',
-                balance: 0.10000000,
-                payout: 0.008,
-                lastTransaction: '1584010438',
-                id: 2,
-                currency: 'bitcoin',
-            },
-            {
-                schemeName: 'Gamification',
-                schemeCreator: 'Abraham',
-                balance: 0.10000000,
-                payout: 0.008,
-                lastTransaction: '1584010439',
-                id: 2,
+                id: 3,
                 currency: 'bitcoin',
             },
         ]

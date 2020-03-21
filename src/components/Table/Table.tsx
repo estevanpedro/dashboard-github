@@ -1,23 +1,24 @@
-import React, { useState, useEffect } from 'react'
-import { Container, Colunm, PayloadText, Title, Name } from './elements'
+import React from 'react'
+import { Container, Colunm, PayloadText, Name } from './elements'
 import Arrow from "../../assets/icons/right-arrow.svg"
 import IconButton from '../IconButton'
-
+import Text from '../Text'
 export interface Props {
     schemeName: string
     schemeCreator?: string
-    balance: number | any
-    payout: number | any
-    lastTransaction: number | string
+    balance: number
+    payout: number
+    lastTransaction: string
     id: number
 }
 
 const Table = ({ splitInfo, id }: { splitInfo: Props; id: number }) => {
+    console.log(new Date(parseFloat(splitInfo.lastTransaction)).toLocaleString('en-GB'))
     return (
         <div>
             <Container pair={id % 2 === 0 ? true : false}>
                 <Colunm width={'300px'}>
-                    <Title>{splitInfo.schemeName}</Title>
+                    <Text weight='bold'>{splitInfo.schemeName}</Text>
                     {splitInfo.schemeCreator ? <Name>{splitInfo.schemeCreator}</Name> : <div />}
                 </Colunm>
 
@@ -29,8 +30,10 @@ const Table = ({ splitInfo, id }: { splitInfo: Props; id: number }) => {
                     <PayloadText>{splitInfo.payout}</PayloadText>
                 </Colunm>
 
-                <Colunm>
-                    <PayloadText>{splitInfo.lastTransaction}</PayloadText>
+                <Colunm width={'200px'}>
+                    <PayloadText>
+                        {new Date(parseFloat(splitInfo.lastTransaction)).toLocaleString('en-GB')}
+                    </PayloadText>
                 </Colunm>
 
                 <Colunm width={'50px'}>

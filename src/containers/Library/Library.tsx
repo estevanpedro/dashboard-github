@@ -3,6 +3,7 @@ import Title from '../../components/Title'
 import { TableContainner, Menu, Containner } from './elements'
 import TableTitles from '../../components/Table/TableTitles'
 import TableOptions from '../../components/Table/TableOptions'
+import { LibraryProps } from './index'
 
 const Library = ({
   Tab,
@@ -14,28 +15,17 @@ const Library = ({
   setColorTransaction,
   preference,
   setPreference,
-}: {
-  Tab: any;
-  colorBalance: string;
-  setcolorBalance: any;
-  colorCurrency: string;
-  setcolorCurrency: any;
-  colorTransaction: string;
-  setColorTransaction: any;
-  preference: string;
-  setPreference: any;
-}) => {
+}: LibraryProps) => {
   return (
     <Containner>
       <Title>Library</Title>
-
       <Menu>
         <TableOptions
           props="Balance"
           color={colorBalance}
           onClick={() => {
             setPreference('balance')
-            setcolorBalance(colorBalance ? null : '#')
+            setcolorBalance(colorBalance ? '' : '#')
             setcolorCurrency('')
             setColorTransaction('')
           }}
@@ -45,8 +35,8 @@ const Library = ({
           color={colorCurrency}
           onClick={() => {
             setPreference('currency')
-            setcolorBalance(null)
-            setcolorCurrency(colorCurrency ? null : '#')
+            setcolorBalance('')
+            setcolorCurrency(colorCurrency ? '' : '#')
             setColorTransaction('')
           }}
         />
@@ -55,8 +45,8 @@ const Library = ({
           color={colorTransaction}
           onClick={() => {
             setPreference('lastTransaction')
-            setcolorBalance(null)
-            setcolorCurrency(null)
+            setcolorBalance('')
+            setcolorCurrency('')
             setColorTransaction(colorTransaction ? '' : '#')
           }}
         />

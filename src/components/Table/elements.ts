@@ -17,9 +17,8 @@ export const Colunm = styled.div<ColunmField>`
   width: ${props => (props.width ? props.width : '150px')};
   flex-direction: column;
   display: flex;
-  padding-left: 20px;
-  padding-right: 20px;
-  margin: 5px 5px 5px 5px;
+  padding: 0 20px;
+  margin: 5px;
 `
 interface ColunmField {
   width?: string;

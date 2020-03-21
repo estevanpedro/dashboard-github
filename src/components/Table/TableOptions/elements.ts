@@ -1,10 +1,6 @@
 import styled from 'styled-components'
 import ds from '../../../design/designSystem'
 
-export const Menu = styled.div`
-  display: flex;
-  justify-content: flex-end;
-`
 export const Option = styled.button<OptionProps>`
   width: 150px;
   height: 25px;

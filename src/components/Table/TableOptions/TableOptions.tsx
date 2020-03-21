@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Menu, Option, } from './elements'
+import React from 'react'
+import { Option, } from './elements'
 
 interface Props {
     props?: string
