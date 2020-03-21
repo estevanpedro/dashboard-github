@@ -1,49 +1,4 @@
-import theme from 'styled-theming'
-
-export default {
-  colors: {
-    primary: theme('mode', {
-      light: '#FF9140',
-      dark: '#63e4a6'
-    }),
-    secondary: theme('mode', {
-      light: '#5B5F97',
-      dark: '#63e4a6'
-    }),
-    background: theme('mode', {
-      light: '#E6E6E6',
-      dark: '#262626'
-    }),
-    secondaryBg: theme('mode', {
-      light: '#DBDBDB',
-      dark: '#262E33'
-    })
-    ,
-    contrast: theme('mode', {
-      light: '#1D1D1D',
-      dark: '#fafafa'
-    }),
-    confirm: theme('mode', {
-      light: '#3EC110',
-      dark: '#63e4a6'
-    }),
-    cancel: theme('mode', {
-      light: '#E30101',
-      dark: '#E30101'
-    }),
-    white: theme('mode', {
-      light: '#fafafa',
-      dark: '#fafafa'
-    }),
-    line: theme('mode', {
-      light: 'rgba(29, 29, 29, 0.1)',
-      dark: 'rgba(255,255,255, 0.7)'
-    }),
-    header: theme('mode', {
-      light: '#1D1D1D',
-      dark: '#1D1D1D',
-    }),
-  },
+const common = {
   spacing: {
     lateral: '60px',
     vertical: '30px',
@@ -56,4 +11,41 @@ export default {
     big: '26px',
     title: '38px',
   },
+}
+
+const light = {
+  colors: {
+    primary: '#FF9140',
+    secondary: '#5B5F97',
+    background: '#E6E6E6',
+    secondaryBg: '#DBDBDB',
+    contrast: '#1D1D1D',
+    confirm: '#3EC110',
+    cancel: '#E30101',
+    white: '#fafafa',
+    line: 'rgba(29, 29, 29, 0.1)',
+    header: '#1D1D1D',
+  },
+  ...common,
+}
+
+const dark = {
+  colors: {
+    primary: '#63e4a6',
+    secondary: '#63e4a6',
+    background: '#262626',
+    secondaryBg: '#262E33',
+    contrast: '#fafafa',
+    confirm: '#63e4a6',
+    cancel: '#E30101',
+    white: '#fafafa',
+    line: 'rgba(255,255,255, 0.7)',
+    header: '#1D1D1D',
+  },
+  ...common,
+}
+
+export default {
+  light,
+  dark,
 }
