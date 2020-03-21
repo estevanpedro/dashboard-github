@@ -16,7 +16,7 @@ import Api from './containers/Api'
 import Profile from './containers/Profile'
 import SchemeMap from './containers/SchemeMap'
 
-import { MyThemeProvider } from './design/Theme/context/ThemeContext'
+import ThemeService from './services/ThemeService'
 
 dotenv.config()
 
@@ -24,7 +24,7 @@ const App = (): JSX.Element => (
   <>
     <GlobalStyle />
     <Provider store={store}>
-      <MyThemeProvider>
+      <ThemeService>
         <PersistGate persistor={persistor} loading={null}>
           <Router>
             <Route path='/login' component={<Login />} />
@@ -37,7 +37,7 @@ const App = (): JSX.Element => (
             {/* <Route path="/" component={}/> */}
           </Router>
         </PersistGate>
-      </MyThemeProvider>
+      </ThemeService>
     </Provider>
   </>
 )
