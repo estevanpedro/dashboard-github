@@ -54,7 +54,6 @@ export const SplitContent = () => {
 
   return (
     <FlexContainer direction='column' width='100%' justify='space-between'>
-      <Title>Split</Title>
       <Input
         label='Split Name'
         value={name}
@@ -190,7 +189,7 @@ export const NotifyContent = () => {
   const dispatch = useDispatch()
 
   return (
-    <FlexContainer direction='column' height='500px'>
+    <FlexContainer direction='column' width='100%'>
       <Input
         label='Name'
         value={name}
@@ -231,7 +230,11 @@ export const NotifyContent = () => {
         ))}
       </OverflowContainer>
 
-      <IconButton icon={plus} onClick={() => dispatch(addEmail())} />
+      <IconButton
+        icon={plus}
+        onClick={() => dispatch(addEmail())}
+        margin='0 0 20px 0'
+      />
     </FlexContainer>
   )
 }
@@ -241,7 +244,7 @@ export const SendContent = () => {
   const dispatch = useDispatch()
 
   return (
-    <>
+    <FlexContainer direction='column' width='100%' justify='space-between'>
       <Input
         label='Name'
         value={name}
@@ -329,8 +332,12 @@ export const SendContent = () => {
           </SplitContainer>
         ))}
       </OverflowContainer>
-      <IconButton icon={plus} onClick={() => dispatch(addSend())} />
-    </>
+      <IconButton
+        icon={plus}
+        onClick={() => dispatch(addSend())}
+        margin='0 0 20px 0'
+      />
+    </FlexContainer>
   )
 }
 

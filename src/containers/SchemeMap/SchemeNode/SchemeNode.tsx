@@ -3,8 +3,11 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { RootState } from '../../../redux/rootReducer'
 
+import Button from '../../../components/Button'
 import Modal from '../../../components/Modal'
 import FlexContainer from '../../../components/FlexContainer'
+import Text from '../../../components/Text'
+import Title from '../../../components/Title'
 
 import {
   Container,
@@ -15,7 +18,7 @@ import {
   OptionNode,
 } from './elements'
 import options, { NodeOption } from './options'
-import { SchemeNodeType } from './utils/nodeType'
+import { NodeType, SchemeNodeType } from './utils/nodeType'
 import { addSplit, addTimer, addNotify, addSend } from './utils/toolsFuncions'
 
 interface Props {
@@ -25,6 +28,15 @@ interface Props {
 }
 
 interface ModalContent {
+  title:
+    | 'Split'
+    | 'Timer'
+    | 'Notify'
+    | 'Send'
+    | 'Swap'
+    | 'Event'
+    | 'Edit'
+    | 'Delete'
   content: FunctionComponent
 }
 
@@ -112,7 +124,6 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
               <Arrow margin='right' />
             </RelativeContainer>
           )}
-          {/* If not last, create line with height 100% and position relative minus button height / 2 */}
           {!last && <VerticalArrow />}
           <Node
             primary
@@ -127,6 +138,7 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
       }
       title='Options'
       description=''
+      onSubmit={modalContent ? ModalFunctions[modalContent.title] : undefined}
     >
       {!modalContent ? (
         <FlexContainer wrap='wrap' justify='space-between'>
@@ -136,7 +148,10 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
               primary={option.title !== 'Edit'}
               onClick={() => {
                 console.log(option.content)
-                setModalContent({ content: option.content })
+                setModalContent({
+                  title: option.title,
+                  content: option.content,
+                })
               }}
             >
               <img src={option.icon} />
@@ -145,8 +160,17 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
           ))}
         </FlexContainer>
       ) : (
-        <FlexContainer height='600px'>
+        <FlexContainer height='600px' direction='column' justify='flex-start'>
+          <Text
+            color='primary'
+            onClick={() => setModalContent(null)}
+            curosorPointer
+          >
+            ← Go back to options
+          </Text>
+          <Title>{modalContent.title}</Title>
           <modalContent.content />
+          {/* <Button onClick={ModalFunctions[modalContent.title]}>Confirm</Button> */}
         </FlexContainer>
       )}
     </Modal>

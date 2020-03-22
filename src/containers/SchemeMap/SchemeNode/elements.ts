@@ -53,7 +53,7 @@ export interface NodeProps {
 
 export const OverflowContainer = styled.div`
   width: 100%;
-  height: 400px;
+  height: 300px;
   overflow: scroll;
   /* box-shadow: 8px 8px 12px rgba(0, 0, 0, 0.5); */
 `

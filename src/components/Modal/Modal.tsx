@@ -18,7 +18,7 @@ interface Props {
   title: string
   description: string
   children: ReactElement
-  onSubmit?: () => void
+  onSubmit?: () => void | undefined
 }
 
 const Modal = ({ trigger, description, children, onSubmit }: Props) => {
