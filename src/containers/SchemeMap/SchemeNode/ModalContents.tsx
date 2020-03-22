@@ -41,7 +41,7 @@ import {
 import IconButton from '../../../components/IconButton'
 import Input from '../../../components/Input'
 import FlexContainer from '../../../components/FlexContainer'
-import { SubTitle } from '../../../components/Title'
+import Title, { SubTitle } from '../../../components/Title'
 import Slider from '../../../components/Slider'
 import Line from '../../../components/Line'
 
@@ -53,17 +53,27 @@ export const SplitContent = () => {
   const dispatch = useDispatch()
 
   return (
-    <>
+    <FlexContainer direction='column' width='100%' justify='space-between'>
+      <Title>Split</Title>
+      <Input
+        label='Split Name'
+        value={name}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          dispatch(updateSplitName(e.target.value))
+        }
+        type='text'
+        width='100'
+      />
+      <FlexContainer
+        width='100%'
+        height='80px'
+        justify='space-between'
+        align='center'
+      >
+        <SubTitle>Split List</SubTitle>
+        <IconButton icon={plus} onClick={() => dispatch(addSplit())} />
+      </FlexContainer>
       <OverflowContainer>
-        <Input
-          label='Split Name'
-          value={name}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            dispatch(updateSplitName(e.target.value))
-          }
-          type='text'
-          width='100'
-        />
         {splits.map((split, i) => (
           <SplitContainer key={split.id}>
             <FlexContainer
@@ -118,8 +128,7 @@ export const SplitContent = () => {
           </SplitContainer>
         ))}
       </OverflowContainer>
-      <IconButton icon={plus} onClick={() => dispatch(addSplit())} />
-    </>
+    </FlexContainer>
   )
 }
 
@@ -345,6 +354,14 @@ export const EditContent = () => {
   return (
     <>
       <h1>EditContent</h1>
+    </>
+  )
+}
+
+export const DeleteContent = () => {
+  return (
+    <>
+      <h1>DeleteContent</h1>
     </>
   )
 }

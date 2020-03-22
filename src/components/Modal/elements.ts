@@ -2,7 +2,8 @@ import styled from 'styled-components'
 import ds from '../../design/designSystem'
 
 export const PopupStyleLight = {
-  width: 400,
+  width: 600,
+  height: 730,
   borderRadius: 4,
   border: 'none',
   display: 'flex',
@@ -10,7 +11,8 @@ export const PopupStyleLight = {
 }
 
 export const PopupStyleDark = {
-  width: 400,
+  width: 600,
+  height: 730,
   borderRadius: 4,
   border: 'none',
   display: 'flex',

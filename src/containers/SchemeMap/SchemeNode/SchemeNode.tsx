@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, FunctionComponent } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { RootState } from '../../../redux/rootReducer'
@@ -14,7 +14,7 @@ import {
   Arrow,
   OptionNode,
 } from './elements'
-import options, { NodeOption } from './utils/options'
+import options, { NodeOption } from './options'
 import { SchemeNodeType } from './utils/nodeType'
 import { addSplit, addTimer, addNotify, addSend } from './utils/toolsFuncions'
 
@@ -24,8 +24,13 @@ interface Props {
   last?: boolean
 }
 
+interface ModalContent {
+  content: FunctionComponent
+}
+
 const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
   const [optionsActive, setOptionsActive] = useState(false)
+  const [modalContent, setModalContent] = useState<ModalContent | null>(null)
 
   const dispatch = useDispatch()
 
@@ -74,6 +79,9 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
     Edit: () => {
       setOptionsActive(false)
     },
+    Delete: () => {
+      setOptionsActive(false)
+    },
   }
 
   const hasChildren = nodeData.children.length > 0
@@ -96,43 +104,52 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
   }
 
   return (
-    <Container hasChildren={hasChildren}>
-      {!ignoreLeftArrow && (
-        <RelativeContainer>
-          <Arrow margin='right' />
-        </RelativeContainer>
-      )}
-      {/* If not last, create line with height 100% and position relative minus button height / 2 */}
-      {!last && <VerticalArrow />}
-      <Node
-        primary
-        onClick={() => setOptionsActive(!optionsActive)}
-        className={nodeClass()}
-      >
-        {nodeData.info.name}
-      </Node>
-      {optionsActive && (
-        <FlexContainer position='absolute' left='130px' zIndex='2'>
+    <Modal
+      trigger={
+        <Container hasChildren={hasChildren}>
+          {!ignoreLeftArrow && (
+            <RelativeContainer>
+              <Arrow margin='right' />
+            </RelativeContainer>
+          )}
+          {/* If not last, create line with height 100% and position relative minus button height / 2 */}
+          {!last && <VerticalArrow />}
+          <Node
+            primary
+            onClick={() => setOptionsActive(!optionsActive)}
+            className={nodeClass()}
+          >
+            {nodeData.info.name}
+          </Node>
+
+          {hasChildren && <Arrow margin='left' />}
+        </Container>
+      }
+      title='Options'
+      description=''
+    >
+      {!modalContent ? (
+        <FlexContainer wrap='wrap' justify='space-between'>
           {options.map((option: NodeOption) => (
-            <Modal
+            <OptionNode
               key={option.id}
-              trigger={
-                <OptionNode key={option.id} primary={option.title !== 'Edit'}>
-                  <img src={option.icon} />
-                  {option.title}
-                </OptionNode>
-              }
-              title={option.title}
-              description={option.description}
-              onSubmit={ModalFunctions[option.title]}
+              primary={option.title !== 'Edit'}
+              onClick={() => {
+                console.log(option.content)
+                setModalContent({ content: option.content })
+              }}
             >
-              <option.content />
-            </Modal>
+              <img src={option.icon} />
+              {option.title}
+            </OptionNode>
           ))}
         </FlexContainer>
+      ) : (
+        <FlexContainer height='600px'>
+          <modalContent.content />
+        </FlexContainer>
       )}
-      {hasChildren && <Arrow margin='left' />}
-    </Container>
+    </Modal>
   )
 }
 

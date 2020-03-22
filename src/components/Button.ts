@@ -17,6 +17,7 @@ export default styled.button<ButtonProps>`
   &:active {
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.25);
   }
+  align-self: ${props => props.align || 'auto'};
 `
 
 interface ButtonProps {

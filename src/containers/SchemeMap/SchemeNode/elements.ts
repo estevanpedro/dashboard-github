@@ -55,13 +55,13 @@ export const OverflowContainer = styled.div`
   width: 100%;
   height: 400px;
   overflow: scroll;
+  /* box-shadow: 8px 8px 12px rgba(0, 0, 0, 0.5); */
 `
 
 export const SplitContainer = styled.div`
-  border: 1px solid ${ds.colors.primary};
+  border-bottom: 1px solid ${ds.colors.primary};
   padding: 20px;
   margin-bottom: ${ds.spacing.vertical};
-  border-radius: 4px;
 `
 
 const arrowPointerMixin = css`
@@ -107,10 +107,10 @@ export const VerticalArrow = styled.div`
 `
 
 export const OptionNode = styled(Node)<OptionNode>`
-  width: 90px;
+  width: 140px;
   height: 62px;
+  margin-bottom: 10px;
   font-size: ${ds.fontSize.verySmall};
-  margin: 0 10px;
   img {
     height: 18px;
     margin-bottom: 4px;
