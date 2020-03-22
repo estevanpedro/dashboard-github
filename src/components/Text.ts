@@ -5,11 +5,12 @@ export default styled.span<TextProps>`
     props.size
       ? props.theme.fontSize[props.size]
       : props.theme.fontSize.regular};
-  color: ${props => props.theme.colors.contrast};
-  font-weight: ${props => (props.weight ? props.weight : 'regular')};
+  color: ${props => props.color || props.theme.colors.contrast};
+  font-weight: ${props => props.weight || 'regular'};
 `
 
 interface TextProps {
   size?: 'small' | 'regular' | 'medium' | 'big' | 'title'
   weight?: 'bold' | 'normal' | 'italic'
+  color?: string
 }
