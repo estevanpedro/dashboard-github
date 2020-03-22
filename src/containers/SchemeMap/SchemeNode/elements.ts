@@ -1,7 +1,5 @@
 import styled from 'styled-components'
 
-import ds from '../../../design/designSystem'
-
 export const Container = styled.div`
   display: flex;
   align-items: center;
@@ -12,14 +10,14 @@ export const Node = styled.button<NodeProps>`
   height: 82px;
   border-radius: 4px;
   background-color: ${props =>
-    props.primary ? ds.colors.primary : ds.colors.secondary};
-  color: ${ds.colors.background};
+    props.primary ? props.theme.colors.primary : props.theme.colors.secondary};
+  color: ${props => props.theme.colors.background};
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   cursor: pointer;
-  font-size: ${ds.fontSize.medium};
+  font-size: ${props => props.theme.fontSize.medium};
   font-family: 'Roboto Condensed', sans-serif;
   font-weight: bold;
   outline: none;
