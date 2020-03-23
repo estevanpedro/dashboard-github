@@ -21,7 +21,7 @@ const Library = ({
       <Title>Library</Title>
       <Menu>
         <TableOptions
-          props="Balance"
+          props='Balance'
           color={colorBalance}
           onClick={() => {
             setPreference('balance')
@@ -31,7 +31,7 @@ const Library = ({
           }}
         />
         <TableOptions
-          props="Currency"
+          props='Currency'
           color={colorCurrency}
           onClick={() => {
             setPreference('currency')
@@ -41,7 +41,7 @@ const Library = ({
           }}
         />
         <TableOptions
-          props="Last Transaction"
+          props='Last Transaction'
           color={colorTransaction}
           onClick={() => {
             setPreference('lastTransaction')
@@ -52,9 +52,7 @@ const Library = ({
         />
       </Menu>
       <TableTitles />
-      <TableContainner>
-        {Tab(preference)}
-      </TableContainner>
+      <TableContainner>{Tab(preference)}</TableContainner>
     </Containner>
   )
 }
