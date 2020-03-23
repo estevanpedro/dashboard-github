@@ -15,7 +15,7 @@ import Library from './containers/Library'
 import Api from './containers/Api'
 import Profile from './containers/Profile'
 import SchemeMap from './containers/SchemeMap'
-
+import SplitDetails from './containers/SplitDetails'
 import { MyThemeProvider } from './design/Theme/context/ThemeContext'
 
 dotenv.config()
@@ -34,6 +34,7 @@ const App = (): JSX.Element => (
             <Route path='/api' component={<Api />} />
             <Route path='/profile' component={<Profile />} />
             <Route path='/scheme' component={<SchemeMap />} />
+            <Route path='/split-details' component={<SplitDetails />} />
             {/* <Route path="/" component={}/> */}
           </Router>
         </PersistGate>
