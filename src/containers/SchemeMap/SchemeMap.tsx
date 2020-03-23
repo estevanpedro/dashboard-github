@@ -1,16 +1,52 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
+
+import FlexContainer from '../../components/FlexContainer'
+import Title from '../../components/Title'
+
+import { RootState } from '../../redux/rootReducer'
 
 import SchemeNode from './SchemeNode'
+import { SchemeContainer } from './elements'
+import { SchemeNodeType } from './SchemeNode/utils/nodeType'
 
-const mockData = {
-  name: 'Split 01',
+interface NodeColumnProps {
+  rootNode: SchemeNodeType
+  ignoreLeftArrow?: boolean
+  last?: boolean
 }
-const SchemeMap = () => {
+
+const NodeColumn = ({ rootNode, ignoreLeftArrow, last }: NodeColumnProps) => {
   return (
-    <div>
-      <h1>Scheme Map</h1>
-      <SchemeNode nodeData={mockData} />
-    </div>
+    <FlexContainer align='flex-start' justify='flex-start' position='relative'>
+      <SchemeNode
+        nodeData={rootNode}
+        ignoreLeftArrow={ignoreLeftArrow}
+        last={last}
+      />
+
+      <FlexContainer direction='column'>
+        {rootNode.children.map((node: SchemeNodeType, index) => (
+          <NodeColumn
+            rootNode={node}
+            last={index === rootNode.children.length - 1}
+          />
+        ))}
+      </FlexContainer>
+    </FlexContainer>
+  )
+}
+
+const SchemeMap = () => {
+  const { rootNode } = useSelector((state: RootState) => state.schemeMap)
+
+  return (
+    <>
+      <Title>SchemeMap</Title>
+      <SchemeContainer>
+        <NodeColumn rootNode={rootNode} ignoreLeftArrow={true} last={true} />
+      </SchemeContainer>
+    </>
   )
 }
 

@@ -25,6 +25,7 @@ const light = {
     white: '#fafafa',
     line: 'rgba(29, 29, 29, 0.1)',
     header: '#1D1D1D',
+    contrastOpacity: 'rgba(29, 29, 29, 0.1)',
   },
   ...common,
 }
@@ -41,6 +42,7 @@ const dark = {
     white: '#fafafa',
     line: 'rgba(255,255,255, 0.7)',
     header: '#1D1D1D',
+    contrastOpacity: 'rgba(250, 250, 250, 0.1)',
   },
   ...common,
 }

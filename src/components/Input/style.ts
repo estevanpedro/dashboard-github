@@ -31,7 +31,7 @@ export const InputField = styled.input<InputFieldProps>`
   border-bottom-width: 1px;
   border-bottom-color: ${props =>
     !props.isFocused
-      ? props.theme.colors.contrast
+      ? props.theme.colors.contrastOpacity
       : props.theme.colors.primary};
   font-size: ${props => props.theme.fontSize.big};
   background: transparent;

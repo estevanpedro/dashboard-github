@@ -1,71 +1,179 @@
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import React, { useState, FunctionComponent } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 
 import { RootState } from '../../../redux/rootReducer'
 
+import Button from '../../../components/Button'
 import Modal from '../../../components/Modal'
+import FlexContainer from '../../../components/FlexContainer'
+import Text from '../../../components/Text'
+import Title from '../../../components/Title'
 
-import { Container, Node } from './elements'
-import OptionNode from './OptionNode'
+import {
+  Container,
+  Node,
+  RelativeContainer,
+  VerticalArrow,
+  Arrow,
+  OptionNode,
+} from './elements'
 import options, { NodeOption } from './options'
+import { NodeType, SchemeNodeType } from './utils/nodeType'
+import { addSplit, addTimer, addNotify, addSend } from './utils/toolsFuncions'
 
 interface Props {
-  nodeData: {
-    name: string
-  }
+  nodeData: SchemeNodeType
+  ignoreLeftArrow?: boolean
+  last?: boolean
 }
 
-const SchemeNode = ({ nodeData }: Props) => {
+interface ModalContent {
+  title:
+    | 'Split'
+    | 'Timer'
+    | 'Notify'
+    | 'Send'
+    | 'Swap'
+    | 'Event'
+    | 'Edit'
+    | 'Delete'
+  content: FunctionComponent
+}
+
+const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
   const [optionsActive, setOptionsActive] = useState(false)
-  const { name, hours, minutes, seconds } = useSelector(
+  const [modalContent, setModalContent] = useState<ModalContent | null>(null)
+
+  const dispatch = useDispatch()
+
+  const { name: timerName, hours, minutes, seconds } = useSelector(
     (state: RootState) => state.timer
   )
-  const { emails } = useSelector((state: RootState) => state.notify)
+  const { name: splitName, splits } = useSelector(
+    (state: RootState) => state.split
+  )
+  const { name: notifyName, emails } = useSelector(
+    (state: RootState) => state.notify
+  )
+  const { name: sendName, addresses } = useSelector(
+    (state: RootState) => state.send
+  )
 
   const ModalFunctions = {
-    Split: () => {},
+    Split: () => {
+      dispatch(addSplit(nodeData, splitName, splits))
+      setOptionsActive(false)
+    },
     Timer: () => {
-      const timerData = {
-        name,
+      const timerInfo = {
         hours,
         minutes,
         seconds,
       }
 
-      console.log(timerData)
+      dispatch(addTimer(nodeData, timerName, timerInfo))
+      setOptionsActive(false)
     },
     Notify: () => {
-      console.log(emails)
+      dispatch(addNotify(nodeData, notifyName, emails))
+      setOptionsActive(false)
     },
-    Send: () => {},
-    Swap: () => {},
-    Event: () => {},
-    Edit: () => {},
+    Send: () => {
+      dispatch(addSend(nodeData, sendName, addresses))
+      setOptionsActive(false)
+    },
+    Swap: () => {
+      setOptionsActive(false)
+    },
+    Event: () => {
+      setOptionsActive(false)
+    },
+    Edit: () => {
+      setOptionsActive(false)
+    },
+    Delete: () => {
+      setOptionsActive(false)
+    },
+  }
+
+  const hasChildren = nodeData.children.length > 0
+
+  const nodeClass = () => {
+    switch (nodeData.type) {
+      case 'timer':
+      case 'notify':
+      case 'send':
+      case 'swap':
+      case 'event':
+        return 'tool'
+
+      case 'address':
+        return 'address'
+
+      default:
+        return
+    }
   }
 
   return (
-    <Container>
-      <Node primary onClick={() => setOptionsActive(!optionsActive)}>
-        {nodeData.name}
-      </Node>
-      {optionsActive &&
-        options.map((option: NodeOption) => (
-          <Modal
-            key={option.id}
-            trigger={
-              <OptionNode key={option.id} primary={option.title !== 'Edit'}>
-                <img src={option.icon} />
-                {option.title}
-              </OptionNode>
-            }
-            title={option.title}
-            description={option.description}
-            onSubmit={ModalFunctions[option.title]}
+    <Modal
+      trigger={
+        <Container hasChildren={hasChildren}>
+          {!ignoreLeftArrow && (
+            <RelativeContainer>
+              <Arrow margin='right' />
+            </RelativeContainer>
+          )}
+          {!last && <VerticalArrow />}
+          <Node
+            primary
+            onClick={() => setOptionsActive(!optionsActive)}
+            className={nodeClass()}
           >
-            <option.content />
-          </Modal>
-        ))}
-    </Container>
+            {nodeData.info.name}
+          </Node>
+
+          {hasChildren && <Arrow margin='left' />}
+        </Container>
+      }
+      title='Options'
+      description=''
+      onSubmit={modalContent ? ModalFunctions[modalContent.title] : undefined}
+    >
+      {!modalContent ? (
+        <FlexContainer wrap='wrap' justify='space-between'>
+          {options.map((option: NodeOption) => (
+            <OptionNode
+              key={option.id}
+              primary={option.title !== 'Edit'}
+              onClick={() => {
+                console.log(option.content)
+                setModalContent({
+                  title: option.title,
+                  content: option.content,
+                })
+              }}
+            >
+              <img src={option.icon} />
+              {option.title}
+            </OptionNode>
+          ))}
+        </FlexContainer>
+      ) : (
+        <FlexContainer height='600px' direction='column' justify='flex-start'>
+          <Text
+            color='primary'
+            onClick={() => setModalContent(null)}
+            curosorPointer
+          >
+            ← Go back to options
+          </Text>
+          <Title>{modalContent.title}</Title>
+          <modalContent.content />
+          {/* <Button onClick={ModalFunctions[modalContent.title]}>Confirm</Button> */}
+        </FlexContainer>
+      )}
+    </Modal>
   )
 }
 
