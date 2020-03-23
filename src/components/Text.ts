@@ -1,16 +1,16 @@
 import styled from 'styled-components'
 
-import ds from '../design/designSystem'
-
 export default styled.span<TextProps>`
   font-size: ${props =>
-    props.size ? ds.fontSize[props.size] : ds.fontSize.regular};
-  color: ${ds.colors.contrast};
-  font-weight: ${props =>
-    props.weight ? props.weight : 'regular'};
+    props.size
+      ? props.theme.fontSize[props.size]
+      : props.theme.fontSize.regular};
+  color: ${props => props.color || props.theme.colors.contrast};
+  font-weight: ${props => props.weight || 'regular'};
 `
 
 interface TextProps {
   size?: 'small' | 'regular' | 'medium' | 'big' | 'title'
-  weight?: 'bold' | 'normal'
+  weight?: 'bold' | 'normal' | 'italic'
+  color?: string
 }

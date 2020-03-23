@@ -1,8 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import ds from '../design/designSystem'
-
 const SliderContainer = styled.div``
 
 const Range = styled.input<RangeProps>`
@@ -19,7 +17,7 @@ const Range = styled.input<RangeProps>`
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
     border-radius: 50%;
-    background-color: ${ds.colors.confirm};
+    background-color: ${props => props.theme.colors.confirm};
   }
 `
 

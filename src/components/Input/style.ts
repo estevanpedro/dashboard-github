@@ -1,7 +1,5 @@
 import styled from 'styled-components'
 
-import ds from '../../design/designSystem'
-
 export const Container = styled.div<ContainerProps>`
   display: flex;
   flex-direction: column;
@@ -17,9 +15,11 @@ interface ContainerProps {
 
 export const Label = styled.label<LabelProps>`
   margin-bottom: 10px;
-  font-size: ${ds.fontSize.small};
+  font-size: ${props => props.theme.fontSize.small};
   color: ${props =>
-    !props.isFocused ? ds.colors.contrast : ds.colors.primary};
+    !props.isFocused
+      ? props.theme.colors.contrast
+      : props.theme.colors.primary};
   transition: 0.3s ease color;
 `
 
@@ -30,16 +30,18 @@ interface LabelProps {
 export const InputField = styled.input<InputFieldProps>`
   border-bottom-width: 1px;
   border-bottom-color: ${props =>
-    !props.isFocused ? ds.colors.contrast : ds.colors.primary};
-  font-size: ${ds.fontSize.big};
+    !props.isFocused
+      ? props.theme.colors.contrast
+      : props.theme.colors.primary};
+  font-size: ${props => props.theme.fontSize.big};
   background: transparent;
   outline: none;
   transition: 0.3s ease border-bottom;
   border-top: none;
   border-left: none;
   border-right: none;
-  caret-color: ${ds.colors.contrast};
-  color: ${ds.colors.contrast};
+  caret-color: ${props => props.theme.colors.contrast};
+  color: ${props => props.theme.colors.contrast};
 `
 
 interface InputFieldProps {
@@ -47,5 +49,5 @@ interface InputFieldProps {
 }
 
 export const Error = styled.span`
-  color: ${ds.colors.cancel};
+  color: ${props => props.theme.colors.cancel};
 `

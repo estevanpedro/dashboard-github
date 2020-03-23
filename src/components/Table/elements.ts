@@ -1,14 +1,21 @@
 import styled from 'styled-components'
-import ds from '../../design/designSystem'
+import FlexContainer from '../FlexContainer'
 import Text from '../Text'
+
+interface ColumnProps {
+  width?: string
+}
 
 export const Container = styled.div<ContainerProps>`
   padding: 4px 4px;
-  border-top: 1px solid ${ds.colors.contrast};
+  border-top: 1px solid ${props => props.theme.colors.contrast};
   align-items: center;
   display: flex;
   justify-content: space-between;
-  background-color: ${props => (props.pair ? ds.colors.secondaryBg : ds.colors.background)};
+  background-color: ${props =>
+    props.pair
+      ? props.theme.colors.secondaryBg
+      : props.theme.colors.background};
 `
 interface ContainerProps {
   pair: boolean
@@ -21,17 +28,24 @@ export const Colunm = styled.div<ColunmField>`
   margin: 5px;
 `
 interface ColunmField {
-  width?: string;
+  width?: string
 }
 
+export const Column = styled(FlexContainer)<ColumnProps>`
+  width: ${props => props.width || '150px'};
+  flex-direction: column;
+  padding: 0 20px;
+  margin: 5px;
+`
+
 export const Title = styled(Text)`
- font-weight: bold;
+  font-weight: bold;
 `
 export const PayloadText = styled(Text)`
-  color: ${ds.colors.primary};;
+  color: ${props => props.theme.colors.primary};
 `
 
 export const Name = styled(Text)`
   font-style: italic;
-  font-size: ${ds.fontSize.verySmall};
+  font-size: ${props => props.theme.fontSize.verySmall};
 `

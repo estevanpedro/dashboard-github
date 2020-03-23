@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import ds from '../../design/designSystem'
 
 export const PopupStyleLight = {
   width: 400,
@@ -25,7 +24,7 @@ export const Container = styled.div`
 
 export const Input = styled.input<InputProps>`
   border-radius: 4px;
-  border-color: ${ds.colors.secondaryBg};
+  border-color: ${props => props.theme.colors.secondaryBg};
   border-width: 0.1;
   width: 300px;
   height: 25px;
@@ -35,7 +34,7 @@ interface InputProps {}
 export const ModalField = styled.div<ModalField>`
   width: 100%;
   margin-top: 10px;
-  text-align: ${props => (props.align ? props.align : 'left')};
+  text-align: ${props => props.align || 'left'};
 `
 interface ModalField {
   align?: 'left' | 'center' | 'right'
@@ -44,9 +43,9 @@ interface ModalField {
 export const Button = styled.button`
   width: 150px;
   height: 40px;
-  background-color: ${ds.colors.confirm};
-  color: ${ds.colors.background};
-  font-size: ${ds.fontSize.regular};
+  background-color: ${props => props.theme.colors.confirm};
+  color: ${props => props.theme.colors.background};
+  font-size: ${props => props.theme.fontSize.regular};
   font-weight: bold;
   border-radius: 50px;
   font-size: 16px;
