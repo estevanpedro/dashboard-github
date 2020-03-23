@@ -10,7 +10,7 @@ export default styled.span<TextProps>`
 `
 
 interface TextProps {
-  size?: 'small' | 'regular' | 'medium' | 'big' | 'title'
+  size?: 'verySmall' | 'small' | 'regular' | 'medium' | 'big' | 'title'
   weight?: 'bold' | 'normal' | 'italic'
   color?: string
 }

@@ -32,7 +32,7 @@ const light = {
 const dark = {
   colors: {
     primary: '#63e4a6',
-    secondary: '#63e4a6',
+    secondary: '#5B5F97',
     background: '#262626',
     secondaryBg: '#262E33',
     contrast: '#fafafa',
