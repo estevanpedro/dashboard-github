@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components'
 import ds from './designSystem'
 
-export default createGlobalStyle`
+export default createGlobalStyle<GlobalStyleProps>`
   * {
     margin: 0;
     padding: 0;
@@ -13,7 +13,8 @@ export default createGlobalStyle`
   }
   body {
     height: 100%;
-    background-color: ${ds.colors.background};
+    background-color: ${props =>
+      props.lightMode ? ds.light.colors.background : ds.dark.colors.background};
   }
   #root {
     height: 100%;
@@ -26,3 +27,7 @@ export default createGlobalStyle`
     border: none;
   }
 `
+
+interface GlobalStyleProps {
+  lightMode: boolean
+}

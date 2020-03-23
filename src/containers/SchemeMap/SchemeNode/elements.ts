@@ -1,13 +1,9 @@
 import styled, { css } from 'styled-components'
 
-import ds from '../../../design/designSystem'
-
 export const Container = styled.div<ContainerProps>`
   display: flex;
   align-items: center;
   margin-bottom: 5rem;
-  display: flex;
-  align-items: center;
 `
 
 interface ContainerProps {
@@ -19,14 +15,14 @@ export const Node = styled.button<NodeProps>`
   height: 82px;
   border-radius: 4px;
   background-color: ${props =>
-    props.primary ? ds.colors.primary : ds.colors.secondary};
-  color: ${ds.colors.background};
+    props.primary ? props.theme.colors.primary : props.theme.colors.secondary};
+  color: ${props => props.theme.colors.background};
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   cursor: pointer;
-  font-size: ${ds.fontSize.medium};
+  font-size: ${props => props.theme.fontSize.medium};
   font-family: 'Roboto Condensed', sans-serif;
   font-weight: bold;
   outline: none;
@@ -35,14 +31,14 @@ export const Node = styled.button<NodeProps>`
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.25);
   }
   &.tool {
-    background-color: ${ds.colors.secondary};
+    background-color: ${props => props.theme.colors.secondary};
     border-radius: 40px;
     width: 200px;
   }
   &.address {
     background-color: transparent;
-    border: 2px solid ${ds.colors.primary};
-    color: ${ds.colors.contrast};
+    border: 2px solid ${props => props.theme.colors.primary};
+    color: ${props => props.theme.colors.contrast};
     font-weight: normal;
   }
 `
@@ -59,9 +55,9 @@ export const OverflowContainer = styled.div`
 `
 
 export const SplitContainer = styled.div`
-  border-bottom: 1px solid ${ds.colors.primary};
+  border-bottom: 1px solid ${props => props.theme.colors.primary};
   padding: 20px;
-  margin-bottom: ${ds.spacing.vertical};
+  margin-bottom: ${props => props.theme.spacing.vertical};
 `
 
 const arrowPointerMixin = css`
@@ -110,15 +106,19 @@ export const OptionNode = styled(Node)<OptionNode>`
   width: 140px;
   height: 62px;
   margin-bottom: 10px;
-  font-size: ${ds.fontSize.verySmall};
+  font-size: ${props => props.theme.fontSize.verySmall};
   img {
     height: 18px;
     margin-bottom: 4px;
   }
-  background-color: ${ds.colors.white};
-  color: ${props => (props.primary ? ds.colors.primary : ds.colors.secondary)};
+  background-color: ${props => props.theme.colors.white};
+  color: ${props =>
+    props.primary ? props.theme.colors.primary : props.theme.colors.secondary};
   border: 2px solid
-    ${props => (props.primary ? ds.colors.primary : ds.colors.secondary)};
+    ${props =>
+      props.primary
+        ? props.theme.colors.primary
+        : props.theme.colors.secondary};
   flex-direction: column;
 `
 

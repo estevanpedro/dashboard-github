@@ -1,12 +1,15 @@
 import styled from 'styled-components'
 
-import ds from '../design/designSystem'
-
 export default styled.span<TextProps>`
   font-size: ${props =>
-    props.size ? ds.fontSize[props.size] : ds.fontSize.regular};
+    props.size
+      ? props.theme.fontSize[props.size]
+      : props.theme.fontSize.regular};
   color: ${props =>
-    props.color ? ds.colors[props.color] : ds.colors.contrast};
+    props.color
+      ? props.theme.colors[props.color]
+      : props.theme.colors.contrast};
+  font-weight: ${props => props.weight || 'regular'};
   cursor: ${props => (props.curosorPointer ? 'pointer' : 'auto')};
 `
 
@@ -25,4 +28,5 @@ interface TextProps {
     | 'header'
     | 'contrastOpacity'
   curosorPointer?: boolean
+  weight?: 'bold' | 'normal' | 'italic'
 }

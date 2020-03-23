@@ -1,9 +1,10 @@
 import React from 'react'
+import Title from '../../components/Title'
 
 const MySchemes = () => {
   return (
     <div>
-      <h1>MySchemes</h1>
+      <Title>MySchemes</Title>
     </div>
   )
 }

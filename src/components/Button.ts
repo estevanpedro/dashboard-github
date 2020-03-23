@@ -1,15 +1,16 @@
 import styled from 'styled-components'
-import ds from '../design/designSystem'
 
 export default styled.button<ButtonProps>`
   width: 217px;
   height: 50px;
   border-radius: 4px;
   background-color: ${props =>
-    !props.isSecondary ? ds.colors.primary : ds.colors.secondary};
+    !props.isSecondary
+      ? props.theme.colors.primary
+      : props.theme.colors.secondary};
   outline: none;
-  color: ${ds.colors.background};
-  font-size: ${ds.fontSize.regular};
+  color: ${props => props.theme.colors.background};
+  font-size: ${props => props.theme.fontSize.regular};
   font-weight: bold;
   margin: ${props => props.margin || 0};
   cursor: pointer;

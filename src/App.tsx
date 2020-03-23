@@ -5,7 +5,6 @@ import { PersistGate } from 'redux-persist/integration/react'
 import dotenv from 'dotenv'
 
 import store, { persistor } from './redux/store'
-import GlobalStyle from './design/GlobalStyle'
 import { Route } from './utils/routerUtils'
 
 import Login from './containers/Login'
@@ -16,15 +15,14 @@ import Api from './containers/Api'
 import Profile from './containers/Profile'
 import SchemeMap from './containers/SchemeMap'
 
-import { MyThemeProvider } from './design/Theme/context/ThemeContext'
+import ThemeService from './services/ThemeService'
 
 dotenv.config()
 
 const App = (): JSX.Element => (
   <>
-    <GlobalStyle />
     <Provider store={store}>
-      <MyThemeProvider>
+      <ThemeService>
         <PersistGate persistor={persistor} loading={null}>
           <Router id='router-container'>
             <Route path='/login' component={<Login />} />
@@ -37,7 +35,7 @@ const App = (): JSX.Element => (
             {/* <Route path="/" component={}/> */}
           </Router>
         </PersistGate>
-      </MyThemeProvider>
+      </ThemeService>
     </Provider>
   </>
 )
