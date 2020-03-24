@@ -19,9 +19,11 @@ import {
     ValuesField,
     TableText,
     BalanceText,
-    InfoText
+    EditButton,
+    Line,
+    GraphicText
 } from './elements'
-import { Doughnut, Bar, Pie } from 'react-chartjs-2';
+import { Bar, Pie } from 'react-chartjs-2';
 var QRCode = require('qrcode.react');
 
 const data = {
@@ -59,50 +61,68 @@ const data2 = {
     ]
 };
 
-const SplitDetails = () => {
+const SplitDetails = ({
+    SplitExample,
+    historyExample,
+    createShareList,
+    createTransList,
+}: {
+    SplitExample: any;
+    historyExample: any;
+    createShareList: any;
+    createTransList: any;
+}) => {
+    console.log('SplitExample: ', SplitExample)
+
+
+
     return (
         <Container>
 
             <Header>
-                <Title>Mensalidade</Title>
+                <Title>{SplitExample.splitName}</Title>
                 <Category>
-                    <CategoryName size="verySmall" >Private</CategoryName>
+                    <CategoryName size="verySmall">
+                        {SplitExample.public ? 'Public' : 'Private'}
+                    </CategoryName>
                 </Category>
-
+                <EditButton onClick={() => { }}>Edit Scheme</EditButton>
             </Header>
 
             <Body>
+
                 <QRField>
-                    <QRCode value='www.google.com' />
+                    <QRCode value={SplitExample.address} />
                 </QRField>
 
                 <DetailsField>
                     <SubtitleText>Wallet Address</SubtitleText>
-                    <PayloadText>SD13asASKJdkSD8as8290ia90dk922</PayloadText>
-
+                    <PayloadText>{SplitExample.address}</PayloadText>
                     <SubtitleText>Balance</SubtitleText>
-                    <PayloadText>0.0145 BTC</PayloadText>
-
+                    <PayloadText>{SplitExample.balance} BTC</PayloadText>
                     <SubtitleText>Payout</SubtitleText>
-                    <PayloadText>0.0008</PayloadText>
-
+                    <PayloadText>{SplitExample.payout}</PayloadText>
                     <SubtitleText>Service Fee</SubtitleText>
-                    <PayloadText>Yes</PayloadText>
+                    <PayloadText>{SplitExample.serviceFee ? 'Yes' : 'No'}</PayloadText>
                 </DetailsField>
 
                 <GraphicField>
                     <Pie data={data} />
                 </GraphicField>
 
+
                 <GraphicField>
-                    <Bar
-                        data={data2}
-                        options={{
-                            maintainAspectRatio: false
-                        }}
-                    />
+                    <Bar data={data2} options={{ maintainAspectRatio: true }} />
+                    <GraphicText size={'verySmall'}>
+                        Last Month: + 1.33%
+                    </GraphicText>
+                    <GraphicText size={'verySmall'}>
+                        Year to Date: + 33.33%
+                    </GraphicText>
                 </GraphicField>
             </Body>
+
+            <Line></Line>
 
             <Bottom>
 
@@ -114,23 +134,11 @@ const SplitDetails = () => {
                         <TableTitle>Time UTC</TableTitle>
                         <TableTitle>Info</TableTitle>
                     </TitleField>
-                    <>
-                        <ValuesField>
-                            <BalanceText>+0.000123545</BalanceText>
-                            <TableText>18:00:10 22/01/2020</TableText>
-                            <TableText>TxID</TableText>
-                        </ValuesField>
-                        <ValuesField>
-                            <BalanceText>+0.000123545</BalanceText>
-                            <TableText>18:00:10 22/01/2020</TableText>
-                            <TableText>TxID{'  '}</TableText>
-                        </ValuesField>
-                    </>
+                    {createTransList()}
                 </BottomField>
 
                 <BottomField>
                     <SubTitle>Shares</SubTitle>
-
                     <TitleField>
                         <TableTitle>Address</TableTitle>
                         <TableTitle>Size</TableTitle>
@@ -139,17 +147,7 @@ const SplitDetails = () => {
                         <TableTitle>{''}</TableTitle>
                         <TableTitle>{''}</TableTitle>
                     </TitleField>
-                    <>
-                        <ValuesField>
-                            <BalanceText>35asx....xadf</BalanceText>
-                            <TableText>100</TableText>
-                            <TableText>Estevan Pedro</TableText>
-                            <TableText>0.001</TableText>
-                            <TableText>{''}</TableText>
-                            <TableText>{''}</TableText>
-                        </ValuesField>
-
-                    </>
+                    {createShareList()}
                 </BottomField>
 
             </Bottom>

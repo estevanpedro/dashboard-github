@@ -11,7 +11,6 @@ export interface Props {
     lastTransaction: string
     id: number
 }
-
 const Table = ({
     splitInfo,
     id
