@@ -25,15 +25,14 @@ interface Props {
     public: boolean
     address: string
     serviceFee: boolean
-    owners: any
-}
-{/**
-owners: {
+    owners: {
         address: string
         size: number
         label: string
-        paid: string
-        }
+        paid: number
+    }[]
+}
+{/**
 */}
 const LibraryContainner = () => {
     const [colorBalance, setcolorBalance] = useState('')
@@ -49,7 +48,7 @@ const LibraryContainner = () => {
                 currency: 'bitcoin',
                 id: 1,
                 userId: 441,
-                public: false,
+                public: true,
                 address: "ASDio2daijA2da21sadasdZxza",
                 balance: 0.0145,
                 payout: 0.0008,

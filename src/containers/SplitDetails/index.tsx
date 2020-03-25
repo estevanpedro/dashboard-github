@@ -13,7 +13,7 @@ const SplitExample = {
     currency: 'bitcoin',
     id: 1,
     userId: 441,
-    public: false,
+    public: true,
     address: "zZASDio2daijA2testtestass1sadasdZxza",
     balance: 0.0145,
     payout: 0.0008,
