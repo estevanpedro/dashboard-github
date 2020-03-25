@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { RouteComponentProps } from '@reach/router'
 
 import FlexContainer from '../../components/FlexContainer'
 import Title from '../../components/Title'
@@ -37,7 +38,11 @@ const NodeColumn = ({ rootNode, ignoreLeftArrow, last }: NodeColumnProps) => {
   )
 }
 
-const SchemeMap = () => {
+interface Props {
+  schemeId?: string
+}
+
+const SchemeMap = ({ schemeId }: Props & RouteComponentProps) => {
   const { rootNode } = useSelector((state: RootState) => state.schemeMap)
 
   return (
