@@ -25,13 +25,13 @@ const App = (): JSX.Element => (
       <ThemeService>
         <PersistGate persistor={persistor} loading={null}>
           <Router id='router-container'>
-            <Route path='/login' component={<Login />} />
-            <Route path='/sign-up' component={<SignUp />} />
-            <Route path='/my-schemes' component={<MySchemes />} />
-            <Route path='/library' component={<Library />} />
-            <Route path='/api' component={<Api />} />
-            <Route path='/profile' component={<Profile />} />
-            <Route path='/scheme' component={<SchemeMap />} />
+            <Route path='/login' component={Login} />
+            <Route path='/sign-up' component={SignUp} />
+            <Route path='/my-schemes' component={MySchemes} />
+            <Route path='/library' component={Library} />
+            <Route path='/api' component={Api} />
+            <Route path='/profile' component={Profile} />
+            <Route path='/scheme/:schemeId' component={SchemeMap} />
             {/* <Route path="/" component={}/> */}
           </Router>
         </PersistGate>
