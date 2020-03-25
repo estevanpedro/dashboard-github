@@ -51,13 +51,13 @@ export const OverflowContainer = styled.div`
   width: 100%;
   height: 300px;
   overflow: scroll;
-  /* box-shadow: 8px 8px 12px rgba(0, 0, 0, 0.5); */
+  border: 1px solid ${props => props.theme.colors.contrast};
+  border-radius: 4px;
 `
 
 export const SplitContainer = styled.div`
-  border-bottom: 1px solid ${props => props.theme.colors.primary};
+  border-bottom: 4px solid ${props => props.theme.colors.primary};
   padding: 20px;
-  margin-bottom: ${props => props.theme.spacing.vertical};
 `
 
 const arrowPointerMixin = css`
@@ -66,7 +66,7 @@ const arrowPointerMixin = css`
     position: absolute;
     right: 1rem;
 
-    border: solid black;
+    border: solid ${props => props.theme.colors.contrast};
     border-width: 0 1px 1px 0;
     display: inline-block;
 
@@ -87,7 +87,7 @@ export const Arrow = styled.div<{ margin: 'left' | 'right' }>`
   height: 1px;
   width: 2.5rem;
   margin-right: ${props => props.margin === 'right' && '1rem'};
-  background-color: black;
+  background-color: ${props => props.theme.colors.contrast};
 
   ${props => props.margin === 'right' && arrowPointerMixin}
 `
@@ -99,7 +99,7 @@ export const VerticalArrow = styled.div`
   left: 0;
   top: 42px;
 
-  background-color: black;
+  background-color: ${props => props.theme.colors.contrast};
 `
 
 export const OptionNode = styled(Node)<OptionNode>`
@@ -111,7 +111,7 @@ export const OptionNode = styled(Node)<OptionNode>`
     height: 18px;
     margin-bottom: 4px;
   }
-  background-color: ${props => props.theme.colors.white};
+  background-color: ${props => props.theme.colors.secondaryBg};
   color: ${props =>
     props.primary ? props.theme.colors.primary : props.theme.colors.secondary};
   border: 2px solid
