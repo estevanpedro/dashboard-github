@@ -5,8 +5,9 @@ export const Container = styled.div`
 `
 
 export const Header = styled.div`
-display: flex;
+  display: flex;
   flex-direction: row;
+  justify-content: space-between;
 `
 export const Body = styled.div`
 flex-direction: row;
@@ -69,18 +70,13 @@ export const GraphicText = styled(Text)`
 `
 export const BottomField = styled.div`
     margin: 5px;
-    padding: 5px;
+    padding: 15px;
     flex-direction: row;
     display: inline-block;
     background-color: ${props => props.theme.colors.secondaryBg};
 `
 
-export const TableTitle = styled(Text)`
-  color: ${props => props.theme.colors.contrast};
-  font-size: 16px;
-  padding: 0 10px 0 10px; 
-  margin: 0 10px 0 0px;
-`
+
 
 export const InfoText = styled(Text)`
   color: ${props => props.theme.colors.contrast};
@@ -89,29 +85,12 @@ export const InfoText = styled(Text)`
   margin: 0 10px 0 0px;
 `
 
-export const TableText = styled(Text) <TableTextProps>`
-  color: ${props => props.theme.colors.contrast};
-  font-size: 14px;
-  /* padding: 0 20px 0 10px; */
-  border: 1px solid green;
-  width: ${props => props.width ? props.width : ''};
-`
-interface TableTextProps {
-  width?: string
-}
-
-export const BalanceText = styled(Text)`
-  color: ${props => props.theme.colors.confirm};
-  font-size: 14px;
-  padding: 0 10px 0 10px;
-  border: 1px solid green;
-  position: initial;
-`
 
 export const TitleField = styled.div`
   justify-content: space-between;
   display: flex;
   width: 400px;
+
 `
 export const ValuesField = styled.div<ValuesProps>`
   justify-content:  space-between;
@@ -122,6 +101,31 @@ export const ValuesField = styled.div<ValuesProps>`
       ? props.theme.colors.grey
       : props.theme.colors.secondaryBg};
 `
+
+export const TableTitle = styled(Text) <WidthProps>`
+  color: ${props => props.theme.colors.contrast};
+  font-size: 16px;
+  /* padding: 0 10px 0 10px;  */
+  /* margin: 0 10px 0 0px; */
+  width: ${props => props.width ? props.width : ''};
+`
+
+export const TableText = styled(Text) <WidthProps>`
+  color: ${props => props.theme.colors.contrast};
+  font-size: 14px;
+  width: ${props => props.width ? props.width : ''};
+`
+interface WidthProps {
+  width?: string
+}
+
+export const BalanceText = styled(Text) <WidthProps>`
+  color: ${props => props.theme.colors.confirm};
+  font-size: 14px;
+  position: initial;
+  width: ${props => props.width ? props.width : ''};
+`
+
 interface ValuesProps {
   pair?: boolean
 }
@@ -130,10 +134,8 @@ export const EditButton = styled.button`
     background-color: ${props => props.theme.colors.secondary};
     color: white;
     font-size: 18px;
-    /* height: 35px; */
     padding: 5px 15px 5px 15px;
     align-self: center;
-    /* display: block; */
     border-radius: 2px;
     justify-self: flex-end;
     margin: 0 40px 0 5px;
@@ -145,3 +147,9 @@ height: 1px;
 display: flex;
 align-self: center;
 `
+export const EditIcon = styled.img`
+    width: 24px;
+    height: 24px;
+    background-color: green;
+ 
+`;

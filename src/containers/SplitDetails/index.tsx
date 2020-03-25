@@ -1,26 +1,9 @@
 import SplitDetails from './SplitDetails'
 import React from 'react'
 import {
-    Category,
-    CategoryName,
-    Header,
-    Body,
-    Bottom,
-    Container,
-    QRField,
-    DetailsField,
-    SubtitleText,
-    PayloadText,
-    GraphicField,
-    BottomField,
-    TableTitle,
-    TitleField,
     ValuesField,
     TableText,
     BalanceText,
-    EditButton,
-    Line,
-    GraphicText
 } from './elements'
 const SplitExample = {
     id: 1,
@@ -33,15 +16,15 @@ const SplitExample = {
     serviceFee: true,
     owners: [
         {
-            address: "11s...xza",
+            address: "as454axAsaDFAsdedasdaASDasdASD",
             size: 50,
-            label: 'Estevan Pedro...',
+            label: 'Estevan Pedro Wisoczynski Reboledo',
             paid: 0.001
         },
         {
             address: "az1...xza",
             size: 50,
-            label: 'Albertaaaaaaaaaaaa...',
+            label: 'Alberte Einstein',
             paid: 0.001
         },
     ]
@@ -88,12 +71,22 @@ const SplitDetailsContainer = () => {
             return (
                 <>
                     <ValuesField pair={id % 2 === 0 ? true : false}>
-                        <BalanceText>{splitInfo.address}</BalanceText>
+                        <BalanceText width="60px">
+                            {splitInfo.address.slice(0, 3)
+                                + '...' +
+                                splitInfo.address.slice(splitInfo.address.length - 3, splitInfo.address.length)}
+                        </BalanceText>
                         <TableText width="25px">{splitInfo.size}</TableText>
-                        <TableText width="100px">{splitInfo.label}</TableText>
-                        <TableText>{splitInfo.paid}</TableText>
-                        <TableText>{''}</TableText>
-                        <TableText>{''}</TableText>
+                        <TableText width="100px">
+                            {
+                                splitInfo.label.charAt(0).toUpperCase() +
+                                splitInfo.label.slice(1).split(" ")[0] +
+                                " " +
+                                splitInfo.label.slice(1).split(" ")[1].charAt(0).toUpperCase() +
+                                splitInfo.label.split(" ")[1].slice(1)
+                            }
+                        </TableText>
+                        <TableText width="40px">{splitInfo.paid}</TableText>
                     </ValuesField>
 
                 </>

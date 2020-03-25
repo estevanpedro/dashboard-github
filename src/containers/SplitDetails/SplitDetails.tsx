@@ -1,6 +1,8 @@
 import React from 'react'
 import Title from '../../components/Title'
 import { SubTitle } from '../../components/Title'
+import Edit from '../../assets/icons/edit.svg'
+import IconButton from '../../components/IconButton'
 import {
     Category,
     CategoryName,
@@ -21,7 +23,8 @@ import {
     BalanceText,
     EditButton,
     Line,
-    GraphicText
+    GraphicText,
+    EditIcon,
 } from './elements'
 import { Bar, Pie } from 'react-chartjs-2';
 var QRCode = require('qrcode.react');
@@ -74,8 +77,18 @@ const SplitDetails = ({
 }) => {
     console.log('SplitExample: ', SplitExample)
 
-
-
+    {/**
+replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
+replace("^[A-Za-z]{2}[0-9]{2}\z")
+*/}
+    const name = 'estevan pedro wisoczynski'
+    console.log(
+        name.charAt(0).toUpperCase() +
+        name.slice(1).split(" ")[0] +
+        " " +
+        name.slice(1).split(" ")[1].charAt(0).toUpperCase() +
+        name.split(" ")[1].slice(1)
+    )
     return (
         <Container>
 
@@ -130,7 +143,7 @@ const SplitDetails = ({
                     <SubTitle>Transactions</SubTitle>
 
                     <TitleField>
-                        <TableTitle>Balance</TableTitle>
+                        <TableTitle width="70px">Balance</TableTitle>
                         <TableTitle>Time UTC</TableTitle>
                         <TableTitle>Info</TableTitle>
                     </TitleField>
@@ -138,14 +151,20 @@ const SplitDetails = ({
                 </BottomField>
 
                 <BottomField>
-                    <SubTitle>Shares</SubTitle>
+                    <Header>
+                        <SubTitle>Shares</SubTitle>
+                        <IconButton
+                            icon={Edit}
+                            onClick={() => {
+                                console.log('Open modal to edit scheme with ID equal to:')
+                            }}
+                        />
+                    </Header>
                     <TitleField>
-                        <TableTitle>Address</TableTitle>
-                        <TableTitle>Size</TableTitle>
-                        <TableTitle>Label</TableTitle>
-                        <TableTitle>Paid</TableTitle>
-                        <TableTitle>{''}</TableTitle>
-                        <TableTitle>{''}</TableTitle>
+                        <TableTitle width="60px">Address</TableTitle>
+                        <TableTitle width="25px">Size</TableTitle>
+                        <TableTitle width="100px">Label</TableTitle>
+                        <TableTitle width="40px">Paid</TableTitle>
                     </TitleField>
                     {createShareList()}
                 </BottomField>
