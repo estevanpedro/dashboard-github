@@ -27,18 +27,6 @@ export const Container = styled.div`
   width: 100%;
 `
 
-export const ModalField = styled.div<ModalField>`
-  width: 100%;
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: ${props => props.align || 'flex-start'};
-  margin-bottom: ${props => props.theme.spacing.vertical};
-`
-interface ModalField {
-  align?: 'flex-start' | 'center' | 'flex-end'
-}
-
 export const Close = styled.a`
   cursor: pointer;
   position: absolute;
@@ -54,3 +42,9 @@ export const Close = styled.a`
 `
 
 export const IconButton = styled.button``
+
+export const ErrorAlert = styled.div`
+  width: 52px;
+  height: 52px;
+  background-color: ${props => props.theme.colors.cancel};
+`
