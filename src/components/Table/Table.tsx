@@ -19,7 +19,6 @@ const Table = ({
     splitInfo: Props;
     id: number
 }) => {
-    console.log(new Date(parseFloat(splitInfo.lastTransaction)).toLocaleString('en-US'))
     return (
         <div>
             <Container pair={id % 2 === 0 ? true : false}>
@@ -43,10 +42,7 @@ const Table = ({
                 </Colunm>
 
                 <Colunm width={'50px'}>
-                    <Link
-                        to={'/split-details/' + splitInfo.id}
-                    // to={'/split-details'}
-                    >
+                    <Link to={'/split-details/' + splitInfo.id} >
                         <IconButton
                             icon={Arrow}
                             onClick={() => {

@@ -49,8 +49,6 @@ const SplitDetails = ({
         })
         return [labels, size]
     }
-
-    // console.log('SplitExample: ', ShareData(SplitExample))
     const ShareChart = {
         labels: ShareData(SplitExample)[0],
         datasets: [{
@@ -79,7 +77,6 @@ const SplitDetails = ({
         })
         return [months, amounts]
     }
-    // console.log(PayoutData(historyExample))
 
     const PayoutsChart = {
         labels: PayoutData(historyExample.reverse())[0],
@@ -164,9 +161,7 @@ const SplitDetails = ({
                         <SubTitle>Shares</SubTitle>
                         <IconButton
                             icon={Edit}
-                            onClick={() => {
-                                console.log('Open modal to edit scheme with ID equal to:')
-                            }}
+                            onClick={() => { }}
                         />
                     </Header>
                     <TitleField>
