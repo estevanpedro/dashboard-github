@@ -5,16 +5,17 @@ import Navbar from '../containers/Navbar'
 import Container from '../components/Container'
 
 export const Route = (
-  props: { component: JSX.Element } & RouteComponentProps
+  // props: { component: JSX.Element } & RouteComponentProps
+  props: any
 ) => {
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
-
+  const splitId = props.splitId
   return (
     <>
       <Navbar />
-      <Container>{props.component}</Container>
+      <Container >{props.component}</Container>
     </>
   )
 }

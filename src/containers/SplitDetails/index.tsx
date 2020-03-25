@@ -52,10 +52,16 @@ const historyExample = [
         type: 'split',
         sentTo: 'ASDa2d2adaD1251AScsca23154a2cdascxazzz1910sa', //address
         created_at: '11:34:10 03/03/2020',
-    }
+    },
+    {
+        id: 4,
+        amount: '-1.50050000',
+        type: 'split',
+        sentTo: 'ASDa2d2adaD1251AScsca23154a2cdascxazzz1910sa', //address
+        created_at: '11:34:10 04/03/2020',
+    },
 ]
-const SplitDetailsContainer = () => {
-
+const SplitDetailsContainer = (splitId: any) => {
     function createTransList() {
         const Table = ({ info, id }: { info: any; id: any }) => {
             return (

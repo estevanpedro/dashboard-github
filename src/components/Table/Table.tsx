@@ -3,7 +3,7 @@ import { Container, Colunm, PayloadText, Name } from './elements'
 import Arrow from "../../assets/icons/right-arrow.svg"
 import IconButton from '../IconButton'
 import Text from '../Text'
-import Link from '../../components/Link'
+import { Link } from '@reach/router'
 export interface Props {
     schemeName: string
     schemeCreator?: string
@@ -43,11 +43,14 @@ const Table = ({
                 </Colunm>
 
                 <Colunm width={'50px'}>
-                    <Link to='/split-details'>
+                    <Link
+                        to={'/split-details/' + splitInfo.id}
+                    // to={'/split-details'}
+                    >
                         <IconButton
                             icon={Arrow}
                             onClick={() => {
-                                console.log('Navigate to Scheme id:', splitInfo.id)
+                                console.log('/split-details/', splitInfo.id)
                             }}
                         />
                     </Link>

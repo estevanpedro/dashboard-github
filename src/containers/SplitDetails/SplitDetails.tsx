@@ -25,28 +25,6 @@ import {
 import { Bar, Pie } from 'react-chartjs-2';
 var QRCode = require('qrcode.react');
 
-const data = {
-    labels: [
-        'Red',
-        'Blue',
-        'Yellow'
-    ],
-    datasets: [{
-        data: [300, 50, 100],
-        backgroundColor: [
-            '#FF6384',
-            '#36A2EB',
-            '#FFCE56'
-        ],
-        hoverBackgroundColor: [
-            '#FF6384',
-            '#36A2EB',
-            '#FFCE56'
-        ]
-    }]
-};
-
-
 const SplitDetails = ({
     SplitExample,
     historyExample,
@@ -58,7 +36,7 @@ const SplitDetails = ({
     createShareList: any;
     createTransList: any;
 }) => {
-    console.log('SplitExample: ', SplitExample)
+
 
     let ShareData = (apiDATA: any) => {
         let labels: any[] = []
@@ -72,8 +50,8 @@ const SplitDetails = ({
         return [labels, size]
     }
 
-    console.log('SplitExample: ', ShareData(SplitExample))
-    const data = {
+    // console.log('SplitExample: ', ShareData(SplitExample))
+    const ShareChart = {
         labels: ShareData(SplitExample)[0],
         datasets: [{
             data: ShareData(SplitExample)[1],
@@ -101,7 +79,7 @@ const SplitDetails = ({
         })
         return [months, amounts]
     }
-    console.log(PayoutData(historyExample))
+    // console.log(PayoutData(historyExample))
 
     const PayoutsChart = {
         labels: PayoutData(historyExample.reverse())[0],
@@ -149,7 +127,7 @@ const SplitDetails = ({
                 </DetailsField>
 
                 <GraphicField>
-                    <Pie data={data} />
+                    <Pie data={ShareChart} />
                 </GraphicField>
 
 
