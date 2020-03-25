@@ -3,6 +3,7 @@ import { Container, Colunm, PayloadText, Name } from './elements'
 import Arrow from "../../assets/icons/right-arrow.svg"
 import IconButton from '../IconButton'
 import Text from '../Text'
+import Link from '../../components/Link'
 export interface Props {
     schemeName: string
     schemeCreator?: string
@@ -42,12 +43,14 @@ const Table = ({
                 </Colunm>
 
                 <Colunm width={'50px'}>
-                    <IconButton
-                        icon={Arrow}
-                        onClick={() => {
-                            console.log('Navigate to Scheme id:', splitInfo.id)
-                        }}
-                    />
+                    <Link to='/split-details'>
+                        <IconButton
+                            icon={Arrow}
+                            onClick={() => {
+                                console.log('Navigate to Scheme id:', splitInfo.id)
+                            }}
+                        />
+                    </Link>
                 </Colunm>
             </Container>
 
