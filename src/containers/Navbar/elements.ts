@@ -11,6 +11,7 @@ export const NavbarContainer = styled.nav`
   justify-content: flex-end;
   align-items: center;
   box-sizing: border-box;
+  z-index: 100;
 `
 
 export const LinksWrapper = styled.span`

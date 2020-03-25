@@ -16,11 +16,20 @@ import {
   SwapContent,
   EventContent,
   EditContent,
+  DeleteContent,
 } from './ModalContents'
 
 export interface NodeOption {
   id: number
-  title: 'Split' | 'Timer' | 'Notify' | 'Send' | 'Swap' | 'Event' | 'Edit'
+  title:
+    | 'Split'
+    | 'Timer'
+    | 'Notify'
+    | 'Send'
+    | 'Swap'
+    | 'Event'
+    | 'Edit'
+    | 'Delete'
   description: string
   icon: string
   content: FunctionComponent
@@ -75,6 +84,13 @@ const options: NodeOption[] = [
     description: '',
     icon: editIcon,
     content: EditContent,
+  },
+  {
+    id: 8,
+    title: 'Delete',
+    description: '',
+    icon: editIcon,
+    content: DeleteContent,
   },
 ]
 

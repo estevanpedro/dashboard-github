@@ -11,7 +11,7 @@ const OptionNode = styled(Node)<OptionNode>`
     height: 18px;
     margin-bottom: 4px;
   }
-  background-color: transparent;
+  background-color: ${props => props.theme.colors.white};
   color: ${props =>
     props.primary ? props.theme.colors.primary : props.theme.colors.secondary};
   border: 2px solid

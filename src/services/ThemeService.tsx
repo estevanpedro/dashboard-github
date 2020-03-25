@@ -3,6 +3,7 @@ import { ThemeProvider } from 'styled-components'
 
 import ThemeContext from '../contexts/ThemeContext'
 import designSystem from '../design/designSystem'
+import GlobalStyle from '../design/GlobalStyle'
 
 const ThemeService = ({ children }: { children: any }) => {
   const [theme, setTheme] = useState<'light' | 'dark'>('dark')
@@ -13,7 +14,10 @@ const ThemeService = ({ children }: { children: any }) => {
 
   return (
     <ThemeContext.Provider value={{ toggle }}>
-      <ThemeProvider theme={designSystem[theme]}>{children}</ThemeProvider>
+      <ThemeProvider theme={designSystem[theme]}>
+        <GlobalStyle lightMode={theme === 'light'} />
+        {children}
+      </ThemeProvider>
     </ThemeContext.Provider>
   )
 }

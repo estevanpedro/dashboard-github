@@ -1,15 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import uniqid from 'uniqid'
 
-interface Email {
+export interface Email {
   id: string
   email: string
 }
 interface NotifyState {
+  name: string
   emails: Email[]
 }
 
 const initialState: NotifyState = {
+  name: 'Notify',
   emails: [
     {
       id: '0',
@@ -22,6 +24,9 @@ const reducer = createSlice({
   name: 'notify',
   initialState,
   reducers: {
+    updateNotifyName(state: NotifyState, action: PayloadAction<string>) {
+      state.name = action.payload
+    },
     addEmail(state: NotifyState) {
       state.emails = [
         ...state.emails,
@@ -44,6 +49,11 @@ const reducer = createSlice({
   },
 })
 
-export const { addEmail, removeEmail, updateEmail } = reducer.actions
+export const {
+  updateNotifyName,
+  addEmail,
+  removeEmail,
+  updateEmail,
+} = reducer.actions
 
 export default reducer.reducer

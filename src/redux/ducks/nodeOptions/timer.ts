@@ -8,7 +8,7 @@ export interface TimerState {
 }
 
 const initialState: TimerState = {
-  name: '',
+  name: 'Timer',
   hours: 0,
   minutes: 0,
   seconds: 0,
@@ -18,7 +18,7 @@ const reducer = createSlice({
   name: 'timer',
   initialState,
   reducers: {
-    updateNameValue(state: TimerState, action: PayloadAction<string>) {
+    updateTimerName(state: TimerState, action: PayloadAction<string>) {
       state.name = action.payload
     },
     updateHoursValue(state: TimerState, action: PayloadAction<number>) {
@@ -34,7 +34,7 @@ const reducer = createSlice({
 })
 
 export const {
-  updateNameValue,
+  updateTimerName,
   updateHoursValue,
   updateMinutesValue,
   updateSecondsValue,
