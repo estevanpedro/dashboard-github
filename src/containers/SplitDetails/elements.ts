@@ -90,6 +90,7 @@ export const TitleField = styled.div`
   justify-content: space-between;
   display: flex;
   width: 400px;
+  margin: 15px 0 0 0;
 
 `
 export const ValuesField = styled.div<ValuesProps>`

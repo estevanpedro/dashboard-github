@@ -18,13 +18,9 @@ import {
     BottomField,
     TableTitle,
     TitleField,
-    ValuesField,
-    TableText,
-    BalanceText,
     EditButton,
     Line,
     GraphicText,
-    EditIcon,
 } from './elements'
 import { Bar, Pie } from 'react-chartjs-2';
 var QRCode = require('qrcode.react');
@@ -49,20 +45,7 @@ const data = {
         ]
     }]
 };
-const data2 = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-    datasets: [
-        {
-            label: 'My First dataset',
-            backgroundColor: 'rgba(255,99,132,0.2)',
-            borderColor: 'rgba(255,99,132,1)',
-            borderWidth: 1,
-            hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-            hoverBorderColor: 'rgba(255,99,132,1)',
-            data: [65, 59, -80, 81, -56, 55, 40]
-        }
-    ]
-};
+
 
 const SplitDetails = ({
     SplitExample,
@@ -77,18 +60,64 @@ const SplitDetails = ({
 }) => {
     console.log('SplitExample: ', SplitExample)
 
-    {/**
-replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
-replace("^[A-Za-z]{2}[0-9]{2}\z")
-*/}
-    const name = 'estevan pedro wisoczynski'
-    console.log(
-        name.charAt(0).toUpperCase() +
-        name.slice(1).split(" ")[0] +
-        " " +
-        name.slice(1).split(" ")[1].charAt(0).toUpperCase() +
-        name.split(" ")[1].slice(1)
-    )
+    let ShareData = (apiDATA: any) => {
+        let labels: any[] = []
+        let size: any[] = []
+        apiDATA.owners.map((info: any) => {
+            labels = [info.label].concat(labels)
+        })
+        apiDATA.owners.map((info: any) => {
+            size = [info.size].concat(size)
+        })
+        return [labels, size]
+    }
+
+    console.log('SplitExample: ', ShareData(SplitExample))
+    const data = {
+        labels: ShareData(SplitExample)[0],
+        datasets: [{
+            data: ShareData(SplitExample)[1],
+            backgroundColor: [
+                '#FF6384',
+                '#36A2EB',
+                '#FFCE56'
+            ],
+            hoverBackgroundColor: [
+                '#FF6384',
+                '#36A2EB',
+                '#FFCE56'
+            ]
+        }]
+    };
+
+    let PayoutData = (apiDATA: any) => {
+        let months: any[] = []
+        let amounts: any[] = []
+        apiDATA.map((info: any) => {
+            months = [info.created_at].concat(months)
+        })
+        apiDATA.map((info: any) => {
+            amounts = [info.amount].concat(amounts)
+        })
+        return [months, amounts]
+    }
+    console.log(PayoutData(historyExample))
+
+    const PayoutsChart = {
+        labels: PayoutData(historyExample.reverse())[0],
+        datasets: [
+            {
+                label: 'Payouts',
+                backgroundColor: '#FF9140',
+                borderColor: '#FF9140',
+                borderWidth: 1,
+                hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+                hoverBorderColor: 'rgba(255,99,132,1)',
+                data: PayoutData(historyExample.reverse())[1],
+            }
+        ]
+    };
+
     return (
         <Container>
 
@@ -125,13 +154,15 @@ replace("^[A-Za-z]{2}[0-9]{2}\z")
 
 
                 <GraphicField>
-                    <Bar data={data2} options={{ maintainAspectRatio: true }} />
-                    <GraphicText size={'verySmall'}>
+                    <Bar data={PayoutsChart} options={{ maintainAspectRatio: true }} />
+                    {/**
+                   <GraphicText size={'verySmall'}>
                         Last Month: + 1.33%
                     </GraphicText>
                     <GraphicText size={'verySmall'}>
                         Year to Date: + 33.33%
                     </GraphicText>
+                    */}
                 </GraphicField>
             </Body>
 

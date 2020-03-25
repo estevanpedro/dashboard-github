@@ -27,6 +27,7 @@ const SplitExample = {
             label: 'Alberte Einstein',
             paid: 0.001
         },
+
     ]
 }
 
@@ -36,14 +37,21 @@ const historyExample = [
         amount: '0.50000000',
         type: 'split',
         sentTo: 'ASDa2d2adaD1251AScsca23154a2cdascxazzz1910sa', //address
-        created_at: '18:00:10 22/01/2020',
+        created_at: '10:08:10 01/01/2020',
     },
     {
-        id: 1,
+        id: 2,
         amount: '1.00000000',
         type: 'split',
         sentTo: 'ASDa2d2adaD1251AScsca23154a2cdascxazzz1910sa', //address
-        created_at: '18:00:10 22/01/2020',
+        created_at: '15:55:10 05/02/2020',
+    },
+    {
+        id: 3,
+        amount: '-0.50050000',
+        type: 'split',
+        sentTo: 'ASDa2d2adaD1251AScsca23154a2cdascxazzz1910sa', //address
+        created_at: '11:34:10 03/03/2020',
     }
 ]
 const SplitDetailsContainer = () => {
@@ -60,7 +68,7 @@ const SplitDetailsContainer = () => {
                 </>
             )
         }
-        const Map = historyExample.map((info: any, id: number) => {
+        const Map = historyExample.reverse().map((info: any, id: number) => {
             return <Table info={info} id={id} />
         })
         return Map
@@ -97,6 +105,7 @@ const SplitDetailsContainer = () => {
         })
         return Map
     }
+
 
     return <SplitDetails
         SplitExample={SplitExample}
