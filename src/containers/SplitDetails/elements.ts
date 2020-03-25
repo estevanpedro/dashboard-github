@@ -30,7 +30,8 @@ export const Category = styled.div`
     border: 2px solid ${props => props.theme.colors.primary};
     align-self: center;
     display: block;
-    justify-content: flex-start;
+    justify-content: center;
+    justify-self: center;
     margin-right: auto;
 `
 
@@ -154,3 +155,12 @@ export const EditIcon = styled.img`
     background-color: green;
  
 `;
+
+export const Title = styled.h1`
+  font-size: ${props => props.theme.fontSize.title};
+  color: ${props => props.theme.colors.contrast};
+`
+export const SubTitle = styled.h1`
+  font-size: ${props => props.theme.fontSize.big};
+  color: ${props => props.theme.colors.contrast};
+`

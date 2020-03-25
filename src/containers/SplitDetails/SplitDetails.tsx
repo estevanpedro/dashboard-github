@@ -1,6 +1,4 @@
 import React from 'react'
-import Title from '../../components/Title'
-import { SubTitle } from '../../components/Title'
 import Edit from '../../assets/icons/edit.svg'
 import IconButton from '../../components/IconButton'
 import {
@@ -21,6 +19,8 @@ import {
     EditButton,
     Line,
     GraphicText,
+    Title,
+    SubTitle
 } from './elements'
 import { Bar, Pie } from 'react-chartjs-2';
 var QRCode = require('qrcode.react');
