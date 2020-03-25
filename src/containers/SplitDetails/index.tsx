@@ -5,12 +5,16 @@ import {
     TableText,
     BalanceText,
 } from './elements'
+import { RouteComponentProps } from '@reach/router'
 const SplitExample = {
+    schemeName: 'Mensalidade',
+    schemeCreator: 'Jacinto',
+    lastTransaction: '1583321650000',
+    currency: 'bitcoin',
     id: 1,
-    ownerId: 441,
+    userId: 441,
     public: false,
-    splitName: 'Mensalidade',
-    address: "ASDio2daijA2da21sadasdZxza",
+    address: "zZASDio2daijA2testtestass1sadasdZxza",
     balance: 0.0145,
     payout: 0.0008,
     serviceFee: true,
@@ -22,12 +26,11 @@ const SplitExample = {
             paid: 0.001
         },
         {
-            address: "az1...xza",
+            address: "as454axAsaDFAsdedasdaASDasdASD",
             size: 50,
             label: 'Alberte Einstein',
             paid: 0.001
         },
-
     ]
 }
 
@@ -58,10 +61,23 @@ const historyExample = [
         amount: '-1.50050000',
         type: 'split',
         sentTo: 'ASDa2d2adaD1251AScsca23154a2cdascxazzz1910sa', //address
-        created_at: '11:34:10 04/03/2020',
+        created_at: '08:34:10 04/03/2020',
     },
 ]
-const SplitDetailsContainer = (splitId: any) => {
+
+interface Props {
+    splitId?: number
+}
+
+const SplitDetailsContainer = ({ splitId }: Props & RouteComponentProps) => {
+
+    console.log('splitId: ', splitId)
+    {/**
+    TODO API FUNCTION TO GET THE SPLIT HISTORY AND THE SPLIT DETAILS --
+    GET ALL TRANSACTION FROM USER ID
+    RESPONSE EQUAL TO SplitExample and historyExample
+    */}
+
     function createTransList() {
         const Table = ({ info, id }: { info: any; id: any }) => {
             return (

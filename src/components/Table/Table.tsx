@@ -19,7 +19,7 @@ const Table = ({
     splitInfo: Props;
     id: number
 }) => {
-    console.log(new Date(parseFloat(splitInfo.lastTransaction)).toLocaleString('en-GB'))
+    console.log(new Date(parseFloat(splitInfo.lastTransaction)).toLocaleString('en-US'))
     return (
         <div>
             <Container pair={id % 2 === 0 ? true : false}>

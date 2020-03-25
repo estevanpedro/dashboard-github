@@ -100,7 +100,7 @@ const SplitDetails = ({
         <Container>
 
             <Header>
-                <Title>{SplitExample.splitName}</Title>
+                <Title>{SplitExample.schemeName}</Title>
                 <Category>
                     <CategoryName size="verySmall">
                         {SplitExample.public ? 'Public' : 'Private'}

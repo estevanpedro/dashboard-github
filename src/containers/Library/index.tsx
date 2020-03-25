@@ -16,13 +16,25 @@ export interface LibraryProps {
 interface Props {
     schemeName: string
     schemeCreator?: string
+    userId: number
     balance: number
     payout: number
     lastTransaction: string
     id: number
     currency: string
+    public: boolean
+    address: string
+    serviceFee: boolean
+    owners: any
 }
-
+{/**
+owners: {
+        address: string
+        size: number
+        label: string
+        paid: string
+        }
+*/}
 const LibraryContainner = () => {
     const [colorBalance, setcolorBalance] = useState('')
     const [colorCurrency, setcolorCurrency] = useState('')
@@ -33,30 +45,31 @@ const LibraryContainner = () => {
             {
                 schemeName: 'Mensalidade',
                 schemeCreator: 'Jacinto',
-                balance: 1.0000000,
-                payout: 0.008,
-                lastTransaction: '1584010432',
+                lastTransaction: '1583321650000',
+                currency: 'bitcoin',
                 id: 1,
-                currency: 'bitcoin',
+                userId: 441,
+                public: false,
+                address: "ASDio2daijA2da21sadasdZxza",
+                balance: 0.0145,
+                payout: 0.0008,
+                serviceFee: true,
+                owners: [
+                    {
+                        address: "as454axAsaDFAsdedasdaASDasdASD",
+                        size: 50,
+                        label: 'Estevan Pedro Wisoczynski Reboledo',
+                        paid: 0.001
+                    },
+                    {
+                        address: "as454axAsaDFAsdedasdaASDasdASD",
+                        size: 50,
+                        label: 'Alberte Einstein',
+                        paid: 0.001
+                    },
+                ]
             },
-            {
-                schemeName: 'Money',
-                schemeCreator: 'Einstein',
-                balance: 0.10000000,
-                payout: 0.008,
-                lastTransaction: '1584010434',
-                id: 2,
-                currency: 'bitcoin',
-            },
-            {
-                schemeName: 'Payback',
-                schemeCreator: 'Abraham',
-                balance: 5.10000000,
-                payout: 0.008,
-                lastTransaction: '1584010437',
-                id: 3,
-                currency: 'bitcoin',
-            },
+
         ]
     )
 
