@@ -43,6 +43,7 @@ interface ModalContent {
 const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
   const [optionsActive, setOptionsActive] = useState(false)
   const [modalContent, setModalContent] = useState<ModalContent | null>(null)
+  const [formErrors, setFormErrors] = useState([])
 
   const dispatch = useDispatch()
 
@@ -116,15 +117,15 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
   }
 
   return (
-    <Modal
-      trigger={
-        <Container hasChildren={hasChildren}>
-          {!ignoreLeftArrow && (
-            <RelativeContainer>
-              <Arrow margin='right' />
-            </RelativeContainer>
-          )}
-          {!last && <VerticalArrow />}
+    <Container hasChildren={hasChildren}>
+      {!ignoreLeftArrow && (
+        <RelativeContainer>
+          <Arrow margin='right' />
+        </RelativeContainer>
+      )}
+      {!last && <VerticalArrow />}
+      <Modal
+        trigger={
           <Node
             primary
             onClick={() => setOptionsActive(!optionsActive)}
@@ -132,48 +133,55 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
           >
             {nodeData.info.name}
           </Node>
-
-          {hasChildren && <Arrow margin='left' />}
-        </Container>
-      }
-      title='Options'
-      description=''
-      onSubmit={modalContent ? ModalFunctions[modalContent.title] : undefined}
-    >
-      {!modalContent ? (
-        <FlexContainer wrap='wrap' justify='space-between'>
-          {options.map((option: NodeOption) => (
-            <OptionNode
-              key={option.id}
-              primary={option.title !== 'Edit'}
-              onClick={() => {
-                console.log(option.content)
-                setModalContent({
-                  title: option.title,
-                  content: option.content,
-                })
-              }}
-            >
-              <img src={option.icon} />
-              {option.title}
-            </OptionNode>
-          ))}
-        </FlexContainer>
-      ) : (
-        <FlexContainer height='600px' direction='column' justify='flex-start'>
-          <Text
-            color='primary'
-            onClick={() => setModalContent(null)}
-            curosorPointer
+        }
+        title='Options'
+        description=''
+        onSubmit={modalContent ? ModalFunctions[modalContent.title] : undefined}
+      >
+        {!modalContent ? (
+          <FlexContainer wrap='wrap' justify='space-between'>
+            {options.map((option: NodeOption) => (
+              <OptionNode
+                key={option.id}
+                primary={option.title !== 'Edit'}
+                onClick={() => {
+                  console.log(option.content)
+                  setModalContent({
+                    title: option.title,
+                    content: option.content,
+                  })
+                }}
+              >
+                <img src={option.icon} />
+                {option.title}
+              </OptionNode>
+            ))}
+          </FlexContainer>
+        ) : (
+          <FlexContainer
+            height='600px'
+            direction='column'
+            justify='flex-start'
+            width='100%'
           >
-            ← Go back to options
-          </Text>
-          <Title>{modalContent.title}</Title>
-          <modalContent.content />
-          {/* <Button onClick={ModalFunctions[modalContent.title]}>Confirm</Button> */}
-        </FlexContainer>
-      )}
-    </Modal>
+            <Text
+              color='primary'
+              onClick={() => setModalContent(null)}
+              curosorPointer
+              margin='0 0 20px 0'
+            >
+              ← Go back to options
+            </Text>
+            <Title>{modalContent.title}</Title>
+            <modalContent.content />
+            {formErrors.map(error => (
+              <Text color='contrast'>{error}</Text>
+            ))}
+          </FlexContainer>
+        )}
+      </Modal>
+      {hasChildren && <Arrow margin='left' />}
+    </Container>
   )
 }
 

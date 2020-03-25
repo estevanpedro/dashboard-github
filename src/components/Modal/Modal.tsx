@@ -37,7 +37,7 @@ const Modal = ({ trigger, description, children, onSubmit }: Props) => {
           <Close onClick={close}> &times; </Close>
           <ModalField>{children}</ModalField>
           {onSubmit && (
-            <ModalField align={'right'}>
+            <ModalField align={'flex-end'}>
               <Button
                 onClick={() => {
                   onSubmit()
