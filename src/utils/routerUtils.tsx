@@ -1,4 +1,4 @@
-import React, { useEffect, FunctionComponent, Component } from 'react'
+import React, { useEffect, FunctionComponent } from 'react'
 import { RouteComponentProps } from '@reach/router'
 
 import Navbar from '../containers/Navbar'

@@ -48,7 +48,6 @@ const SchemeMap = ({ schemeId }: Props & RouteComponentProps) => {
   return (
     <>
       <Title>SchemeMap</Title>
-
       <SchemeContainer>
         <NodeColumn rootNode={rootNode} ignoreLeftArrow={true} last={true} />
       </SchemeContainer>
