@@ -1,21 +1,26 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, FunctionComponent } from 'react'
 import { RouteComponentProps } from '@reach/router'
 
 import Navbar from '../containers/Navbar'
 import Container from '../components/Container'
 
-export const Route = (
-  // props: { component: JSX.Element } & RouteComponentProps
-  props: any
-) => {
+interface Props extends RouteComponentProps {
+  component: FunctionComponent
+}
+
+export const Route: FunctionComponent<Props> = ({
+  component: Component,
+  ...rest
+}) => {
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
-  const splitId = props.splitId
   return (
     <>
       <Navbar />
-      <Container >{props.component}</Container>
+      <Container>
+        <Component {...rest} />
+      </Container>
     </>
   )
 }
