@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export default styled.span<TextProps>`
+  margin: ${props => props.margin};
   font-size: ${props =>
     props.size
       ? props.theme.fontSize[props.size]
@@ -29,4 +30,5 @@ interface TextProps {
     | 'contrastOpacity'
   curosorPointer?: boolean
   weight?: 'bold' | 'normal' | 'italic'
+  margin?: string
 }

@@ -199,7 +199,19 @@ export const NotifyContent = () => {
         type='text'
         width='100%'
       />
-      <Line />
+      <FlexContainer
+        width='100%'
+        height='80px'
+        justify='space-between'
+        align='center'
+      >
+        <SubTitle>Email list</SubTitle>
+        <IconButton
+          icon={plus}
+          onClick={() => dispatch(addEmail())}
+          margin='0 0 20px 0'
+        />
+      </FlexContainer>
       <OverflowContainer>
         {emails.map((email, i) => (
           <FlexContainer
@@ -209,16 +221,18 @@ export const NotifyContent = () => {
             align='center'
             margin='0 0 50px 0'
           >
-            <Input
-              label={`Email ${i + 1}`}
-              value={email.email}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                dispatch(updateEmail({ id: email.id, email: e.target.value }))
-              }
-              type='email'
-              width='85%'
-              marginBottom={1}
-            />
+            <FlexContainer padding='20px' width='100%' justify='flex-start'>
+              <Input
+                label={`Email ${i + 1}`}
+                value={email.email}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  dispatch(updateEmail({ id: email.id, email: e.target.value }))
+                }
+                type='email'
+                width='85%'
+                marginBottom={1}
+              />
+            </FlexContainer>
             {i > 0 && (
               <IconButton
                 icon={minus}
@@ -229,12 +243,6 @@ export const NotifyContent = () => {
           </FlexContainer>
         ))}
       </OverflowContainer>
-
-      <IconButton
-        icon={plus}
-        onClick={() => dispatch(addEmail())}
-        margin='0 0 20px 0'
-      />
     </FlexContainer>
   )
 }
@@ -254,6 +262,19 @@ export const SendContent = () => {
         type='text'
         width='100%'
       />
+      <FlexContainer
+        width='100%'
+        height='80px'
+        justify='space-between'
+        align='center'
+      >
+        <SubTitle>Send list</SubTitle>
+        <IconButton
+          icon={plus}
+          onClick={() => dispatch(addSend())}
+          margin='0 0 20px 0'
+        />
+      </FlexContainer>
       <OverflowContainer>
         {addresses.map((address, i) => (
           <SplitContainer key={address.id}>
@@ -332,11 +353,6 @@ export const SendContent = () => {
           </SplitContainer>
         ))}
       </OverflowContainer>
-      <IconButton
-        icon={plus}
-        onClick={() => dispatch(addSend())}
-        margin='0 0 20px 0'
-      />
     </FlexContainer>
   )
 }

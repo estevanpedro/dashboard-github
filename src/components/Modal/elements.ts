@@ -30,9 +30,13 @@ export const Container = styled.div`
 export const ModalField = styled.div<ModalField>`
   width: 100%;
   margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: ${props => props.align || 'flex-start'};
+  margin-bottom: ${props => props.theme.spacing.vertical};
 `
 interface ModalField {
-  align?: 'left' | 'center' | 'right'
+  align?: 'flex-start' | 'center' | 'flex-end'
 }
 
 export const Close = styled.a`

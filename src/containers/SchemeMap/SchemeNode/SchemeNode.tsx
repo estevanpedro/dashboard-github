@@ -158,11 +158,17 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
             ))}
           </FlexContainer>
         ) : (
-          <FlexContainer height='600px' direction='column' justify='flex-start'>
+          <FlexContainer
+            height='600px'
+            direction='column'
+            justify='flex-start'
+            width='100%'
+          >
             <Text
               color='primary'
               onClick={() => setModalContent(null)}
               curosorPointer
+              margin='0 0 20px 0'
             >
               ← Go back to options
             </Text>

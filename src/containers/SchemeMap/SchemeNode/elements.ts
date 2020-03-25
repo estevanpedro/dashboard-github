@@ -51,13 +51,13 @@ export const OverflowContainer = styled.div`
   width: 100%;
   height: 300px;
   overflow: scroll;
-  /* box-shadow: 8px 8px 12px rgba(0, 0, 0, 0.5); */
+  border: 1px solid ${props => props.theme.colors.contrast};
+  border-radius: 4px;
 `
 
 export const SplitContainer = styled.div`
-  border-bottom: 1px solid ${props => props.theme.colors.primary};
+  border-bottom: 4px solid ${props => props.theme.colors.primary};
   padding: 20px;
-  margin-bottom: ${props => props.theme.spacing.vertical};
 `
 
 const arrowPointerMixin = css`
