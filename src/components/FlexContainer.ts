@@ -17,7 +17,7 @@ export default styled.div<FlexContainer>`
   bottom: ${props => props.bottom || 'auto'};
   left: ${props => props.left || 'auto'};
   right: ${props => props.right || 'auto'};
-  z-index: ${props => props.zIndex || '1'};
+  ${props => (props.zIndex ? `z-index: ${props.zIndex}` : '')};
 `
 
 interface FlexContainer {

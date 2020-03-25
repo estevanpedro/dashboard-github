@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+import ds from '../../design/designSystem'
+
 export const PopupStyleLight = {
   width: 600,
   height: 730,
@@ -7,6 +9,7 @@ export const PopupStyleLight = {
   border: 'none',
   display: 'flex',
   padding: '15px 30px',
+  backgroundColor: ds.light.colors.secondaryBg,
 }
 
 export const PopupStyleDark = {
@@ -16,7 +19,7 @@ export const PopupStyleDark = {
   border: 'none',
   display: 'flex',
   padding: '15px 30px',
-  backgroundColor: '#262E33',
+  backgroundColor: ds.dark.colors.secondaryBg,
 }
 
 export const Container = styled.div`
@@ -24,39 +27,13 @@ export const Container = styled.div`
   width: 100%;
 `
 
-export const Input = styled.input<InputProps>`
-  border-radius: 4px;
-  border-color: ${props => props.theme.colors.secondaryBg};
-  border-width: 0.1;
-  width: 300px;
-  height: 25px;
-`
-interface InputProps {}
-
 export const ModalField = styled.div<ModalField>`
   width: 100%;
   margin-top: 10px;
-  text-align: ${props => props.align || 'left'};
 `
 interface ModalField {
   align?: 'left' | 'center' | 'right'
 }
-
-export const Button = styled.button`
-  width: 150px;
-  height: 40px;
-  background-color: ${props => props.theme.colors.confirm};
-  color: ${props => props.theme.colors.background};
-  font-size: ${props => props.theme.fontSize.regular};
-  font-weight: bold;
-  border-radius: 50px;
-  font-size: 16px;
-  box-shadow: 2px 3px 4px rgba(0, 0, 0, 0.25);
-  cursor: pointer;
-  &:active {
-    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.25);
-  }
-`
 
 export const Close = styled.a`
   cursor: pointer;
