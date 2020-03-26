@@ -25,6 +25,7 @@ const light = {
     white: '#fafafa',
     line: 'rgba(29, 29, 29, 0.1)',
     header: '#1D1D1D',
+    grey: 'rgb(242, 242, 242,0.8)',
     contrastOpacity: 'rgba(29, 29, 29, 0.1)',
   },
   ...common,
@@ -33,7 +34,7 @@ const light = {
 const dark = {
   colors: {
     primary: '#63e4a6',
-    secondary: '#63e4a6',
+    secondary: '#5B5F97',
     background: '#262626',
     secondaryBg: '#262E33',
     contrast: '#fafafa',
@@ -42,6 +43,7 @@ const dark = {
     white: '#fafafa',
     line: 'rgba(255,255,255, 0.7)',
     header: '#1D1D1D',
+    grey: 'rgb(242, 242, 242,0.1)',
     contrastOpacity: 'rgba(250, 250, 250, 0.1)',
   },
   ...common,
