@@ -3,6 +3,7 @@ import { Container, Colunm, PayloadText, Name } from './elements'
 import Arrow from "../../assets/icons/right-arrow.svg"
 import IconButton from '../IconButton'
 import Text from '../Text'
+import { Link } from '@reach/router'
 export interface Props {
     schemeName: string
     schemeCreator?: string
@@ -11,7 +12,6 @@ export interface Props {
     lastTransaction: string
     id: number
 }
-
 const Table = ({
     splitInfo,
     id
@@ -19,7 +19,6 @@ const Table = ({
     splitInfo: Props;
     id: number
 }) => {
-    console.log(new Date(parseFloat(splitInfo.lastTransaction)).toLocaleString('en-GB'))
     return (
         <div>
             <Container pair={id % 2 === 0 ? true : false}>
@@ -43,12 +42,14 @@ const Table = ({
                 </Colunm>
 
                 <Colunm width={'50px'}>
-                    <IconButton
-                        icon={Arrow}
-                        onClick={() => {
-                            console.log('Navigate to Scheme id:', splitInfo.id)
-                        }}
-                    />
+                    <Link to={'/split-details/' + splitInfo.id} >
+                        <IconButton
+                            icon={Arrow}
+                            onClick={() => {
+                                console.log('/split-details/', splitInfo.id)
+                            }}
+                        />
+                    </Link>
                 </Colunm>
             </Container>
 
