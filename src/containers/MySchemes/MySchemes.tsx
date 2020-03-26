@@ -4,6 +4,8 @@ import { TableContainner, Menu, Containner, NewButton } from './elements'
 import TableTitles from '../../components/Table/TableTitles'
 import TableOptions from '../../components/Table/TableOptions'
 import { MySchemesProps } from './index'
+import ModalSmall from '../../components/ModalSmall'
+import Modal from '../../components/Modal'
 
 const MySchemes = ({
   Tab,
@@ -16,6 +18,9 @@ const MySchemes = ({
   preference,
   setPreference,
 }: MySchemesProps) => {
+  function ToolFunctions() {
+    return <Title>(TODO) Functions to show components</Title>
+  }
   return (
     <Containner>
       <Title>Library</Title>
@@ -54,6 +59,9 @@ const MySchemes = ({
       <TableTitles />
       <TableContainner>{Tab(preference)}</TableContainner>
       <NewButton onClick={() => { }}>New Scheme</NewButton>
+
+      <Modal title={'aa'} trigger={<button>aaaa</button>} children={<div><p>aa</p></div>} />
+      <ModalSmall title={'Tool'} description={'Description'} Functions={ToolFunctions} />
     </Containner>
   )
 }
