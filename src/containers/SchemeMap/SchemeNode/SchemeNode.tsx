@@ -43,7 +43,7 @@ interface ModalContent {
 const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
   const [optionsActive, setOptionsActive] = useState(false)
   const [modalContent, setModalContent] = useState<ModalContent | null>(null)
-  const [formErrors, setFormErrors] = useState([])
+  const [formErrors, setFormErrors] = useState<string[]>([])
 
   const dispatch = useDispatch()
 
@@ -61,39 +61,125 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
   )
 
   const ModalFunctions = {
-    Split: () => {
-      dispatch(addSplit(nodeData, splitName, splits))
-      setOptionsActive(false)
+    Split: async (close: () => void) => {
+      const someEmpty = splits.some(split => !split.address || !split.name)
+      const shareSum = splits.reduce((split, sum) => {
+        return { ...sum, share: split.share + sum.share }
+      })
+
+      let noErrors = true
+
+      if (!splitName) {
+        setFormErrors([...formErrors, "Split name can't be empty"])
+        noErrors = false
+      }
+      if (someEmpty) {
+        setFormErrors([...formErrors, "Adddress and name can't be empty"])
+        noErrors = false
+      }
+
+      if (shareSum.share !== 100) {
+        setFormErrors([...formErrors, 'Total share number must be 100'])
+        noErrors = false
+      }
+
+      if (noErrors) {
+        dispatch(addSplit(nodeData, splitName, splits))
+        setOptionsActive(false)
+        close()
+      }
     },
-    Timer: () => {
+    Timer: (close: () => void) => {
       const timerInfo = {
         hours,
         minutes,
         seconds,
       }
 
-      dispatch(addTimer(nodeData, timerName, timerInfo))
-      setOptionsActive(false)
+      let noErrors = true
+
+      if (!timerName) {
+        setFormErrors([...formErrors, "The timer name can't be empty"])
+        noErrors = false
+      }
+      if (hours === 0 && minutes === 0 && seconds === 0) {
+        setFormErrors([...formErrors, "The time can't be zero!"])
+        noErrors = false
+      }
+
+      if (noErrors) {
+        dispatch(addTimer(nodeData, timerName, timerInfo))
+        setOptionsActive(false)
+        close()
+      }
     },
-    Notify: () => {
-      dispatch(addNotify(nodeData, notifyName, emails))
-      setOptionsActive(false)
+    Notify: (close: () => void) => {
+      const someEmpty = emails.some(email => !email.email)
+      let noErrors = true
+
+      if (!notifyName) {
+        setFormErrors([...formErrors, "The notify name can't be empty"])
+        noErrors = false
+      }
+
+      if (someEmpty) {
+        setFormErrors([...formErrors, "Email field can't be empty"])
+        noErrors = false
+      }
+
+      if (noErrors) {
+        dispatch(addNotify(nodeData, notifyName, emails))
+        setOptionsActive(false)
+        close()
+      }
     },
-    Send: () => {
-      dispatch(addSend(nodeData, sendName, addresses))
-      setOptionsActive(false)
+    Send: (close: () => void) => {
+      const someEmpty = addresses.some(
+        address => !address.address || !address.name
+      )
+
+      const addressSum = addresses.reduce((address, sum) => {
+        return { ...sum, percentage: address.percentage + sum.percentage }
+      })
+
+      let noErrors = true
+
+      if (!sendName) {
+        setFormErrors([...formErrors, "Send name can't be empty"])
+        noErrors = false
+      }
+
+      if (someEmpty) {
+        setFormErrors([...formErrors, "Address and name can't be empty"])
+        noErrors = false
+      }
+
+      if (addressSum.percentage !== 100) {
+        setFormErrors([...formErrors, 'Percentage total must be 100'])
+        noErrors = false
+      }
+
+      if (noErrors) {
+        dispatch(addSend(nodeData, sendName, addresses))
+        setOptionsActive(false)
+        close()
+      }
     },
-    Swap: () => {
+    Swap: (close: () => void) => {
       setOptionsActive(false)
+      close()
     },
-    Event: () => {
+    Event: (close: () => void) => {
       setOptionsActive(false)
+      close()
     },
-    Edit: () => {
+    Edit: (close: () => void) => {
       setOptionsActive(false)
+      close()
     },
-    Delete: () => {
+    Delete: (close: () => void) => {
       setOptionsActive(false)
+      close()
     },
   }
 
@@ -135,8 +221,8 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
           </Node>
         }
         title='Options'
-        description=''
         onSubmit={modalContent ? ModalFunctions[modalContent.title] : undefined}
+        errors={formErrors}
       >
         {!modalContent ? (
           <FlexContainer wrap='wrap' justify='space-between'>
@@ -145,7 +231,6 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
                 key={option.id}
                 primary={option.title !== 'Edit'}
                 onClick={() => {
-                  console.log(option.content)
                   setModalContent({
                     title: option.title,
                     content: option.content,
@@ -174,9 +259,6 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
             </Text>
             <Title>{modalContent.title}</Title>
             <modalContent.content />
-            {formErrors.map(error => (
-              <Text color='contrast'>{error}</Text>
-            ))}
           </FlexContainer>
         )}
       </Modal>
