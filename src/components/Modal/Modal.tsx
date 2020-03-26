@@ -1,28 +1,33 @@
-import React, { ReactElement, useContext } from 'react'
+import React, { ReactElement, useContext, useState } from 'react'
+import { ThemeContext } from 'styled-components'
 import Popup from 'reactjs-popup'
 
-import Text from '../../components/Text'
 import Button from '../../components/Button'
+import FlexContainer from '../../components/FlexContainer'
 
 import {
   Container,
-  ModalField,
   Close,
   PopupStyleLight,
   PopupStyleDark,
+  ErrorAlert,
+  ErrorInfo,
 } from './elements'
 
-import { ThemeContext } from 'styled-components'
+import warningIcon from '../../assets/icons/warning.svg'
+
 interface Props {
   trigger: ReactElement
   title: string
-  description: string
   children: ReactElement
-  onSubmit?: () => void | undefined
+  onSubmit?: (close: () => void) => void | undefined
+  errors?: string[]
 }
 
-const Modal = ({ trigger, description, children, onSubmit }: Props) => {
+const Modal = ({ trigger, children, onSubmit, errors = [] }: Props) => {
   const themeContext = useContext(ThemeContext)
+
+  const [errorInfoActive, setErrorInfoActive] = useState(false)
 
   return (
     <Popup
@@ -35,18 +40,43 @@ const Modal = ({ trigger, description, children, onSubmit }: Props) => {
       {close => (
         <Container>
           <Close onClick={close}> &times; </Close>
-          <ModalField>{children}</ModalField>
+          <FlexContainer width='100%' direction='column'>
+            {children}
+          </FlexContainer>
           {onSubmit && (
-            <ModalField align={'flex-end'}>
+            <FlexContainer
+              width='100%'
+              margin='30px 0 0 0 '
+              align='center'
+              justify='flex-end'
+              position='relative'
+            >
+              {errors.length ? (
+                <>
+                  {errorInfoActive && (
+                    <ErrorInfo>
+                      {errors.map(error => (
+                        <FlexContainer justify='flex-start' width='100%'>
+                          {error}
+                        </FlexContainer>
+                      ))}
+                    </ErrorInfo>
+                  )}
+                  <ErrorAlert
+                    onClick={() => setErrorInfoActive(!errorInfoActive)}
+                  >
+                    <img src={warningIcon} alt='warning icon' />
+                  </ErrorAlert>
+                </>
+              ) : null}
               <Button
                 onClick={() => {
-                  onSubmit()
-                  close()
+                  onSubmit(close)
                 }}
               >
                 Confirm
               </Button>
-            </ModalField>
+            </FlexContainer>
           )}
         </Container>
       )}
