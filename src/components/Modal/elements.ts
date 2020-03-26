@@ -4,7 +4,7 @@ import ds from '../../design/designSystem'
 
 export const PopupStyleLight = {
   width: 600,
-  height: 730,
+  height: '80vh',
   borderRadius: 4,
   border: 'none',
   display: 'flex',
@@ -14,7 +14,7 @@ export const PopupStyleLight = {
 
 export const PopupStyleDark = {
   width: 600,
-  height: 730,
+  height: '80vh',
   borderRadius: 4,
   border: 'none',
   display: 'flex',
