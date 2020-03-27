@@ -2,7 +2,16 @@ import React, { useState } from 'react'
 import Title from '../../components/Title'
 import Text from '../../components/Text'
 import Input from '../../components/Input'
-import { TableContainner, Menu, Containner, NewButton, InfoText, Area, Select, ButtonConfirm } from './elements'
+import {
+  TableContainner,
+  Menu,
+  Containner,
+  NewButton,
+  InfoText,
+  Area,
+  Select,
+  ButtonConfirm,
+} from './elements'
 import TableTitles from '../../components/Table/TableTitles'
 import TableOptions from '../../components/Table/TableOptions'
 import { MySchemesProps } from './index'
@@ -63,10 +72,9 @@ const MySchemes = ({
       <TableTitles />
       <TableContainner>{Tab(preference)}</TableContainner>
 
-
       <Modal
         title={'New Scheme'}
-        trigger={<NewButton onClick={() => { }}>New Scheme</NewButton>}
+        trigger={<NewButton onClick={() => {}}>New Scheme</NewButton>}
         children={
           <Area>
             <Title>Create new Scheme</Title>
@@ -75,11 +83,8 @@ const MySchemes = ({
               label='Scheme name'
               value={schemeName}
               onChange={(e: any) => {
-
-                console.log(e.target.value)
                 setSchemeName(e.target.value)
-              }
-              }
+              }}
               type='text'
             />
             <InfoText>Private or Public?</InfoText>
@@ -90,18 +95,17 @@ const MySchemes = ({
                 } else {
                   setIsPublic(false)
                 }
-              }
-              }>
-              <option value='public'>
-                Public
-              </option>
+              }}
+            >
+              <option value='public'>Public</option>
               <option value='private'>Private</option>
             </Select>
             <br />
-            <Link to={'/scheme/' + schemeName} state={{ schemeName: schemeName, isPublic: isPublic }}>
-              <ButtonConfirm onClick={() => { }}>
-                Create
-            </ButtonConfirm>
+            <Link
+              to={'/scheme/' + schemeName}
+              state={{ schemeName: schemeName, isPublic: isPublic }}
+            >
+              <ButtonConfirm onClick={() => {}}>Create</ButtonConfirm>
             </Link>
           </Area>
         }

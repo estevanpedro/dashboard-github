@@ -44,9 +44,7 @@ interface Props {
 
 const SchemeMap = ({ location }: Props & RouteComponentProps) => {
   const { rootNode } = useSelector((state: RootState) => state.schemeMap)
-  console.log('Informations from MySchemes modal to create new schemes: ', location.state)
-  console.log('schemeName: ', location.state.schemeName)
-  console.log('isPublic: ', location.state.isPublic)
+  console.log(location)
   return (
     <>
       <Title>{location.state.schemeName}</Title>

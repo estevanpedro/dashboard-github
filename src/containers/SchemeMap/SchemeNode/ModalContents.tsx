@@ -360,7 +360,7 @@ export const SendContent = () => {
 export const SwapContent = () => {
   return (
     <>
-      <h1>SwapContent</h1>
+      <h1>[WIP]</h1>
     </>
   )
 }
@@ -368,7 +368,7 @@ export const SwapContent = () => {
 export const EventContent = () => {
   return (
     <>
-      <h1>EventContent</h1>
+      <h1>[WIP]</h1>
     </>
   )
 }
@@ -376,7 +376,7 @@ export const EventContent = () => {
 export const EditContent = () => {
   return (
     <>
-      <h1>EditContent</h1>
+      <h1>[WIP]</h1>
     </>
   )
 }

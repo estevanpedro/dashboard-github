@@ -24,16 +24,15 @@ interface Props {
   errors?: string[]
 }
 
-
 const Modal = ({ trigger, children, onSubmit, errors = [] }: Props) => {
   const themeContext = useContext(ThemeContext)
-  console.log('themeContext:', themeContext.color)
   const [errorInfoActive, setErrorInfoActive] = useState(false)
   return (
     <Popup
       contentStyle={
-        themeContext.colors.primary === "#FF9140" ? PopupStyleLight : PopupStyleDark
-
+        themeContext.colors.primary === '#FF9140'
+          ? PopupStyleLight
+          : PopupStyleDark
       }
       trigger={trigger}
       modal
