@@ -39,15 +39,17 @@ const NodeColumn = ({ rootNode, ignoreLeftArrow, last }: NodeColumnProps) => {
 }
 
 interface Props {
-  schemeId?: string
+  location?: any
 }
 
-const SchemeMap = ({ schemeId }: Props & RouteComponentProps) => {
+const SchemeMap = ({ location }: Props & RouteComponentProps) => {
   const { rootNode } = useSelector((state: RootState) => state.schemeMap)
-
+  console.log('Informations from MySchemes modal to create new schemes: ', location.state)
+  console.log('schemeName: ', location.state.schemeName)
+  console.log('isPublic: ', location.state.isPublic)
   return (
     <>
-      <Title>SchemeMap</Title>
+      <Title>{location.state.schemeName}</Title>
       <SchemeContainer>
         <NodeColumn rootNode={rootNode} ignoreLeftArrow={true} last={true} />
       </SchemeContainer>
