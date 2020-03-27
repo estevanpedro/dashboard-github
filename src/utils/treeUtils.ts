@@ -31,7 +31,7 @@ export const findNodeParent = (
   }
 
   for (let n = 0; n < root.children.length; n++) {
-    const node = findTreeNode(id, root.children[n], callback)
+    const node = findNodeParent(id, root.children[n], callback)
     if (node) return node
   }
 }
