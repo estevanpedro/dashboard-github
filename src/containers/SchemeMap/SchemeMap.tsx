@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { RouteComponentProps } from '@reach/router'
 
+import Button from '../../components/Button'
 import FlexContainer from '../../components/FlexContainer'
 import Title from '../../components/Title'
 
@@ -44,10 +45,19 @@ interface Props {
 
 const SchemeMap = ({ location }: Props & RouteComponentProps) => {
   const { rootNode } = useSelector((state: RootState) => state.schemeMap)
-  console.log(location)
+
+  const handleSave = () => {
+    // TODO: API INTEGRATION
+    console.log(rootNode)
+  }
+
   return (
     <>
-      <Title>{location.state.schemeName}</Title>
+      <FlexContainer width='100%' justify='space-between'>
+        <Title>{location.state.schemeName}</Title>
+        <Button onClick={handleSave}>Save</Button>
+      </FlexContainer>
+
       <SchemeContainer>
         <NodeColumn rootNode={rootNode} ignoreLeftArrow={true} last={true} />
       </SchemeContainer>

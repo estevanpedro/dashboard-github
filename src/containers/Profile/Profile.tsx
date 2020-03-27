@@ -58,15 +58,15 @@ const Profile = () => {
       </ProfileField>
       <ProfileField>
         <SubTitle>Password</SubTitle>
-        <Link to='/'>aaaaa</Link>
+        <Link to='/'>Change Password</Link>
       </ProfileField>
       <ProfileField>
         <SubTitle>API Token</SubTitle>
-        <Link to='/'>aaaaa</Link>
+        <Link to='/'>Create Api Token</Link>
       </ProfileField>
       <ProfileField>
         <SubTitle>Social Auth</SubTitle>
-        <Link to='/'>aaaaa</Link>
+        <Link to='/'>Manage Connections</Link>
       </ProfileField>
     </ProfileContainer>
   )
