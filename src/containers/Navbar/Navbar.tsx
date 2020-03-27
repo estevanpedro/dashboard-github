@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-
+import Logo from '../../components/Logo'
 import { NavbarContainer, LinksWrapper, NavLink, ThemeButton } from './elements'
 import NavOptions from './NavOptions'
 import ThemeContext from '../../contexts/ThemeContext'
@@ -16,6 +16,7 @@ const Navbar = () => {
 
   return (
     <NavbarContainer>
+      <Logo />
       <LinksWrapper>
         {NavOptions.map(option =>
           renderLink(

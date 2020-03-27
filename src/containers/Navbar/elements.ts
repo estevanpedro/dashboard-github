@@ -8,7 +8,7 @@ export const NavbarContainer = styled.nav`
   position: fixed;
   background-color: ${props => props.theme.colors.header};
   display: flex;
-  justify-content: flex-end;
+  /* justify-content: flex-end; */
   align-items: center;
   box-sizing: border-box;
   z-index: 100;
