@@ -2,29 +2,30 @@ import styled from 'styled-components'
 
 import ds from '../../design/designSystem'
 
-export const PopupStyleLight = {
-  width: 600,
-  height: '80vh',
+const CommonStyle = {
+  width: 700,
+  height: '90vh',
   borderRadius: 4,
   border: 'none',
   display: 'flex',
-  padding: '15px 30px',
-  backgroundColor: ds.light.colors.secondaryBg,
+  padding: '10px 0',
+}
+
+export const PopupStyleLight = {
+  ...CommonStyle,
+  background: ds.light.colors.secondaryBg,
 }
 
 export const PopupStyleDark = {
-  width: 600,
-  height: '80vh',
-  borderRadius: 4,
-  border: 'none',
-  display: 'flex',
-  padding: '15px 30px',
-  backgroundColor: ds.dark.colors.secondaryBg,
+  ...CommonStyle,
+  background: ds.dark.colors.secondaryBg,
 }
 
 export const Container = styled.div`
-  padding: 10px 10px;
+  padding: 0 25px;
   width: 100%;
+  height: 100%;
+  overflow: scroll;
 `
 
 export const Close = styled.a`

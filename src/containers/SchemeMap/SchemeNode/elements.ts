@@ -48,8 +48,8 @@ export interface NodeProps {
 }
 
 export const OverflowContainer = styled.div`
-  width: 100%;
-  height: 300px;
+  width: 99%;
+  height: 280px;
   overflow: scroll;
   border: 1px solid ${props => props.theme.colors.contrast};
   border-radius: 4px;

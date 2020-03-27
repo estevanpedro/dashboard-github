@@ -16,7 +16,16 @@ const initialState: SchemeMapState = {
   rootNode: {
     id: '0',
     type: 'split',
-    children: [],
+    children: [
+      {
+        id: '1',
+        type: 'address',
+        children: [],
+        info: {
+          name: 'Address 0',
+        },
+      },
+    ],
     info: {
       name: 'Split',
     },

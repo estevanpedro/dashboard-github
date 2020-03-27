@@ -40,7 +40,7 @@ const Modal = ({ trigger, children, onSubmit, errors = [] }: Props) => {
       {close => (
         <Container>
           <Close onClick={close}> &times; </Close>
-          <FlexContainer width='100%' direction='column'>
+          <FlexContainer width='100%' direction='column' justify='flex-start'>
             {children}
           </FlexContainer>
           {onSubmit && (
@@ -49,7 +49,6 @@ const Modal = ({ trigger, children, onSubmit, errors = [] }: Props) => {
               margin='30px 0 0 0 '
               align='center'
               justify='flex-end'
-              position='relative'
             >
               {errors.length ? (
                 <>

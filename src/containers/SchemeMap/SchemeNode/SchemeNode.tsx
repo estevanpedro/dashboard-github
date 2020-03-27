@@ -202,6 +202,18 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
     }
   }
 
+  const filterOptions = (options: NodeOption[]) => {
+    switch (nodeData.type) {
+      case 'split':
+        return options.filter(
+          option => option.title === 'Edit' || option.title === 'Delete'
+        )
+
+      default:
+        return options
+    }
+  }
+
   return (
     <Container hasChildren={hasChildren}>
       {!ignoreLeftArrow && (
@@ -226,7 +238,7 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
       >
         {!modalContent ? (
           <FlexContainer wrap='wrap' justify='space-between'>
-            {options.map((option: NodeOption) => (
+            {filterOptions(options).map((option: NodeOption) => (
               <OptionNode
                 key={option.id}
                 primary={option.title !== 'Edit'}
@@ -253,7 +265,7 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
               color='primary'
               onClick={() => setModalContent(null)}
               curosorPointer
-              margin='0 0 20px 0'
+              margin='0 0 10px 0'
             >
               ← Go back to options
             </Text>
