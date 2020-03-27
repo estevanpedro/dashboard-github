@@ -19,7 +19,13 @@ import {
 } from './elements'
 import options, { NodeOption } from './options'
 import { NodeType, SchemeNodeType } from './utils/nodeType'
-import { addSplit, addTimer, addNotify, addSend } from './utils/toolsFuncions'
+import {
+  addSplit,
+  addTimer,
+  addNotify,
+  addSend,
+  deleteNode,
+} from './utils/toolsFuncions'
 
 interface Props {
   nodeData: SchemeNodeType
@@ -50,7 +56,7 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
   const { name: timerName, hours, minutes, seconds } = useSelector(
     (state: RootState) => state.timer
   )
-  const { name: splitName, splits } = useSelector(
+  const { name: splitName, splitAddress, splits } = useSelector(
     (state: RootState) => state.split
   )
   const { name: notifyName, emails } = useSelector(
@@ -84,7 +90,7 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
       }
 
       if (noErrors) {
-        dispatch(addSplit(nodeData, splitName, splits))
+        dispatch(addSplit(nodeData, splitName, splitAddress, splits))
         setOptionsActive(false)
         close()
       }
@@ -178,6 +184,7 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
       close()
     },
     Delete: (close: () => void) => {
+      dispatch(deleteNode(nodeData.id))
       setOptionsActive(false)
       close()
     },
@@ -200,6 +207,15 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
       default:
         return
     }
+  }
+
+  const filterOptions = (options: NodeOption[]) => {
+    if (nodeData.children.length) {
+      return options.filter(
+        option => option.title === 'Edit' || option.title === 'Delete'
+      )
+    }
+    return options
   }
 
   return (
@@ -225,8 +241,8 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
         errors={formErrors}
       >
         {!modalContent ? (
-          <FlexContainer wrap='wrap' justify='space-between'>
-            {options.map((option: NodeOption) => (
+          <FlexContainer wrap='wrap' justify='space-between' margin='20px 20px'>
+            {filterOptions(options).map((option: NodeOption) => (
               <OptionNode
                 key={option.id}
                 primary={option.title !== 'Edit'}
@@ -237,14 +253,14 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
                   })
                 }}
               >
-                <img src={option.icon} />
+                <option.icon size={30} style={{ margin: 5 }} />
                 {option.title}
               </OptionNode>
             ))}
           </FlexContainer>
         ) : (
           <FlexContainer
-            height='600px'
+            maxHeight='600px'
             direction='column'
             justify='flex-start'
             width='100%'
@@ -253,7 +269,7 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
               color='primary'
               onClick={() => setModalContent(null)}
               curosorPointer
-              margin='0 0 20px 0'
+              margin='0 0 10px 0'
             >
               ← Go back to options
             </Text>

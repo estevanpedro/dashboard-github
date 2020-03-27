@@ -13,7 +13,7 @@ const ThemeService = ({ children }: { children: any }) => {
   }
 
   return (
-    <ThemeContext.Provider value={{ toggle }}>
+    <ThemeContext.Provider value={{ toggle, theme }}>
       <ThemeProvider theme={designSystem[theme]}>
         <GlobalStyle lightMode={theme === 'light'} />
         {children}

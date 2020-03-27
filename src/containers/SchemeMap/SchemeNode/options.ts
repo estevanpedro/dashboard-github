@@ -1,12 +1,5 @@
 import { FunctionComponent } from 'react'
-
-import splitIcon from '../../../assets/icons/split.svg'
-import timerIcon from '../../../assets/icons/stopwatch.svg'
-import notifyIcon from '../../../assets/icons/bell.svg'
-import sendIcon from '../../../assets/icons/share.svg'
-import swapIcon from '../../../assets/icons/sort.svg'
-import eventIcon from '../../../assets/icons/tick.svg'
-import editIcon from '../../../assets/icons/edit.svg'
+import { MdCallSplit, MdAccessAlarms, MdNotificationsActive, MdSend, MdSwapHoriz, MdEventAvailable, MdModeEdit, MdDelete } from "react-icons/md"
 
 import {
   SplitContent,
@@ -22,16 +15,16 @@ import {
 export interface NodeOption {
   id: number
   title:
-    | 'Split'
-    | 'Timer'
-    | 'Notify'
-    | 'Send'
-    | 'Swap'
-    | 'Event'
-    | 'Edit'
-    | 'Delete'
+  | 'Split'
+  | 'Timer'
+  | 'Notify'
+  | 'Send'
+  | 'Swap'
+  | 'Event'
+  | 'Edit'
+  | 'Delete'
   description: string
-  icon: string
+  icon: any
   content: FunctionComponent
 }
 
@@ -40,56 +33,56 @@ const options: NodeOption[] = [
     id: 1,
     title: 'Split',
     description: '',
-    icon: splitIcon,
+    icon: MdCallSplit,
     content: SplitContent,
   },
   {
     id: 2,
     title: 'Timer',
     description: '',
-    icon: timerIcon,
+    icon: MdAccessAlarms,
     content: TimerContent,
   },
   {
     id: 3,
     title: 'Notify',
     description: '',
-    icon: notifyIcon,
+    icon: MdNotificationsActive,
     content: NotifyContent,
   },
   {
     id: 4,
     title: 'Send',
     description: '',
-    icon: sendIcon,
+    icon: MdSend,
     content: SendContent,
   },
   {
     id: 5,
     title: 'Swap',
     description: '',
-    icon: swapIcon,
+    icon: MdSwapHoriz,
     content: SwapContent,
   },
   {
     id: 6,
     title: 'Event',
     description: '',
-    icon: eventIcon,
+    icon: MdEventAvailable,
     content: EventContent,
   },
   {
     id: 7,
     title: 'Edit',
     description: '',
-    icon: editIcon,
+    icon: MdModeEdit,
     content: EditContent,
   },
   {
     id: 8,
     title: 'Delete',
     description: '',
-    icon: editIcon,
+    icon: MdDelete,
     content: DeleteContent,
   },
 ]

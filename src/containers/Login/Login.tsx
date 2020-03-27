@@ -37,7 +37,7 @@ const Login = () => {
       try {
         const response = await Api.login(userData)
         dispatch(changeSecretToken(response.data.secret_token))
-        navigate('/profile')
+        navigate('/my-schemes')
       } catch (e) {
         console.error(e)
       }
@@ -83,11 +83,9 @@ const Login = () => {
           type='password'
           error={passwordError}
         />
-
         <Button type='submit' margin='0 0 20px 0'>
           Login
         </Button>
-
         <Link to='/sign-up'>Create an account</Link>
       </LoginForm>
     </LoginContainer>

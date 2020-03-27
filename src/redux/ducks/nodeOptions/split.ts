@@ -10,11 +10,13 @@ export interface Split {
 
 export interface SplitState {
   name: string
+  splitAddress: string
   splits: Split[]
 }
 
 const initialState: SplitState = {
   name: 'Split',
+  splitAddress: '',
   splits: [
     {
       name: 'Address 1',
@@ -45,6 +47,9 @@ const reducer = createSlice({
     },
     updateSplitName(state: SplitState, action: PayloadAction<string>) {
       state.name = action.payload
+    },
+    updateSplitAddress(state: SplitState, action: PayloadAction<string>) {
+      state.splitAddress = action.payload
     },
     updateAddressName(
       state: SplitState,
@@ -83,6 +88,7 @@ export const {
   addSplit,
   removeSplit,
   updateSplitName,
+  updateSplitAddress,
   updateAddressName,
   updateAddressValue,
   updateAddressShare,

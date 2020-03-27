@@ -11,8 +11,9 @@ interface ContainerProps {
 }
 
 export const Node = styled.button<NodeProps>`
-  width: 130px;
-  height: 82px;
+  /* width: 130px; */
+  height: 60px;
+  padding: 20px 25px 20px 25px;
   border-radius: 4px;
   background-color: ${props =>
     props.primary ? props.theme.colors.primary : props.theme.colors.secondary};
@@ -48,8 +49,8 @@ export interface NodeProps {
 }
 
 export const OverflowContainer = styled.div`
-  width: 100%;
-  height: 300px;
+  width: 99%;
+  height: 280px;
   overflow: scroll;
   border: 1px solid ${props => props.theme.colors.contrast};
   border-radius: 4px;
@@ -76,6 +77,9 @@ const arrowPointerMixin = css`
 
     transform: rotate(-45deg);
     -webkit-transform: rotate(-45deg);
+    
+    /* transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg); */
   }
 `
 
@@ -97,29 +101,25 @@ export const VerticalArrow = styled.div`
   height: 100%;
   position: absolute;
   left: 0;
-  top: 42px;
+  top: 30px;
 
   background-color: ${props => props.theme.colors.contrast};
 `
 
-export const OptionNode = styled(Node)<OptionNode>`
-  width: 140px;
+export const OptionNode = styled(Node) <OptionNode>`
+ width: 140px;
   height: 62px;
   margin-bottom: 10px;
   font-size: ${props => props.theme.fontSize.verySmall};
-  img {
-    height: 18px;
-    margin-bottom: 4px;
-  }
   background-color: ${props => props.theme.colors.secondaryBg};
   color: ${props =>
-    props.primary ? props.theme.colors.primary : props.theme.colors.secondary};
+    props.primary ? props.theme.colors.contrast : props.theme.colors.secondary};
   border: 2px solid
     ${props =>
-      props.primary
-        ? props.theme.colors.primary
-        : props.theme.colors.secondary};
+    props.primary
+      ? props.theme.colors.primary
+      : props.theme.colors.secondary};
   flex-direction: column;
 `
 
-interface OptionNode extends NodeProps {}
+interface OptionNode extends NodeProps { }

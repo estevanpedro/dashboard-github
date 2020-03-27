@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 import { Node, NodeProps } from './elements'
 
-const OptionNode = styled(Node)<OptionNode>`
+const OptionNode = styled(Node) <OptionNode>`
   width: 90px;
   height: 62px;
   font-size: ${props => props.theme.fontSize.verySmall};
@@ -16,12 +16,12 @@ const OptionNode = styled(Node)<OptionNode>`
     props.primary ? props.theme.colors.primary : props.theme.colors.secondary};
   border: 2px solid
     ${props =>
-      props.primary
-        ? props.theme.colors.primary
-        : props.theme.colors.secondary};
+    props.primary
+      ? props.theme.colors.primary
+      : props.theme.colors.secondary};
   flex-direction: column;
 `
 
-interface OptionNode extends NodeProps {}
+interface OptionNode extends NodeProps { }
 
 export default OptionNode

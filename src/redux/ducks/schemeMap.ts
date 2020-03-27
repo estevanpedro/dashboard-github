@@ -16,7 +16,16 @@ const initialState: SchemeMapState = {
   rootNode: {
     id: '0',
     type: 'split',
-    children: [],
+    children: [
+      {
+        id: '1',
+        type: 'address',
+        children: [],
+        info: {
+          name: 'Address 0',
+        },
+      },
+    ],
     info: {
       name: 'Split',
     },
@@ -38,12 +47,9 @@ const reducer = createSlice({
       }
     },
 
-    removeNode(
-      state: SchemeMapState,
-      action: PayloadAction<{ id: string; parentId: string }>
-    ) {
-      const { id, parentId } = action.payload
-      const newTree = removeTreeNode(parentId, id, state.rootNode)
+    removeNode(state: SchemeMapState, action: PayloadAction<{ id: string }>) {
+      const { id } = action.payload
+      const newTree = removeTreeNode(id, state.rootNode)
 
       if (newTree) {
         state.rootNode = newTree
@@ -68,6 +74,6 @@ const reducer = createSlice({
   },
 })
 
-export const { addNode } = reducer.actions
+export const { addNode, removeNode, updateNode } = reducer.actions
 
 export default reducer.reducer

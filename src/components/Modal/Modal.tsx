@@ -26,13 +26,13 @@ interface Props {
 
 const Modal = ({ trigger, children, onSubmit, errors = [] }: Props) => {
   const themeContext = useContext(ThemeContext)
-
   const [errorInfoActive, setErrorInfoActive] = useState(false)
-
   return (
     <Popup
       contentStyle={
-        themeContext.mode === 'light' ? PopupStyleLight : PopupStyleDark
+        themeContext.colors.primary === '#FF9140'
+          ? PopupStyleLight
+          : PopupStyleDark
       }
       trigger={trigger}
       modal
@@ -40,16 +40,15 @@ const Modal = ({ trigger, children, onSubmit, errors = [] }: Props) => {
       {close => (
         <Container>
           <Close onClick={close}> &times; </Close>
-          <FlexContainer width='100%' direction='column'>
+          <FlexContainer width='100%' direction='column' justify='flex-start'>
             {children}
           </FlexContainer>
           {onSubmit && (
             <FlexContainer
               width='100%'
-              margin='30px 0 0 0 '
+              margin='20% 0 0 0 '
               align='center'
               justify='flex-end'
-              position='relative'
             >
               {errors.length ? (
                 <>

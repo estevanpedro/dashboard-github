@@ -9,6 +9,7 @@ import {
   addSplit,
   removeSplit,
   updateSplitName,
+  updateSplitAddress,
   updateAddressName,
   updateAddressValue,
   updateAddressShare,
@@ -49,7 +50,9 @@ import minus from '../../../assets/icons/minus.svg'
 import plus from '../../../assets/icons/plus.svg'
 
 export const SplitContent = () => {
-  const { name, splits } = useSelector((state: RootState) => state.split)
+  const { name, splitAddress, splits } = useSelector(
+    (state: RootState) => state.split
+  )
   const dispatch = useDispatch()
 
   return (
@@ -59,6 +62,15 @@ export const SplitContent = () => {
         value={name}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           dispatch(updateSplitName(e.target.value))
+        }
+        type='text'
+        width='100'
+      />
+      <Input
+        label='Split Address'
+        value={splitAddress}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          dispatch(updateSplitAddress(e.target.value))
         }
         type='text'
         width='100'
@@ -360,7 +372,7 @@ export const SendContent = () => {
 export const SwapContent = () => {
   return (
     <>
-      <h1>SwapContent</h1>
+      <h1>[WIP]</h1>
     </>
   )
 }
@@ -368,7 +380,7 @@ export const SwapContent = () => {
 export const EventContent = () => {
   return (
     <>
-      <h1>EventContent</h1>
+      <h1>[WIP]</h1>
     </>
   )
 }
@@ -376,15 +388,11 @@ export const EventContent = () => {
 export const EditContent = () => {
   return (
     <>
-      <h1>EditContent</h1>
+      <h1>[WIP]</h1>
     </>
   )
 }
 
 export const DeleteContent = () => {
-  return (
-    <>
-      <h1>DeleteContent</h1>
-    </>
-  )
+  return <></>
 }
