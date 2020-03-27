@@ -11,8 +11,9 @@ interface ContainerProps {
 }
 
 export const Node = styled.button<NodeProps>`
-  width: 130px;
-  height: 82px;
+  /* width: 130px; */
+  height: 60px;
+  padding: 20px 25px 20px 25px;
   border-radius: 4px;
   background-color: ${props =>
     props.primary ? props.theme.colors.primary : props.theme.colors.secondary};
@@ -76,6 +77,9 @@ const arrowPointerMixin = css`
 
     transform: rotate(-45deg);
     -webkit-transform: rotate(-45deg);
+    
+    /* transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg); */
   }
 `
 
@@ -97,7 +101,7 @@ export const VerticalArrow = styled.div`
   height: 100%;
   position: absolute;
   left: 0;
-  top: 42px;
+  top: 30px;
 
   background-color: ${props => props.theme.colors.contrast};
 `
@@ -125,6 +129,7 @@ export const OptionNode = styled(Node) <OptionNode>`
       ? props.theme.colors.primary
       : props.theme.colors.secondary}; */
   flex-direction: column;
+  padding: 50px 30px;
 `
 
 interface OptionNode extends NodeProps { }

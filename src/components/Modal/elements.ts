@@ -13,12 +13,12 @@ const CommonStyle = {
 
 export const PopupStyleLight = {
   ...CommonStyle,
-  background: ds.light.colors.secondaryBg,
+  backgroundColor: ds.light.colors.secondaryBg,
 }
 
 export const PopupStyleDark = {
   ...CommonStyle,
-  background: ds.dark.colors.secondaryBg,
+  backgroundColor: ds.dark.colors.secondaryBg,
 }
 
 export const Container = styled.div`

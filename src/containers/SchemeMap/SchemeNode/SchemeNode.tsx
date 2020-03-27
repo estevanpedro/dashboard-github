@@ -29,14 +29,14 @@ interface Props {
 
 interface ModalContent {
   title:
-    | 'Split'
-    | 'Timer'
-    | 'Notify'
-    | 'Send'
-    | 'Swap'
-    | 'Event'
-    | 'Edit'
-    | 'Delete'
+  | 'Split'
+  | 'Timer'
+  | 'Notify'
+  | 'Send'
+  | 'Swap'
+  | 'Event'
+  | 'Edit'
+  | 'Delete'
   content: FunctionComponent
 }
 
@@ -237,7 +237,7 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
         errors={formErrors}
       >
         {!modalContent ? (
-          <FlexContainer wrap='wrap' justify='space-between'>
+          <FlexContainer wrap='wrap' justify='space-between' margin='20px 20px'>
             {filterOptions(options).map((option: NodeOption) => (
               <OptionNode
                 key={option.id}
@@ -255,24 +255,24 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
             ))}
           </FlexContainer>
         ) : (
-          <FlexContainer
-            height='600px'
-            direction='column'
-            justify='flex-start'
-            width='100%'
-          >
-            <Text
-              color='primary'
-              onClick={() => setModalContent(null)}
-              curosorPointer
-              margin='0 0 10px 0'
+            <FlexContainer
+              height='600px'
+              direction='column'
+              justify='flex-start'
+              width='100%'
             >
-              ← Go back to options
+              <Text
+                color='primary'
+                onClick={() => setModalContent(null)}
+                curosorPointer
+                margin='0 0 10px 0'
+              >
+                ← Go back to options
             </Text>
-            <Title>{modalContent.title}</Title>
-            <modalContent.content />
-          </FlexContainer>
-        )}
+              <Title>{modalContent.title}</Title>
+              <modalContent.content />
+            </FlexContainer>
+          )}
       </Modal>
       {hasChildren && <Arrow margin='left' />}
     </Container>
