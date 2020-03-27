@@ -249,7 +249,7 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
                   })
                 }}
               >
-                <img src={option.icon} />
+                <option.icon size={30} style={{ margin: 5 }} />
                 {option.title}
               </OptionNode>
             ))}
