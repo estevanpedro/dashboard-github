@@ -260,7 +260,7 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
           </FlexContainer>
         ) : (
           <FlexContainer
-            height='600px'
+            maxHeight='600px'
             direction='column'
             justify='flex-start'
             width='100%'

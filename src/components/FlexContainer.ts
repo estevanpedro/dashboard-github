@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export default styled.div<FlexContainer>`
   width: ${props => props.width || 'auto'};
   height: ${props => props.height || 'auto'};
+  max-height: ${props => props.maxHeight || 'auto'};
   position: ${props => props.position || 'static'};
   margin: ${props => props.margin || '0'};
   padding: ${props => props.padding || '0'};
@@ -23,6 +24,7 @@ export default styled.div<FlexContainer>`
 interface FlexContainer {
   width?: string
   height?: string
+  maxHeight?: string
   position?: 'static' | 'relative' | 'absolute' | 'fixed' | 'sticky'
   margin?: string
   padding?: string

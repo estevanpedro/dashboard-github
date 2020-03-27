@@ -382,9 +382,5 @@ export const EditContent = () => {
 }
 
 export const DeleteContent = () => {
-  return (
-    <>
-      <h1>DeleteContent</h1>
-    </>
-  )
+  return <></>
 }
