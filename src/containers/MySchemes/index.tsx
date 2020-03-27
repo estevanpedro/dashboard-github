@@ -1,8 +1,8 @@
-import Library from './Library'
 import React, { useState } from 'react'
+import MySchemes from './MySchemes'
 import Table from '../../components/Table'
 
-export interface LibraryProps {
+export interface MySchemesProps {
     Tab: any //"JSX.Element[] | undefined" -not working
     colorBalance: string
     setcolorBalance: React.Dispatch<React.SetStateAction<string>>
@@ -32,8 +32,7 @@ interface Props {
         paid: number
     }[]
 }
-
-const LibraryContainner = () => {
+const MySchemesContainner = () => {
     const [colorBalance, setcolorBalance] = useState('')
     const [colorCurrency, setcolorCurrency] = useState('')
     const [colorTransaction, setColorTransaction] = useState('#')
@@ -120,8 +119,7 @@ const LibraryContainner = () => {
             return lastTransaction
         }
     }
-
-    return <Library
+    return <MySchemes
         Tab={Tab}
         colorBalance={colorBalance}
         setcolorBalance={setcolorBalance}
@@ -134,4 +132,4 @@ const LibraryContainner = () => {
     />
 }
 
-export default LibraryContainner
+export default MySchemesContainner

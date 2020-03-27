@@ -4,7 +4,7 @@ import ds from '../../design/designSystem'
 
 export const PopupStyleLight = {
   width: 600,
-  height: '80vh',
+  height: 730,
   borderRadius: 4,
   border: 'none',
   display: 'flex',
@@ -14,7 +14,7 @@ export const PopupStyleLight = {
 
 export const PopupStyleDark = {
   width: 600,
-  height: '80vh',
+  height: 730,
   borderRadius: 4,
   border: 'none',
   display: 'flex',
@@ -58,6 +58,15 @@ export const ErrorAlert = styled.div`
     height: 22px;
   }
 `
+export const ModalField = styled.div<ModalField>`
+  width: 100%;
+  margin-top: 10px;
+  text-align: ${props => props.align ? props.align : 'left'}
+`
+
+interface ModalField {
+  align?: 'left' | 'center' | 'right'
+}
 
 export const ErrorInfo = styled.div`
   width: 320px;
