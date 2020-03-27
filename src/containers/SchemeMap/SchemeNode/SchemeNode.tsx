@@ -19,7 +19,13 @@ import {
 } from './elements'
 import options, { NodeOption } from './options'
 import { NodeType, SchemeNodeType } from './utils/nodeType'
-import { addSplit, addTimer, addNotify, addSend } from './utils/toolsFuncions'
+import {
+  addSplit,
+  addTimer,
+  addNotify,
+  addSend,
+  deleteNode,
+} from './utils/toolsFuncions'
 
 interface Props {
   nodeData: SchemeNodeType
@@ -29,14 +35,14 @@ interface Props {
 
 interface ModalContent {
   title:
-  | 'Split'
-  | 'Timer'
-  | 'Notify'
-  | 'Send'
-  | 'Swap'
-  | 'Event'
-  | 'Edit'
-  | 'Delete'
+    | 'Split'
+    | 'Timer'
+    | 'Notify'
+    | 'Send'
+    | 'Swap'
+    | 'Event'
+    | 'Edit'
+    | 'Delete'
   content: FunctionComponent
 }
 
@@ -178,6 +184,7 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
       close()
     },
     Delete: (close: () => void) => {
+      dispatch(deleteNode(nodeData.id))
       setOptionsActive(false)
       close()
     },
@@ -203,15 +210,12 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
   }
 
   const filterOptions = (options: NodeOption[]) => {
-    switch (nodeData.type) {
-      case 'split':
-        return options.filter(
-          option => option.title === 'Edit' || option.title === 'Delete'
-        )
-
-      default:
-        return options
+    if (nodeData.children.length) {
+      return options.filter(
+        option => option.title === 'Edit' || option.title === 'Delete'
+      )
     }
+    return options
   }
 
   return (
@@ -255,24 +259,24 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
             ))}
           </FlexContainer>
         ) : (
-            <FlexContainer
-              height='600px'
-              direction='column'
-              justify='flex-start'
-              width='100%'
+          <FlexContainer
+            height='600px'
+            direction='column'
+            justify='flex-start'
+            width='100%'
+          >
+            <Text
+              color='primary'
+              onClick={() => setModalContent(null)}
+              curosorPointer
+              margin='0 0 10px 0'
             >
-              <Text
-                color='primary'
-                onClick={() => setModalContent(null)}
-                curosorPointer
-                margin='0 0 10px 0'
-              >
-                ← Go back to options
+              ← Go back to options
             </Text>
-              <Title>{modalContent.title}</Title>
-              <modalContent.content />
-            </FlexContainer>
-          )}
+            <Title>{modalContent.title}</Title>
+            <modalContent.content />
+          </FlexContainer>
+        )}
       </Modal>
       {hasChildren && <Arrow margin='left' />}
     </Container>

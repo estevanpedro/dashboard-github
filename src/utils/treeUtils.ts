@@ -21,6 +21,21 @@ export const findTreeNode = (
   }
 }
 
+export const findNodeParent = (
+  id: string,
+  root: SchemeNodeType,
+  callback: (node: SchemeNodeType) => SchemeNodeType
+): SchemeNodeType | undefined => {
+  if (root.children.some(child => child.id === id)) {
+    return callback(root)
+  }
+
+  for (let n = 0; n < root.children.length; n++) {
+    const node = findTreeNode(id, root.children[n], callback)
+    if (node) return node
+  }
+}
+
 /**
  * Add a passed node to the tree
  * @param {string} id Node to be appended to
@@ -47,7 +62,6 @@ export const addTreeNode = (
  * @param {SchemeNodeType} root Root node
  */
 export const removeTreeNode = (
-  parentId: string,
   id: string,
   root: SchemeNodeType
 ): SchemeNodeType | undefined => {
@@ -55,8 +69,9 @@ export const removeTreeNode = (
 
   const rootCopy = JSON.parse(JSON.stringify(root))
 
-  return findTreeNode(parentId, rootCopy, n => {
-    n.children.filter(child => child.id !== id)
+  return findNodeParent(id, rootCopy, n => {
+    console.log(n, id)
+    n.children = n.children.filter(child => child.id !== id)
     return rootCopy
   })
 }
