@@ -102,24 +102,29 @@ export const VerticalArrow = styled.div`
   background-color: ${props => props.theme.colors.contrast};
 `
 
-export const OptionNode = styled(Node)<OptionNode>`
-  width: 140px;
-  height: 62px;
+export const OptionNode = styled(Node) <OptionNode>`
+  /* width: 100px;
+  height: 100px; */
+  box-shadow: 2px 3px 4px rgba(0, 0, 0, 0);
+  &:active {
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.25);
+  }
   margin-bottom: 10px;
   font-size: ${props => props.theme.fontSize.verySmall};
   img {
-    height: 18px;
+    height: 60px;
     margin-bottom: 4px;
+    margin-top: 10px;
   }
   background-color: ${props => props.theme.colors.secondaryBg};
   color: ${props =>
-    props.primary ? props.theme.colors.primary : props.theme.colors.secondary};
-  border: 2px solid
+    props.primary ? props.theme.colors.contrast : props.theme.colors.secondary};
+  /* border: 2px solid
     ${props =>
-      props.primary
-        ? props.theme.colors.primary
-        : props.theme.colors.secondary};
+    props.primary
+      ? props.theme.colors.primary
+      : props.theme.colors.secondary}; */
   flex-direction: column;
 `
 
-interface OptionNode extends NodeProps {}
+interface OptionNode extends NodeProps { }
