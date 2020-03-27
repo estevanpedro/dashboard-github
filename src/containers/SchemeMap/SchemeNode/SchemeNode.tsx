@@ -56,7 +56,7 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
   const { name: timerName, hours, minutes, seconds } = useSelector(
     (state: RootState) => state.timer
   )
-  const { name: splitName, splits } = useSelector(
+  const { name: splitName, splitAddress, splits } = useSelector(
     (state: RootState) => state.split
   )
   const { name: notifyName, emails } = useSelector(
@@ -90,7 +90,7 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
       }
 
       if (noErrors) {
-        dispatch(addSplit(nodeData, splitName, splits))
+        dispatch(addSplit(nodeData, splitName, splitAddress, splits))
         setOptionsActive(false)
         close()
       }

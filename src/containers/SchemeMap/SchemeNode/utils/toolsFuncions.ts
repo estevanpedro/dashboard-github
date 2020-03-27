@@ -10,6 +10,7 @@ import { SchemeNodeType } from './nodeType'
 export const addSplit = (
   nodeData: SchemeNodeType,
   name: string,
+  splitAddress: string,
   splits: Split[]
 ) => {
   return addNode({
@@ -29,7 +30,7 @@ export const addSplit = (
           },
         }
       }),
-      info: { name },
+      info: { name, splitAddress },
     },
   })
 }

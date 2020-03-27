@@ -46,7 +46,7 @@ const Modal = ({ trigger, children, onSubmit, errors = [] }: Props) => {
           {onSubmit && (
             <FlexContainer
               width='100%'
-              margin='30px 0 0 0 '
+              margin='20% 0 0 0 '
               align='center'
               justify='flex-end'
             >
