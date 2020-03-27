@@ -111,13 +111,9 @@ export const OptionNode = styled(Node) <OptionNode>`
   height: 62px;
   margin-bottom: 10px;
   font-size: ${props => props.theme.fontSize.verySmall};
-  img {
-    height: 18px;
-    margin-bottom: 4px;
-  }
   background-color: ${props => props.theme.colors.secondaryBg};
   color: ${props =>
-    props.primary ? props.theme.colors.primary : props.theme.colors.secondary};
+    props.primary ? props.theme.colors.contrast : props.theme.colors.secondary};
   border: 2px solid
     ${props =>
     props.primary
