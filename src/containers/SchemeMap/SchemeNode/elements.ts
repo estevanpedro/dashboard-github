@@ -107,29 +107,23 @@ export const VerticalArrow = styled.div`
 `
 
 export const OptionNode = styled(Node) <OptionNode>`
-  /* width: 100px;
-  height: 100px; */
-  box-shadow: 2px 3px 4px rgba(0, 0, 0, 0);
-  &:active {
-    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.25);
-  }
+ width: 140px;
+  height: 62px;
   margin-bottom: 10px;
   font-size: ${props => props.theme.fontSize.verySmall};
   img {
-    height: 60px;
+    height: 18px;
     margin-bottom: 4px;
-    margin-top: 10px;
   }
   background-color: ${props => props.theme.colors.secondaryBg};
   color: ${props =>
-    props.primary ? props.theme.colors.contrast : props.theme.colors.secondary};
-  /* border: 2px solid
+    props.primary ? props.theme.colors.primary : props.theme.colors.secondary};
+  border: 2px solid
     ${props =>
     props.primary
       ? props.theme.colors.primary
-      : props.theme.colors.secondary}; */
+      : props.theme.colors.secondary};
   flex-direction: column;
-  padding: 50px 30px;
 `
 
 interface OptionNode extends NodeProps { }
