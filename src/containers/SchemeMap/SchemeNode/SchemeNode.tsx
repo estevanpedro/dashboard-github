@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { RootState } from '../../../redux/rootReducer'
 
-import Button from '../../../components/Button'
 import Modal from '../../../components/Modal'
 import FlexContainer from '../../../components/FlexContainer'
 import Text from '../../../components/Text'
@@ -17,8 +16,8 @@ import {
   Arrow,
   OptionNode,
 } from './elements'
-import options, { NodeOption } from './options'
-import { NodeType, SchemeNodeType } from './utils/nodeType'
+import options, { NodeOption, TitleType } from './options'
+import { SchemeNodeType } from './utils/nodeType'
 import {
   addSplit,
   addTimer,
@@ -34,15 +33,7 @@ interface Props {
 }
 
 interface ModalContent {
-  title:
-    | 'Split'
-    | 'Timer'
-    | 'Notify'
-    | 'Send'
-    | 'Swap'
-    | 'Event'
-    | 'Edit'
-    | 'Delete'
+  title: TitleType
   content: FunctionComponent
 }
 
@@ -67,7 +58,7 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
   )
 
   const ModalFunctions = {
-    Split: async (close: () => void) => {
+    Split: (close: () => void) => {
       const someEmpty = splits.some(split => !split.address || !split.name)
       const shareSum = splits.reduce((split, sum) => {
         return { ...sum, share: split.share + sum.share }
@@ -79,6 +70,7 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last }: Props) => {
         setFormErrors([...formErrors, "Split name can't be empty"])
         noErrors = false
       }
+
       if (someEmpty) {
         setFormErrors([...formErrors, "Adddress and name can't be empty"])
         noErrors = false

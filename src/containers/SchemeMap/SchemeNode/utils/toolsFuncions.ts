@@ -7,6 +7,13 @@ import { Address } from '../../../../redux/ducks/nodeOptions/send'
 
 import { SchemeNodeType } from './nodeType'
 
+/**
+ * Add split helper
+ * @param {SchemeNodeType} nodeData Data from the node to get appended
+ * @param {string} name Split name
+ * @param {string} splitAddress New node address
+ * @param {Split[]} splits Split addresses
+ */
 export const addSplit = (
   nodeData: SchemeNodeType,
   name: string,
@@ -35,6 +42,12 @@ export const addSplit = (
   })
 }
 
+/**
+ * Add Timer helper
+ * @param {nodeData} nodeData Data from the node to get appended
+ * @param {string} name Timer name
+ * @param {timerInfo} timerInfo Timer time
+ */
 export const addTimer = (
   nodeData: SchemeNodeType,
   name: string,
@@ -51,6 +64,12 @@ export const addTimer = (
   })
 }
 
+/**
+ * Add Notify helper
+ * @param {SchemeNodeType} nodeData Data from the node to get appended
+ * @param {string} name Notify name
+ * @param {Email[]} emails Email list
+ */
 export const addNotify = (
   nodeData: SchemeNodeType,
   name: string,
@@ -67,6 +86,12 @@ export const addNotify = (
   })
 }
 
+/**
+ * Add Send helper
+ * @param {SchemeNodeType} nodeData Data from the node to get appended
+ * @param {string} name Send name
+ * @param {Address[]} addresses Addresses list
+ */
 export const addSend = (
   nodeData: SchemeNodeType,
   name: string,
@@ -95,6 +120,10 @@ export const addSend = (
   })
 }
 
+/**
+ * Delete node helper
+ * @param {string} id Deleted node id
+ */
 export const deleteNode = (id: string) => {
   return removeNode({ id })
 }

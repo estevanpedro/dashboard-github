@@ -1,25 +1,18 @@
 import React from 'react'
-import { Option, } from './elements'
+import { Option } from './elements'
 
 interface Props {
-    props?: string
-    onClick?: any
-    color?: string
+  props?: string
+  onClick?: () => void
+  color?: string
 }
 
-const TableOptions = ({
-    props,
-    onClick,
-    color
-}: Props
-) => {
-    return (
-        <Option
-            onClick={onClick}
-            color={color}>
-            {props}
-        </Option>
-    )
+const TableOptions = ({ props, onClick, color }: Props) => {
+  return (
+    <Option onClick={onClick} color={color}>
+      {props}
+    </Option>
+  )
 }
 
 export default TableOptions
