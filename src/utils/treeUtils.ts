@@ -70,7 +70,6 @@ export const removeTreeNode = (
   const rootCopy = JSON.parse(JSON.stringify(root))
 
   return findNodeParent(id, rootCopy, n => {
-    console.log(n, id)
     n.children = n.children.filter(child => child.id !== id)
     return rootCopy
   })

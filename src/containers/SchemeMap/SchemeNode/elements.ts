@@ -11,7 +11,6 @@ interface ContainerProps {
 }
 
 export const Node = styled.button<NodeProps>`
-  /* width: 130px; */
   height: 60px;
   padding: 20px 25px 20px 25px;
   border-radius: 4px;
@@ -71,15 +70,11 @@ const arrowPointerMixin = css`
     border-width: 0 1px 1px 0;
     display: inline-block;
 
-    /* Change this to alter arrow pointer size */
     padding: 3px;
     top: -3px;
 
     transform: rotate(-45deg);
     -webkit-transform: rotate(-45deg);
-    
-    /* transform: rotate(-45deg);
-    -webkit-transform: rotate(-45deg); */
   }
 `
 
@@ -87,7 +82,7 @@ export const RelativeContainer = styled.div`
   position: relative;
 `
 
-export const Arrow = styled.div<{ margin: 'left' | 'right' }>`
+export const Arrow = styled.div<ArrowProps>`
   height: 1px;
   width: 2.5rem;
   margin-right: ${props => props.margin === 'right' && '1rem'};
@@ -95,6 +90,10 @@ export const Arrow = styled.div<{ margin: 'left' | 'right' }>`
 
   ${props => props.margin === 'right' && arrowPointerMixin}
 `
+
+interface ArrowProps {
+  margin: 'left' | 'right'
+}
 
 export const VerticalArrow = styled.div`
   width: 1px;
@@ -106,8 +105,8 @@ export const VerticalArrow = styled.div`
   background-color: ${props => props.theme.colors.contrast};
 `
 
-export const OptionNode = styled(Node) <OptionNode>`
- width: 140px;
+export const OptionNode = styled(Node)`
+  width: 140px;
   height: 62px;
   margin-bottom: 10px;
   font-size: ${props => props.theme.fontSize.verySmall};
@@ -116,10 +115,8 @@ export const OptionNode = styled(Node) <OptionNode>`
     props.primary ? props.theme.colors.contrast : props.theme.colors.secondary};
   border: 2px solid
     ${props =>
-    props.primary
-      ? props.theme.colors.primary
-      : props.theme.colors.secondary};
+      props.primary
+        ? props.theme.colors.primary
+        : props.theme.colors.secondary};
   flex-direction: column;
 `
-
-interface OptionNode extends NodeProps { }

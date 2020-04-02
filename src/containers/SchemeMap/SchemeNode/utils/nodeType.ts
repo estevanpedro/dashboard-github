@@ -11,5 +11,5 @@ export declare type SchemeNodeType = {
   id: string
   type: NodeType
   children: SchemeNodeType[]
-  info: any
+  info: any // TODO: specified info type for each NodeType
 }
