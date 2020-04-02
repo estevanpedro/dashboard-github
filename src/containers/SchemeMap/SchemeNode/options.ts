@@ -10,6 +10,8 @@ import {
   MdDelete,
 } from 'react-icons/md'
 
+import { IconType } from 'react-icons/lib/cjs'
+
 import {
   SplitContent,
   TimerContent,
@@ -34,7 +36,7 @@ export type TitleType =
 export interface NodeOption {
   id: number
   title: TitleType
-  icon: any
+  icon: IconType
   content: FunctionComponent
 }
 

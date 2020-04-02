@@ -1,116 +1,97 @@
 import React, { useState } from 'react'
-import Title from '../../components/Title'
-import Text from '../../components/Text'
-import Input from '../../components/Input'
-import {
-  TableContainner,
-  Menu,
-  Containner,
-  NewButton,
-  InfoText,
-  Area,
-  Select,
-  ButtonConfirm,
-} from './elements'
-import TableTitles from '../../components/Table/TableTitles'
-import TableOptions from '../../components/Table/TableOptions'
-import { MySchemesProps } from './index'
-import Modal from '../../components/Modal'
-import { Link } from '@reach/router'
+import MySchemesTable from './MySchemesTable'
+import Table from '../../components/Table'
 
-const MySchemes = ({
-  Tab,
-  colorBalance,
-  setcolorBalance,
-  colorCurrency,
-  setcolorCurrency,
-  colorTransaction,
-  setColorTransaction,
-  preference,
-  setPreference,
-}: MySchemesProps) => {
-  function ToolFunctions() {
-    return <Title>(TODO) Functions to show components</Title>
+import { LibInfo } from '../Library/types'
+
+const MySchemes = () => {
+  const [colorBalance, setcolorBalance] = useState('')
+  const [colorCurrency, setcolorCurrency] = useState('')
+  const [colorTransaction, setColorTransaction] = useState('#')
+  const [preference, setPreference] = useState('lastTransaction')
+  const [libInfoExample, setLibInfoExample] = useState<LibInfo[]>([
+    {
+      schemeName: 'Mensalidade',
+      schemeCreator: 'Jacinto',
+      lastTransaction: '1583321650000',
+      currency: 'bitcoin',
+      id: 1,
+      userId: 441,
+      public: true,
+      address: 'ASDio2daijA2da21sadasdZxza',
+      balance: 0.0145,
+      payout: 0.0008,
+      serviceFee: true,
+      owners: [
+        {
+          address: 'as454axAsaDFAsdedasdaASDasdASD',
+          size: 50,
+          label: 'Estevan Pedro Wisoczynski Reboledo',
+          paid: 0.001,
+        },
+        {
+          address: 'as454axAsaDFAsdedasdaASDasdASD',
+          size: 50,
+          label: 'Alberte Einstein',
+          paid: 0.001,
+        },
+      ],
+    },
+  ])
+
+  const compareValues = (valueA: number | string, valueB: number | string) => {
+    if (valueA < valueB) return 1
+    if (valueA > valueB) return -1
+    return 0
   }
-  const [schemeName, setSchemeName] = useState('')
-  const [isPublic, setIsPublic] = useState()
-  return (
-    <Containner>
-      <Title>My Schemes</Title>
-      <Menu>
-        <TableOptions
-          props='Balance'
-          color={colorBalance}
-          onClick={() => {
-            setPreference('balance')
-            setcolorBalance(colorBalance ? '' : '#')
-            setcolorCurrency('')
-            setColorTransaction('')
-          }}
-        />
-        <TableOptions
-          props='Currency'
-          color={colorCurrency}
-          onClick={() => {
-            setPreference('currency')
-            setcolorBalance('')
-            setcolorCurrency(colorCurrency ? '' : '#')
-            setColorTransaction('')
-          }}
-        />
-        <TableOptions
-          props='Last Transaction'
-          color={colorTransaction}
-          onClick={() => {
-            setPreference('lastTransaction')
-            setcolorBalance('')
-            setcolorCurrency('')
-            setColorTransaction(colorTransaction ? '' : '#')
-          }}
-        />
-      </Menu>
-      <TableTitles />
-      <TableContainner>{Tab(preference)}</TableContainner>
 
-      <Modal
-        title={'New Scheme'}
-        trigger={<NewButton onClick={() => {}}>New Scheme</NewButton>}
-        children={
-          <Area>
-            <Title>Create new Scheme</Title>
+  const Tab = (preference: string) => {
+    if (preference === 'balance') {
+      libInfoExample.sort((a: LibInfo, b: LibInfo) =>
+        compareValues(a.balance, b.balance)
+      )
 
-            <Input
-              label='Scheme name'
-              value={schemeName}
-              onChange={(e: any) => {
-                setSchemeName(e.target.value)
-              }}
-              type='text'
-            />
-            <InfoText>Private or Public?</InfoText>
-            <Select
-              onChange={(e: any) => {
-                if (e.target.value === 'public') {
-                  setIsPublic(true)
-                } else {
-                  setIsPublic(false)
-                }
-              }}
-            >
-              <option value='public'>Public</option>
-              <option value='private'>Private</option>
-            </Select>
-            <br />
-            <Link
-              to={'/scheme/' + schemeName}
-              state={{ schemeName: schemeName, isPublic: isPublic }}
-            >
-              <ButtonConfirm onClick={() => {}}>Create</ButtonConfirm>
-            </Link>
-          </Area>
+      const balance = libInfoExample.map((info: LibInfo, id: number) => {
+        return <Table splitInfo={info} id={id} />
+      })
+
+      return balance
+    } else if (preference === 'currency') {
+      libInfoExample.sort((a: LibInfo, b: LibInfo) =>
+        compareValues(a.currency, b.currency)
+      )
+
+      const currency = libInfoExample.map((info: LibInfo, id: number) => {
+        return <Table splitInfo={info} id={id} />
+      })
+
+      return currency
+    } else if (preference === 'lastTransaction') {
+      libInfoExample.sort((a: LibInfo, b: LibInfo) =>
+        compareValues(parseInt(a.lastTransaction), parseInt(b.lastTransaction))
+      )
+
+      const lastTransaction = libInfoExample.map(
+        (info: LibInfo, id: number) => {
+          return <Table splitInfo={info} id={id} />
         }
-      />
-    </Containner>
+      )
+
+      return lastTransaction
+    }
+  }
+  return (
+    <MySchemesTable
+      Tab={Tab}
+      colorBalance={colorBalance}
+      setcolorBalance={setcolorBalance}
+      colorCurrency={colorCurrency}
+      setcolorCurrency={setcolorCurrency}
+      colorTransaction={colorTransaction}
+      setColorTransaction={setColorTransaction}
+      preference={preference}
+      setPreference={setPreference}
+    />
   )
 }
 

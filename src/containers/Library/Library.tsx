@@ -2,25 +2,7 @@ import LibraryTable from './LibraryTable'
 import React, { useState } from 'react'
 import Table from '../../components/Table'
 
-interface LibInfo {
-  schemeName: string
-  schemeCreator?: string
-  userId: number
-  balance: number
-  payout: number
-  lastTransaction: string
-  id: number
-  currency: string
-  public: boolean
-  address: string
-  serviceFee: boolean
-  owners: {
-    address: string
-    size: number
-    label: string
-    paid: number
-  }[]
-}
+import { LibInfo } from './types'
 
 const Library = () => {
   const [colorBalance, setcolorBalance] = useState('')

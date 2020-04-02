@@ -5,7 +5,7 @@ import ThemeContext from '../contexts/ThemeContext'
 import designSystem from '../design/designSystem'
 import GlobalStyle from '../design/GlobalStyle'
 
-const ThemeService = ({ children }: { children: any }) => {
+const ThemeService = ({ children }: { children: JSX.Element }) => {
   const [theme, setTheme] = useState<'light' | 'dark'>('dark')
 
   const toggle = () => {
