@@ -16,8 +16,8 @@ import { changeSecretToken } from '../../redux/ducks/auth'
 import { LoginContainer, LoginForm } from './elements'
 
 const Login = () => {
-  const [usernameValue, setUsernameValue] = useState('estevan1234')
-  const [passwordValue, setPasswordValue] = useState('estevan1234')
+  const [usernameValue, setUsernameValue] = useState('')
+  const [passwordValue, setPasswordValue] = useState('')
   const [usernameError, setUsernameError] = useState('')
   const [passwordError, setPasswordError] = useState('')
   const [apiError, setApiError] = useState('')

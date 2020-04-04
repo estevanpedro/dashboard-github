@@ -15,11 +15,11 @@ import { changeSecretToken } from '../../redux/ducks/auth'
 import { SignUpContainer, SignUpForm, ReturnText } from './elements'
 
 const SignUp = () => {
-  const [fullNameValue, setFullNameValue] = useState('estevan1234')
-  const [usernameValue, setUsernameValue] = useState('estevan123')
-  const [emailValue, setEmailValue] = useState('estevan1234@estevan1234.com')
-  const [passwordValue, setPasswordValue] = useState('estevan1234')
-  const [confirmPasswordValue, setConfirmPasswordValue] = useState('estevan1234')
+  const [fullNameValue, setFullNameValue] = useState('')
+  const [usernameValue, setUsernameValue] = useState('')
+  const [emailValue, setEmailValue] = useState('')
+  const [passwordValue, setPasswordValue] = useState('')
+  const [confirmPasswordValue, setConfirmPasswordValue] = useState('')
 
   const [fullNameError, setFullNameError] = useState('')
   const [userNameError, setUsernameError] = useState('')
