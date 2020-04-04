@@ -29,7 +29,7 @@ const App = (): JSX.Element => (
             <Route path='/sign-up' component={SignUp} />
             <Route path='/my-schemes' component={MySchemes} />
             <Route path='/library' component={Library} />
-            {/**  <Route path='/api' component={Api} /> */}
+            <Route path='/api' component={Api} />
             <Route path='/profile' component={Profile} />
             <Route path='/scheme/:schemeId' component={SchemeMap} />
             <Route path='/split-details/:splitId' component={SplitDetails} />

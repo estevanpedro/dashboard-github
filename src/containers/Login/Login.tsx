@@ -5,6 +5,7 @@ import { navigate } from '@reach/router'
 import Button from '../../components/Button'
 import Input from '../../components/Input'
 import Link from '../../components/Link'
+import Error from '../../components/Error'
 
 import { SubTitle } from '../../components/Title'
 
@@ -15,11 +16,11 @@ import { changeSecretToken } from '../../redux/ducks/auth'
 import { LoginContainer, LoginForm } from './elements'
 
 const Login = () => {
-  const [usernameValue, setUsernameValue] = useState('')
-  const [passwordValue, setPasswordValue] = useState('')
+  const [usernameValue, setUsernameValue] = useState('estevanpedro')
+  const [passwordValue, setPasswordValue] = useState('estevan')
   const [usernameError, setUsernameError] = useState('')
   const [passwordError, setPasswordError] = useState('')
-
+  const [apiError, setApiError] = useState('')
   const dispatch = useDispatch()
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -36,8 +37,17 @@ const Login = () => {
 
       try {
         const response = await Api.login(userData)
-        dispatch(changeSecretToken(response.data.secret_token))
-        navigate('/my-schemes')
+        console.log('response login: ', response.data.message)
+        if (response.data.error) {
+          console.log('response.error: ', response.data.error)
+          setApiError(response.error)
+        }
+        if (response.data.access_token) {
+          console.log('response.access_token: ', response.data.access_token)
+          dispatch(changeSecretToken(response.data.access_token))
+          navigate('/my-schemes')
+        }
+
       } catch (e) {
         console.error(e)
       }
@@ -83,6 +93,7 @@ const Login = () => {
           type='password'
           error={passwordError}
         />
+        <Error>{apiError}</Error>
         <Button type='submit' margin='0 0 20px 0'>
           Login
         </Button>

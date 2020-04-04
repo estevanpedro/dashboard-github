@@ -8,17 +8,16 @@ import Link from '../../components/Link'
 import Title from '../../components/Title'
 
 import Api from '../../Api'
-
 import { changeSecretToken } from '../../redux/ducks/auth'
 
 import { SignUpContainer, SignUpForm, ReturnText } from './elements'
 
 const SignUp = () => {
-  const [fullNameValue, setFullNameValue] = useState('')
-  const [usernameValue, setUsernameValue] = useState('')
-  const [emailValue, setEmailValue] = useState('')
-  const [passwordValue, setPasswordValue] = useState('')
-  const [confirmPasswordValue, setConfirmPasswordValue] = useState('')
+  const [fullNameValue, setFullNameValue] = useState('estevan1234')
+  const [usernameValue, setUsernameValue] = useState('estevan123')
+  const [emailValue, setEmailValue] = useState('estevan1234@estevan1234.com')
+  const [passwordValue, setPasswordValue] = useState('estevan1234')
+  const [confirmPasswordValue, setConfirmPasswordValue] = useState('estevan1234')
 
   const [fullNameError, setFullNameError] = useState('')
   const [userNameError, setUsernameError] = useState('')
@@ -42,16 +41,19 @@ const SignUp = () => {
         username: usernameValue,
         password: passwordValue,
       }
-
       try {
-        const response = await Api.createUser(signUpData)
-        dispatch(changeSecretToken(response.data.secret_token))
-        navigate('/profile')
+        const response = await Api.UserSignup(signUpData)
+        if (response.data.access_token) {
+          console.log('response.access_token: ', response.data.access_token)
+          dispatch(changeSecretToken(response.data.access_token))
+          navigate('/profile')
+        }
       } catch (e) {
         console.error(e)
       }
     }
   }
+
 
   const signUpvalidation = () => {
     // TODO: improve signup validation
@@ -128,7 +130,7 @@ const SignUp = () => {
           }
           type='password'
         />
-        <Button type='submit'>Create now</Button>
+        <Button onClick={() => { }} type='submit'>Create now</Button>
         <ReturnText size='regular'>
           If you already have an account, <Link to='/login'>login</Link>
         </ReturnText>
