@@ -7,6 +7,8 @@ import Input from '../../components/Input'
 import Link from '../../components/Link'
 import Title from '../../components/Title'
 
+import Error from '../../components/Error'
+
 import Api from '../../Api'
 import { changeSecretToken } from '../../redux/ducks/auth'
 
@@ -23,6 +25,7 @@ const SignUp = () => {
   const [userNameError, setUsernameError] = useState('')
   const [emailError, setEmailError] = useState('')
   const [passwordError, setPasswordError] = useState('')
+  const [apiError, setApiError] = useState('')
 
   const dispatch = useDispatch()
 
@@ -43,6 +46,9 @@ const SignUp = () => {
       }
       try {
         const response = await Api.UserSignup(signUpData)
+        if (response.data.error) {
+          setApiError(response.data.error)
+        }
         if (response.data.access_token) {
           console.log('response.access_token: ', response.data.access_token)
           dispatch(changeSecretToken(response.data.access_token))
@@ -130,6 +136,7 @@ const SignUp = () => {
           }
           type='password'
         />
+        <Error>{apiError}</Error>
         <Button onClick={() => { }} type='submit'>Create now</Button>
         <ReturnText size='regular'>
           If you already have an account, <Link to='/login'>login</Link>

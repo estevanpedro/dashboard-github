@@ -16,11 +16,12 @@ import { changeSecretToken } from '../../redux/ducks/auth'
 import { LoginContainer, LoginForm } from './elements'
 
 const Login = () => {
-  const [usernameValue, setUsernameValue] = useState('estevanpedro')
-  const [passwordValue, setPasswordValue] = useState('estevan')
+  const [usernameValue, setUsernameValue] = useState('estevan1234')
+  const [passwordValue, setPasswordValue] = useState('estevan1234')
   const [usernameError, setUsernameError] = useState('')
   const [passwordError, setPasswordError] = useState('')
   const [apiError, setApiError] = useState('')
+
   const dispatch = useDispatch()
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -37,10 +38,8 @@ const Login = () => {
 
       try {
         const response = await Api.login(userData)
-        console.log('response login: ', response.data.message)
         if (response.data.error) {
-          console.log('response.error: ', response.data.error)
-          setApiError(response.error)
+          setApiError(response.data.error)
         }
         if (response.data.access_token) {
           console.log('response.access_token: ', response.data.access_token)
