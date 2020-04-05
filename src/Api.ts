@@ -1,5 +1,12 @@
 import axios from 'axios'
 
+// TODO LIST
+// getMySchemes
+// getLibrary
+// logout
+// createScheme
+// updateScheme
+
 class Api {
   url: string
   options: {
@@ -15,9 +22,6 @@ class Api {
     }
   }
 
-
-  // TODO: methods documentation
-
   login = async (userData: {
     username: string
     password: string
@@ -29,14 +33,14 @@ class Api {
         {
           username,
           password,
-        },
-        this.options
-      ).then((response: any) => {
-        console.log('response login: ', response, response.message)
+        }
+      )
+      .then((response: any) => {
+        console.log('response login: ', response)
         return response
       })
       .catch((err) => {
-        console.log('catch err login: ', err.message)
+        console.log('Axios catch err login: ', err.message)
       })
   }
 
@@ -47,9 +51,7 @@ class Api {
     fullname: string
     email: string
   }) => {
-
     const { username, password, fullname, email } = createUserData
-
     return await axios
       .post(
         `${this.url}/signup`,
@@ -61,22 +63,36 @@ class Api {
         },
         {
           validateStatus: (status: any) => {
-            return true // if false -> Error: Request failed with status code 400
+            return true
           },
         }
       )
-      .catch(err => {
-        console.log(err)
-      })
       .then((response: any) => {
         console.log('response of UserSignup: ', response)
         return response
       })
+      .catch(err => {
+        console.log('Axios catch UserSignup: ', err)
+      })
   }
 
   getProfile = async (secretToken: string) => {
-    return await axios.get(`${this.url}/profile?secret_token=${secretToken}`)
+    return await axios
+      .get(`${this.url}/user-details`,
+        {
+          headers: {
+            Authorization: `Bearer ${secretToken}`
+          }
+        })
+      .then((response: any) => {
+        console.log('Trying to getProfile: ', response)
+        return response
+      })
+      .catch((err: any) => {
+        console.log('Axios catch getProfile: ', err)
+      })
   }
 }
+
 
 export default new Api()

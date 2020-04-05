@@ -41,9 +41,8 @@ const Login = () => {
         if (response.data.error) {
           setApiError(response.data.error)
         }
-        if (response.data.access_token) {
-          console.log('response.access_token: ', response.data.access_token)
-          dispatch(changeSecretToken(response.data.access_token))
+        if (response.data.acess_token) {
+          dispatch(changeSecretToken(response.data.acess_token))
           navigate('/my-schemes')
         }
 
