@@ -23,15 +23,7 @@ import {
   DeleteContent,
 } from './ModalContents'
 
-export type TitleType =
-  | 'Split'
-  | 'Timer'
-  | 'Notify'
-  | 'Send'
-  | 'Swap'
-  | 'Event'
-  | 'Edit'
-  | 'Delete'
+export type TitleType = 'Split' | 'Timer' | 'Notify' | 'Send' | 'Swap' | 'Event'
 
 export interface NodeOption {
   id: number
@@ -76,18 +68,6 @@ const options: NodeOption[] = [
     title: 'Event',
     icon: MdEventAvailable,
     content: EventContent,
-  },
-  {
-    id: 7,
-    title: 'Edit',
-    icon: MdModeEdit,
-    content: EditContent,
-  },
-  {
-    id: 8,
-    title: 'Delete',
-    icon: MdDelete,
-    content: DeleteContent,
   },
 ]
 
