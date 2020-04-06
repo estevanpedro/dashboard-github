@@ -8,6 +8,7 @@ const common = {
     small: '18px',
     regular: '20px',
     medium: '22px',
+    xMedium: '24px',
     big: '26px',
     title: '38px',
   },
