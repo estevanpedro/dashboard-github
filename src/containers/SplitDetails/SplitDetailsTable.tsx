@@ -95,6 +95,17 @@ const SplitDetails = ({
             {SplitExample.public ? 'Public' : 'Private'}
           </CategoryName>
         </Category>
+        {
+          SplitExample.public ?
+            <></>
+            :
+            <Link
+              to={`/scheme/${SplitExample.schemeName}`}
+              state={{ schemeName: SplitExample.schemeName, isPublic: true }}
+            >
+              <EditButton>Edit Scheme</EditButton>
+            </Link>
+        }
       </Header>
 
       <Body>
