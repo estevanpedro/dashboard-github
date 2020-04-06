@@ -12,23 +12,25 @@ export default styled.span<TextProps>`
       : props.theme.colors.contrast};
   font-weight: ${props => props.weight || 'regular'};
   cursor: ${props => (props.curosorPointer ? 'pointer' : 'auto')};
+  text-align: ${props => props.align || 'left'};
 `
 
 interface TextProps {
   size?: 'verySmall' | 'small' | 'regular' | 'medium' | 'big' | 'title'
   color?:
-  | 'primary'
-  | 'secondary'
-  | 'background'
-  | 'secondaryBg'
-  | 'contrast'
-  | 'confirm'
-  | 'cancel'
-  | 'white'
-  | 'line'
-  | 'header'
-  | 'contrastOpacity'
+    | 'primary'
+    | 'secondary'
+    | 'background'
+    | 'secondaryBg'
+    | 'contrast'
+    | 'confirm'
+    | 'cancel'
+    | 'white'
+    | 'line'
+    | 'header'
+    | 'contrastOpacity'
   curosorPointer?: boolean
   weight?: 'bold' | 'normal' | 'italic'
   margin?: string
+  align?: 'left' | 'center' | 'right' | 'justify'
 }

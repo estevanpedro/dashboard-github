@@ -12,3 +12,15 @@ export default styled(Link)`
     border-color: ${props => props.theme.colors.secondary};
   }
 `
+
+export const TextLink = styled.a<TextLinkProps>`
+  margin: ${props => props.margin || '0'};
+  font-size: ${props => props.theme.fontSize.regular};
+  color: ${props => props.theme.colors.primary};
+  text-decoration: none;
+  cursor: pointer;
+`
+
+interface TextLinkProps {
+  margin?: string
+}

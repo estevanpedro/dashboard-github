@@ -77,18 +77,6 @@ const options: NodeOption[] = [
     icon: MdEventAvailable,
     content: EventContent,
   },
-  {
-    id: 7,
-    title: 'Edit',
-    icon: MdModeEdit,
-    content: EditContent,
-  },
-  {
-    id: 8,
-    title: 'Delete',
-    icon: MdDelete,
-    content: DeleteContent,
-  },
 ]
 
 export default options
