@@ -6,6 +6,7 @@ import ThemeContext from '../../contexts/ThemeContext'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../redux/rootReducer'
 import { changeSecretToken } from '../../redux/ducks/auth'
+import { MdInvertColors } from 'react-icons/md'
 
 const Navbar = () => {
   const { secretToken } = useSelector((state: RootState) => state.auth)
@@ -38,12 +39,13 @@ const Navbar = () => {
           renderLink(
             <NavLink to={option.to} key={option.id} onClick={() => { Logout(option.id) }}>
               {option.title}
+
             </NavLink>,
             option.needsLogin
           )
         )}
       </LinksWrapper>
-      <ThemeButton onClick={toggle}>Theme</ThemeButton>
+      <ThemeButton onClick={toggle}><MdInvertColors size='30' /></ThemeButton>
     </NavbarContainer>
   )
 }

@@ -95,12 +95,6 @@ const SplitDetails = ({
             {SplitExample.public ? 'Public' : 'Private'}
           </CategoryName>
         </Category>
-        <Link
-          to={`/scheme/${SplitExample.schemeName}`}
-          state={{ schemeName: SplitExample.schemeName, isPublic: true }}
-        >
-          <EditButton>Edit Scheme</EditButton>
-        </Link>
       </Header>
 
       <Body>
@@ -153,7 +147,6 @@ const SplitDetails = ({
         <BottomField>
           <Header>
             <SubTitle>Shares</SubTitle>
-            <IconButton icon={Edit} onClick={() => { }} />
           </Header>
           <TitleField>
             <TableTitle width='60px'>Address</TableTitle>
