@@ -5,6 +5,7 @@ import { navigate } from '@reach/router'
 import Button from '../../components/Button'
 import Input from '../../components/Input'
 import Link from '../../components/Link'
+import Error from '../../components/Error'
 
 import { SubTitle } from '../../components/Title'
 
@@ -19,6 +20,7 @@ const Login = () => {
   const [passwordValue, setPasswordValue] = useState('')
   const [usernameError, setUsernameError] = useState('')
   const [passwordError, setPasswordError] = useState('')
+  const [apiError, setApiError] = useState('')
 
   const dispatch = useDispatch()
 
@@ -36,8 +38,14 @@ const Login = () => {
 
       try {
         const response = await Api.login(userData)
-        dispatch(changeSecretToken(response.data.secret_token))
-        navigate('/my-schemes')
+        if (response.data.error) {
+          setApiError(response.data.error)
+        }
+        if (response.data.acess_token) {
+          dispatch(changeSecretToken(response.data.acess_token))
+          navigate('/my-schemes')
+        }
+
       } catch (e) {
         console.error(e)
       }
@@ -83,6 +91,7 @@ const Login = () => {
           type='password'
           error={passwordError}
         />
+        <Error>{apiError}</Error>
         <Button type='submit' margin='0 0 20px 0'>
           Login
         </Button>

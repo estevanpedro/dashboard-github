@@ -7,8 +7,9 @@ import Input from '../../components/Input'
 import Link from '../../components/Link'
 import Title from '../../components/Title'
 
-import Api from '../../Api'
+import Error from '../../components/Error'
 
+import Api from '../../Api'
 import { changeSecretToken } from '../../redux/ducks/auth'
 
 import { SignUpContainer, SignUpForm, ReturnText } from './elements'
@@ -24,6 +25,7 @@ const SignUp = () => {
   const [userNameError, setUsernameError] = useState('')
   const [emailError, setEmailError] = useState('')
   const [passwordError, setPasswordError] = useState('')
+  const [apiError, setApiError] = useState('')
 
   const dispatch = useDispatch()
 
@@ -42,16 +44,22 @@ const SignUp = () => {
         username: usernameValue,
         password: passwordValue,
       }
-
       try {
-        const response = await Api.createUser(signUpData)
-        dispatch(changeSecretToken(response.data.secret_token))
-        navigate('/profile')
+        const response = await Api.UserSignup(signUpData)
+        if (response.data.error) {
+          setApiError(response.data.error)
+        }
+        if (response.data.acess_token) {
+          console.log('response.access_token: ', response.data.acess_token)
+          dispatch(changeSecretToken(response.data.acess_token))
+          navigate('/profile')
+        }
       } catch (e) {
         console.error(e)
       }
     }
   }
+
 
   const signUpvalidation = () => {
     // TODO: improve signup validation
@@ -128,7 +136,8 @@ const SignUp = () => {
           }
           type='password'
         />
-        <Button type='submit'>Create now</Button>
+        <Error>{apiError}</Error>
+        <Button onClick={() => { }} type='submit'>Create now</Button>
         <ReturnText size='regular'>
           If you already have an account, <Link to='/login'>login</Link>
         </ReturnText>

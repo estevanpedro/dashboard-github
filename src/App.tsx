@@ -5,7 +5,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 import dotenv from 'dotenv'
 
 import store, { persistor } from './redux/store'
-import { Route } from './utils/routerUtils'
+import { Route, LoggedRoute } from './utils/routerUtils'
 
 import Login from './containers/Login'
 import SignUp from './containers/SignUp'
@@ -27,11 +27,11 @@ const App = (): JSX.Element => (
           <Router id='router-container'>
             <Route path='/login' component={Login} />
             <Route path='/sign-up' component={SignUp} />
-            <Route path='/my-schemes' component={MySchemes} />
+            <LoggedRoute path='/my-schemes' component={MySchemes} />
             <Route path='/library' component={Library} />
             <Route path='/api' component={Api} />
-            <Route path='/profile' component={Profile} />
-            <Route path='/scheme/:schemeId' component={SchemeMap} />
+            <LoggedRoute path='/profile' component={Profile} />
+            <LoggedRoute path='/scheme/:schemeId' component={SchemeMap} />
             <Route path='/split-details/:splitId' component={SplitDetails} />
             {/* <Route path="/" component={}/> */}
           </Router>
