@@ -23,15 +23,7 @@ import {
   DeleteContent,
 } from './ModalContents'
 
-export type TitleType =
-  | 'Split'
-  | 'Timer'
-  | 'Notify'
-  | 'Send'
-  | 'Swap'
-  | 'Event'
-  | 'Edit'
-  | 'Delete'
+export type TitleType = 'Split' | 'Timer' | 'Notify' | 'Send' | 'Swap' | 'Event'
 
 export interface NodeOption {
   id: number

@@ -10,6 +10,7 @@ import {
 } from '../../../components'
 
 import { SchemeNodeType } from '../SchemeNode/utils/nodeType'
+
 import { MenuContainer } from './elements'
 import MenuOptions from './MenuOptions'
 
@@ -27,12 +28,11 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
 
   const renderMenu = () => {
     if (nodeInfo) {
-      const { type, info, children } = nodeInfo
+      const { info, children } = nodeInfo
       if (isOptionsVisible) {
         return (
           <MenuOptions
-            nodeName={info.name}
-            nodeType={type}
+            data={nodeInfo}
             returnToInfo={() => setIsOptionsVisible(false)}
           />
         )

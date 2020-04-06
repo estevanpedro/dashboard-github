@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { RouteComponentProps, NavigateOptions } from '@reach/router'
+import ScrollContainer from 'react-indiana-drag-scroll'
 
 import Button from '../../components/Button'
 import FlexContainer from '../../components/FlexContainer'
@@ -10,7 +11,7 @@ import { RootState } from '../../redux/rootReducer'
 
 import SchemeNode from './SchemeNode'
 import NodeMenu from './NodeMenu'
-import { SchemeContainer } from './elements'
+import { SchemeContainer, OverflowContainer } from './elements'
 import { SchemeNodeType } from './SchemeNode/utils/nodeType'
 
 interface NodeColumnProps {
@@ -68,19 +69,23 @@ const SchemeMap = ({ location }: Props & RouteComponentProps) => {
       </FlexContainer>
 
       <SchemeContainer>
-        <FlexContainer
-          width='82%'
-          height='100%'
-          overflow='scroll'
-          justify='flex-start'
-        >
-          <NodeColumn
-            rootNode={rootNode}
-            ignoreLeftArrow={true}
-            last={true}
-            setNodeInfo={setMenuInfo}
-          />
-        </FlexContainer>
+        <ScrollContainer style={{ height: '100%', width: '100%' }}>
+          <FlexContainer
+            width='500%'
+            height='500%'
+            justify='flex-start'
+            position='relative'
+            top='10%'
+            left='5%'
+          >
+            <NodeColumn
+              rootNode={rootNode}
+              ignoreLeftArrow={true}
+              last={true}
+              setNodeInfo={setMenuInfo}
+            />
+          </FlexContainer>
+        </ScrollContainer>
         <NodeMenu nodeInfo={menuInfo} updateMenuInfo={setMenuInfo} />
       </SchemeContainer>
     </>
