@@ -42,11 +42,12 @@ const Table = ({
                 </Colunm>
 
                 <Colunm width={'50px'}>
-                    <Link to={'/split-details/' + splitInfo.id} >
+                    <Link
+                        to={'/split-details/' + splitInfo.id}>
                         <IconButton
                             icon={Arrow}
                             onClick={() => {
-                                console.log('/split-details/', splitInfo.id)
+                                console.log('schemeId', splitInfo.id)
                             }}
                         />
                     </Link>

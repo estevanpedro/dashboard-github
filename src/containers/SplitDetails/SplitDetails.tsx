@@ -1,7 +1,13 @@
 import SplitDetailsTable from './SplitDetailsTable'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { ValuesField, TableText, BalanceText } from './elements'
-import { RouteComponentProps } from '@reach/router'
+import { RouteComponentProps, NavigateOptions } from '@reach/router'
+
+import Api from '../../Api'
+import { useSelector, useDispatch } from 'react-redux'
+import { RootState } from '../../redux/rootReducer'
+
+// TODO // import { updateSplitDetails } from '../../redux/ducks/splitDetails'
 
 const SplitExample = {
   schemeName: 'Mensalidade',
@@ -62,16 +68,34 @@ const historyExample = [
   },
 ]
 
-interface Props {
-  splitId?: number
-}
+// interface Props {
+//   splitId?: any
+// }
 
-const SplitDetails = ({ splitId }: Props & RouteComponentProps) => {
-  /**
-    TODO: API FUNCTION TO GET THE SPLIT HISTORY AND THE SPLIT DETAILS --
-    GET ALL TRANSACTION FROM USER ID
-    RESPONSE EQUAL TO SplitExample and historyExample
-    */
+const SplitDetails = (props: any) => {
+
+  const dispatch = useDispatch()
+  const [schemeId, setSchemeId] = useState(props.schemeId) // splitId is coming from the Library or from the MyScheme throuth routes
+  const [splitDetails, setSplitDetails] = useState<any[]>([]) // Need to connect splitDetails to the component...
+  const { secretToken } = useSelector((state: RootState) => state.auth)
+
+  useEffect(() => {
+    const fetchSplitDetails = async () => {
+      const detailsData = {
+        secretToken,
+        schemeId
+      }
+      try {
+        const response = await Api.splitDetails(detailsData)
+        setSplitDetails(response.data.schemes)
+        // dispatch(updateSplitDetails(response.data.schemes))
+      } catch (e) {
+        console.error(e)
+      }
+    }
+    fetchSplitDetails()
+  }, [dispatch, props.splitId])
+
 
   function createTransList() {
     const Table = ({ info, id }: { info: any; id: number }) => {

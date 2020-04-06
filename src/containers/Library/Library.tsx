@@ -55,7 +55,7 @@ const Library = () => {
       try {
         const response = await Api.getLibrary()
 
-        setLibrary(response.data.schemes)
+        setLibrary(response.data)
 
         // dispatch(updateLibrary(response.data.schemes))
       } catch (e) {
@@ -78,8 +78,8 @@ const Library = () => {
         compareValues(a.balance, b.balance)
       )
 
-      const balance = libInfoExample.map((info: LibInfo, id: number) => {
-        return <Table splitInfo={info} id={id} />
+      const balance = libInfoExample.map((info: LibInfo, id: number, key: any) => {
+        return <Table splitInfo={info} id={id} key={key} />
       })
 
       return balance
@@ -88,8 +88,8 @@ const Library = () => {
         compareValues(a.currency, b.currency)
       )
 
-      const currency = libInfoExample.map((info: LibInfo, id: number) => {
-        return <Table splitInfo={info} id={id} />
+      const currency = libInfoExample.map((info: LibInfo, id: number, key: any) => {
+        return <Table splitInfo={info} id={id} key={key} />
       })
 
       return currency
@@ -99,8 +99,8 @@ const Library = () => {
       )
 
       const lastTransaction = libInfoExample.map(
-        (info: LibInfo, id: number) => {
-          return <Table splitInfo={info} id={id} />
+        (info: LibInfo, id: number, key: any) => {
+          return <Table splitInfo={info} id={id} key={key} />
         }
       )
 

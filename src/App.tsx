@@ -32,7 +32,7 @@ const App = (): JSX.Element => (
             <Route path='/api' component={Api} />
             <LoggedRoute path='/profile' component={Profile} />
             <LoggedRoute path='/scheme/:schemeId' component={SchemeMap} />
-            <Route path='/split-details/:splitId' component={SplitDetails} />
+            <Route path='/split-details/:schemeId' component={SplitDetails} />
             {/* <Route path="/" component={}/> */}
           </Router>
         </PersistGate>

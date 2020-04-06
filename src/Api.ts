@@ -93,7 +93,7 @@ class Api {
       })
   }
 
-  // API RESPONSE INCOMPLETE
+  // API INCOMPLETE
   getLibrary = async () => {
     return await axios
       .get(`${this.url}/library`)
@@ -106,7 +106,7 @@ class Api {
       })
   }
 
-  // API RESPONSE INCOMPLETE
+  // API INCOMPLETE
   getMySchemes = async (secretToken: string) => {
     return await axios
       .get(`${this.url}/scheme`,
@@ -166,35 +166,45 @@ class Api {
       json: any
     }) => {
     return await axios
-      .post(`${this.url}/scheme/${schemeId}`,
+      .patch(`${this.url}/scheme/${schemeId}`,
         json,
         {
           headers: { Authorization: `Bearer ${secretToken}` }
         },
       )
       .then((response: any) => {
-        console.log('Trying to createScheme: ', response)
+        console.log('Trying to updateScheme: ', response)
         return response
       })
       .catch((err: any) => {
-        console.log('Axios catch createScheme error: ', err)
+        console.log('Axios catch updateScheme error: ', err)
       })
   }
 
-  // THIS AXIOS WAS NOT TESTED... API INCOMPLETE
-  splitDetails = async ({ secretToken, schemeId, }: { secretToken: string; schemeId: any }) => {
+  // Need to configure the API endpoint to accpect id, right now, it only accepts _id.
+  // This endpoint is used to get de history transactions of an specific scheme, utilizing the scheme to get it, 
+  // it should show only the transaction history of the first split of a scheme. 
+  splitDetails = async (detailsData: { secretToken: string; schemeId: any }) => {
+
+    const { secretToken, schemeId } = detailsData
+
+    const schemeIdAnNotExample = '5e8b29421ce06e5bc5892eff'
+
     return await axios
-      .post(`${this.url}/scheme/${schemeId}`,
+      .get(`${this.url}/scheme/${schemeIdAnNotExample}`,
         {
-          headers: { Authorization: `Bearer ${secretToken}` }
+          headers: {
+            Authorization: `Bearer ${secretToken}`,
+            'Access-Control-Allow-Origin': '*',
+          }
         },
       )
       .then((response: any) => {
-        console.log('Trying to createScheme: ', response)
+        console.log('Trying to splitDetails: ', response)
         return response
       })
       .catch((err: any) => {
-        console.log('Axios catch createScheme error: ', err)
+        console.log('Axios catch splitDetails error: ', err)
       })
   }
 
