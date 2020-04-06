@@ -92,6 +92,112 @@ class Api {
         console.log('Axios catch getProfile: ', err)
       })
   }
+
+  // API RESPONSE INCOMPLETE
+  getLibrary = async () => {
+    return await axios
+      .get(`${this.url}/library`)
+      .then((response: any) => {
+        console.log('Trying to getLibrary: ', response)
+        return response
+      })
+      .catch((err: any) => {
+        console.log('Axios catch getLibrary error:', err)
+      })
+  }
+
+  // API RESPONSE INCOMPLETE
+  getMySchemes = async (secretToken: string) => {
+    return await axios
+      .get(`${this.url}/scheme`,
+        {
+          headers: {
+            Authorization: `Bearer ${secretToken}`
+          }
+        }
+      )
+      .then((response: any) => {
+        console.log('Trying to getMySchemes: ', response)
+        return response
+      })
+      .catch((err: any) => {
+        console.log('Axios catch getMySchemes error: ', err)
+      })
+  }
+
+  // THIS AXIOS WAS NOT TESTED... API INCOMPLETE
+  createScheme = async (
+    {
+      secretToken,
+      json,
+    }:
+      {
+        secretToken: string;
+        json: any
+      }
+  ) => {
+    return await axios
+      .post(`${this.url}/scheme`,
+        {
+          headers: {
+            Authorization: `Bearer ${secretToken}`
+          }
+        },
+        json
+      )
+      .then((response: any) => {
+        console.log('Trying to createScheme: ', response)
+        return response
+      })
+      .catch((err: any) => {
+        console.log('Axios catch createScheme error: ', err)
+      })
+  }
+
+  // THIS AXIOS WAS NOT TESTED... API INCOMPLETE
+  updateScheme = async (
+    {
+      secretToken,
+      schemeId,
+      json,
+    }: {
+      secretToken: string;
+      schemeId: any;
+      json: any
+    }) => {
+    return await axios
+      .post(`${this.url}/scheme/${schemeId}`,
+        json,
+        {
+          headers: { Authorization: `Bearer ${secretToken}` }
+        },
+      )
+      .then((response: any) => {
+        console.log('Trying to createScheme: ', response)
+        return response
+      })
+      .catch((err: any) => {
+        console.log('Axios catch createScheme error: ', err)
+      })
+  }
+
+  // THIS AXIOS WAS NOT TESTED... API INCOMPLETE
+  splitDetails = async ({ secretToken, schemeId, }: { secretToken: string; schemeId: any }) => {
+    return await axios
+      .post(`${this.url}/scheme/${schemeId}`,
+        {
+          headers: { Authorization: `Bearer ${secretToken}` }
+        },
+      )
+      .then((response: any) => {
+        console.log('Trying to createScheme: ', response)
+        return response
+      })
+      .catch((err: any) => {
+        console.log('Axios catch createScheme error: ', err)
+      })
+  }
+
 }
 
 

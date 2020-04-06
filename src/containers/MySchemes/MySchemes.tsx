@@ -1,6 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import MySchemesTable from './MySchemesTable'
 import Table from '../../components/Table'
+
+import Api from '../../Api'
+import { useSelector, useDispatch } from 'react-redux'
+import { RootState } from '../../redux/rootReducer'
+
+// TODO // import { updateMySchemes } from '../../redux/ducks/mySchemes'
 
 import { LibInfo } from '../Library/types'
 
@@ -38,6 +44,28 @@ const MySchemes = () => {
       ],
     },
   ])
+
+
+  // TODO connect with the component and with redux...
+  const dispatch = useDispatch()
+  const [mySchemes, setMySchemes] = useState<any[]>([])
+  const { secretToken } = useSelector((state: RootState) => state.auth)
+
+  useEffect(() => {
+    const fetchMySchemes = async () => {
+      try {
+        const response = await Api.getMySchemes(secretToken)
+
+        setMySchemes(response.data.schemes)
+
+        // dispatch(updateMySchemes(response.data.schemes))
+      } catch (e) {
+        console.error(e)
+      }
+    }
+    fetchMySchemes()
+  }, [dispatch])
+
 
   const compareValues = (valueA: number | string, valueB: number | string) => {
     if (valueA < valueB) return 1

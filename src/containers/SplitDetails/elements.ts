@@ -98,7 +98,7 @@ export const ValuesField = styled.div<ValuesProps>`
     props.pair ? props.theme.colors.grey : props.theme.colors.secondaryBg};
 `
 
-export const TableTitle = styled(Text)<WidthProps>`
+export const TableTitle = styled(Text) <WidthProps>`
   color: ${props => props.theme.colors.contrast};
   font-size: 16px;
   /* padding: 0 10px 0 10px;  */
@@ -106,7 +106,7 @@ export const TableTitle = styled(Text)<WidthProps>`
   width: ${props => (props.width ? props.width : '')};
 `
 
-export const TableText = styled(Text)<WidthProps>`
+export const TableText = styled(Text) <WidthProps>`
   color: ${props => props.theme.colors.contrast};
   font-size: 14px;
   width: ${props => (props.width ? props.width : '')};
@@ -115,7 +115,7 @@ interface WidthProps {
   width?: string
 }
 
-export const BalanceText = styled(Text)<WidthProps>`
+export const BalanceText = styled(Text) <WidthProps>`
   color: ${props => props.theme.colors.confirm};
   font-size: 14px;
   position: initial;

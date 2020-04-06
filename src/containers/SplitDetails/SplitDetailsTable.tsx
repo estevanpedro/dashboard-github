@@ -153,7 +153,7 @@ const SplitDetails = ({
         <BottomField>
           <Header>
             <SubTitle>Shares</SubTitle>
-            <IconButton icon={Edit} onClick={() => {}} />
+            <IconButton icon={Edit} onClick={() => { }} />
           </Header>
           <TitleField>
             <TableTitle width='60px'>Address</TableTitle>
