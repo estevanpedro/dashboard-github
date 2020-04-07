@@ -15,19 +15,10 @@ export interface SchemeMapState {
 const initialState: SchemeMapState = {
   rootNode: {
     id: '0',
-    type: 'split',
-    children: [
-      {
-        id: '1',
-        type: 'address',
-        children: [],
-        info: {
-          name: 'Address 0',
-        },
-      },
-    ],
+    type: 'root',
+    children: [],
     info: {
-      name: 'Split',
+      name: 'root',
     },
   },
 }

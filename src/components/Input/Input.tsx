@@ -11,6 +11,7 @@ interface Props {
   placeholder?: string
   marginBottom?: number
   min?: number
+  name?: string
 }
 
 const Input = ({
@@ -23,6 +24,7 @@ const Input = ({
   error,
   marginBottom,
   min,
+  name,
 }: Props) => {
   const [isFocused, setIsFocused] = useState(false)
 
@@ -38,6 +40,7 @@ const Input = ({
         isFocused={isFocused}
         type={type}
         min={min}
+        name={name}
       />
       {error && error.length && <Error>{error}</Error>}
     </Container>

@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+import { SchemeInfo } from './apiTypes'
+
 // TODO LIST
 // getMySchemes
 // getLibrary
@@ -22,28 +24,21 @@ class Api {
     }
   }
 
-  login = async (userData: {
-    username: string
-    password: string
-  }) => {
+  login = async (userData: { username: string; password: string }) => {
     const { username, password } = userData
     return await axios
-      .post(
-        `${this.url}/login`,
-        {
-          username,
-          password,
-        }
-      )
+      .post(`${this.url}/login`, {
+        username,
+        password,
+      })
       .then((response: any) => {
         console.log('response login: ', response)
         return response
       })
-      .catch((err) => {
+      .catch(err => {
         console.log('Axios catch err login: ', err.message)
       })
   }
-
 
   UserSignup = async (createUserData: {
     username: string
@@ -78,12 +73,11 @@ class Api {
 
   getProfile = async (secretToken: string) => {
     return await axios
-      .get(`${this.url}/user-details`,
-        {
-          headers: {
-            Authorization: `Bearer ${secretToken}`
-          }
-        })
+      .get(`${this.url}/user-details`, {
+        headers: {
+          Authorization: `Bearer ${secretToken}`,
+        },
+      })
       .then((response: any) => {
         console.log('Trying to getProfile: ', response)
         return response
@@ -109,13 +103,11 @@ class Api {
   // API INCOMPLETE
   getMySchemes = async (secretToken: string) => {
     return await axios
-      .get(`${this.url}/scheme`,
-        {
-          headers: {
-            Authorization: `Bearer ${secretToken}`
-          }
-        }
-      )
+      .get(`${this.url}/scheme`, {
+        headers: {
+          Authorization: `Bearer ${secretToken}`,
+        },
+      })
       .then((response: any) => {
         console.log('Trying to getMySchemes: ', response)
         return response
@@ -126,25 +118,14 @@ class Api {
   }
 
   // THIS AXIOS WAS NOT TESTED... API INCOMPLETE
-  createScheme = async (
-    {
-      secretToken,
-      json,
-    }:
-      {
-        secretToken: string;
-        json: any
-      }
-  ) => {
+  createScheme = async (secretToken: string, newSchemeInfo: SchemeInfo) => {
     return await axios
-      .post(`${this.url}/scheme`,
-        {
-          headers: {
-            Authorization: `Bearer ${secretToken}`
-          }
+      .post(`${this.url}/scheme`, newSchemeInfo, {
+        headers: {
+          Authorization: `Bearer ${secretToken}`,
         },
-        json
-      )
+      })
+
       .then((response: any) => {
         console.log('Trying to createScheme: ', response)
         return response
@@ -155,23 +136,19 @@ class Api {
   }
 
   // THIS AXIOS WAS NOT TESTED... API INCOMPLETE
-  updateScheme = async (
-    {
-      secretToken,
-      schemeId,
-      json,
-    }: {
-      secretToken: string;
-      schemeId: any;
-      json: any
-    }) => {
+  updateScheme = async ({
+    secretToken,
+    schemeId,
+    json,
+  }: {
+    secretToken: string
+    schemeId: any
+    json: any
+  }) => {
     return await axios
-      .patch(`${this.url}/scheme/${schemeId}`,
-        json,
-        {
-          headers: { Authorization: `Bearer ${secretToken}` }
-        },
-      )
+      .patch(`${this.url}/scheme/${schemeId}`, json, {
+        headers: { Authorization: `Bearer ${secretToken}` },
+      })
       .then((response: any) => {
         console.log('Trying to updateScheme: ', response)
         return response
@@ -182,23 +159,23 @@ class Api {
   }
 
   // Need to configure the API endpoint to accpect id, right now, it only accepts _id.
-  // This endpoint is used to get de history transactions of an specific scheme, utilizing the scheme to get it, 
-  // it should show only the transaction history of the first split of a scheme. 
-  splitDetails = async (detailsData: { secretToken: string; schemeId: any }) => {
-
+  // This endpoint is used to get de history transactions of an specific scheme, utilizing the scheme to get it,
+  // it should show only the transaction history of the first split of a scheme.
+  splitDetails = async (detailsData: {
+    secretToken: string
+    schemeId: any
+  }) => {
     const { secretToken, schemeId } = detailsData
 
     const schemeIdAnNotExample = '5e8b29421ce06e5bc5892eff'
 
     return await axios
-      .get(`${this.url}/scheme/${schemeIdAnNotExample}`,
-        {
-          headers: {
-            Authorization: `Bearer ${secretToken}`,
-            'Access-Control-Allow-Origin': '*',
-          }
+      .get(`${this.url}/scheme/${schemeIdAnNotExample}`, {
+        headers: {
+          Authorization: `Bearer ${secretToken}`,
+          'Access-Control-Allow-Origin': '*',
         },
-      )
+      })
       .then((response: any) => {
         console.log('Trying to splitDetails: ', response)
         return response
@@ -207,8 +184,6 @@ class Api {
         console.log('Axios catch splitDetails error: ', err)
       })
   }
-
 }
-
 
 export default new Api()

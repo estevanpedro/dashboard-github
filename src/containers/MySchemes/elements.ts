@@ -30,49 +30,54 @@ interface OptionProps {
   isFocused?: boolean
 }
 export const NewButton = styled.button`
-    display: flex;
-    background-color: ${props => props.theme.colors.secondary};
-    color: white;
-    font-size: 18px;
-    padding: 5px 15px 5px 15px;
-    align-self: center;
-    border-radius: 2px;
-    justify-self: flex-end;
-    margin: 30px 40px 0 5px;
+  display: flex;
+  background-color: ${props => props.theme.colors.secondary};
+  color: white;
+  font-size: 18px;
+  padding: 5px 15px 5px 15px;
+  align-self: center;
+  border-radius: 2px;
+  justify-self: flex-end;
+  margin: 30px 40px 0 5px;
 `
 export const InfoText = styled.p`
   color: ${props => props.theme.colors.contrast};
   font-size: 18px;
-  margin: 10px 0px 10px 0px;
+  margin-bottom: 20px;
 `
 export const Input = styled.input`
-    display: flex;
-    color: white;
-    font-size: 18px;
-    align-self: center;
-    border-radius: 2px;
-    justify-self: flex-end;
-    border-radius: 5px;
-    margin: 10px 0px 10px 0px;
+  display: flex;
+  color: white;
+  font-size: 18px;
+  align-self: center;
+  border-radius: 2px;
+  justify-self: flex-end;
+  border-radius: 5px;
+  margin-bottom: 20px;
 `
 export const Area = styled.div`
   justify-content: center;
   align-self: center;
-  align-items:center;
+  align-items: center;
   /* border: 1px solid white; */
   padding: 30px;
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `
+
 export const Select = styled.select`
-justify-content: center;
-align-self: center;
-align-items:center;
-margin: 10px 0px 20px 0px;
+  width: 100px;
+  background-color: transparent;
+  border: 2px solid ${props => props.theme.colors.primary};
+  border-radius: 4px;
+  color: ${props => props.theme.colors.contrast};
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  option {
+    padding: 20px;
+  }
 `
-
-export const ButtonConfirm = styled(Button)`
-justify-content: center;
-align-self: center;
-align-items:center;
-margin: 10px 0px 20px 0px;
-`
-

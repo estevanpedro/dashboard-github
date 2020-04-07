@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import React from 'react'
 
 import {
   Container,
@@ -30,6 +30,9 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last, onClick }: Props) => {
 
       case 'address':
         return 'address'
+
+      case 'root':
+        return 'root'
 
       default:
         return

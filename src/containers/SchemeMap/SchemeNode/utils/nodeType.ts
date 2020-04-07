@@ -1,4 +1,5 @@
 export type NodeType =
+  | 'root'
   | 'split'
   | 'timer'
   | 'notify'

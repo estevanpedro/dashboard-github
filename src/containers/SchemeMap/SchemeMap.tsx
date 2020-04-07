@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { RouteComponentProps, NavigateOptions } from '@reach/router'
 import ScrollContainer from 'react-indiana-drag-scroll'
@@ -8,10 +8,11 @@ import FlexContainer from '../../components/FlexContainer'
 import Title from '../../components/Title'
 
 import { RootState } from '../../redux/rootReducer'
+import Api from '../../Api'
 
 import SchemeNode from './SchemeNode'
 import NodeMenu from './NodeMenu'
-import { SchemeContainer, OverflowContainer } from './elements'
+import { SchemeContainer } from './elements'
 import { SchemeNodeType } from './SchemeNode/utils/nodeType'
 
 interface NodeColumnProps {
@@ -25,9 +26,18 @@ interface Props {
   location?: NavigateOptions<{ schemeName: string }>
 }
 
-const SchemeMap = ({ location }: Props & RouteComponentProps) => {
+const SchemeMap = ({ location, ...props }: Props & RouteComponentProps) => {
   const { rootNode } = useSelector((state: RootState) => state.schemeMap)
   const [menuInfo, setMenuInfo] = useState<SchemeNodeType | null>(null)
+
+  useEffect(() => {
+    const fetchScheme = async () => {
+      const id = props.schemeId
+      const response = await Api.splitDetails(id)
+      console.log(response)
+    }
+    fetchScheme()
+  }, [])
 
   const handleSave = () => {
     // TODO: API INTEGRATION
@@ -65,7 +75,9 @@ const SchemeMap = ({ location }: Props & RouteComponentProps) => {
     <>
       <FlexContainer width='100%' justify='space-between'>
         <Title>{location && location.state && location.state.schemeName}</Title>
-        <Button onClick={handleSave}>Save</Button>
+        <Button onClick={handleSave} margin='0 0 20px 0'>
+          Save
+        </Button>
       </FlexContainer>
 
       <SchemeContainer>

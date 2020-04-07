@@ -41,6 +41,11 @@ export const Node = styled.button<NodeProps>`
     color: ${props => props.theme.colors.contrast};
     font-weight: normal;
   }
+  &.root {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+  }
 `
 
 export interface NodeProps {
