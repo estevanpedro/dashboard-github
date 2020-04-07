@@ -45,7 +45,6 @@ const MySchemes = () => {
     },
   ])
 
-
   // TODO connect with the component and with redux...
   const dispatch = useDispatch()
   const [mySchemes, setMySchemes] = useState<any[]>([])
@@ -58,7 +57,7 @@ const MySchemes = () => {
 
         setMySchemes(response.data)
 
-        // dispatch(updateMySchemes(response.data.schemes))
+        setMySchemes(response.data)
       } catch (e) {
         console.error(e)
       }
@@ -66,51 +65,60 @@ const MySchemes = () => {
     fetchMySchemes()
   }, [dispatch])
 
-
   const compareValues = (valueA: number | string, valueB: number | string) => {
     if (valueA < valueB) return 1
     if (valueA > valueB) return -1
     return 0
   }
 
-  const Tab = (preference: string) => {
-    if (preference === 'balance') {
-      libInfoExample.sort((a: LibInfo, b: LibInfo) =>
-        compareValues(a.balance, b.balance)
-      )
+  // const Tab = (preference: string) => {
+  //   if (preference === 'balance') {
+  //     libInfoExample.sort((a: LibInfo, b: LibInfo) =>
+  //       compareValues(a.balance, b.balance)
+  //     )
 
-      const balance = libInfoExample.map((info: LibInfo, id: number, key: any) => {
-        return <Table splitInfo={info} id={id} key={key} />
-      })
+  //     const balance = libInfoExample.map(
+  //       (info: LibInfo, id: number, key: any) => {
+  //         return <Table splitInfo={info} id={id} key={key} />
+  //       }
+  //     )
 
-      return balance
-    } else if (preference === 'currency') {
-      libInfoExample.sort((a: LibInfo, b: LibInfo) =>
-        compareValues(a.currency, b.currency)
-      )
+  //     return balance
+  //   } else if (preference === 'currency') {
+  //     libInfoExample.sort((a: LibInfo, b: LibInfo) =>
+  //       compareValues(a.currency, b.currency)
+  //     )
 
-      const currency = libInfoExample.map((info: LibInfo, id: number, key: any) => {
-        return <Table splitInfo={info} id={id} key={key} />
-      })
+  //     const currency = libInfoExample.map(
+  //       (info: LibInfo, id: number, key: any) => {
+  //         return <Table splitInfo={info} id={id} key={key} />
+  //       }
+  //     )
 
-      return currency
-    } else if (preference === 'lastTransaction') {
-      libInfoExample.sort((a: LibInfo, b: LibInfo) =>
-        compareValues(parseInt(a.lastTransaction), parseInt(b.lastTransaction))
-      )
+  //     return currency
+  //   } else if (preference === 'lastTransaction') {
+  //     libInfoExample.sort((a: LibInfo, b: LibInfo) =>
+  //       compareValues(parseInt(a.lastTransaction), parseInt(b.lastTransaction))
+  //     )
 
-      const lastTransaction = libInfoExample.map(
-        (info: LibInfo, id: number, key: any) => {
-          return <Table splitInfo={info} id={id} key={key} />
-        }
-      )
+  //     const lastTransaction = libInfoExample.map(
+  //       (info: LibInfo, id: number, key: any) => {
+  //         return <Table splitInfo={info} id={id} key={key} />
+  //       }
+  //     )
 
-      return lastTransaction
-    }
+  //     return lastTransaction
+  //   }
+  // }
+
+  const handleTab = () => {
+    return mySchemes.map((info: any, i: number) => (
+      <Table splitInfo={info} id={i} />
+    ))
   }
   return (
     <MySchemesTable
-      Tab={Tab}
+      Tab={handleTab}
       colorBalance={colorBalance}
       setcolorBalance={setcolorBalance}
       colorCurrency={colorCurrency}
