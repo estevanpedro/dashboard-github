@@ -3,8 +3,8 @@ import styled, { keyframes } from 'styled-components'
 export const LoadingContainer = styled.div<LoadingContainerProps>`
   position: fixed;
   width: 100%;
-  height: 100%;
-  top: 0;
+  height: calc(100% - 60px);
+  top: 60px;
   left: 0;
   background-color: ${props => props.theme.colors.background};
   z-index: 1000;

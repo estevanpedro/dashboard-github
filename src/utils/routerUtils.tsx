@@ -21,6 +21,7 @@ export const Route: FunctionComponent<Props> = ({
     <>
       <Navbar />
       <Container>
+        <Loading />
         <Component {...rest} />
       </Container>
     </>
