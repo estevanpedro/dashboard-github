@@ -75,7 +75,7 @@ const historyExample = [
 const SplitDetails = (props: any) => {
   const dispatch = useDispatch()
   const [schemeId, setSchemeId] = useState(props.schemeId) // splitId is coming from the Library or from the MyScheme throuth routes
-  const [splitDetails, setSplitDetails] = useState<any[]>([]) // Need to connect splitDetails to the component...
+  const [schemeDetails, setSchemeDetails] = useState<any[]>([]) // Need to connect splitDetails to the component...
   const { secretToken } = useSelector((state: RootState) => state.auth)
 
   useEffect(() => {
@@ -86,7 +86,7 @@ const SplitDetails = (props: any) => {
       }
       try {
         const response = await Api.splitDetails(detailsData)
-        setSplitDetails(response.data)
+        setSchemeDetails(response.data)
         // dispatch(updateSplitDetails(response.data.schemes))
       } catch (e) {
         console.error(e)
@@ -151,7 +151,7 @@ const SplitDetails = (props: any) => {
 
   return (
     <SplitDetailsTable
-      schemeDetails={splitDetails}
+      schemeDetails={schemeDetails}
       SplitExample={SplitExample}
       historyExample={historyExample}
       createShareList={createShareList}
