@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const MenuContainer = styled.menu`
-  width: 23%;
+  width: 350px;
   height: 100%;
   padding: 20px;
   position: absolute;
@@ -14,6 +14,24 @@ export const MenuContainer = styled.menu`
   justify-content: center;
   box-sizing: border-box;
   overflow-y: scroll;
+  ::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px ${props => props.theme.colors.background};
+  border-radius: 10px;
+}
+::-webkit-scrollbar-corner{
+  background: ${props => props.theme.colors.background};
+}
+::-webkit-scrollbar {
+  width: 13px;
+  background: ${props => props.theme.colors.background};
+}
+::-webkit-scrollbar-thumb {
+  background: ${props => props.theme.colors.primary};
+  border-radius: 10px;
+}
+  ::-webkit-scrollbar-thumb:hover {
+  background: ${props => props.theme.colors.primary};
+}
 `
 
 export const OptionContainer = styled.div`
