@@ -25,7 +25,7 @@ const rotate = keyframes`
 
 export const Loader = styled.div`
   border: 8px solid ${props => props.theme.colors.primary};
-  border-left-color: #22a6b3;
+  border-left-color: ${props => props.theme.colors.secondary};
   border-radius: 50%;
   width: 50px;
   height: 50px;

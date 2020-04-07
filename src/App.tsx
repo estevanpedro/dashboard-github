@@ -1,5 +1,5 @@
 import React from 'react'
-import { Router } from '@reach/router'
+import { Router, Redirect } from '@reach/router'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import dotenv from 'dotenv'
@@ -25,6 +25,7 @@ const App = (): JSX.Element => (
       <ThemeService>
         <PersistGate persistor={persistor} loading={null}>
           <Router id='router-container'>
+            <Redirect from='/' to='/my-schemes' />
             <Route path='/login' component={Login} />
             <Route path='/sign-up' component={SignUp} />
             <LoggedRoute path='/my-schemes' component={MySchemes} />
