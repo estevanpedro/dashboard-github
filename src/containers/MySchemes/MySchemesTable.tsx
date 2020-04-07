@@ -165,7 +165,9 @@ const MySchemes = ({
                     to={'/scheme/' + schemeName}
                     state={{ schemeName: schemeName, isPublic: isPublic }}
                   > */}
-                  <Button type='submit'>Create</Button>
+                  <Button type='submit' align='flex-end'>
+                    Create
+                  </Button>
                   {/* </Link> */}
                 </form>
               )

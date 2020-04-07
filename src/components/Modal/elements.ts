@@ -4,7 +4,7 @@ import ds from '../../design/designSystem'
 
 const CommonStyle = {
   width: 700,
-  height: '90vh',
+  height: '70vh',
   borderRadius: 4,
   border: 'none',
   display: 'flex',
