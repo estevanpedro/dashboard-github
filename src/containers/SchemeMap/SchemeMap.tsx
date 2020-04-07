@@ -67,7 +67,9 @@ const SchemeMap = ({ location, schemeId }: Props & RouteComponentProps) => {
       console.log(schemeCopy)
 
       if (schemeId) {
+        dispatch(setLoading(true))
         await Api.updateScheme(secretToken, schemeId, schemeCopy)
+        dispatch(setLoading(false))
       }
     }
   }
