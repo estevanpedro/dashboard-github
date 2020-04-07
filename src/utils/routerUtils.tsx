@@ -33,6 +33,7 @@ export const LoggedRoute: FunctionComponent<Props> = ({
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
+
   const { secretToken } = useSelector((state: RootState) => state.auth)
 
   if (secretToken) {
@@ -46,5 +47,5 @@ export const LoggedRoute: FunctionComponent<Props> = ({
     )
   }
 
-  return (<></>)
+  return <></>
 }

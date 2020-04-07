@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import uniqid from 'uniqid'
+import { useSelector, useDispatch } from 'react-redux'
 import { RouteComponentProps, NavigateOptions } from '@reach/router'
 import ScrollContainer from 'react-indiana-drag-scroll'
 
@@ -8,6 +9,7 @@ import FlexContainer from '../../components/FlexContainer'
 import Title from '../../components/Title'
 
 import { RootState } from '../../redux/rootReducer'
+import { loadRoot } from '../../redux/ducks/schemeMap'
 import Api from '../../Api'
 
 import SchemeNode from './SchemeNode'
@@ -24,17 +26,24 @@ interface NodeColumnProps {
 
 interface Props {
   location?: NavigateOptions<{ schemeName: string }>
+  schemeId?: string
 }
 
-const SchemeMap = ({ location, ...props }: Props & RouteComponentProps) => {
+const SchemeMap = ({ location, schemeId }: Props & RouteComponentProps) => {
+  const { secretToken } = useSelector((state: RootState) => state.auth)
   const { rootNode } = useSelector((state: RootState) => state.schemeMap)
   const [menuInfo, setMenuInfo] = useState<SchemeNodeType | null>(null)
 
+  const dispatch = useDispatch()
+
   useEffect(() => {
     const fetchScheme = async () => {
-      const id = props.schemeId
-      const response = await Api.splitDetails(id)
-      console.log(response)
+      const id = schemeId
+      if (id) {
+        const response = await Api.splitDetails({ secretToken, schemeId: id })
+        console.log(response)
+        dispatch(loadRoot({ root: response.data.tree }))
+      }
     }
     fetchScheme()
   }, [])

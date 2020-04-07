@@ -25,19 +25,20 @@ export const addSplit = (
     node: {
       id: uniqid(),
       type: 'split',
+      name: name,
       children: splits.map(split => {
         return {
           id: uniqid(),
           type: 'address',
+          name: split.name,
           children: [],
           info: {
-            name: split.name,
             address: split.address,
             share: split.share,
           },
         }
       }),
-      info: { name, splitAddress },
+      info: { splitAddress },
     },
   })
 }
@@ -58,6 +59,7 @@ export const addTimer = (
     node: {
       id: uniqid(),
       type: 'timer',
+      name: name,
       children: [],
       info: { name, timerInfo },
     },
@@ -80,8 +82,9 @@ export const addNotify = (
     node: {
       id: uniqid(),
       type: 'notify',
+      name: name,
       children: [],
-      info: { name, emails },
+      info: { emails },
     },
   })
 }
@@ -102,20 +105,20 @@ export const addSend = (
     node: {
       id: uniqid(),
       type: 'send',
+      name: name,
       children: addresses.map(address => {
         return {
           id: uniqid(),
           type: 'address',
+          name: address.name,
           children: [],
           info: {
-            name: address.name,
             address: address.address,
             percentage: address.percentage,
             value: address.value,
           },
         }
       }),
-      info: { name },
     },
   })
 }

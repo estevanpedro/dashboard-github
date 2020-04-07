@@ -48,7 +48,7 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last, onClick }: Props) => {
       )}
       {!last && <VerticalArrow />}
       <Node primary onClick={onClick} className={nodeClass()}>
-        {nodeData.info.name}
+        {nodeData.type === 'root' ? 'root' : nodeData.name}
       </Node>
       {hasChildren && <Arrow margin='left' />}
     </Container>

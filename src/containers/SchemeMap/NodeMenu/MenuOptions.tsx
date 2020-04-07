@@ -76,7 +76,7 @@ const MenuOptions = ({ data, returnToInfo }: Props) => {
         <TextLink
           onClick={returnToInfo}
           margin='0 0 20px 0'
-        >{`← ${data.info.name} info`}</TextLink>
+        >{`← ${data.name} info`}</TextLink>
         <SubTitle>Add new node</SubTitle>
         <FlexContainer wrap='wrap' width='100%' justify='center'>
           {options.map(option => (

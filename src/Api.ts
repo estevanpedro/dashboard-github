@@ -163,14 +163,12 @@ class Api {
   // it should show only the transaction history of the first split of a scheme.
   splitDetails = async (detailsData: {
     secretToken: string
-    schemeId: any
+    schemeId: string
   }) => {
     const { secretToken, schemeId } = detailsData
 
-    const schemeIdAnNotExample = '5e8b29421ce06e5bc5892eff'
-
     return await axios
-      .get(`${this.url}/scheme/${schemeIdAnNotExample}`, {
+      .get(`${this.url}/scheme/${schemeId}`, {
         headers: {
           Authorization: `Bearer ${secretToken}`,
           'Access-Control-Allow-Origin': '*',
