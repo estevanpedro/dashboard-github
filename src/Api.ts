@@ -136,18 +136,16 @@ class Api {
   }
 
   // THIS AXIOS WAS NOT TESTED... API INCOMPLETE
-  updateScheme = async ({
-    secretToken,
-    schemeId,
-    json,
-  }: {
-    secretToken: string
-    schemeId: any
-    json: any
-  }) => {
+  updateScheme = async (
+    secretToken: string,
+    schemeId: string,
+    schemeInfo: SchemeInfo
+  ) => {
     return await axios
-      .patch(`${this.url}/scheme/${schemeId}`, json, {
-        headers: { Authorization: `Bearer ${secretToken}` },
+      .patch(`${this.url}/scheme/${schemeId}`, schemeInfo, {
+        headers: {
+          Authorization: `Bearer ${secretToken}`,
+        },
       })
       .then((response: any) => {
         console.log('Trying to updateScheme: ', response)

@@ -113,7 +113,7 @@ const MySchemes = () => {
 
   const handleTab = () => {
     return mySchemes.map((info: any, i: number) => (
-      <Table splitInfo={info} id={i} />
+      <Table splitInfo={info} id={i} key={info._id.$oid} />
     ))
   }
   return (

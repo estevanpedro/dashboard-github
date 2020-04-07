@@ -33,12 +33,10 @@ export const addSplit = (
           name: split.name,
           children: [],
           info: {
-            address: split.address,
-            share: split.share,
+            percentage: split.share,
           },
         }
       }),
-      info: { splitAddress },
     },
   })
 }

@@ -10,7 +10,9 @@ import Title from '../../components/Title'
 
 import { RootState } from '../../redux/rootReducer'
 import { loadRoot } from '../../redux/ducks/schemeMap'
+
 import Api from '../../Api'
+import { SchemeInfo } from '../../apiTypes'
 
 import SchemeNode from './SchemeNode'
 import NodeMenu from './NodeMenu'
@@ -31,6 +33,7 @@ interface Props {
 
 const SchemeMap = ({ location, schemeId }: Props & RouteComponentProps) => {
   const { secretToken } = useSelector((state: RootState) => state.auth)
+  const [schemeInfo, setSchemeInfo] = useState<SchemeInfo | null>(null)
   const { rootNode } = useSelector((state: RootState) => state.schemeMap)
   const [menuInfo, setMenuInfo] = useState<SchemeNodeType | null>(null)
 
@@ -41,16 +44,29 @@ const SchemeMap = ({ location, schemeId }: Props & RouteComponentProps) => {
       const id = schemeId
       if (id) {
         const response = await Api.splitDetails({ secretToken, schemeId: id })
-        console.log(response)
+        setSchemeInfo(response.data)
         dispatch(loadRoot({ root: response.data.tree }))
       }
     }
     fetchScheme()
   }, [])
 
-  const handleSave = () => {
-    // TODO: API INTEGRATION
-    console.log(rootNode)
+  const handleSave = async () => {
+    if (schemeInfo) {
+      const schemeCopy = {
+        name: schemeInfo.name,
+        fee: schemeInfo.fee,
+        payout: schemeInfo.payout,
+        visibility: schemeInfo.visibility,
+        tree: rootNode,
+      }
+
+      console.log(schemeCopy)
+
+      if (schemeId) {
+        await Api.updateScheme(secretToken, schemeId, schemeCopy)
+      }
+    }
   }
 
   const NodeColumn = ({ rootNode, ignoreLeftArrow, last }: NodeColumnProps) => {
@@ -83,7 +99,7 @@ const SchemeMap = ({ location, schemeId }: Props & RouteComponentProps) => {
   return (
     <>
       <FlexContainer width='100%' justify='space-between'>
-        <Title>{location && location.state && location.state.schemeName}</Title>
+        <Title>{schemeInfo && schemeInfo.name}</Title>
         <Button onClick={handleSave} margin='0 0 20px 0'>
           Save
         </Button>

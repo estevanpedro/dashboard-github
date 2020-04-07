@@ -16,7 +16,6 @@ export interface Props {
   id: number
 }
 const Table = ({ splitInfo, id }: Props) => {
-  console.log(splitInfo)
   return (
     <div>
       <Container pair={id % 2 === 0 ? true : false}>

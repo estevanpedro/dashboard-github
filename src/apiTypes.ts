@@ -5,8 +5,5 @@ export interface SchemeInfo {
   fee: boolean
   payout: string
   visibility: 'public' | 'private'
-  tree: {
-    type: 'root'
-    children: SchemeNodeType[]
-  }
+  tree: SchemeNodeType
 }

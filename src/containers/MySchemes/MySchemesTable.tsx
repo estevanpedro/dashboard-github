@@ -65,6 +65,8 @@ const MySchemes = ({
       payout,
       visibility: visibility === 'Public' ? 'public' : 'private',
       tree: {
+        id: '1',
+        name: 'root',
         type: 'root',
         children: [],
       },
