@@ -26,17 +26,21 @@ import {
 } from './elements'
 import { Bar, Pie } from 'react-chartjs-2'
 
+interface Props {
+  SplitExample: any
+  historyExample: any
+  createShareList: any
+  createTransList: any
+  schemeDetails: any
+}
+
 const SplitDetails = ({
   SplitExample,
   historyExample,
   createShareList,
   createTransList,
-}: {
-  SplitExample: any
-  historyExample: any
-  createShareList: any
-  createTransList: any
-}) => {
+  schemeDetails,
+}: Props) => {
   let ShareData = (apiDATA: any) => {
     let labels: any[] = []
     let size: any[] = []
@@ -89,39 +93,44 @@ const SplitDetails = ({
   return (
     <Container>
       <Header>
-        <Title>{SplitExample.schemeName}</Title>
+        <Title>{schemeDetails.name}</Title>
         <Category>
           <CategoryName size='verySmall'>
-            {SplitExample.public ? 'Public' : 'Private'}
+            {schemeDetails.visibility === 'public' ? 'Public' : 'Private'}
           </CategoryName>
         </Category>
-        {
-          SplitExample.public ?
-            <></>
-            :
-            <Link
-              to={`/scheme/${SplitExample.schemeName}`}
-              state={{ schemeName: SplitExample.schemeName, isPublic: true }}
-            >
-              <EditButton>Edit Scheme</EditButton>
-            </Link>
-        }
+        {schemeDetails.visibility === 'public' ? (
+          <></>
+        ) : (
+          <Link
+            to={`/scheme/${SplitExample.schemeName}`}
+            state={{ schemeName: SplitExample.schemeName, isPublic: true }}
+          >
+            <EditButton>Edit Scheme</EditButton>
+          </Link>
+        )}
       </Header>
 
       <Body>
         <QRField>
-          <QRCode value={SplitExample.address} />
+          <QRCode
+            value={schemeDetails.tree ? schemeDetails.tree.address : ''}
+          />
         </QRField>
 
         <DetailsField>
           <SubtitleText>Wallet Address</SubtitleText>
-          <PayloadText>{SplitExample.address}</PayloadText>
+          <PayloadText>
+            {schemeDetails.tree ? schemeDetails.tree.address : ''}
+          </PayloadText>
           <SubtitleText>Balance</SubtitleText>
           <PayloadText>{SplitExample.balance} BTC</PayloadText>
           <SubtitleText>Payout</SubtitleText>
-          <PayloadText>{SplitExample.payout}</PayloadText>
+          <PayloadText>{schemeDetails.payout}</PayloadText>
           <SubtitleText>Service Fee</SubtitleText>
-          <PayloadText>{SplitExample.serviceFee ? 'Yes' : 'No'}</PayloadText>
+          <PayloadText>
+            {schemeDetails.serviceFee === 'True' ? 'Yes' : 'No'}
+          </PayloadText>
         </DetailsField>
 
         <GraphicField>
