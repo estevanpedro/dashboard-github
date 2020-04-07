@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import React from 'react'
 
 import {
   Container,
@@ -17,7 +17,8 @@ interface Props {
 }
 
 const SchemeNode = ({ nodeData, ignoreLeftArrow, last, onClick }: Props) => {
-  const hasChildren = nodeData.children.length > 0
+  const hasChildren =
+    nodeData && nodeData.children && nodeData.children.length > 0
 
   const nodeClass = () => {
     switch (nodeData.type) {
@@ -30,6 +31,9 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last, onClick }: Props) => {
 
       case 'address':
         return 'address'
+
+      case 'root':
+        return 'root'
 
       default:
         return
@@ -45,7 +49,7 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last, onClick }: Props) => {
       )}
       {!last && <VerticalArrow />}
       <Node primary onClick={onClick} className={nodeClass()}>
-        {nodeData.info.name}
+        {nodeData.type === 'root' ? 'root' : nodeData.name}
       </Node>
       {hasChildren && <Arrow margin='left' />}
     </Container>

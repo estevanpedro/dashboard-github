@@ -15,20 +15,9 @@ export interface SchemeMapState {
 const initialState: SchemeMapState = {
   rootNode: {
     id: '0',
-    type: 'split',
-    children: [
-      {
-        id: '1',
-        type: 'address',
-        children: [],
-        info: {
-          name: 'Address 0',
-        },
-      },
-    ],
-    info: {
-      name: 'Split',
-    },
+    type: 'root',
+    name: 'root',
+    children: [],
   },
 }
 
@@ -36,6 +25,14 @@ const reducer = createSlice({
   name: 'schemeMap',
   initialState,
   reducers: {
+    loadRoot(
+      state: SchemeMapState,
+      action: PayloadAction<{ root: SchemeNodeType }>
+    ) {
+      const { root } = action.payload
+      console.log(root)
+      state.rootNode = action.payload.root
+    },
     addNode(
       state: SchemeMapState,
       action: PayloadAction<{ id: string; node: SchemeNodeType }>
@@ -74,6 +71,6 @@ const reducer = createSlice({
   },
 })
 
-export const { addNode, removeNode, updateNode } = reducer.actions
+export const { loadRoot, addNode, removeNode, updateNode } = reducer.actions
 
 export default reducer.reducer

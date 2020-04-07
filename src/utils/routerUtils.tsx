@@ -2,6 +2,7 @@ import React, { useEffect, FunctionComponent } from 'react'
 import { RouteComponentProps } from '@reach/router'
 
 import Navbar from '../containers/Navbar'
+import Loading from '../containers/Loading'
 import Container from '../components/Container'
 import { useSelector } from 'react-redux'
 import { RootState } from '../redux/rootReducer'
@@ -20,6 +21,7 @@ export const Route: FunctionComponent<Props> = ({
     <>
       <Navbar />
       <Container>
+        <Loading />
         <Component {...rest} />
       </Container>
     </>
@@ -33,6 +35,7 @@ export const LoggedRoute: FunctionComponent<Props> = ({
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
+
   const { secretToken } = useSelector((state: RootState) => state.auth)
 
   if (secretToken) {
@@ -40,11 +43,12 @@ export const LoggedRoute: FunctionComponent<Props> = ({
       <>
         <Navbar />
         <Container>
+          <Loading />
           <Component {...rest} />
         </Container>
       </>
     )
   }
 
-  return (<></>)
+  return <></>
 }

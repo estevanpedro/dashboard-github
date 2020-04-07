@@ -10,6 +10,7 @@ import Api from '../../Api'
 import { RootState } from '../../redux/rootReducer'
 
 import { updateUserInfo } from '../../redux/ducks/user'
+import { setLoading } from '../../redux/ducks/loading'
 
 import { ProfileContainer, ProfileField } from './elements'
 
@@ -24,7 +25,9 @@ const Profile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
+        dispatch(setLoading(true))
         const response = await Api.getProfile(secretToken)
+        dispatch(setLoading(false))
 
         const userData = {
           username: response.data.user.username || 'USERNAME_NOT_FOUND',

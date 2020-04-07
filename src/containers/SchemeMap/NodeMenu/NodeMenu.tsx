@@ -28,7 +28,7 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
 
   const renderMenu = () => {
     if (nodeInfo) {
-      const { info, children } = nodeInfo
+      const { name, children } = nodeInfo
       if (isOptionsVisible) {
         return (
           <MenuOptions
@@ -46,14 +46,18 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
           justify='flex-start'
           align='flex-start'
         >
-          <SubTitle>{info.name}</SubTitle>
+          <SubTitle>{name}</SubTitle>
           <Line margin='0 0 20px 0' />
           <FieldTitle>Children Nodes</FieldTitle>
-          {children.map(child => (
-            <TextLink margin='0 0 20px 0' onClick={() => updateMenuInfo(child)}>
-              {child.info.name}
-            </TextLink>
-          ))}
+          {children &&
+            children.map(child => (
+              <TextLink
+                margin='0 0 20px 0'
+                onClick={() => updateMenuInfo(child)}
+              >
+                {child.name}
+              </TextLink>
+            ))}
           <TextLink onClick={() => setIsOptionsVisible(true)}>
             + Add new node
           </TextLink>

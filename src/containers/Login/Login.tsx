@@ -12,6 +12,7 @@ import { SubTitle } from '../../components/Title'
 import Api from '../../Api'
 
 import { changeSecretToken } from '../../redux/ducks/auth'
+import { setLoading } from '../../redux/ducks/loading'
 
 import { LoginContainer, LoginForm } from './elements'
 
@@ -37,7 +38,9 @@ const Login = () => {
       }
 
       try {
+        dispatch(setLoading(true))
         const response = await Api.login(userData)
+        dispatch(setLoading(false))
         if (response.data.error) {
           setApiError(response.data.error)
         }
@@ -45,7 +48,6 @@ const Login = () => {
           dispatch(changeSecretToken(response.data.acess_token))
           navigate('/my-schemes')
         }
-
       } catch (e) {
         console.error(e)
       }

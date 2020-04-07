@@ -28,7 +28,7 @@ const MenuOptions = ({ data, returnToInfo }: Props) => {
   const { name: timerName, hours, minutes, seconds } = useSelector(
     (state: RootState) => state.timer
   )
-  const { name: splitName, splitAddress, splits } = useSelector(
+  const { name: splitName, splits } = useSelector(
     (state: RootState) => state.split
   )
   const { name: notifyName, emails } = useSelector(
@@ -39,7 +39,7 @@ const MenuOptions = ({ data, returnToInfo }: Props) => {
   )
 
   const OptionFunctions = {
-    Split: addSplit(data, splitName, splitAddress, splits),
+    Split: addSplit(data, splitName, splits),
     Timer: addTimer(data, timerName, { hours, minutes, seconds }),
     Notify: addNotify(data, notifyName, emails),
     Send: addSend(data, sendName, addresses),
@@ -76,7 +76,7 @@ const MenuOptions = ({ data, returnToInfo }: Props) => {
         <TextLink
           onClick={returnToInfo}
           margin='0 0 20px 0'
-        >{`← ${data.info.name} info`}</TextLink>
+        >{`← ${data.name} info`}</TextLink>
         <SubTitle>Add new node</SubTitle>
         <FlexContainer wrap='wrap' width='100%' justify='center'>
           {options.map(option => (

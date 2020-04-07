@@ -8,9 +8,3 @@ export const SchemeContainer = styled.div`
   border-radius: 4px;
   box-sizing: border-box;
 `
-
-export const OverflowContainer = styled.div`
-  width: 82%;
-  height: 100%;
-  overflow: scroll;
-`

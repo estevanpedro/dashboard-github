@@ -1,6 +1,11 @@
 import LibraryTable from './LibraryTable'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Table from '../../components/Table'
+import Api from '../../Api'
+import { useSelector, useDispatch } from 'react-redux'
+import { RootState } from '../../redux/rootReducer'
+
+// TODO // import { updateLibrary } from '../../redux/ducks/library'
 
 import { LibInfo } from './types'
 
@@ -9,6 +14,7 @@ const Library = () => {
   const [colorCurrency, setcolorCurrency] = useState('')
   const [colorTransaction, setColorTransaction] = useState('#')
   const [preference, setPreference] = useState('lastTransaction')
+
   const [libInfoExample, setLibInfoExample] = useState<LibInfo[]>([
     {
       schemeName: 'Mensalidade',
@@ -39,6 +45,27 @@ const Library = () => {
     },
   ])
 
+
+  // TODO connect with the component and with redux...
+  const dispatch = useDispatch()
+  const [library, setLibrary] = useState<any[]>([])
+
+  useEffect(() => {
+    const fetchLibrary = async () => {
+      try {
+        const response = await Api.getLibrary()
+
+        setLibrary(response.data)
+
+        // dispatch(updateLibrary(response.data.schemes))
+      } catch (e) {
+        console.error(e)
+      }
+    }
+    fetchLibrary()
+  }, [dispatch])
+
+
   const compareValues = (valueA: number | string, valueB: number | string) => {
     if (valueA < valueB) return 1
     if (valueA > valueB) return -1
@@ -51,8 +78,8 @@ const Library = () => {
         compareValues(a.balance, b.balance)
       )
 
-      const balance = libInfoExample.map((info: LibInfo, id: number) => {
-        return <Table splitInfo={info} id={id} />
+      const balance = libInfoExample.map((info: LibInfo, id: number, key: any) => {
+        return <Table splitInfo={info} id={id} key={key} />
       })
 
       return balance
@@ -61,8 +88,8 @@ const Library = () => {
         compareValues(a.currency, b.currency)
       )
 
-      const currency = libInfoExample.map((info: LibInfo, id: number) => {
-        return <Table splitInfo={info} id={id} />
+      const currency = libInfoExample.map((info: LibInfo, id: number, key: any) => {
+        return <Table splitInfo={info} id={id} key={key} />
       })
 
       return currency
@@ -72,8 +99,8 @@ const Library = () => {
       )
 
       const lastTransaction = libInfoExample.map(
-        (info: LibInfo, id: number) => {
-          return <Table splitInfo={info} id={id} />
+        (info: LibInfo, id: number, key: any) => {
+          return <Table splitInfo={info} id={id} key={key} />
         }
       )
 

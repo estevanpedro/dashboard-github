@@ -11,6 +11,7 @@ import Error from '../../components/Error'
 
 import Api from '../../Api'
 import { changeSecretToken } from '../../redux/ducks/auth'
+import { setLoading } from '../../redux/ducks/loading'
 
 import { SignUpContainer, SignUpForm, ReturnText } from './elements'
 
@@ -45,7 +46,9 @@ const SignUp = () => {
         password: passwordValue,
       }
       try {
+        dispatch(setLoading(true))
         const response = await Api.UserSignup(signUpData)
+        dispatch(setLoading(false))
         if (response.data.error) {
           setApiError(response.data.error)
         }
@@ -59,7 +62,6 @@ const SignUp = () => {
       }
     }
   }
-
 
   const signUpvalidation = () => {
     // TODO: improve signup validation
@@ -137,7 +139,9 @@ const SignUp = () => {
           type='password'
         />
         <Error>{apiError}</Error>
-        <Button onClick={() => { }} type='submit'>Create now</Button>
+        <Button onClick={() => {}} type='submit'>
+          Create now
+        </Button>
         <ReturnText size='regular'>
           If you already have an account, <Link to='/login'>login</Link>
         </ReturnText>

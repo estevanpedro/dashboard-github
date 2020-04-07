@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import React, { useState, useEffect } from 'react'
+import uniqid from 'uniqid'
+import { useSelector, useDispatch } from 'react-redux'
 import { RouteComponentProps, NavigateOptions } from '@reach/router'
 import ScrollContainer from 'react-indiana-drag-scroll'
 
@@ -8,10 +9,15 @@ import FlexContainer from '../../components/FlexContainer'
 import Title from '../../components/Title'
 
 import { RootState } from '../../redux/rootReducer'
+import { loadRoot } from '../../redux/ducks/schemeMap'
+import { setLoading } from '../../redux/ducks/loading'
+
+import Api from '../../Api'
+import { SchemeInfo } from '../../apiTypes'
 
 import SchemeNode from './SchemeNode'
 import NodeMenu from './NodeMenu'
-import { SchemeContainer, OverflowContainer } from './elements'
+import { SchemeContainer } from './elements'
 import { SchemeNodeType } from './SchemeNode/utils/nodeType'
 
 interface NodeColumnProps {
@@ -23,15 +29,49 @@ interface NodeColumnProps {
 
 interface Props {
   location?: NavigateOptions<{ schemeName: string }>
+  schemeId?: string
 }
 
-const SchemeMap = ({ location }: Props & RouteComponentProps) => {
+const SchemeMap = ({ location, schemeId }: Props & RouteComponentProps) => {
+  const { secretToken } = useSelector((state: RootState) => state.auth)
+  const [schemeInfo, setSchemeInfo] = useState<SchemeInfo | null>(null)
   const { rootNode } = useSelector((state: RootState) => state.schemeMap)
   const [menuInfo, setMenuInfo] = useState<SchemeNodeType | null>(null)
 
-  const handleSave = () => {
-    // TODO: API INTEGRATION
-    console.log(rootNode)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    const fetchScheme = async () => {
+      const id = schemeId
+      if (id) {
+        dispatch(setLoading(true))
+        const response = await Api.splitDetails({ secretToken, schemeId: id })
+        dispatch(setLoading(false))
+        setSchemeInfo(response.data)
+        dispatch(loadRoot({ root: response.data.tree }))
+      }
+    }
+    fetchScheme()
+  }, [])
+
+  const handleSave = async () => {
+    if (schemeInfo) {
+      const schemeCopy = {
+        name: schemeInfo.name,
+        fee: schemeInfo.fee,
+        payout: schemeInfo.payout,
+        visibility: schemeInfo.visibility,
+        tree: rootNode,
+      }
+
+      console.log(schemeCopy)
+
+      if (schemeId) {
+        dispatch(setLoading(true))
+        await Api.updateScheme(secretToken, schemeId, schemeCopy)
+        dispatch(setLoading(false))
+      }
+    }
   }
 
   const NodeColumn = ({ rootNode, ignoreLeftArrow, last }: NodeColumnProps) => {
@@ -49,13 +89,15 @@ const SchemeMap = ({ location }: Props & RouteComponentProps) => {
         />
 
         <FlexContainer direction='column'>
-          {rootNode.children.map((node: SchemeNodeType, index) => (
-            <NodeColumn
-              rootNode={node}
-              last={index === rootNode.children.length - 1}
-              setNodeInfo={setMenuInfo}
-            />
-          ))}
+          {rootNode &&
+            rootNode.children &&
+            rootNode.children.map((node: SchemeNodeType, index) => (
+              <NodeColumn
+                rootNode={node}
+                last={index === rootNode.children.length - 1}
+                setNodeInfo={setMenuInfo}
+              />
+            ))}
         </FlexContainer>
       </FlexContainer>
     )
@@ -64,8 +106,10 @@ const SchemeMap = ({ location }: Props & RouteComponentProps) => {
   return (
     <>
       <FlexContainer width='100%' justify='space-between'>
-        <Title>{location && location.state && location.state.schemeName}</Title>
-        <Button onClick={handleSave}>Save</Button>
+        <Title>{schemeInfo && schemeInfo.name}</Title>
+        <Button onClick={handleSave} margin='0 0 20px 0'>
+          Save
+        </Button>
       </FlexContainer>
 
       <SchemeContainer>

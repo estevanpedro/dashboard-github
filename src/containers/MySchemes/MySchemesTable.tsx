@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
-import Title from '../../components/Title'
-import Text from '../../components/Text'
-import Input from '../../components/Input'
+import { navigate } from '@reach/router'
+import { Formik } from 'formik'
+import { useSelector, useDispatch } from 'react-redux'
+
+import { Button, Title, Input } from '../../components'
 import {
   TableContainner,
   Menu,
@@ -10,13 +12,17 @@ import {
   InfoText,
   Area,
   Select,
-  ButtonConfirm,
 } from './elements'
+
 import TableTitles from '../../components/Table/TableTitles'
 import TableOptions from '../../components/Table/TableOptions'
 import Modal from '../../components/Modal'
-import { Link } from '@reach/router'
 
+import Api from '../../Api'
+import { SchemeInfo } from '../../apiTypes'
+import { RootState } from '../../redux/rootReducer'
+
+import { setLoading } from '../../redux/ducks/loading'
 export interface Props {
   Tab: (p: string) => JSX.Element[] | undefined
   colorBalance: string
@@ -40,11 +46,45 @@ const MySchemes = ({
   preference,
   setPreference,
 }: Props) => {
-  function ToolFunctions() {
-    return <Title>(TODO) Functions to show components</Title>
-  }
+  const { secretToken } = useSelector((state: RootState) => state.auth)
+
   const [schemeName, setSchemeName] = useState('')
   const [isPublic, setIsPublic] = useState()
+
+  const dispatch = useDispatch()
+
+  const initialNewSchemeValues = {
+    name: '',
+    payout: '0.1',
+    visibility: 'Public',
+  }
+
+  const handleNewSchemeSubmit = async (
+    values: typeof initialNewSchemeValues
+  ) => {
+    const { name, payout, visibility } = values
+
+    const newSchemeInfo: SchemeInfo = {
+      name,
+      fee: false,
+      payout,
+      visibility: visibility === 'Public' ? 'public' : 'private',
+      tree: {
+        id: '1',
+        name: 'root',
+        type: 'root',
+        children: [],
+      },
+    }
+
+    dispatch(setLoading(true))
+    const response = await Api.createScheme(secretToken, newSchemeInfo)
+    dispatch(setLoading(false))
+
+    const id = response.data._id.$oid
+    navigate(`/scheme/${id}`)
+  }
+
   return (
     <Containner>
       <Title>My Schemes</Title>
@@ -86,41 +126,55 @@ const MySchemes = ({
       <Modal
         title={'New Scheme'}
         trigger={<NewButton onClick={() => {}}>New Scheme</NewButton>}
-        children={
-          <Area>
-            <Title>Create new Scheme</Title>
-
-            <Input
-              label='Scheme name'
-              value={schemeName}
-              onChange={(e: any) => {
-                setSchemeName(e.target.value)
-              }}
-              type='text'
-            />
-            <InfoText>Private or Public?</InfoText>
-            <Select
-              onChange={(e: any) => {
-                if (e.target.value === 'public') {
-                  setIsPublic(true)
-                } else {
-                  setIsPublic(false)
-                }
-              }}
-            >
-              <option value='public'>Public</option>
-              <option value='private'>Private</option>
-            </Select>
-            <br />
-            <Link
-              to={'/scheme/' + schemeName}
-              state={{ schemeName: schemeName, isPublic: isPublic }}
-            >
-              <ButtonConfirm onClick={() => {}}>Create</ButtonConfirm>
-            </Link>
-          </Area>
-        }
-      />
+      >
+        <Area>
+          <Title>Create new scheme</Title>
+          <Formik
+            initialValues={initialNewSchemeValues}
+            onSubmit={handleNewSchemeSubmit}
+          >
+            {({ values, handleChange, handleSubmit }) => {
+              return (
+                <form onSubmit={handleSubmit}>
+                  <Input
+                    label='Scheme Name'
+                    name='name'
+                    value={values.name}
+                    onChange={handleChange}
+                    // onBlur={handleBlur}
+                    type='text'
+                  />
+                  <Input
+                    label='Payout'
+                    name='payout'
+                    value={values.payout}
+                    onChange={handleChange}
+                    // onBlur={handleBlur}
+                    type='number'
+                  />
+                  <InfoText>Private or Public?</InfoText>
+                  <Select
+                    name='visibility'
+                    onChange={handleChange}
+                    value={values.visibility}
+                  >
+                    <option value='public'>Public</option>
+                    <option value='private'>Private</option>
+                  </Select>
+                  {/* <Link
+                    to={'/scheme/' + schemeName}
+                    state={{ schemeName: schemeName, isPublic: isPublic }}
+                  > */}
+                  <Button type='submit' align='flex-end'>
+                    Create
+                  </Button>
+                  {/* </Link> */}
+                </form>
+              )
+            }}
+          </Formik>
+        </Area>
+      </Modal>
     </Containner>
   )
 }

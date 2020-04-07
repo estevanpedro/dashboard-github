@@ -32,6 +32,7 @@ export const NavLink = styled(Link)`
 `
 export const ThemeButton = styled.button`
   margin-left: 35px;
+  padding-top: 7px;
   color: ${props => props.theme.colors.white};
   font-size: ${props => props.theme.fontSize.small};
   text-decoration: none;
