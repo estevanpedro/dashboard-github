@@ -10,6 +10,7 @@ import Title from '../../components/Title'
 
 import { RootState } from '../../redux/rootReducer'
 import { loadRoot } from '../../redux/ducks/schemeMap'
+import { setLoading } from '../../redux/ducks/loading'
 
 import Api from '../../Api'
 import { SchemeInfo } from '../../apiTypes'
@@ -43,7 +44,9 @@ const SchemeMap = ({ location, schemeId }: Props & RouteComponentProps) => {
     const fetchScheme = async () => {
       const id = schemeId
       if (id) {
+        dispatch(setLoading(true))
         const response = await Api.splitDetails({ secretToken, schemeId: id })
+        dispatch(setLoading(false))
         setSchemeInfo(response.data)
         dispatch(loadRoot({ root: response.data.tree }))
       }
@@ -84,13 +87,15 @@ const SchemeMap = ({ location, schemeId }: Props & RouteComponentProps) => {
         />
 
         <FlexContainer direction='column'>
-          {rootNode.children.map((node: SchemeNodeType, index) => (
-            <NodeColumn
-              rootNode={node}
-              last={index === rootNode.children.length - 1}
-              setNodeInfo={setMenuInfo}
-            />
-          ))}
+          {rootNode &&
+            rootNode.children &&
+            rootNode.children.map((node: SchemeNodeType, index) => (
+              <NodeColumn
+                rootNode={node}
+                last={index === rootNode.children.length - 1}
+                setNodeInfo={setMenuInfo}
+              />
+            ))}
         </FlexContainer>
       </FlexContainer>
     )

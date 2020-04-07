@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { navigate } from '@reach/router'
 import { Formik } from 'formik'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import { Button, Title, Input } from '../../components'
 import {
@@ -21,6 +21,8 @@ import Modal from '../../components/Modal'
 import Api from '../../Api'
 import { SchemeInfo } from '../../apiTypes'
 import { RootState } from '../../redux/rootReducer'
+
+import { setLoading } from '../../redux/ducks/loading'
 export interface Props {
   Tab: (p: string) => JSX.Element[] | undefined
   colorBalance: string
@@ -48,6 +50,9 @@ const MySchemes = ({
 
   const [schemeName, setSchemeName] = useState('')
   const [isPublic, setIsPublic] = useState()
+
+  const dispatch = useDispatch()
+
   const initialNewSchemeValues = {
     name: '',
     payout: '0.1',
@@ -72,7 +77,10 @@ const MySchemes = ({
       },
     }
 
+    dispatch(setLoading(true))
     const response = await Api.createScheme(secretToken, newSchemeInfo)
+    dispatch(setLoading(false))
+
     const id = response.data._id.$oid
     navigate(`/scheme/${id}`)
   }

@@ -6,6 +6,8 @@ import Api from '../../Api'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../redux/rootReducer'
 
+import { setLoading } from '../../redux/ducks/loading'
+
 // TODO // import { updateMySchemes } from '../../redux/ducks/mySchemes'
 
 import { LibInfo } from '../Library/types'
@@ -53,7 +55,9 @@ const MySchemes = () => {
   useEffect(() => {
     const fetchMySchemes = async () => {
       try {
+        dispatch(setLoading(true))
         const response = await Api.getMySchemes(secretToken)
+        dispatch(setLoading(false))
 
         setMySchemes(response.data)
 

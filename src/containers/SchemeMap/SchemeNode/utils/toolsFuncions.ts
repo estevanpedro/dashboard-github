@@ -17,7 +17,6 @@ import { SchemeNodeType } from './nodeType'
 export const addSplit = (
   nodeData: SchemeNodeType,
   name: string,
-  splitAddress: string,
   splits: Split[]
 ) => {
   return addNode({
@@ -33,7 +32,7 @@ export const addSplit = (
           name: split.name,
           children: [],
           info: {
-            percentage: split.share,
+            percentage: split.share / 100,
           },
         }
       }),

@@ -66,15 +66,6 @@ export const SplitContent = () => {
         type='text'
         width='100'
       />
-      <Input
-        label='Split Address'
-        value={splitAddress}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          dispatch(updateSplitAddress(e.target.value))
-        }
-        type='text'
-        width='100'
-      />
       <FlexContainer
         width='100%'
         height='80px'
@@ -107,17 +98,6 @@ export const SplitContent = () => {
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 dispatch(
                   updateAddressName({ id: split.id, name: e.target.value })
-                )
-              }
-              type='text'
-              width='100%'
-            />
-            <Input
-              label={`Address`}
-              value={split.address}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                dispatch(
-                  updateAddressValue({ id: split.id, address: e.target.value })
                 )
               }
               type='text'

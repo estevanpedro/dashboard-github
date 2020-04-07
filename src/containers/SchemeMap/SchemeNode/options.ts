@@ -39,36 +39,36 @@ const options: NodeOption[] = [
     icon: MdCallSplit,
     content: SplitContent,
   },
-  {
-    id: 2,
-    title: 'Timer',
-    icon: MdAccessAlarms,
-    content: TimerContent,
-  },
-  {
-    id: 3,
-    title: 'Notify',
-    icon: MdNotificationsActive,
-    content: NotifyContent,
-  },
-  {
-    id: 4,
-    title: 'Send',
-    icon: MdSend,
-    content: SendContent,
-  },
-  {
-    id: 5,
-    title: 'Swap',
-    icon: MdSwapHoriz,
-    content: SwapContent,
-  },
-  {
-    id: 6,
-    title: 'Event',
-    icon: MdEventAvailable,
-    content: EventContent,
-  },
+  // {
+  //   id: 2,
+  //   title: 'Timer',
+  //   icon: MdAccessAlarms,
+  //   content: TimerContent,
+  // },
+  // {
+  //   id: 3,
+  //   title: 'Notify',
+  //   icon: MdNotificationsActive,
+  //   content: NotifyContent,
+  // },
+  // {
+  //   id: 4,
+  //   title: 'Send',
+  //   icon: MdSend,
+  //   content: SendContent,
+  // },
+  // {
+  //   id: 5,
+  //   title: 'Swap',
+  //   icon: MdSwapHoriz,
+  //   content: SwapContent,
+  // },
+  // {
+  //   id: 6,
+  //   title: 'Event',
+  //   icon: MdEventAvailable,
+  //   content: EventContent,
+  // },
 ]
 
 export default options

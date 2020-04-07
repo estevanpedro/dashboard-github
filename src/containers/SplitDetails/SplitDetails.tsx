@@ -1,11 +1,12 @@
-import SplitDetailsTable from './SplitDetailsTable'
 import React, { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+
+import SplitDetailsTable from './SplitDetailsTable'
 import { ValuesField, TableText, BalanceText } from './elements'
-import { RouteComponentProps, NavigateOptions } from '@reach/router'
 
 import Api from '../../Api'
-import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../redux/rootReducer'
+import { setLoading } from '../../redux/ducks/loading'
 
 // TODO // import { updateSplitDetails } from '../../redux/ducks/splitDetails'
 
@@ -85,7 +86,9 @@ const SplitDetails = (props: any) => {
         schemeId,
       }
       try {
+        dispatch(setLoading(true))
         const response = await Api.splitDetails(detailsData)
+        dispatch(setLoading(false))
         setSchemeDetails(response.data)
         // dispatch(updateSplitDetails(response.data.schemes))
       } catch (e) {

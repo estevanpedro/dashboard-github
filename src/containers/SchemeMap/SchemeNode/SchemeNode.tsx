@@ -17,7 +17,8 @@ interface Props {
 }
 
 const SchemeNode = ({ nodeData, ignoreLeftArrow, last, onClick }: Props) => {
-  const hasChildren = nodeData.children.length > 0
+  const hasChildren =
+    nodeData && nodeData.children && nodeData.children.length > 0
 
   const nodeClass = () => {
     switch (nodeData.type) {

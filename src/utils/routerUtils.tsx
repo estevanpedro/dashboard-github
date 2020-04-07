@@ -2,6 +2,7 @@ import React, { useEffect, FunctionComponent } from 'react'
 import { RouteComponentProps } from '@reach/router'
 
 import Navbar from '../containers/Navbar'
+import Loading from '../containers/Loading'
 import Container from '../components/Container'
 import { useSelector } from 'react-redux'
 import { RootState } from '../redux/rootReducer'
@@ -41,6 +42,7 @@ export const LoggedRoute: FunctionComponent<Props> = ({
       <>
         <Navbar />
         <Container>
+          <Loading />
           <Component {...rest} />
         </Container>
       </>

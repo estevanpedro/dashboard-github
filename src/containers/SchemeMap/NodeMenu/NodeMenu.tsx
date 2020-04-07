@@ -49,11 +49,15 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
           <SubTitle>{name}</SubTitle>
           <Line margin='0 0 20px 0' />
           <FieldTitle>Children Nodes</FieldTitle>
-          {children.map(child => (
-            <TextLink margin='0 0 20px 0' onClick={() => updateMenuInfo(child)}>
-              {child.name}
-            </TextLink>
-          ))}
+          {children &&
+            children.map(child => (
+              <TextLink
+                margin='0 0 20px 0'
+                onClick={() => updateMenuInfo(child)}
+              >
+                {child.name}
+              </TextLink>
+            ))}
           <TextLink onClick={() => setIsOptionsVisible(true)}>
             + Add new node
           </TextLink>
