@@ -5,6 +5,7 @@ import { navigate } from '@reach/router'
 import Button from '../../components/Button'
 import Input from '../../components/Input'
 import Link from '../../components/Link'
+import LinkToInputs from '../../components/LinkToInputs'
 import Error from '../../components/Error'
 
 import { SubTitle } from '../../components/Title'
@@ -93,6 +94,7 @@ const Login = () => {
           type='password'
           error={passwordError}
         />
+        <LinkToInputs to='/forgot'>Forgot Password</LinkToInputs>
         <Error>{apiError}</Error>
         <Button type='submit' margin='0 0 20px 0'>
           Login
