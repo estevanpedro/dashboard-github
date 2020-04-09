@@ -12,16 +12,18 @@ import {
 
 import { IconType } from 'react-icons/lib/cjs'
 
-import {
-  SplitContent,
-  TimerContent,
-  NotifyContent,
-  SendContent,
-  SwapContent,
-  EventContent,
-  EditContent,
-  DeleteContent,
-} from './ModalContents'
+// import {
+//   SplitContent,
+//   TimerContent,
+//   NotifyContent,
+//   SendContent,
+//   SwapContent,
+//   EventContent,
+//   EditContent,
+//   DeleteContent,
+// } from './ModalContents'
+
+import SplitForm from '../NodeMenu/Forms/SplitForm'
 
 export type TitleType = 'Split' | 'Timer' | 'Notify' | 'Send' | 'Swap' | 'Event'
 
@@ -29,7 +31,9 @@ export interface NodeOption {
   id: number
   title: TitleType
   icon: IconType
-  content: FunctionComponent
+  content: FunctionComponent<{
+    onConfirm: (type: TitleType, data: any) => void
+  }>
 }
 
 const options: NodeOption[] = [
@@ -37,7 +41,7 @@ const options: NodeOption[] = [
     id: 1,
     title: 'Split',
     icon: MdCallSplit,
-    content: SplitContent,
+    content: SplitForm,
   },
   // {
   //   id: 2,
