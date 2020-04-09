@@ -14,7 +14,7 @@ import {
 import { TitleType } from '../../SchemeNode/options'
 
 import { MenuButtonContainer, BorderContainer } from '../elements'
-import { array } from 'prop-types'
+
 interface Props {
   onConfirm: (title: TitleType, formData: any) => void
 }

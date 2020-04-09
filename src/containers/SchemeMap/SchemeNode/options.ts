@@ -12,16 +12,16 @@ import {
 
 import { IconType } from 'react-icons/lib/cjs'
 
-import {
-  SplitContent,
-  TimerContent,
-  NotifyContent,
-  SendContent,
-  SwapContent,
-  EventContent,
-  EditContent,
-  DeleteContent,
-} from './ModalContents'
+// import {
+//   SplitContent,
+//   TimerContent,
+//   NotifyContent,
+//   SendContent,
+//   SwapContent,
+//   EventContent,
+//   EditContent,
+//   DeleteContent,
+// } from './ModalContents'
 
 import SplitForm from '../NodeMenu/Forms/SplitForm'
 
