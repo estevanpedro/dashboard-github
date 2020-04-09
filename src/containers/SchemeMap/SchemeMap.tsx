@@ -41,17 +41,17 @@ const SchemeMap = ({ location, schemeId }: Props & RouteComponentProps) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    const fetchScheme = async () => {
+    const fetchSchemeDetails = async () => {
       const id = schemeId
       if (id) {
         dispatch(setLoading(true))
-        const response = await Api.splitDetails({ secretToken, schemeId: id })
+        const response = await Api.getSchemeDetails({ secretToken, schemeId: id })
         dispatch(setLoading(false))
         setSchemeInfo(response.data)
         dispatch(loadRoot({ root: response.data.tree }))
       }
     }
-    fetchScheme()
+    fetchSchemeDetails()
   }, [])
 
   const handleSave = async () => {

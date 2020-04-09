@@ -1,17 +1,16 @@
 export default [
-  // {
-  //   id: 0,
-  //   title: 'API',
-  //   needsLogin: false,
-  //   to: '/api',
-  // },
-  // {
-  //   id: 1,
-  //   title: 'Library',
-  //   needsLogin: false,
-  //   to: '/library',
-  // },
-
+  {
+    id: 0,
+    title: 'API',
+    needsLogin: false,
+    to: '/api',
+  },
+  {
+    id: 1,
+    title: 'Library',
+    needsLogin: false,
+    to: '/library',
+  },
   {
     id: 2,
     title: 'My Schemes',

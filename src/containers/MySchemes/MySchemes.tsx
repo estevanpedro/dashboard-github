@@ -17,35 +17,6 @@ const MySchemes = () => {
   const [colorCurrency, setcolorCurrency] = useState('')
   const [colorTransaction, setColorTransaction] = useState('#')
   const [preference, setPreference] = useState('lastTransaction')
-  const [libInfoExample, setLibInfoExample] = useState<LibInfo[]>([
-    {
-      schemeName: 'Mensalidade',
-      schemeCreator: 'Jacinto',
-      lastTransaction: '1583321650000',
-      currency: 'bitcoin',
-      id: 1,
-      userId: 441,
-      public: true,
-      address: 'ASDio2daijA2da21sadasdZxza',
-      balance: 0.0145,
-      payout: 0.0008,
-      serviceFee: true,
-      owners: [
-        {
-          address: 'as454axAsaDFAsdedasdaASDasdASD',
-          size: 50,
-          label: 'Estevan Pedro Wisoczynski Reboledo',
-          paid: 0.001,
-        },
-        {
-          address: 'as454axAsaDFAsdedasdaASDasdASD',
-          size: 50,
-          label: 'Alberte Einstein',
-          paid: 0.001,
-        },
-      ],
-    },
-  ])
 
   // TODO connect with the component and with redux...
   const dispatch = useDispatch()
@@ -61,9 +32,9 @@ const MySchemes = () => {
 
         setMySchemes(response.data)
 
-        setMySchemes(response.data)
       } catch (e) {
         console.error(e)
+        dispatch(setLoading(false))
       }
     }
     fetchMySchemes()
