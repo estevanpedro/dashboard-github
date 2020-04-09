@@ -29,7 +29,7 @@ const Table = ({ splitInfo, id }: Props) => {
         </Colunm>
 
         <Colunm>
-          <PayloadText>{splitInfo.balance || '1'} BTC</PayloadText>
+          <PayloadText>{splitInfo.balance || '0'} BTC</PayloadText>
         </Colunm>
 
         <Colunm>

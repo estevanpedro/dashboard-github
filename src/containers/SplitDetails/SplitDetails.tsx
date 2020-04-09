@@ -137,15 +137,7 @@ const SplitDetails = (props: any) => {
             </BalanceText>
             <TableText width='25px'>{info.info.percentage * 100}</TableText>
             <TableText width='100px'>
-              {info.name.charAt(0).toUpperCase() +
-                info.name.slice(1).split(' ')[0] +
-                ' ' +
-                info.name
-                  .slice(1)
-                  .split(' ')[1]
-                  .charAt(0)
-                  .toUpperCase() +
-                info.name.split(' ')[1].slice(1)}
+              {info.name}
             </TableText>
             <TableText width='40px'></TableText>
           </ValuesField>
