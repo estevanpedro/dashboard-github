@@ -61,7 +61,7 @@ const Profile = () => {
       </ProfileField>
       <ProfileField>
         <SubTitle>Password</SubTitle>
-        <Link to='/'>Change Password</Link>
+        <Link to='/forgot'>Change Password</Link>
       </ProfileField>
       <ProfileField>
         <SubTitle>API Token</SubTitle>

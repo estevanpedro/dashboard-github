@@ -2,7 +2,8 @@ import styled from 'styled-components'
 import { Link } from '@reach/router'
 
 export default styled(Link)`
-  font-size: ${props => props.theme.fontSize.regular};
+  margin: -20px 0 0 0;
+  font-size: ${props => props.theme.fontSize.verySmall};
   color: ${props => props.theme.colors.primary};
   /* border-bottom: 2px solid ${props => props.theme.colors.primary}; */
   text-decoration: none;
@@ -11,10 +12,10 @@ export default styled(Link)`
     color: ${props => props.theme.colors.secondary};
     border-color: ${props => props.theme.colors.secondary};
   }
+  align-self: flex-end;
 `
 
 export const TextLink = styled.a<TextLinkProps>`
-  margin: ${props => props.margin || '0'};
   font-size: ${props => props.theme.fontSize.regular};
   color: ${props => props.theme.colors.primary};
   text-decoration: none;
@@ -22,5 +23,5 @@ export const TextLink = styled.a<TextLinkProps>`
 `
 
 interface TextLinkProps {
-  margin?: string
+    margin?: string
 }

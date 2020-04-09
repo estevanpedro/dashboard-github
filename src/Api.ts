@@ -2,13 +2,6 @@ import axios from 'axios'
 
 import { SchemeInfo } from './apiTypes'
 
-// TODO LIST
-// getMySchemes
-// getLibrary
-// logout
-// createScheme
-// updateScheme
-
 class Api {
   url: string
   options: {
@@ -70,6 +63,39 @@ class Api {
         console.log('Axios catch UserSignup: ', err)
       })
   }
+
+  forgotPassword = async (email: string) => {
+    return await axios
+      .post(`${this.url}/forgot`,
+        {
+          email
+        })
+      .then((response: any) => {
+        console.log('response of forgotPassword: ')
+        return response
+      })
+      .catch((err: any) => {
+        console.log('Axios catch forgotPassword')
+      })
+  }
+
+  resetPassword = async (reset_token: string, password: string) => {
+    console.log('token: ', reset_token, 'password: ', password)
+    return await axios
+      .post(`${this.url}/reset`,
+        {
+          reset_token,
+          password
+        })
+      .then((response: any) => {
+        console.log('response of resetPassword: ')
+        return response
+      })
+      .catch((err: any) => {
+        console.log('Axios catch resetPassword: ', err)
+      })
+  }
+
 
   getProfile = async (secretToken: string) => {
     return await axios
