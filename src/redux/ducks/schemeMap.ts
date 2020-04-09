@@ -57,13 +57,11 @@ const reducer = createSlice({
       state: SchemeMapState,
       action: PayloadAction<{
         id: string
-        attr: string
-        value: string | number
+        nodeValue: SchemeNodeType
       }>
     ) {
-      const { id, attr, value } = action.payload
-      const newTree = updateTreeNode(id, attr, value, state.rootNode)
-
+      const { id, nodeValue } = action.payload
+      const newTree = updateTreeNode(id, nodeValue, state.rootNode)
       if (newTree) {
         state.rootNode = newTree
       }

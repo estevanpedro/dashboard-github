@@ -14,12 +14,14 @@ import {
 import { TitleType } from '../../SchemeNode/options'
 
 import { MenuButtonContainer, BorderContainer } from '../elements'
+import { FormData } from './types'
 
 interface Props {
   onConfirm: (title: TitleType, formData: any) => void
+  initialState?: FormData
 }
-const SplitForm = ({ onConfirm }: Props) => {
-  const splitInitialValues = {
+const SplitForm = ({ onConfirm, initialState }: Props) => {
+  const splitInitialValues: FormData = {
     name: 'Split',
     address: '',
     splits: [
@@ -36,7 +38,10 @@ const SplitForm = ({ onConfirm }: Props) => {
   }
 
   return (
-    <Formik initialValues={splitInitialValues} onSubmit={handleSubmit}>
+    <Formik
+      initialValues={initialState || splitInitialValues}
+      onSubmit={handleSubmit}
+    >
       {({ values, handleChange, handleSubmit, setFieldValue }) => (
         <form onSubmit={handleSubmit}>
           <Input

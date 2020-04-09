@@ -78,20 +78,21 @@ export const removeTreeNode = (
 /**
  * Update an anttribute of a node from the three
  * @param {string} id Id from node to be updated
- * @param {string }attr Node attribute to be updated
- * @param {string} value New attribute value
+ * @param {string} value New node value
  * @param {SchemeNodeType} root Root node
  */
 export const updateTreeNode = (
   id: string,
-  attr: string,
-  value: string | number,
+  value: SchemeNodeType,
   root: SchemeNodeType
 ): SchemeNodeType | undefined => {
   const rootCopy = JSON.parse(JSON.stringify(root))
 
   return findTreeNode(id, rootCopy, n => {
-    n.info[attr] = value
+    n.name = value.name
+    n.address = value.address
+    n.children = value.children
+    console.log(rootCopy)
     return rootCopy
   })
 }

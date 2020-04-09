@@ -12,6 +12,8 @@ import {
 
 import { IconType } from 'react-icons/lib/cjs'
 
+import { FormData } from '../NodeMenu/Forms/types'
+
 // import {
 //   SplitContent,
 //   TimerContent,
@@ -33,6 +35,7 @@ export interface NodeOption {
   icon: IconType
   content: FunctionComponent<{
     onConfirm: (type: TitleType, data: any) => void
+    initialState?: FormData
   }>
 }
 
