@@ -63,8 +63,8 @@ const SplitDetails = ({
     datasets: [
       {
         data: ShareData(firstSplit)[1],
-        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-        hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#FF9140', '#36f2EB'],
+        hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#FF9140', '#36f2EB'],
       },
     ],
   }
@@ -76,7 +76,7 @@ const SplitDetails = ({
       months = [info.created_at].concat(months)
     })
     historyDetails.map((info: any) => {
-      amounts = [info.amount_received].concat(amounts)
+      amounts = [info.amount_received > 0 ? info.amount_received : '-' + info.amount_sent].concat(amounts)
     })
     return [months, amounts]
   }
@@ -105,18 +105,14 @@ const SplitDetails = ({
             {schemeDetails.visibility === 'public' ? 'Public' : 'Private'}
           </CategoryName>
         </Category>
-        {schemeDetails.visibility === 'public' ? (
-          <></>
-        ) : (
-            <Link
-              to={`/scheme/${schemeDetails &&
-                schemeDetails._id &&
-                schemeDetails._id.$oid}`}
-              state={{ schemeName: SplitExample.schemeName, isPublic: true }}
-            >
-              <EditButton>Edit Scheme</EditButton>
-            </Link>
-          )}
+        <Link
+          to={`/scheme/${schemeDetails &&
+            schemeDetails._id &&
+            schemeDetails._id.$oid}`}
+          state={{ schemeName: SplitExample.schemeName, isPublic: true }}
+        >
+          <EditButton>Edit Scheme</EditButton>
+        </Link>
       </Header>
 
       <Body>

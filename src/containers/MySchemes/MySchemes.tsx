@@ -61,7 +61,6 @@ const MySchemes = () => {
 
         setMySchemes(response.data)
 
-        setMySchemes(response.data)
       } catch (e) {
         console.error(e)
       }
