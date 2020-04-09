@@ -4,7 +4,7 @@ import Table from '../../components/Table'
 import Api from '../../Api'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../redux/rootReducer'
-
+import { setLoading } from '../../redux/ducks/loading'
 // TODO // import { updateLibrary } from '../../redux/ducks/library'
 
 import { LibInfo } from './types'
@@ -53,14 +53,16 @@ const Library = () => {
   useEffect(() => {
     const fetchLibrary = async () => {
       try {
+        dispatch(setLoading(true))
         const response = await Api.getLibrary()
-
+        dispatch(setLoading(false))
         console.log(response.data)
         setLibrary(response.data.schemes)
 
         // dispatch(updateLibrary(response.data.schemes))
       } catch (e) {
         console.error(e)
+        dispatch(setLoading(false))
       }
     }
     fetchLibrary()
