@@ -4,7 +4,7 @@ import Table from '../../components/Table'
 import Api from '../../Api'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../redux/rootReducer'
-
+import { setLoading } from '../../redux/ducks/loading'
 // TODO // import { updateLibrary } from '../../redux/ducks/library'
 
 import { LibInfo } from './types'
@@ -53,64 +53,78 @@ const Library = () => {
   useEffect(() => {
     const fetchLibrary = async () => {
       try {
+        dispatch(setLoading(true))
         const response = await Api.getLibrary()
-
-        setLibrary(response.data)
+        dispatch(setLoading(false))
+        console.log(response.data)
+        setLibrary(response.data.schemes)
 
         // dispatch(updateLibrary(response.data.schemes))
       } catch (e) {
         console.error(e)
+        dispatch(setLoading(false))
       }
     }
     fetchLibrary()
   }, [dispatch])
 
 
+  // const compareValues = (valueA: number | string, valueB: number | string) => {
+  //   if (valueA < valueB) return 1
+  //   if (valueA > valueB) return -1
+  //   return 0
+  // }
+
+  // const Tab = (preference: string) => {
+  //   if (preference === 'balance') {
+  //     library.sort((a: any, b: any) =>
+  //       compareValues(a.balance, b.balance)
+  //     )
+
+  //     const balance = library.map((info: any, id: number, key: any) => {
+  //       return <Table splitInfo={info} id={id} key={key} />
+  //     })
+
+  //     return balance
+  //   } else if (preference === 'currency') {
+  //     library.sort((a: any, b: any) =>
+  //       compareValues(a.currency, b.currency)
+  //     )
+
+  //     const currency = library.map((info: any, id: number, key: any) => {
+  //       return <Table splitInfo={info} id={id} key={key} />
+  //     })
+
+  //     return currency
+  //   } else if (preference === 'lastTransaction') {
+  //     library.sort((a: any, b: any) =>
+  //       compareValues(parseInt(a.lastTransaction), parseInt(b.lastTransaction))
+  //     )
+
+  //     const lastTransaction = library.map(
+  //       (info: any, id: number) => {
+  //         return <Table splitInfo={info} id={id} key={info._id.$oid} />
+  //       }
+  //     )
+
+  //     return lastTransaction
+  //   }
+  // }
   const compareValues = (valueA: number | string, valueB: number | string) => {
     if (valueA < valueB) return 1
     if (valueA > valueB) return -1
     return 0
   }
 
-  const Tab = (preference: string) => {
-    if (preference === 'balance') {
-      libInfoExample.sort((a: LibInfo, b: LibInfo) =>
-        compareValues(a.balance, b.balance)
-      )
-
-      const balance = libInfoExample.map((info: LibInfo, id: number, key: any) => {
-        return <Table splitInfo={info} id={id} key={key} />
-      })
-
-      return balance
-    } else if (preference === 'currency') {
-      libInfoExample.sort((a: LibInfo, b: LibInfo) =>
-        compareValues(a.currency, b.currency)
-      )
-
-      const currency = libInfoExample.map((info: LibInfo, id: number, key: any) => {
-        return <Table splitInfo={info} id={id} key={key} />
-      })
-
-      return currency
-    } else if (preference === 'lastTransaction') {
-      libInfoExample.sort((a: LibInfo, b: LibInfo) =>
-        compareValues(parseInt(a.lastTransaction), parseInt(b.lastTransaction))
-      )
-
-      const lastTransaction = libInfoExample.map(
-        (info: LibInfo, id: number, key: any) => {
-          return <Table splitInfo={info} id={id} key={key} />
-        }
-      )
-
-      return lastTransaction
-    }
+  const handleTab = () => {
+    return library.map((info: any, i: number) => (
+      <Table splitInfo={info} id={i} key={info._id.$oid} />
+    ))
   }
 
   return (
     <LibraryTable
-      Tab={Tab}
+      Tab={handleTab}
       colorBalance={colorBalance}
       setcolorBalance={setcolorBalance}
       colorCurrency={colorCurrency}

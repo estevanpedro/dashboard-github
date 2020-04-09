@@ -2,13 +2,6 @@ import axios from 'axios'
 
 import { SchemeInfo } from './apiTypes'
 
-// TODO LIST
-// getMySchemes
-// getLibrary
-// logout
-// createScheme
-// updateScheme
-
 class Api {
   url: string
   options: {
@@ -71,6 +64,39 @@ class Api {
       })
   }
 
+  forgotPassword = async (email: string) => {
+    return await axios
+      .post(`${this.url}/forgot`,
+        {
+          email
+        })
+      .then((response: any) => {
+        console.log('response of forgotPassword: ')
+        return response
+      })
+      .catch((err: any) => {
+        console.log('Axios catch forgotPassword')
+      })
+  }
+
+  resetPassword = async (reset_token: string, password: string) => {
+    console.log('token: ', reset_token, 'password: ', password)
+    return await axios
+      .post(`${this.url}/reset`,
+        {
+          reset_token,
+          password
+        })
+      .then((response: any) => {
+        console.log('response of resetPassword: ')
+        return response
+      })
+      .catch((err: any) => {
+        console.log('Axios catch resetPassword: ', err)
+      })
+  }
+
+
   getProfile = async (secretToken: string) => {
     return await axios
       .get(`${this.url}/user-details`, {
@@ -117,6 +143,23 @@ class Api {
       })
   }
 
+  getSchemeDetails = async (data: { secretToken: string, schemeId: any }) => {
+    const { secretToken, schemeId } = data
+    return await axios
+      .get(`${this.url}/scheme/${schemeId}`, {
+        headers: {
+          Authorization: `Bearer ${secretToken}`,
+        },
+      })
+      .then((response: any) => {
+        console.log('Trying to getSchemeInfo: ', response)
+        return response
+      })
+      .catch((err: any) => {
+        console.log('Axios catch getSchemeInfo error: ', err)
+      })
+  }
+
   // THIS AXIOS WAS NOT TESTED... API INCOMPLETE
   createScheme = async (secretToken: string, newSchemeInfo: SchemeInfo) => {
     return await axios
@@ -159,25 +202,26 @@ class Api {
   // Need to configure the API endpoint to accpect id, right now, it only accepts _id.
   // This endpoint is used to get de history transactions of an specific scheme, utilizing the scheme to get it,
   // it should show only the transaction history of the first split of a scheme.
-  splitDetails = async (detailsData: {
-    secretToken: string
-    schemeId: string
-  }) => {
-    const { secretToken, schemeId } = detailsData
-
+  getHistory = async (
+    req: {
+      secretToken: string
+      address: any
+    }) => {
+    const { secretToken, address } = req
     return await axios
-      .get(`${this.url}/scheme/${schemeId}`, {
-        headers: {
-          Authorization: `Bearer ${secretToken}`,
-          'Access-Control-Allow-Origin': '*',
-        },
-      })
+      .get(`${this.url}/history/${address}`,
+        {
+          headers: {
+            Authorization: `Bearer ${secretToken}`,
+          },
+        }
+      )
       .then((response: any) => {
-        console.log('Trying to splitDetails: ', response)
+        // console.log('Trying to getHistory: ', response)
         return response
       })
       .catch((err: any) => {
-        console.log('Axios catch splitDetails error: ', err)
+        console.log('Axios catch getHistory error: ', err)
       })
   }
 }

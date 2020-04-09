@@ -77,25 +77,31 @@ const SplitDetails = (props: any) => {
   const dispatch = useDispatch()
   const [schemeId, setSchemeId] = useState(props.schemeId) // splitId is coming from the Library or from the MyScheme throuth routes
   const [schemeDetails, setSchemeDetails] = useState<any[]>([]) // Need to connect splitDetails to the component...
+  const [firstSplit, setFirstSplit] = useState<any[]>([])
   const { secretToken } = useSelector((state: RootState) => state.auth)
-
+  const [historyDetails, setHistoryDetails] = useState<any[]>([])
   useEffect(() => {
-    const fetchSplitDetails = async () => {
+    const fetchSchemeDetails = async () => {
       const detailsData = {
         secretToken,
         schemeId,
       }
       try {
         dispatch(setLoading(true))
-        const response = await Api.splitDetails(detailsData)
+        const response = await Api.getSchemeDetails(detailsData)
         dispatch(setLoading(false))
         setSchemeDetails(response.data)
+        setFirstSplit(response.data.tree.children[0].children)
         // dispatch(updateSplitDetails(response.data.schemes))
+        // GET HISTORY
+        const history = await Api.getHistory({ secretToken, address: response.data.tree.address })
+        setHistoryDetails(history.data)
+        // console.log('history: ', history.data)
       } catch (e) {
         console.error(e)
       }
     }
-    fetchSplitDetails()
+    fetchSchemeDetails()
   }, [dispatch, props.splitId])
 
   function createTransList() {
@@ -103,51 +109,52 @@ const SplitDetails = (props: any) => {
       return (
         <>
           <ValuesField pair={id % 2 === 0 ? true : false}>
-            <BalanceText>{info.amount}</BalanceText>
+            <BalanceText>{info.amount_received > 0 ? info.amount_received : '-' + info.amount_sent}</BalanceText>
             <TableText>{info.created_at}</TableText>
-            <TableText>{info.type}</TableText>
+            <TableText>{info.network}</TableText>
           </ValuesField>
         </>
       )
     }
-    const Map = historyExample.reverse().map((info: any, id: number) => {
-      return <Table info={info} id={id} />
+    const Map = historyDetails.reverse().map((info: any, id: number) => {
+      return <Table info={info} id={id} key={id} />
     })
     return Map
   }
 
   function createShareList() {
-    const Table = ({ splitInfo, id }: { splitInfo: any; id: number }) => {
+    const Table = ({ info, id }: { info: any; id: number }) => {
       return (
         <>
           <ValuesField pair={id % 2 === 0 ? true : false}>
             <BalanceText width='60px'>
-              {splitInfo.address.slice(0, 3) +
+              {info.address.slice(0, 3) +
                 '...' +
-                splitInfo.address.slice(
-                  splitInfo.address.length - 3,
-                  splitInfo.address.length
+                info.address.slice(
+                  info.address.length - 3,
+                  info.address.length
                 )}
             </BalanceText>
-            <TableText width='25px'>{splitInfo.size}</TableText>
+            <TableText width='25px'>{info.info.percentage * 100}</TableText>
             <TableText width='100px'>
-              {splitInfo.label.charAt(0).toUpperCase() +
-                splitInfo.label.slice(1).split(' ')[0] +
+              {info.name.charAt(0).toUpperCase() +
+                info.name.slice(1).split(' ')[0] +
                 ' ' +
-                splitInfo.label
+                info.name
                   .slice(1)
                   .split(' ')[1]
                   .charAt(0)
                   .toUpperCase() +
-                splitInfo.label.split(' ')[1].slice(1)}
+                info.name.split(' ')[1].slice(1)}
             </TableText>
-            <TableText width='40px'>{splitInfo.paid}</TableText>
+            <TableText width='40px'></TableText>
           </ValuesField>
         </>
       )
     }
-    const Map = SplitExample.owners.map((info: any, id: number) => {
-      return <Table splitInfo={info} id={id} />
+    console.log('firstSplit: ', firstSplit)
+    const Map = firstSplit.map((info: any, id: number) => {
+      return <Table info={info} id={id} key={id} />
     })
     return Map
   }
@@ -159,6 +166,8 @@ const SplitDetails = (props: any) => {
       historyExample={historyExample}
       createShareList={createShareList}
       createTransList={createTransList}
+      firstSplit={firstSplit}
+      historyDetails={historyDetails}
     />
   )
 }

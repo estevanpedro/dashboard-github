@@ -16,6 +16,8 @@ import Profile from './containers/Profile'
 import SchemeMap from './containers/SchemeMap'
 import SplitDetails from './containers/SplitDetails'
 import ThemeService from './services/ThemeService'
+import ForgotPassword from './containers/ForgotPassword'
+import ResetPassword from './containers/ResetPassword'
 
 dotenv.config()
 
@@ -34,6 +36,8 @@ const App = (): JSX.Element => (
             <LoggedRoute path='/profile' component={Profile} />
             <LoggedRoute path='/scheme/:schemeId' component={SchemeMap} />
             <Route path='/split-details/:schemeId' component={SplitDetails} />
+            <Route path='/forgot' component={ForgotPassword} />
+            <Route path='/reset' component={ResetPassword} />
             {/* <Route path="/" component={}/> */}
           </Router>
         </PersistGate>
