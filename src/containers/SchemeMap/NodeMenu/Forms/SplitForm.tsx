@@ -48,7 +48,7 @@ const SplitForm = ({ onConfirm }: Props) => {
             width='100%'
           />
           <Input
-            label='Address(optional)'
+            label='Address (optional)'
             name='address'
             value={values.address}
             onChange={handleChange}
@@ -89,7 +89,7 @@ const SplitForm = ({ onConfirm }: Props) => {
                             width='100%'
                           />
                           <Input
-                            label='Share address(optional)'
+                            label='Share address (optional)'
                             name={`splits.${index}.address`}
                             value={split.address}
                             onChange={handleChange}
