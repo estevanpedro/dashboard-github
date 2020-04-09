@@ -3,9 +3,9 @@ import styled from 'styled-components'
 export const Containner = styled.div``
 export const Text = styled.p`
   /* margin: 0 0 0 0; */
-  font-size: ${props => props.theme.fontSize.regular};
+  font-size: ${props => props.theme.fontSize.verySmall};
   color: ${props => props.theme.colors.contrast};
-  
+  margin: 15px 0 25px 0;
 `
 export const TextMargin = styled.p`
   margin: 15px 0 25px 0;

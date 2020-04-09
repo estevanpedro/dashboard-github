@@ -26,7 +26,9 @@ const ResetPassword = () => {
 
     return (
         <ForgotContainer onSubmit={handleSubmit}>
-            <Title>Forgot Password</Title>
+
+            <Title>Change your password</Title>
+
             <Input
                 type='text'
                 label='Email'

@@ -25,7 +25,8 @@ const ResetPassword = () => {
 
     return (
         <ForgotContainer>
-            <Title>Forgot Password</Title>
+            <Title>New Password</Title>
+
             <Input
                 type='text'
                 label='Token'
@@ -41,6 +42,7 @@ const ResetPassword = () => {
             <Button onClick={() => { handleSubmit(reset_token, password) }} margin='0 0 20px 0'>
                 Confirm
                 </Button>
+            <Text>Check your e-mail to get the token.</Text>
         </ForgotContainer>
     )
 }
