@@ -1,6 +1,10 @@
 import uniqid from 'uniqid'
 
-import { addNode, removeNode } from '../../../../redux/ducks/schemeMap'
+import {
+  addNode,
+  removeNode,
+  updateNode,
+} from '../../../../redux/ducks/schemeMap'
 import { Split } from '../../../../redux/ducks/nodeOptions/split'
 import { Email } from '../../../../redux/ducks/nodeOptions/notify'
 import { Address } from '../../../../redux/ducks/nodeOptions/send'
@@ -129,4 +133,13 @@ export const addSend = (
  */
 export const deleteNode = (id: string) => {
   return removeNode({ id })
+}
+
+/**
+ * Edit node helper
+ * @param id node id
+ * @param nodeValue new node value
+ */
+export const editNode = (id: string, nodeValue: SchemeNodeType) => {
+  return updateNode({ id, nodeValue })
 }
