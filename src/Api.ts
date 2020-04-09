@@ -184,7 +184,6 @@ class Api {
     const { secretToken, address } = req
     return await axios
       .get(`${this.url}/history/${address}`,
-        // .get(`http://127.0.0.1:8000/history/2MyEy6i77Xf35qhnw2drK5SexSrczGfHn4x`,
         {
           headers: {
             Authorization: `Bearer ${secretToken}`,
