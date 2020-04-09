@@ -24,8 +24,8 @@ const Table = ({ splitInfo, id }: Props) => {
           {splitInfo.schemeCreator ? (
             <Name>{splitInfo.schemeCreator}</Name>
           ) : (
-            <div />
-          )}
+              <div />
+            )}
         </Colunm>
 
         <Colunm>

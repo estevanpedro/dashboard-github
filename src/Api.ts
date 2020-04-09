@@ -117,6 +117,23 @@ class Api {
       })
   }
 
+  getSchemeDetails = async (data: { secretToken: string, schemeId: any }) => {
+    const { secretToken, schemeId } = data
+    return await axios
+      .get(`${this.url}/scheme/${schemeId}`, {
+        headers: {
+          Authorization: `Bearer ${secretToken}`,
+        },
+      })
+      .then((response: any) => {
+        console.log('Trying to getSchemeInfo: ', response)
+        return response
+      })
+      .catch((err: any) => {
+        console.log('Axios catch getSchemeInfo error: ', err)
+      })
+  }
+
   // THIS AXIOS WAS NOT TESTED... API INCOMPLETE
   createScheme = async (secretToken: string, newSchemeInfo: SchemeInfo) => {
     return await axios
@@ -159,25 +176,27 @@ class Api {
   // Need to configure the API endpoint to accpect id, right now, it only accepts _id.
   // This endpoint is used to get de history transactions of an specific scheme, utilizing the scheme to get it,
   // it should show only the transaction history of the first split of a scheme.
-  splitDetails = async (detailsData: {
-    secretToken: string
-    schemeId: string
-  }) => {
-    const { secretToken, schemeId } = detailsData
-
+  getHistory = async (
+    req: {
+      secretToken: string
+      address: any
+    }) => {
+    const { secretToken, address } = req
     return await axios
-      .get(`${this.url}/scheme/${schemeId}`, {
-        headers: {
-          Authorization: `Bearer ${secretToken}`,
-          'Access-Control-Allow-Origin': '*',
-        },
-      })
+      .get(`${this.url}/history/${address}`,
+        // .get(`http://127.0.0.1:8000/history/2MyEy6i77Xf35qhnw2drK5SexSrczGfHn4x`,
+        {
+          headers: {
+            Authorization: `Bearer ${secretToken}`,
+          },
+        }
+      )
       .then((response: any) => {
-        console.log('Trying to splitDetails: ', response)
+        // console.log('Trying to getHistory: ', response)
         return response
       })
       .catch((err: any) => {
-        console.log('Axios catch splitDetails error: ', err)
+        console.log('Axios catch getHistory error: ', err)
       })
   }
 }

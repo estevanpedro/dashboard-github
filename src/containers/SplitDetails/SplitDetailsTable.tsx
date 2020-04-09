@@ -32,6 +32,8 @@ interface Props {
   createShareList: any
   createTransList: any
   schemeDetails: any
+  firstSplit: any
+  historyDetails: any
 }
 
 const SplitDetails = ({
@@ -40,43 +42,47 @@ const SplitDetails = ({
   createShareList,
   createTransList,
   schemeDetails,
+  firstSplit,
+  historyDetails
 }: Props) => {
-  let ShareData = (apiDATA: any) => {
+
+  let ShareData = (firstSplit: any) => {
     let labels: any[] = []
     let size: any[] = []
-    apiDATA.owners.map((info: any) => {
-      labels = [info.label].concat(labels)
+    firstSplit.map((info: any) => {
+      labels = [info.name].concat(labels)
     })
-    apiDATA.owners.map((info: any) => {
-      size = [info.size].concat(size)
+    firstSplit.map((info: any) => {
+      size = [info.info.percentage].concat(size)
     })
     return [labels, size]
   }
+
   const ShareChart = {
-    labels: ShareData(SplitExample)[0],
+    labels: ShareData(firstSplit)[0],
     datasets: [
       {
-        data: ShareData(SplitExample)[1],
+        data: ShareData(firstSplit)[1],
         backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
         hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
       },
     ],
   }
 
-  let PayoutData = (apiDATA: any) => {
+  let PayoutData = (historyDetails: any) => {
     let months: any[] = []
     let amounts: any[] = []
-    apiDATA.map((info: any) => {
+    historyDetails.map((info: any) => {
       months = [info.created_at].concat(months)
     })
-    apiDATA.map((info: any) => {
-      amounts = [info.amount].concat(amounts)
+    historyDetails.map((info: any) => {
+      amounts = [info.amount_received].concat(amounts)
     })
     return [months, amounts]
   }
 
   const PayoutsChart = {
-    labels: PayoutData(historyExample.reverse())[0],
+    labels: PayoutData(historyDetails.reverse())[0],
     datasets: [
       {
         label: 'Payouts',
@@ -85,7 +91,7 @@ const SplitDetails = ({
         borderWidth: 1,
         hoverBackgroundColor: 'rgba(255,99,132,0.4)',
         hoverBorderColor: 'rgba(255,99,132,1)',
-        data: PayoutData(historyExample.reverse())[1],
+        data: PayoutData(historyDetails.reverse())[1],
       },
     ],
   }
@@ -102,15 +108,15 @@ const SplitDetails = ({
         {schemeDetails.visibility === 'public' ? (
           <></>
         ) : (
-          <Link
-            to={`/scheme/${schemeDetails &&
-              schemeDetails._id &&
-              schemeDetails._id.$oid}`}
-            state={{ schemeName: SplitExample.schemeName, isPublic: true }}
-          >
-            <EditButton>Edit Scheme</EditButton>
-          </Link>
-        )}
+            <Link
+              to={`/scheme/${schemeDetails &&
+                schemeDetails._id &&
+                schemeDetails._id.$oid}`}
+              state={{ schemeName: SplitExample.schemeName, isPublic: true }}
+            >
+              <EditButton>Edit Scheme</EditButton>
+            </Link>
+          )}
       </Header>
 
       <Body>
