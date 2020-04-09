@@ -23,6 +23,8 @@ import {
   DeleteContent,
 } from './ModalContents'
 
+import SplitForm from '../NodeMenu/Forms/SplitForm'
+
 export type TitleType = 'Split' | 'Timer' | 'Notify' | 'Send' | 'Swap' | 'Event'
 
 export interface NodeOption {
@@ -37,7 +39,7 @@ const options: NodeOption[] = [
     id: 1,
     title: 'Split',
     icon: MdCallSplit,
-    content: SplitContent,
+    content: SplitForm,
   },
   // {
   //   id: 2,

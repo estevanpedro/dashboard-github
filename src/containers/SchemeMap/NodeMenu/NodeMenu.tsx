@@ -45,6 +45,7 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
           direction='column'
           justify='flex-start'
           align='flex-start'
+          padding='20px'
         >
           <SubTitle>{name}</SubTitle>
           <Line margin='0 0 20px 0' />

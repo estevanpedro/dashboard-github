@@ -13,6 +13,8 @@ import {
 } from '../SchemeNode/utils/toolsFuncions'
 import { SchemeNodeType } from '../SchemeNode/utils/nodeType'
 
+import { MenuButtonContainer } from './elements'
+
 import NewNodeOption from './NewNodeOption'
 
 interface Props {
@@ -55,24 +57,39 @@ const MenuOptions = ({ data, returnToInfo }: Props) => {
       }
 
       return (
-        <FlexContainer direction='column'>
+        <FlexContainer
+          height='100%'
+          width='100%'
+          direction='column'
+          position='relative'
+          justify='flex-start'
+          padding='20px'
+        >
           <TextLink onClick={() => setOptionActive(null)} margin='0 0 20px 0'>
             ← Add new node
           </TextLink>
           <optionActive.content />
-          <Button
-            onClick={() => handleConfirm(optionActive.title)}
-            align='flex-end'
-            margin='20px 0'
-          >
-            Confirm
-          </Button>
+          <MenuButtonContainer>
+            <Button
+              onClick={() => handleConfirm(optionActive.title)}
+              align='flex-end'
+              margin='20px 0'
+            >
+              Confirm
+            </Button>
+          </MenuButtonContainer>
         </FlexContainer>
       )
     }
 
     return (
-      <>
+      <FlexContainer
+        direction='column'
+        width='100%'
+        height='100%'
+        justify='flex-start'
+        padding='20px'
+      >
         <TextLink
           onClick={returnToInfo}
           margin='0 0 20px 0'
@@ -87,7 +104,7 @@ const MenuOptions = ({ data, returnToInfo }: Props) => {
             />
           ))}
         </FlexContainer>
-      </>
+      </FlexContainer>
     )
   }
 

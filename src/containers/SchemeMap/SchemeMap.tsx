@@ -47,8 +47,10 @@ const SchemeMap = ({ location, schemeId }: Props & RouteComponentProps) => {
         dispatch(setLoading(true))
         const response = await Api.splitDetails({ secretToken, schemeId: id })
         dispatch(setLoading(false))
-        setSchemeInfo(response.data)
-        dispatch(loadRoot({ root: response.data.tree }))
+        if (response) {
+          setSchemeInfo(response.data)
+          dispatch(loadRoot({ root: response.data.tree }))
+        }
       }
     }
     fetchScheme()
@@ -63,8 +65,6 @@ const SchemeMap = ({ location, schemeId }: Props & RouteComponentProps) => {
         visibility: schemeInfo.visibility,
         tree: rootNode,
       }
-
-      console.log(schemeCopy)
 
       if (schemeId) {
         dispatch(setLoading(true))
