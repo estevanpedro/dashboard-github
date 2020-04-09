@@ -23,7 +23,7 @@ export const MenuContainer = styled.menu`
     background: ${props => props.theme.colors.background};
   }
   ::-webkit-scrollbar {
-    width: 13px;
+    width: 5px;
     background: ${props => props.theme.colors.background};
   }
   ::-webkit-scrollbar-thumb {
@@ -56,4 +56,14 @@ export const MenuButtonContainer = styled(FlexContainer)`
   align-items: feComponentTransfer;
   justify-content: flex-end;
   bottom: 0;
+`
+
+export const BorderContainer = styled.div`
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 3px solid ${props => props.theme.colors.primary};
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `

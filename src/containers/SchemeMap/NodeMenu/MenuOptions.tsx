@@ -40,19 +40,24 @@ const MenuOptions = ({ data, returnToInfo }: Props) => {
     (state: RootState) => state.send
   )
 
-  const OptionFunctions = {
-    Split: addSplit(data, splitName, splits),
-    Timer: addTimer(data, timerName, { hours, minutes, seconds }),
-    Notify: addNotify(data, notifyName, emails),
-    Send: addSend(data, sendName, addresses),
-    Swap: () => {},
-    Event: () => {},
-  }
+  // const OptionFunctions = {
+  //   Split: addSplit(data, splitName, splits),
+  //   Timer: addTimer(data, timerName, { hours, minutes, seconds }),
+  //   Notify: addNotify(data, notifyName, emails),
+  //   Send: addSend(data, sendName, addresses),
+  //   Swap: () => {},
+  //   Event: () => {},
+  // }
 
   const handleMenuRender = () => {
     if (optionActive) {
-      const handleConfirm = (type: TitleType) => {
-        dispatch(OptionFunctions[type])
+      const handleConfirm = (type: TitleType, formData: any) => {
+        switch (type) {
+          case 'Split':
+            dispatch(
+              addSplit(data, formData.name, formData.address, formData.splits)
+            )
+        }
         returnToInfo()
       }
 
@@ -68,16 +73,8 @@ const MenuOptions = ({ data, returnToInfo }: Props) => {
           <TextLink onClick={() => setOptionActive(null)} margin='0 0 20px 0'>
             ← Add new node
           </TextLink>
-          <optionActive.content />
-          <MenuButtonContainer>
-            <Button
-              onClick={() => handleConfirm(optionActive.title)}
-              align='flex-end'
-              margin='20px 0'
-            >
-              Confirm
-            </Button>
-          </MenuButtonContainer>
+          <SubTitle>{optionActive.title}</SubTitle>
+          <optionActive.content onConfirm={handleConfirm} />
         </FlexContainer>
       )
     }

@@ -19,8 +19,10 @@ export const TextLink = styled.a<TextLinkProps>`
   color: ${props => props.theme.colors.primary};
   text-decoration: none;
   cursor: pointer;
+  align-self: ${props => props.alignSelf || 'flex-start'};
 `
 
 interface TextLinkProps {
   margin?: string
+  alignSelf?: 'flex-start' | 'center' | 'flex-end'
 }

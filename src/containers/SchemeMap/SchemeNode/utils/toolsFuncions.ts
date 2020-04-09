@@ -17,19 +17,22 @@ import { SchemeNodeType } from './nodeType'
 export const addSplit = (
   nodeData: SchemeNodeType,
   name: string,
+  address: string,
   splits: Split[]
 ) => {
   return addNode({
     id: nodeData.id,
     node: {
       id: uniqid(),
+      address,
+      name,
       type: 'split',
-      name: name,
       children: splits.map(split => {
         return {
           id: uniqid(),
           type: 'address',
           name: split.name,
+          address: split.address,
           children: [],
           info: {
             percentage: split.share / 100,

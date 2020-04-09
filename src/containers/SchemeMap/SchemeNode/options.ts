@@ -31,7 +31,9 @@ export interface NodeOption {
   id: number
   title: TitleType
   icon: IconType
-  content: FunctionComponent
+  content: FunctionComponent<{
+    onConfirm: (type: TitleType, data: any) => void
+  }>
 }
 
 const options: NodeOption[] = [
