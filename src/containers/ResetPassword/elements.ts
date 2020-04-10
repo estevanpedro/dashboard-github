@@ -11,7 +11,6 @@ export const TextMargin = styled.p`
   margin: 15px 0 25px 0;
   font-size: ${props => props.theme.fontSize.regular};
   color: ${props => props.theme.colors.contrast};
-  
 `
 
 export const ForgotForm = styled.form`
@@ -24,8 +23,11 @@ export const ForgotForm = styled.form`
 
 export const ForgotContainer = styled.div`
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  form {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 `

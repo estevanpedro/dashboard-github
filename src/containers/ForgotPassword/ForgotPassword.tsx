@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useDispatch } from 'react-redux'
 import { navigate } from '@reach/router'
 import { Formik, FormikErrors } from 'formik'
@@ -12,8 +12,6 @@ import Api from '../../Api'
 import { ForgotContainer } from './elements'
 
 const ResetPassword = () => {
-  const [email, setEmail] = useState('')
-
   const dispatch = useDispatch()
 
   const forgotInitialValues = {

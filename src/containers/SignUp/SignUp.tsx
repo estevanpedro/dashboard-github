@@ -75,7 +75,7 @@ const SignUp = () => {
       errors.username = 'Your username needs to have at least 3 characters'
     }
 
-    if (password.length < 3) {
+    if (password.length < 6) {
       errors.password = 'Your password needs to have at least 6 characters'
     }
 
