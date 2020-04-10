@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import ds from '../design/designSystem'
 
 export default styled.div<LineProps>`
   width: 100%;

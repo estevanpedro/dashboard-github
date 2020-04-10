@@ -8,7 +8,6 @@ import { addSplit } from '../SchemeNode/utils/toolsFuncions'
 import { SchemeNodeType } from '../SchemeNode/utils/nodeType'
 
 import NewNodeOption from './NewNodeOption'
-import { FormData } from './Forms/types'
 
 interface Props {
   data: SchemeNodeType

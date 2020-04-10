@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { navigate } from '@reach/router'
 import { Formik } from 'formik'
 import { useSelector, useDispatch } from 'react-redux'
@@ -47,9 +47,6 @@ const MySchemes = ({
   setPreference,
 }: Props) => {
   const { secretToken } = useSelector((state: RootState) => state.auth)
-
-  const [schemeName, setSchemeName] = useState('')
-  const [isPublic, setIsPublic] = useState()
 
   const dispatch = useDispatch()
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { RouteComponentProps, NavigateOptions } from '@reach/router'
+import { RouteComponentProps } from '@reach/router'
 import ScrollContainer from 'react-indiana-drag-scroll'
 
 import Button from '../../components/Button'
@@ -61,7 +61,7 @@ const SchemeMap = ({ schemeId }: Props & RouteComponentProps) => {
       }
     }
     fetchSchemeDetails()
-  }, [])
+  }, [dispatch, schemeId, secretToken])
 
   const handleSave = async () => {
     if (schemeInfo) {

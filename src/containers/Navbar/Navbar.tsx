@@ -14,7 +14,7 @@ const Navbar = () => {
 
   const dispatch = useDispatch()
 
-  const [isLogged, setIsLogged] = useState(secretToken ? true : false)
+  const [isLogged] = useState(secretToken ? true : false)
 
   const renderLink = (element: JSX.Element, needsLogin: boolean) => {
     if (isLogged && element.key === '5') return null

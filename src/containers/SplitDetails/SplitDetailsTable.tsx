@@ -2,8 +2,7 @@ import React from 'react'
 import { Link } from '@reach/router'
 
 import QRCode from 'qrcode.react'
-import Edit from '../../assets/icons/edit.svg'
-import IconButton from '../../components/IconButton'
+
 import {
   Category,
   CategoryName,
@@ -43,16 +42,15 @@ const SplitDetails = ({
   createTransList,
   schemeDetails,
   firstSplit,
-  historyDetails
+  historyDetails,
 }: Props) => {
-
   let ShareData = (firstSplit: any) => {
     let labels: any[] = []
     let size: any[] = []
-    firstSplit.map((info: any) => {
+    firstSplit.forEach((info: any) => {
       labels = [info.name].concat(labels)
     })
-    firstSplit.map((info: any) => {
+    firstSplit.forEach((info: any) => {
       size = [info.info.percentage].concat(size)
     })
     return [labels, size]
@@ -63,8 +61,20 @@ const SplitDetails = ({
     datasets: [
       {
         data: ShareData(firstSplit)[1],
-        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#FF9140', '#36f2EB'],
-        hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#FF9140', '#36f2EB'],
+        backgroundColor: [
+          '#FF6384',
+          '#36A2EB',
+          '#FFCE56',
+          '#FF9140',
+          '#36f2EB',
+        ],
+        hoverBackgroundColor: [
+          '#FF6384',
+          '#36A2EB',
+          '#FFCE56',
+          '#FF9140',
+          '#36f2EB',
+        ],
       },
     ],
   }
@@ -72,11 +82,15 @@ const SplitDetails = ({
   let PayoutData = (historyDetails: any) => {
     let months: any[] = []
     let amounts: any[] = []
-    historyDetails.map((info: any) => {
+    historyDetails.forEach((info: any) => {
       months = [info.created_at].concat(months)
     })
-    historyDetails.map((info: any) => {
-      amounts = [info.amount_received > 0 ? info.amount_received : '-' + info.amount_sent].concat(amounts)
+    historyDetails.forEach((info: any) => {
+      amounts = [
+        info.amount_received > 0
+          ? info.amount_received
+          : '-' + info.amount_sent,
+      ].concat(amounts)
     })
     return [months, amounts]
   }

@@ -123,7 +123,7 @@ const SplitDetails = ({ schemeId }: Props & RouteComponentProps) => {
       }
     }
     fetchSchemeDetails()
-  }, [])
+  }, [dispatch, schemeId, secretToken])
 
   function createTransList() {
     const Table = ({ info, id }: { info: any; id: number }) => {

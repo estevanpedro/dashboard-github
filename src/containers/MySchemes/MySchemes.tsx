@@ -33,13 +33,13 @@ const MySchemes = () => {
       }
     }
     fetchMySchemes()
-  }, [dispatch])
+  }, [dispatch, secretToken])
 
-  const compareValues = (valueA: number | string, valueB: number | string) => {
-    if (valueA < valueB) return 1
-    if (valueA > valueB) return -1
-    return 0
-  }
+  // const compareValues = (valueA: number | string, valueB: number | string) => {
+  //   if (valueA < valueB) return 1
+  //   if (valueA > valueB) return -1
+  //   return 0
+  // }
 
   // const Tab = (preference: string) => {
   //   if (preference === 'balance') {
