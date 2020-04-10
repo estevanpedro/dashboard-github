@@ -167,7 +167,6 @@ const SplitDetails = ({ schemeId }: Props & RouteComponentProps) => {
         </>
       )
     }
-    console.log('firstSplit: ', firstSplit)
     const Map = firstSplit.map((info: any, id: number) => {
       return <Table info={info} id={id} key={id} />
     })

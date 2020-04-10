@@ -120,9 +120,7 @@ const SplitDetails = ({
           </CategoryName>
         </Category>
         <Link
-          to={`/scheme/${schemeDetails &&
-            schemeDetails._id &&
-            schemeDetails._id.$oid}`}
+          to={`/scheme/${schemeDetails && schemeDetails._id}`}
           state={{ schemeName: SplitExample.schemeName, isPublic: true }}
         >
           <EditButton>Edit Scheme</EditButton>

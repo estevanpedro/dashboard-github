@@ -167,7 +167,11 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
     }
 
     return (
-      <Text align='center'>Click on a node to edit it or to add a new one</Text>
+      <FlexContainer padding='20px'>
+        <Text align='center'>
+          Click on a node to edit it or to add a new one
+        </Text>
+      </FlexContainer>
     )
   }
 

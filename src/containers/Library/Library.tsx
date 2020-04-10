@@ -64,7 +64,7 @@ const Library = () => {
 
   //     const lastTransaction = library.map(
   //       (info: any, id: number) => {
-  //         return <Table splitInfo={info} id={id} key={info._id.$oid} />
+  //         return <Table splitInfo={info} id={id} key={info.id} />
   //       }
   //     )
 
@@ -79,7 +79,7 @@ const Library = () => {
 
   const handleTab = () => {
     return library.map((info: any, i: number) => (
-      <Table splitInfo={info} id={i} key={info._id.$oid} />
+      <Table splitInfo={info} id={i} key={info.id} />
     ))
   }
 
