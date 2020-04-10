@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { RouteComponentProps } from '@reach/router'
 import { useSelector, useDispatch } from 'react-redux'
 
 import SplitDetailsTable from './SplitDetailsTable'
@@ -69,47 +70,71 @@ const historyExample = [
   },
 ]
 
-// interface Props {
-//   splitId?: any
-// }
+interface Props {
+  schemeId?: string
+}
 
-const SplitDetails = (props: any) => {
-  const dispatch = useDispatch()
-  const [schemeId, setSchemeId] = useState(props.schemeId) // splitId is coming from the Library or from the MyScheme throuth routes
+const SplitDetails = ({ schemeId }: Props & RouteComponentProps) => {
   const [schemeDetails, setSchemeDetails] = useState<any[]>([]) // Need to connect splitDetails to the component...
   const [firstSplit, setFirstSplit] = useState<any[]>([])
-  const { secretToken } = useSelector((state: RootState) => state.auth)
   const [historyDetails, setHistoryDetails] = useState<any[]>([])
+
+  const { secretToken } = useSelector((state: RootState) => state.auth)
+
+  const dispatch = useDispatch()
   useEffect(() => {
     const fetchSchemeDetails = async () => {
-      const detailsData = {
-        secretToken,
-        schemeId,
-      }
-      try {
-        dispatch(setLoading(true))
-        const response = await Api.getSchemeDetails(detailsData)
-        dispatch(setLoading(false))
-        setSchemeDetails(response.data)
-        setFirstSplit(response.data.tree.children[0].children)
-        // dispatch(updateSplitDetails(response.data.schemes))
-        // GET HISTORY
-        const history = await Api.getHistory({ secretToken, address: response.data.tree.address })
-        setHistoryDetails(history.data)
-        // console.log('history: ', history.data)
-      } catch (e) {
-        console.error(e)
+      if (schemeId) {
+        const detailsData = {
+          secretToken,
+          schemeId,
+        }
+
+        try {
+          dispatch(setLoading(true))
+          const response = await Api.getSchemeDetails(detailsData)
+          dispatch(setLoading(false))
+
+          setSchemeDetails(response.data)
+
+          if (
+            response.data.tree &&
+            response.data.tree.children[0] &&
+            response.data.tree.children[0].children
+          ) {
+            setFirstSplit(response.data.tree.children[0].children)
+            try {
+              dispatch(setLoading(true))
+              const history = await Api.getHistory({
+                secretToken,
+                address: response.data.tree.address,
+              })
+              dispatch(setLoading(false))
+              setHistoryDetails(history.data)
+            } catch (err) {
+              dispatch(setLoading(false))
+              console.error(err)
+            }
+          }
+        } catch (err) {
+          dispatch(setLoading(false))
+          console.error(err)
+        }
       }
     }
     fetchSchemeDetails()
-  }, [dispatch, props.splitId])
+  }, [dispatch, schemeId, secretToken])
 
   function createTransList() {
     const Table = ({ info, id }: { info: any; id: number }) => {
       return (
         <>
           <ValuesField pair={id % 2 === 0 ? true : false}>
-            <BalanceText>{info.amount_received > 0 ? info.amount_received : '-' + info.amount_sent}</BalanceText>
+            <BalanceText>
+              {info.amount_received > 0
+                ? info.amount_received
+                : '-' + info.amount_sent}
+            </BalanceText>
             <TableText>{info.created_at}</TableText>
             <TableText>{info.network}</TableText>
           </ValuesField>
@@ -136,15 +161,12 @@ const SplitDetails = (props: any) => {
                 )}
             </BalanceText>
             <TableText width='25px'>{info.info.percentage * 100}</TableText>
-            <TableText width='100px'>
-              {info.name}
-            </TableText>
+            <TableText width='100px'>{info.name}</TableText>
             <TableText width='40px'></TableText>
           </ValuesField>
         </>
       )
     }
-    console.log('firstSplit: ', firstSplit)
     const Map = firstSplit.map((info: any, id: number) => {
       return <Table info={info} id={id} key={id} />
     })

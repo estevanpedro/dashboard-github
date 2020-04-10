@@ -1,6 +1,5 @@
 import React from 'react'
-import uniqid from 'uniqid'
-import { Formik, FieldArray } from 'formik'
+import { Formik, FieldArray, ArrayHelpers } from 'formik'
 
 import {
   Button,
@@ -17,7 +16,7 @@ import { MenuButtonContainer, BorderContainer } from '../elements'
 import { FormData } from './types'
 
 interface Props {
-  onConfirm: (title: TitleType, formData: any) => void
+  onConfirm: (title: TitleType, FormData: FormData) => void
   initialState?: FormData
 }
 const SplitForm = ({ onConfirm, initialState }: Props) => {
@@ -63,7 +62,7 @@ const SplitForm = ({ onConfirm, initialState }: Props) => {
           <FieldTitle>Shares</FieldTitle>
           <FieldArray
             name='splits'
-            render={(arrayHelpers: any) => (
+            render={(arrayHelpers: ArrayHelpers) => (
               <FlexContainer direction='column'>
                 {values.splits && values.splits.length > 0
                   ? values.splits.map((split, index) => {

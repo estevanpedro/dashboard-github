@@ -1,13 +1,13 @@
 import { FunctionComponent } from 'react'
 import {
   MdCallSplit,
-  MdAccessAlarms,
-  MdNotificationsActive,
-  MdSend,
-  MdSwapHoriz,
-  MdEventAvailable,
-  MdModeEdit,
-  MdDelete,
+  // MdAccessAlarms,
+  // MdNotificationsActive,
+  // MdSend,
+  // MdSwapHoriz,
+  // MdEventAvailable,
+  // MdModeEdit,
+  // MdDelete,
 } from 'react-icons/md'
 
 import { IconType } from 'react-icons/lib/cjs'

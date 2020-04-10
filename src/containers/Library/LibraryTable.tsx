@@ -1,9 +1,8 @@
-import React, { FunctionComponent } from 'react'
+import React from 'react'
 import Title from '../../components/Title'
 import { TableContainner, Menu, Containner } from './elements'
 import TableTitles from '../../components/Table/TableTitles'
 import TableOptions from '../../components/Table/TableOptions'
-import { JSXClosingElement } from '@babel/types'
 
 export interface Props {
   Tab: (p: string) => JSX.Element[] | undefined

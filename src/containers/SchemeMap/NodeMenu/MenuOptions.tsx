@@ -1,19 +1,11 @@
 import React, { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
-import { Button, FlexContainer, SubTitle, TextLink } from '../../../components'
-import { RootState } from '../../../redux/rootReducer'
+import { FlexContainer, SubTitle, TextLink } from '../../../components'
 
 import options, { NodeOption, TitleType } from '../SchemeNode/options'
-import {
-  addSplit,
-  addTimer,
-  addNotify,
-  addSend,
-} from '../SchemeNode/utils/toolsFuncions'
+import { addSplit } from '../SchemeNode/utils/toolsFuncions'
 import { SchemeNodeType } from '../SchemeNode/utils/nodeType'
-
-import { MenuButtonContainer } from './elements'
 
 import NewNodeOption from './NewNodeOption'
 
@@ -29,11 +21,11 @@ const MenuOptions = ({ data, returnToInfo }: Props) => {
 
   const handleMenuRender = () => {
     if (optionActive) {
-      const handleConfirm = (type: TitleType, formData: any) => {
+      const handleConfirm = (type: TitleType, FormData: any) => {
         switch (type) {
           case 'Split':
             dispatch(
-              addSplit(data, formData.name, formData.address, formData.splits)
+              addSplit(data, FormData.name, FormData.address, FormData.splits)
             )
         }
         returnToInfo()

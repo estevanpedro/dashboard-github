@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { navigate } from '@reach/router'
 import { Formik } from 'formik'
 import { useSelector, useDispatch } from 'react-redux'
@@ -48,9 +48,6 @@ const MySchemes = ({
 }: Props) => {
   const { secretToken } = useSelector((state: RootState) => state.auth)
 
-  const [schemeName, setSchemeName] = useState('')
-  const [isPublic, setIsPublic] = useState()
-
   const dispatch = useDispatch()
 
   const initialNewSchemeValues = {
@@ -77,12 +74,19 @@ const MySchemes = ({
       },
     }
 
-    dispatch(setLoading(true))
-    const response = await Api.createScheme(secretToken, newSchemeInfo)
-    dispatch(setLoading(false))
+    try {
+      dispatch(setLoading(true))
+      const response = await Api.createScheme(secretToken, newSchemeInfo)
+      dispatch(setLoading(false))
 
-    const id = response.data._id.$oid
-    navigate(`/scheme/${id}`)
+      if (response.data.id) {
+        const id = response.data.id
+        navigate(`/scheme/${id}`)
+      }
+    } catch (err) {
+      dispatch(setLoading(false))
+      console.error(err)
+    }
   }
 
   return (

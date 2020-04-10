@@ -42,15 +42,20 @@ const Login = () => {
         dispatch(setLoading(true))
         const response = await Api.login(userData)
         dispatch(setLoading(false))
+
         if (response.data.error) {
           setApiError(response.data.error)
+          return
         }
-        if (response.data.acess_token) {
-          dispatch(changeSecretToken(response.data.acess_token))
+
+        if (response.data.access_token) {
+          dispatch(changeSecretToken(response.data.access_token))
           navigate('/my-schemes')
         }
-      } catch (e) {
-        console.error(e)
+      } catch (err) {
+        dispatch(setLoading(false))
+        setApiError('Invalid username or password!')
+        console.error(err)
       }
     }
   }

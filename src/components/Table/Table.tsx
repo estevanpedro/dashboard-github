@@ -6,12 +6,6 @@ import Text from '../Text'
 import { Link } from '@reach/router'
 
 export interface Props {
-  // schemeName: string
-  // schemeCreator?: string
-  // balance: number
-  // payout: number
-  // lastTransaction: string
-  // id: number
   splitInfo: any
   id: number
 }
@@ -24,8 +18,8 @@ const Table = ({ splitInfo, id }: Props) => {
           {splitInfo.schemeCreator ? (
             <Name>{splitInfo.schemeCreator}</Name>
           ) : (
-              <div />
-            )}
+            <div />
+          )}
         </Colunm>
 
         <Colunm>
@@ -45,11 +39,11 @@ const Table = ({ splitInfo, id }: Props) => {
         </Colunm>
 
         <Colunm width={'50px'}>
-          <Link to={'/split-details/' + splitInfo._id.$oid}>
+          <Link to={'/split-details/' + splitInfo.id}>
             <IconButton
               icon={Arrow}
               onClick={() => {
-                console.log('schemeId', splitInfo._id.$oid)
+                console.log('schemeId', splitInfo.id)
               }}
             />
           </Link>

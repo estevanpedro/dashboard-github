@@ -8,20 +8,16 @@ import { RootState } from '../../redux/rootReducer'
 
 import { setLoading } from '../../redux/ducks/loading'
 
-// TODO // import { updateMySchemes } from '../../redux/ducks/mySchemes'
-
-import { LibInfo } from '../Library/types'
-
 const MySchemes = () => {
   const [colorBalance, setcolorBalance] = useState('')
   const [colorCurrency, setcolorCurrency] = useState('')
   const [colorTransaction, setColorTransaction] = useState('#')
   const [preference, setPreference] = useState('lastTransaction')
-
-  // TODO connect with the component and with redux...
-  const dispatch = useDispatch()
   const [mySchemes, setMySchemes] = useState<any[]>([])
+
   const { secretToken } = useSelector((state: RootState) => state.auth)
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const fetchMySchemes = async () => {
@@ -31,20 +27,19 @@ const MySchemes = () => {
         dispatch(setLoading(false))
 
         setMySchemes(response.data)
-
-      } catch (e) {
-        console.error(e)
+      } catch (err) {
         dispatch(setLoading(false))
+        console.error(err)
       }
     }
     fetchMySchemes()
-  }, [dispatch])
+  }, [dispatch, secretToken])
 
-  const compareValues = (valueA: number | string, valueB: number | string) => {
-    if (valueA < valueB) return 1
-    if (valueA > valueB) return -1
-    return 0
-  }
+  // const compareValues = (valueA: number | string, valueB: number | string) => {
+  //   if (valueA < valueB) return 1
+  //   if (valueA > valueB) return -1
+  //   return 0
+  // }
 
   // const Tab = (preference: string) => {
   //   if (preference === 'balance') {
@@ -88,7 +83,7 @@ const MySchemes = () => {
 
   const handleTab = () => {
     return mySchemes.map((info: any, i: number) => (
-      <Table splitInfo={info} id={i} key={info._id.$oid} />
+      <Table splitInfo={info} id={i} key={info.id} />
     ))
   }
   return (

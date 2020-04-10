@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import uniqid from 'uniqid'
 import { useSelector, useDispatch } from 'react-redux'
-import { RouteComponentProps, NavigateOptions } from '@reach/router'
+import { RouteComponentProps } from '@reach/router'
 import ScrollContainer from 'react-indiana-drag-scroll'
 
 import Button from '../../components/Button'
@@ -28,11 +27,10 @@ interface NodeColumnProps {
 }
 
 interface Props {
-  location?: NavigateOptions<{ schemeName: string }>
   schemeId?: string
 }
 
-const SchemeMap = ({ location, schemeId }: Props & RouteComponentProps) => {
+const SchemeMap = ({ schemeId }: Props & RouteComponentProps) => {
   const { secretToken } = useSelector((state: RootState) => state.auth)
   const [schemeInfo, setSchemeInfo] = useState<SchemeInfo | null>(null)
   const { rootNode } = useSelector((state: RootState) => state.schemeMap)
@@ -44,17 +42,26 @@ const SchemeMap = ({ location, schemeId }: Props & RouteComponentProps) => {
     const fetchSchemeDetails = async () => {
       const id = schemeId
       if (id) {
-        dispatch(setLoading(true))
-        const response = await Api.getSchemeDetails({ secretToken, schemeId: id })
-        dispatch(setLoading(false))
-        if (response) {
-          setSchemeInfo(response.data)
-          dispatch(loadRoot({ root: response.data.tree }))
+        try {
+          dispatch(setLoading(true))
+          const response = await Api.getSchemeDetails({
+            secretToken,
+            schemeId: id,
+          })
+          dispatch(setLoading(false))
+
+          if (response.data.tree) {
+            setSchemeInfo(response.data)
+            dispatch(loadRoot({ root: response.data.tree }))
+          }
+        } catch (err) {
+          dispatch(setLoading(false))
+          console.error(err)
         }
       }
     }
     fetchSchemeDetails()
-  }, [])
+  }, [dispatch, schemeId, secretToken])
 
   const handleSave = async () => {
     if (schemeInfo) {
@@ -67,9 +74,14 @@ const SchemeMap = ({ location, schemeId }: Props & RouteComponentProps) => {
       }
 
       if (schemeId) {
-        dispatch(setLoading(true))
-        await Api.updateScheme(secretToken, schemeId, schemeCopy)
-        dispatch(setLoading(false))
+        try {
+          dispatch(setLoading(true))
+          await Api.updateScheme(secretToken, schemeId, schemeCopy)
+          dispatch(setLoading(false))
+        } catch (err) {
+          dispatch(setLoading(false))
+          console.error(err)
+        }
       }
     }
   }

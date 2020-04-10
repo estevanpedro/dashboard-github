@@ -31,7 +31,7 @@ const IconButton = ({ isSecondary, margin, icon, onClick, align }: Props) => {
       onClick={onClick}
       align={align}
     >
-      <img src={icon} />
+      <img src={icon} alt='icon' />
     </ButtonContainer>
   )
 }
