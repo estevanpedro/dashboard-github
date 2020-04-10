@@ -37,15 +37,15 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
     setIsEditAcitve(false)
   }, [nodeInfo])
 
-  const handleConfirmEdit = (title: TitleType, formData: FormData) => {
+  const handleConfirmEdit = (title: TitleType, FormData: FormData) => {
     if (nodeInfo) {
       const { id } = nodeInfo
 
       const data: SchemeNodeType = {
         ...nodeInfo,
-        name: formData.name,
-        address: formData.address,
-        children: formData.splits.map((split, i) => {
+        name: FormData.name,
+        address: FormData.address,
+        children: FormData.splits.map((split, i) => {
           return {
             ...nodeInfo.children[i],
             name: split.name,

@@ -29,11 +29,11 @@ const MenuOptions = ({ data, returnToInfo }: Props) => {
 
   const handleMenuRender = () => {
     if (optionActive) {
-      const handleConfirm = (type: TitleType, formData: any) => {
+      const handleConfirm = (type: TitleType, FormData: any) => {
         switch (type) {
           case 'Split':
             dispatch(
-              addSplit(data, formData.name, formData.address, formData.splits)
+              addSplit(data, FormData.name, FormData.address, FormData.splits)
             )
         }
         returnToInfo()

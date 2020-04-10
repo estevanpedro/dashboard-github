@@ -1,4 +1,4 @@
-export interface FormData {
+export interface SplitData {
   id?: number
   name: string
   address: string
@@ -9,3 +9,5 @@ export interface FormData {
     share: number
   }[]
 }
+
+export type FormData = SplitData
