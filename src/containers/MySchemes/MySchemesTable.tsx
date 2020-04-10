@@ -79,8 +79,8 @@ const MySchemes = ({
       const response = await Api.createScheme(secretToken, newSchemeInfo)
       dispatch(setLoading(false))
 
-      if (response.data._id && response.data._id.$oid) {
-        const id = response.data._id.$oid
+      if (response.data.id) {
+        const id = response.data.id
         navigate(`/scheme/${id}`)
       }
     } catch (err) {

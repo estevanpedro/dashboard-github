@@ -39,11 +39,11 @@ const Table = ({ splitInfo, id }: Props) => {
         </Colunm>
 
         <Colunm width={'50px'}>
-          <Link to={'/split-details/' + splitInfo._id.$oid}>
+          <Link to={'/split-details/' + splitInfo.id}>
             <IconButton
               icon={Arrow}
               onClick={() => {
-                console.log('schemeId', splitInfo._id.$oid)
+                console.log('schemeId', splitInfo.id)
               }}
             />
           </Link>
