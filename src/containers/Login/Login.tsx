@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { navigate } from '@reach/router'
+import { Formik, FormikErrors } from 'formik'
 
 import Button from '../../components/Button'
 import Input from '../../components/Input'
@@ -18,95 +19,96 @@ import { setLoading } from '../../redux/ducks/loading'
 import { LoginContainer, LoginForm } from './elements'
 
 const Login = () => {
-  const [usernameValue, setUsernameValue] = useState('')
-  const [passwordValue, setPasswordValue] = useState('')
-  const [usernameError, setUsernameError] = useState('')
-  const [passwordError, setPasswordError] = useState('')
   const [apiError, setApiError] = useState('')
 
   const dispatch = useDispatch()
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+  const formInitialValues = {
+    username: '',
+    password: '',
+  }
 
-    if (loginValidation()) {
-      setUsernameError('')
-      setPasswordError('')
+  type LoginValues = typeof formInitialValues
 
-      const userData = {
-        username: usernameValue,
-        password: passwordValue,
+  const handleSubmit = async (values: LoginValues) => {
+    const userData = {
+      username: values.username,
+      password: values.password,
+    }
+
+    try {
+      dispatch(setLoading(true))
+      const response = await Api.login(userData)
+      dispatch(setLoading(false))
+
+      if (response.data.error) {
+        setApiError(response.data.error)
+        return
       }
 
-      try {
-        dispatch(setLoading(true))
-        const response = await Api.login(userData)
-        dispatch(setLoading(false))
-
-        if (response.data.error) {
-          setApiError(response.data.error)
-          return
-        }
-
-        if (response.data.access_token) {
-          dispatch(changeSecretToken(response.data.access_token))
-          navigate('/my-schemes')
-        }
-      } catch (err) {
-        dispatch(setLoading(false))
-        setApiError('Invalid username or password!')
-        console.error(err)
+      if (response.data.access_token) {
+        dispatch(changeSecretToken(response.data.access_token))
+        navigate('/my-schemes')
       }
+    } catch (err) {
+      dispatch(setLoading(false))
+      setApiError('Invalid username or password!')
+      console.error(err)
     }
   }
 
-  const loginValidation = () => {
+  const loginValidation = (values: LoginValues) => {
+    const { username, password } = values
     // TODO: improve validation
-    let isValid = true
+    const errors: FormikErrors<LoginValues> = {}
 
-    if (!usernameValue.length) {
-      setUsernameError('Your username needs to have at least 3 characters')
-      isValid = false
+    if (username.length < 3) {
+      errors.username = 'Your username needs to have at least 3 characters'
     }
 
-    if (!passwordValue.length) {
-      setPasswordError('Your password needs to have at least 6 characters')
-      isValid = false
+    if (password.length < 6) {
+      errors.password = 'Your password needs to have at least 6 characters'
     }
 
-    return isValid
+    return errors
   }
 
   return (
-    <LoginContainer onSubmit={handleSubmit}>
-      <SubTitle>Login with your Splitcoin account</SubTitle>
-      <LoginForm>
-        <Input
-          label='Username'
-          value={usernameValue}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setUsernameValue(e.target.value)
-          }
-          type='text'
-          error={usernameError}
-        />
-        <Input
-          label='Password'
-          value={passwordValue}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setPasswordValue(e.target.value)
-          }
-          type='password'
-          error={passwordError}
-        />
-        <LinkToInputs to='/forgot'>Forgot Password</LinkToInputs>
-        <Error>{apiError}</Error>
-        <Button type='submit' margin='0 0 20px 0'>
-          Login
-        </Button>
-        <Link to='/sign-up'>Create an account</Link>
-      </LoginForm>
-    </LoginContainer>
+    <Formik
+      initialValues={formInitialValues}
+      onSubmit={handleSubmit}
+      validate={loginValidation}
+    >
+      {({ values, errors, handleChange, handleSubmit }) => (
+        <LoginContainer onSubmit={handleSubmit}>
+          <SubTitle>Login with your Splitcoin account</SubTitle>
+          <LoginForm>
+            <Input
+              label='Username'
+              name='username'
+              value={values.username}
+              onChange={handleChange}
+              type='text'
+              error={errors.username}
+            />
+            <Input
+              label='Password'
+              name='password'
+              value={values.password}
+              onChange={handleChange}
+              type='password'
+              error={errors.password}
+            />
+            <LinkToInputs to='/forgot'>Forgot Password</LinkToInputs>
+            <Error>{apiError}</Error>
+            <Button type='submit' margin='0 0 20px 0'>
+              Login
+            </Button>
+            <Link to='/sign-up'>Create an account</Link>
+          </LoginForm>
+        </LoginContainer>
+      )}
+    </Formik>
   )
 }
 
