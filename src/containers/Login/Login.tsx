@@ -79,7 +79,7 @@ const Login = () => {
       onSubmit={handleSubmit}
       validate={loginValidation}
     >
-      {({ values, errors, handleChange, handleSubmit }) => (
+      {({ values, errors, touched, handleChange, handleSubmit }) => (
         <LoginContainer onSubmit={handleSubmit}>
           <SubTitle>Login with your Splitcoin account</SubTitle>
           <LoginForm>
@@ -89,7 +89,7 @@ const Login = () => {
               value={values.username}
               onChange={handleChange}
               type='text'
-              error={errors.username}
+              error={touched.username && errors.username ? errors.username : ''}
             />
             <Input
               label='Password'
@@ -97,7 +97,7 @@ const Login = () => {
               value={values.password}
               onChange={handleChange}
               type='password'
-              error={errors.password}
+              error={touched.password && errors.password ? errors.password : ''}
             />
             <LinkToInputs to='/forgot'>Forgot Password</LinkToInputs>
             <Error>{apiError}</Error>

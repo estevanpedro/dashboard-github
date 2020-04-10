@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { navigate } from '@reach/router'
+import { Formik, FormikErrors } from 'formik'
 
 import Button from '../../components/Button'
 import Input from '../../components/Input'
@@ -16,139 +17,131 @@ import { setLoading } from '../../redux/ducks/loading'
 import { SignUpContainer, SignUpForm, ReturnText } from './elements'
 
 const SignUp = () => {
-  const [fullNameValue, setFullNameValue] = useState('')
-  const [usernameValue, setUsernameValue] = useState('')
-  const [emailValue, setEmailValue] = useState('')
-  const [passwordValue, setPasswordValue] = useState('')
-  const [confirmPasswordValue, setConfirmPasswordValue] = useState('')
-
-  const [fullNameError, setFullNameError] = useState('')
-  const [userNameError, setUsernameError] = useState('')
-  const [emailError, setEmailError] = useState('')
-  const [passwordError, setPasswordError] = useState('')
   const [apiError, setApiError] = useState('')
 
   const dispatch = useDispatch()
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+  const signupInitialValues = {
+    fullName: '',
+    username: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  }
 
-    if (signUpvalidation()) {
-      setFullNameError('')
-      setUsernameError('')
-      setEmailError('')
-      setPasswordError('')
+  type SignUpValues = typeof signupInitialValues
 
-      const signUpData = {
-        fullname: fullNameValue,
-        email: emailValue,
-        username: usernameValue,
-        password: passwordValue,
+  const handleSubmit = async (values: SignUpValues) => {
+    const signUpData = {
+      fullname: values.fullName,
+      email: values.email,
+      username: values.username,
+      password: values.password,
+    }
+    try {
+      dispatch(setLoading(true))
+      const response = await Api.signup(signUpData)
+      dispatch(setLoading(false))
+
+      if (response.data.error) {
+        setApiError(response.data.error)
       }
-      try {
-        dispatch(setLoading(true))
-        const response = await Api.signup(signUpData)
-        dispatch(setLoading(false))
 
-        if (response.data.error) {
-          setApiError(response.data.error)
-        }
-
-        if (response.data.access_token) {
-          dispatch(changeSecretToken(response.data.access_token))
-          navigate('/profile')
-        }
-      } catch (err) {
-        dispatch(setLoading(false))
-        setApiError('Something went wrong!')
-        console.error(err)
+      if (response.data.access_token) {
+        dispatch(changeSecretToken(response.data.access_token))
+        navigate('/profile')
       }
+    } catch (err) {
+      dispatch(setLoading(false))
+      setApiError('Something went wrong!')
+      console.error(err)
     }
   }
 
-  const signUpvalidation = () => {
+  const signUpvalidation = (values: SignUpValues) => {
     // TODO: improve signup validation
-    let isValid = true
+    const errors: FormikErrors<SignUpValues> = {}
 
-    if (fullNameValue.length < 3) {
-      setFullNameError('Your name must be bigger than three characters')
+    if (values.fullName.length < 3) {
+      errors.fullName = 'Your name must be bigger than three characters'
     }
 
-    if (!emailValue.length) {
-      setEmailError('You must use a valid email')
+    if (!values.email.length) {
+      errors.email = 'You must use a valid email'
     }
 
-    if (usernameValue.length < 3) {
-      setUsernameError('Your username needs to have at least 3 characters')
+    if (values.username.length < 3) {
+      errors.username = 'Your username needs to have at least 3 characters'
     }
 
-    if (passwordValue.length < 3) {
-      setPasswordError('Your password needs to have at least 6 characters')
+    if (values.password.length < 3) {
+      errors.password = 'Your password needs to have at least 6 characters'
     }
 
-    if (passwordValue !== confirmPasswordValue) {
-      setPasswordError('Your passwords must match')
+    if (values.password !== values.confirmPassword) {
+      errors.password = 'Your passwords must match'
     }
 
-    return isValid
+    return errors
   }
 
   return (
     <SignUpContainer>
       <Title>Create an account</Title>
-      <SignUpForm onSubmit={handleSubmit}>
-        <Input
-          label='Full Name'
-          value={fullNameValue}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setFullNameValue(e.target.value)
-          }
-          error={fullNameError}
-          type='text'
-        />
-        <Input
-          label='Username'
-          value={usernameValue}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setUsernameValue(e.target.value)
-          }
-          error={userNameError}
-          type='text'
-        />
-        <Input
-          label='Email'
-          value={emailValue}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setEmailValue(e.target.value)
-          }
-          error={emailError}
-          type='email'
-        />
-        <Input
-          label='Password'
-          value={passwordValue}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setPasswordValue(e.target.value)
-          }
-          error={passwordError}
-          type='password'
-        />
-        <Input
-          label='Confirm Password'
-          value={confirmPasswordValue}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setConfirmPasswordValue(e.target.value)
-          }
-          type='password'
-        />
-        <Error>{apiError}</Error>
-        <Button onClick={() => {}} type='submit'>
-          Create now
-        </Button>
-        <ReturnText size='regular'>
-          If you already have an account, <Link to='/login'>login</Link>
-        </ReturnText>
-      </SignUpForm>
+      <Formik
+        initialValues={signupInitialValues}
+        onSubmit={handleSubmit}
+        validate={signUpvalidation}
+      >
+        {({ values, errors, touched, handleChange, handleSubmit }) => (
+          <SignUpForm onSubmit={handleSubmit}>
+            <Input
+              label='Full Name'
+              name='fullName'
+              value={values.fullName}
+              onChange={handleChange}
+              error={touched.fullName && errors.fullName ? errors.fullName : ''}
+              type='text'
+            />
+            <Input
+              label='Username'
+              name='username'
+              value={values.username}
+              onChange={handleChange}
+              error={touched.username && errors.username ? errors.username : ''}
+              type='text'
+            />
+            <Input
+              label='Email'
+              name='email'
+              value={values.email}
+              onChange={handleChange}
+              error={touched.email && errors.email ? errors.email : ''}
+              type='email'
+            />
+            <Input
+              label='Password'
+              name='password'
+              value={values.password}
+              onChange={handleChange}
+              error={touched.password && errors.password ? errors.password : ''}
+              type='password'
+            />
+            <Input
+              label='Confirm Password'
+              name='confirmPassword'
+              value={values.confirmPassword}
+              onChange={handleChange}
+              type='password'
+            />
+            <Error>{apiError}</Error>
+            <Button type='submit'>Create now</Button>
+            <ReturnText size='regular'>
+              If you already have an account, <Link to='/login'>login</Link>
+            </ReturnText>
+          </SignUpForm>
+        )}
+      </Formik>
     </SignUpContainer>
   )
 }
