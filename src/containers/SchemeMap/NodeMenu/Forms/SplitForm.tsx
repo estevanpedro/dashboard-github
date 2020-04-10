@@ -1,5 +1,5 @@
 import React from 'react'
-import { Formik, FieldArray } from 'formik'
+import { Formik, FieldArray, ArrayHelpers } from 'formik'
 
 import {
   Button,
@@ -62,7 +62,7 @@ const SplitForm = ({ onConfirm, initialState }: Props) => {
           <FieldTitle>Shares</FieldTitle>
           <FieldArray
             name='splits'
-            render={(arrayHelpers: any) => (
+            render={(arrayHelpers: ArrayHelpers) => (
               <FlexContainer direction='column'>
                 {values.splits && values.splits.length > 0
                   ? values.splits.map((split, index) => {

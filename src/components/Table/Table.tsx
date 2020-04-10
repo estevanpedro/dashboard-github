@@ -6,12 +6,6 @@ import Text from '../Text'
 import { Link } from '@reach/router'
 
 export interface Props {
-  // schemeName: string
-  // schemeCreator?: string
-  // balance: number
-  // payout: number
-  // lastTransaction: string
-  // id: number
   splitInfo: any
   id: number
 }
@@ -24,8 +18,8 @@ const Table = ({ splitInfo, id }: Props) => {
           {splitInfo.schemeCreator ? (
             <Name>{splitInfo.schemeCreator}</Name>
           ) : (
-              <div />
-            )}
+            <div />
+          )}
         </Colunm>
 
         <Colunm>

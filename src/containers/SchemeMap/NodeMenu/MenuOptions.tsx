@@ -1,21 +1,14 @@
 import React, { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
-import { Button, FlexContainer, SubTitle, TextLink } from '../../../components'
-import { RootState } from '../../../redux/rootReducer'
+import { FlexContainer, SubTitle, TextLink } from '../../../components'
 
 import options, { NodeOption, TitleType } from '../SchemeNode/options'
-import {
-  addSplit,
-  addTimer,
-  addNotify,
-  addSend,
-} from '../SchemeNode/utils/toolsFuncions'
+import { addSplit } from '../SchemeNode/utils/toolsFuncions'
 import { SchemeNodeType } from '../SchemeNode/utils/nodeType'
 
-import { MenuButtonContainer } from './elements'
-
 import NewNodeOption from './NewNodeOption'
+import { FormData } from './Forms/types'
 
 interface Props {
   data: SchemeNodeType

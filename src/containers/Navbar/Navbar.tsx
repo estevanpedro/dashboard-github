@@ -16,7 +16,7 @@ const Navbar = () => {
 
   const [isLogged, setIsLogged] = useState(secretToken ? true : false)
 
-  const renderLink = (element: any, needsLogin: boolean) => {
+  const renderLink = (element: JSX.Element, needsLogin: boolean) => {
     if (isLogged && element.key === '5') return null
 
     if (needsLogin) return isLogged ? element : null

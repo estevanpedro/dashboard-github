@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { RouteComponentProps } from '@reach/router'
 import { useSelector, useDispatch } from 'react-redux'
 
 import SplitDetailsTable from './SplitDetailsTable'
@@ -69,56 +70,60 @@ const historyExample = [
   },
 ]
 
-// interface Props {
-//   splitId?: any
-// }
+interface Props {
+  schemeId?: string
+}
 
-const SplitDetails = (props: any) => {
-  const dispatch = useDispatch()
-  const [schemeId, setSchemeId] = useState(props.schemeId) // splitId is coming from the Library or from the MyScheme throuth routes
+const SplitDetails = ({ schemeId }: Props & RouteComponentProps) => {
   const [schemeDetails, setSchemeDetails] = useState<any[]>([]) // Need to connect splitDetails to the component...
   const [firstSplit, setFirstSplit] = useState<any[]>([])
-  const { secretToken } = useSelector((state: RootState) => state.auth)
   const [historyDetails, setHistoryDetails] = useState<any[]>([])
+
+  const { secretToken } = useSelector((state: RootState) => state.auth)
+
+  const dispatch = useDispatch()
   useEffect(() => {
     const fetchSchemeDetails = async () => {
-      const detailsData = {
-        secretToken,
-        schemeId,
-      }
-      try {
-        dispatch(setLoading(true))
-        const response = await Api.getSchemeDetails(detailsData)
-        dispatch(setLoading(false))
-
-        setSchemeDetails(response.data)
-
-        if (
-          response.data.tree &&
-          response.data.tree.children[0] &&
-          response.data.tree.children[0].children
-        ) {
-          setFirstSplit(response.data.tree.children[0].children)
-          try {
-            dispatch(setLoading(true))
-            const history = await Api.getHistory({
-              secretToken,
-              address: response.data.tree.address,
-            })
-            dispatch(setLoading(false))
-            setHistoryDetails(history.data)
-          } catch (err) {
-            dispatch(setLoading(false))
-            console.error(err)
-          }
+      if (schemeId) {
+        const detailsData = {
+          secretToken,
+          schemeId,
         }
-      } catch (err) {
-        dispatch(setLoading(false))
-        console.error(err)
+
+        try {
+          dispatch(setLoading(true))
+          const response = await Api.getSchemeDetails(detailsData)
+          dispatch(setLoading(false))
+
+          setSchemeDetails(response.data)
+
+          if (
+            response.data.tree &&
+            response.data.tree.children[0] &&
+            response.data.tree.children[0].children
+          ) {
+            setFirstSplit(response.data.tree.children[0].children)
+            try {
+              dispatch(setLoading(true))
+              const history = await Api.getHistory({
+                secretToken,
+                address: response.data.tree.address,
+              })
+              dispatch(setLoading(false))
+              setHistoryDetails(history.data)
+            } catch (err) {
+              dispatch(setLoading(false))
+              console.error(err)
+            }
+          }
+        } catch (err) {
+          dispatch(setLoading(false))
+          console.error(err)
+        }
       }
     }
     fetchSchemeDetails()
-  }, [dispatch, props.splitId])
+  }, [])
 
   function createTransList() {
     const Table = ({ info, id }: { info: any; id: number }) => {

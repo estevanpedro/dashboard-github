@@ -15,7 +15,7 @@ const ResetPassword = () => {
 
   const dispatch = useDispatch()
 
-  const handleSubmit = async (email: any) => {
+  const handleSubmit = async (email: string) => {
     try {
       dispatch(setLoading(true))
       const response = await Api.forgotPassword(email)
@@ -31,7 +31,7 @@ const ResetPassword = () => {
   }
 
   return (
-    <ForgotContainer onSubmit={handleSubmit}>
+    <ForgotContainer>
       <Title>Change your password</Title>
 
       <Input

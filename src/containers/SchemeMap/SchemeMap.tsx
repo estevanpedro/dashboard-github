@@ -27,11 +27,10 @@ interface NodeColumnProps {
 }
 
 interface Props {
-  location?: NavigateOptions<{ schemeName: string }>
   schemeId?: string
 }
 
-const SchemeMap = ({ location, schemeId }: Props & RouteComponentProps) => {
+const SchemeMap = ({ schemeId }: Props & RouteComponentProps) => {
   const { secretToken } = useSelector((state: RootState) => state.auth)
   const [schemeInfo, setSchemeInfo] = useState<SchemeInfo | null>(null)
   const { rootNode } = useSelector((state: RootState) => state.schemeMap)
