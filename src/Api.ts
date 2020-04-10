@@ -1,7 +1,23 @@
-import axios, { AxiosResponse } from 'axios'
+import axios from 'axios'
 
 import { SchemeInfo } from './apiTypes'
 
+export interface CreateUserData {
+  username: string
+  password: string
+  fullname: string
+  email: string
+}
+
+export interface SchemeDetailsData {
+  secretToken: string
+  schemeId: string
+}
+
+export interface GetHistoryData {
+  secretToken: string
+  address: string
+}
 class Api {
   url: string
   options: {
@@ -17,6 +33,11 @@ class Api {
     }
   }
 
+  /**
+   * User login request
+   * @param {string} username
+   * @param {string} password
+   */
   login = async (userData: { username: string; password: string }) => {
     const { username, password } = userData
 
@@ -28,191 +49,199 @@ class Api {
 
       return response
     } catch (err) {
-      throw Error(`Error on login request ${err.message}`)
+      throw Error(`Error on Login request: ${err.message}`)
     }
   }
 
-  UserSignup = async (createUserData: {
-    username: string
-    password: string
-    fullname: string
-    email: string
-  }) => {
+  /**
+   * User signup request
+   * @param {CreateUserData} createUserData signup user info
+   */
+  signup = async (createUserData: CreateUserData) => {
     const { username, password, fullname, email } = createUserData
-    return await axios
-      .post(
-        `${this.url}/signup`,
-        {
-          username,
-          password,
-          fullname,
-          email,
-        },
-        {
-          validateStatus: (status: any) => {
-            return true
-          },
-        }
-      )
-      .then((response: any) => {
-        console.log('response of UserSignup: ', response)
-        return response
-      })
-      .catch(err => {
-        console.log('Axios catch UserSignup: ', err)
-      })
-  }
 
-  forgotPassword = async (email: string) => {
-    return await axios
-      .post(`${this.url}/forgot`, {
+    try {
+      const response = await axios.post(`${this.url}/signup`, {
+        username,
+        password,
+        fullname,
         email,
       })
-      .then((response: any) => {
-        console.log('response of forgotPassword: ')
-        return response
-      })
-      .catch((err: any) => {
-        console.log('Axios catch forgotPassword')
-      })
+
+      return response
+    } catch (err) {
+      throw Error(`Error on Signup request: ${err.message}`)
+    }
   }
 
+  /**
+   * Forgot password request
+   * @param {string} email accout email
+   */
+  forgotPassword = async (email: string) => {
+    try {
+      const response = await axios.post(`${this.url}/forgot`, {
+        email,
+      })
+
+      return response
+    } catch (err) {
+      throw Error(`Error on Forgot Password request: ${err.message}`)
+    }
+  }
+
+  /**
+   * Reset user password request
+   * @param {string} reset_token
+   * @param {string} password
+   */
   resetPassword = async (reset_token: string, password: string) => {
-    console.log('token: ', reset_token, 'password: ', password)
-    return await axios
-      .post(`${this.url}/reset`, {
+    try {
+      const response = await axios.post(`${this.url}/reset`, {
         reset_token,
         password,
       })
-      .then((response: any) => {
-        console.log('response of resetPassword: ')
-        return response
-      })
-      .catch((err: any) => {
-        console.log('Axios catch resetPassword: ', err)
-      })
+
+      return response
+    } catch (err) {
+      throw Error(`Error on Reset Password request: ${err.message}`)
+    }
   }
 
+  /**
+   * Get user profile request
+   * @param {string} secretToken user secret token
+   */
   getProfile = async (secretToken: string) => {
-    return await axios
-      .get(`${this.url}/user-details`, {
+    try {
+      const response = await axios.get(`${this.url}/user-details`, {
         headers: {
           Authorization: `Bearer ${secretToken}`,
         },
       })
-      .then((response: any) => {
-        console.log('Trying to getProfile: ', response)
-        return response
-      })
-      .catch((err: any) => {
-        console.log('Axios catch getProfile: ', err)
-      })
+
+      return response
+    } catch (err) {
+      throw Error(`Error on get Profile request: ${err.message}`)
+    }
   }
 
-  // API INCOMPLETE
+  /**
+   * Get public schemes library
+   */
   getLibrary = async () => {
-    return await axios
-      .get(`${this.url}/library`)
-      .then((response: any) => {
-        console.log('Trying to getLibrary: ', response)
-        return response
-      })
-      .catch((err: any) => {
-        console.log('Axios catch getLibrary error:', err)
-      })
+    try {
+      const response = await axios.get(`${this.url}/library`)
+
+      return response
+    } catch (err) {
+      throw Error(`Error on get Library request: ${err.message}`)
+    }
   }
 
-  // API INCOMPLETE
+  /**
+   * Get all user schemes
+   * @param {string} secretToken user secret token
+   */
   getMySchemes = async (secretToken: string) => {
-    return await axios
-      .get(`${this.url}/scheme`, {
+    try {
+      const response = await axios.get(`${this.url}/scheme`, {
         headers: {
           Authorization: `Bearer ${secretToken}`,
         },
       })
-      .then((response: any) => {
-        console.log('Trying to getMySchemes: ', response)
-        return response
-      })
-      .catch((err: any) => {
-        console.log('Axios catch getMySchemes error: ', err)
-      })
+
+      return response
+    } catch (err) {
+      throw Error(`Error on get My Schemes request: ${err.message}`)
+    }
   }
 
-  getSchemeDetails = async (data: { secretToken: string; schemeId: any }) => {
-    const { secretToken, schemeId } = data
-    return await axios
-      .get(`${this.url}/scheme/${schemeId}`, {
+  /**
+   * Get scheme data request
+   * @param {SchemeDetails} data scheme id and user secret token
+   */
+  getSchemeDetails = async (data: SchemeDetailsData) => {
+    try {
+      const { secretToken, schemeId } = data
+
+      const response = await axios.get(`${this.url}/scheme/${schemeId}`, {
         headers: {
           Authorization: `Bearer ${secretToken}`,
         },
       })
-      .then((response: any) => {
-        console.log('Trying to getSchemeInfo: ', response)
-        return response
-      })
-      .catch((err: any) => {
-        console.log('Axios catch getSchemeInfo error: ', err)
-      })
+
+      return response
+    } catch (err) {
+      throw Error(`Error on get SchemeDetails: ${err.message}`)
+    }
   }
 
-  // THIS AXIOS WAS NOT TESTED... API INCOMPLETE
+  /**
+   * Create scheme request
+   * @param {string} secretToken user secret token
+   * @param {SchemeInfo} newSchemeInfo new scheme data
+   */
   createScheme = async (secretToken: string, newSchemeInfo: SchemeInfo) => {
-    return await axios
-      .post(`${this.url}/scheme`, newSchemeInfo, {
+    try {
+      const response = await axios.post(`${this.url}/scheme`, newSchemeInfo, {
         headers: {
           Authorization: `Bearer ${secretToken}`,
         },
       })
 
-      .then((response: any) => {
-        console.log('Trying to createScheme: ', response)
-        return response
-      })
-      .catch((err: any) => {
-        console.log('Axios catch createScheme error: ', err)
-      })
+      return response
+    } catch (err) {
+      throw Error(`Error on Create Scheme: ${err.message}`)
+    }
   }
 
-  // THIS AXIOS WAS NOT TESTED... API INCOMPLETE
+  /**
+   * Updatte scheme request
+   * @param {string} secretToken user secret token
+   * @param {string} schemeId scheme to be updated id
+   * @param {ScehemInfo} schemeInfo update scheme data
+   */
   updateScheme = async (
     secretToken: string,
     schemeId: string,
     schemeInfo: SchemeInfo
   ) => {
-    return await axios
-      .patch(`${this.url}/scheme/${schemeId}`, schemeInfo, {
-        headers: {
-          Authorization: `Bearer ${secretToken}`,
-        },
-      })
-      .then((response: any) => {
-        console.log('Trying to updateScheme: ', response)
-        return response
-      })
-      .catch((err: any) => {
-        console.log('Axios catch updateScheme error: ', err)
-      })
+    try {
+      const response = await axios.patch(
+        `${this.url}/scheme/${schemeId}`,
+        schemeInfo,
+        {
+          headers: {
+            Authorization: `Bearer ${secretToken}`,
+          },
+        }
+      )
+
+      return response
+    } catch (err) {
+      throw Error(`Error on Update Scheme: ${err.message}`)
+    }
   }
 
-  // Need to configure the API endpoint to accpect id, right now, it only accepts _id.
-  // This endpoint is used to get de history transactions of an specific scheme, utilizing the scheme to get it,
-  // it should show only the transaction history of the first split of a scheme.
-  getHistory = async (req: { secretToken: string; address: any }) => {
-    const { secretToken, address } = req
-    return await axios
-      .get(`${this.url}/history/${address}`, {
+  /**
+   * Get scheme history request
+   * @param {GetHistoryData} user secret token and scheme address
+   */
+  getHistory = async (data: GetHistoryData) => {
+    const { secretToken, address } = data
+
+    try {
+      const response = await axios.get(`${this.url}/history/${address}`, {
         headers: {
           Authorization: `Bearer ${secretToken}`,
         },
       })
-      .then((response: any) => {
-        // console.log('Trying to getHistory: ', response)
-        return response
-      })
-      .catch((err: any) => {
-        console.log('Axios catch getHistory error: ', err)
-      })
+
+      return response
+    } catch (err) {
+      throw Error(`Error on get History: ${err.message}`)
+    }
   }
 }
 

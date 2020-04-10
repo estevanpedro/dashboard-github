@@ -90,15 +90,31 @@ const SplitDetails = (props: any) => {
         dispatch(setLoading(true))
         const response = await Api.getSchemeDetails(detailsData)
         dispatch(setLoading(false))
+
         setSchemeDetails(response.data)
-        setFirstSplit(response.data.tree.children[0].children)
-        // dispatch(updateSplitDetails(response.data.schemes))
-        // GET HISTORY
-        const history = await Api.getHistory({ secretToken, address: response.data.tree.address })
-        setHistoryDetails(history.data)
-        // console.log('history: ', history.data)
-      } catch (e) {
-        console.error(e)
+
+        if (
+          response.data.tree &&
+          response.data.tree.children[0] &&
+          response.data.tree.children[0].children
+        ) {
+          setFirstSplit(response.data.tree.children[0].children)
+          try {
+            dispatch(setLoading(true))
+            const history = await Api.getHistory({
+              secretToken,
+              address: response.data.tree.address,
+            })
+            dispatch(setLoading(false))
+            setHistoryDetails(history.data)
+          } catch (err) {
+            dispatch(setLoading(false))
+            console.error(err)
+          }
+        }
+      } catch (err) {
+        dispatch(setLoading(false))
+        console.error(err)
       }
     }
     fetchSchemeDetails()
@@ -109,7 +125,11 @@ const SplitDetails = (props: any) => {
       return (
         <>
           <ValuesField pair={id % 2 === 0 ? true : false}>
-            <BalanceText>{info.amount_received > 0 ? info.amount_received : '-' + info.amount_sent}</BalanceText>
+            <BalanceText>
+              {info.amount_received > 0
+                ? info.amount_received
+                : '-' + info.amount_sent}
+            </BalanceText>
             <TableText>{info.created_at}</TableText>
             <TableText>{info.network}</TableText>
           </ValuesField>
@@ -136,9 +156,7 @@ const SplitDetails = (props: any) => {
                 )}
             </BalanceText>
             <TableText width='25px'>{info.info.percentage * 100}</TableText>
-            <TableText width='100px'>
-              {info.name}
-            </TableText>
+            <TableText width='100px'>{info.name}</TableText>
             <TableText width='40px'></TableText>
           </ValuesField>
         </>

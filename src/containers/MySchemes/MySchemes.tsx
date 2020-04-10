@@ -8,20 +8,16 @@ import { RootState } from '../../redux/rootReducer'
 
 import { setLoading } from '../../redux/ducks/loading'
 
-// TODO // import { updateMySchemes } from '../../redux/ducks/mySchemes'
-
-import { LibInfo } from '../Library/types'
-
 const MySchemes = () => {
   const [colorBalance, setcolorBalance] = useState('')
   const [colorCurrency, setcolorCurrency] = useState('')
   const [colorTransaction, setColorTransaction] = useState('#')
   const [preference, setPreference] = useState('lastTransaction')
-
-  // TODO connect with the component and with redux...
-  const dispatch = useDispatch()
   const [mySchemes, setMySchemes] = useState<any[]>([])
+
   const { secretToken } = useSelector((state: RootState) => state.auth)
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const fetchMySchemes = async () => {
@@ -31,10 +27,9 @@ const MySchemes = () => {
         dispatch(setLoading(false))
 
         setMySchemes(response.data)
-
-      } catch (e) {
-        console.error(e)
+      } catch (err) {
         dispatch(setLoading(false))
+        console.error(err)
       }
     }
     fetchMySchemes()

@@ -1,45 +1,57 @@
 import React, { useState } from 'react'
-import Title, { SubTitle } from '../../components/Title'
-import Button from '../../components/Button'
-import { Text, TextMargin, ForgotForm, ForgotContainer } from './elements'
-import Link from '../../components/Link'
-import Input from '../../components/Input'
-import Api from '../../Api'
+import { useDispatch } from 'react-redux'
 import { navigate } from '@reach/router'
 
+import { setLoading } from '../../redux/ducks/loading'
+
+import { Title, Button, Input } from '../../components'
+
+import Api from '../../Api'
+
+import { ForgotContainer } from './elements'
+
 const ResetPassword = () => {
+  const [email, setEmail] = useState('')
 
-    const [email, setEmail] = useState('')
+  const dispatch = useDispatch()
 
-    const handleSubmit = async (email: any) => {
-        try {
-            const response = await Api.forgotPassword(email)
-            console.log('response', response)
-            if (response.data.message) {
-                navigate('/reset')
-            }
-        } catch (e) {
-            console.error(e)
-        }
+  const handleSubmit = async (email: any) => {
+    try {
+      dispatch(setLoading(true))
+      const response = await Api.forgotPassword(email)
+      dispatch(setLoading(false))
+
+      if (response.data.message) {
+        navigate('/reset')
+      }
+    } catch (err) {
+      dispatch(setLoading(false))
+      console.error(err)
     }
+  }
 
+  return (
+    <ForgotContainer onSubmit={handleSubmit}>
+      <Title>Change your password</Title>
 
-    return (
-        <ForgotContainer onSubmit={handleSubmit}>
-
-            <Title>Change your password</Title>
-
-            <Input
-                type='text'
-                label='Email'
-                value={email}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
-            />
-            <Button onClick={() => { handleSubmit(email) }} margin='0 0 20px 0'>
-                Confirm
-                </Button>
-        </ForgotContainer>
-    )
+      <Input
+        type='text'
+        label='Email'
+        value={email}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          setEmail(e.target.value)
+        }
+      />
+      <Button
+        onClick={() => {
+          handleSubmit(email)
+        }}
+        margin='0 0 20px 0'
+      >
+        Confirm
+      </Button>
+    </ForgotContainer>
+  )
 }
 
 export default ResetPassword

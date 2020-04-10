@@ -77,12 +77,19 @@ const MySchemes = ({
       },
     }
 
-    dispatch(setLoading(true))
-    const response = await Api.createScheme(secretToken, newSchemeInfo)
-    dispatch(setLoading(false))
+    try {
+      dispatch(setLoading(true))
+      const response = await Api.createScheme(secretToken, newSchemeInfo)
+      dispatch(setLoading(false))
 
-    const id = response.data._id.$oid
-    navigate(`/scheme/${id}`)
+      if (response.data._id && response.data._id.$oid) {
+        const id = response.data._id.$oid
+        navigate(`/scheme/${id}`)
+      }
+    } catch (err) {
+      dispatch(setLoading(false))
+      console.error(err)
+    }
   }
 
   return (

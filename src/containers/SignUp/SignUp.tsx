@@ -47,18 +47,21 @@ const SignUp = () => {
       }
       try {
         dispatch(setLoading(true))
-        const response = await Api.UserSignup(signUpData)
+        const response = await Api.signup(signUpData)
         dispatch(setLoading(false))
+
         if (response.data.error) {
           setApiError(response.data.error)
         }
+
         if (response.data.access_token) {
-          console.log('response.access_token: ', response.data.access_token)
           dispatch(changeSecretToken(response.data.access_token))
           navigate('/profile')
         }
-      } catch (e) {
-        console.error(e)
+      } catch (err) {
+        dispatch(setLoading(false))
+        setApiError('Something went wrong!')
+        console.error(err)
       }
     }
   }
