@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
 
 import { SchemeInfo } from './apiTypes'
 
@@ -19,18 +19,17 @@ class Api {
 
   login = async (userData: { username: string; password: string }) => {
     const { username, password } = userData
-    return await axios
-      .post(`${this.url}/login`, {
+
+    try {
+      const response = await axios.post(`${this.url}/login`, {
         username,
         password,
       })
-      .then((response: any) => {
-        console.log('response login: ', response)
-        return response
-      })
-      .catch(err => {
-        console.log('Axios catch err login: ', err.message)
-      })
+
+      return response
+    } catch (err) {
+      throw Error(`Error on login request ${err.message}`)
+    }
   }
 
   UserSignup = async (createUserData: {
@@ -66,10 +65,9 @@ class Api {
 
   forgotPassword = async (email: string) => {
     return await axios
-      .post(`${this.url}/forgot`,
-        {
-          email
-        })
+      .post(`${this.url}/forgot`, {
+        email,
+      })
       .then((response: any) => {
         console.log('response of forgotPassword: ')
         return response
@@ -82,11 +80,10 @@ class Api {
   resetPassword = async (reset_token: string, password: string) => {
     console.log('token: ', reset_token, 'password: ', password)
     return await axios
-      .post(`${this.url}/reset`,
-        {
-          reset_token,
-          password
-        })
+      .post(`${this.url}/reset`, {
+        reset_token,
+        password,
+      })
       .then((response: any) => {
         console.log('response of resetPassword: ')
         return response
@@ -95,7 +92,6 @@ class Api {
         console.log('Axios catch resetPassword: ', err)
       })
   }
-
 
   getProfile = async (secretToken: string) => {
     return await axios
@@ -143,7 +139,7 @@ class Api {
       })
   }
 
-  getSchemeDetails = async (data: { secretToken: string, schemeId: any }) => {
+  getSchemeDetails = async (data: { secretToken: string; schemeId: any }) => {
     const { secretToken, schemeId } = data
     return await axios
       .get(`${this.url}/scheme/${schemeId}`, {
@@ -202,20 +198,14 @@ class Api {
   // Need to configure the API endpoint to accpect id, right now, it only accepts _id.
   // This endpoint is used to get de history transactions of an specific scheme, utilizing the scheme to get it,
   // it should show only the transaction history of the first split of a scheme.
-  getHistory = async (
-    req: {
-      secretToken: string
-      address: any
-    }) => {
+  getHistory = async (req: { secretToken: string; address: any }) => {
     const { secretToken, address } = req
     return await axios
-      .get(`${this.url}/history/${address}`,
-        {
-          headers: {
-            Authorization: `Bearer ${secretToken}`,
-          },
-        }
-      )
+      .get(`${this.url}/history/${address}`, {
+        headers: {
+          Authorization: `Bearer ${secretToken}`,
+        },
+      })
       .then((response: any) => {
         // console.log('Trying to getHistory: ', response)
         return response
