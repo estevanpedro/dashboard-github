@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { navigate } from '@reach/router'
+import { Formik, FormikErrors } from 'formik'
 
 import { setLoading } from '../../redux/ducks/loading'
 
@@ -15,10 +16,16 @@ const ResetPassword = () => {
 
   const dispatch = useDispatch()
 
-  const handleSubmit = async (email: string) => {
+  const forgotInitialValues = {
+    email: '',
+  }
+
+  type ForgotValues = typeof forgotInitialValues
+
+  const handleSubmit = async (values: ForgotValues) => {
     try {
       dispatch(setLoading(true))
-      const response = await Api.forgotPassword(email)
+      const response = await Api.forgotPassword(values.email)
       dispatch(setLoading(false))
 
       if (response.data.message) {
@@ -30,26 +37,43 @@ const ResetPassword = () => {
     }
   }
 
+  const validateForgot = (values: ForgotValues) => {
+    const { email } = values
+
+    const errors: FormikErrors<ForgotValues> = {}
+
+    if (!email.length) {
+      errors.email = 'You must use a valid email'
+    }
+
+    return errors
+  }
+
   return (
     <ForgotContainer>
-      <Title>Change your password</Title>
-
-      <Input
-        type='text'
-        label='Email'
-        value={email}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setEmail(e.target.value)
-        }
-      />
-      <Button
-        onClick={() => {
-          handleSubmit(email)
-        }}
-        margin='0 0 20px 0'
+      <Formik
+        initialValues={forgotInitialValues}
+        onSubmit={handleSubmit}
+        validate={validateForgot}
       >
-        Confirm
-      </Button>
+        {({ values, errors, touched, handleChange, handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <Title>Change your password</Title>
+
+            <Input
+              label='Email'
+              name='email'
+              value={values.email}
+              onChange={handleChange}
+              type='text'
+              error={touched.email && errors.email ? errors.email : ''}
+            />
+            <Button type='submit' margin='0 0 20px 0'>
+              Confirm
+            </Button>
+          </form>
+        )}
+      </Formik>
     </ForgotContainer>
   )
 }

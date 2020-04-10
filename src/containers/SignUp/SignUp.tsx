@@ -59,26 +59,27 @@ const SignUp = () => {
   }
 
   const signUpvalidation = (values: SignUpValues) => {
+    const { fullName, email, username, password, confirmPassword } = values
     // TODO: improve signup validation
     const errors: FormikErrors<SignUpValues> = {}
 
-    if (values.fullName.length < 3) {
+    if (fullName.length < 3) {
       errors.fullName = 'Your name must be bigger than three characters'
     }
 
-    if (!values.email.length) {
+    if (!email.length) {
       errors.email = 'You must use a valid email'
     }
 
-    if (values.username.length < 3) {
+    if (username.length < 3) {
       errors.username = 'Your username needs to have at least 3 characters'
     }
 
-    if (values.password.length < 3) {
+    if (password.length < 3) {
       errors.password = 'Your password needs to have at least 6 characters'
     }
 
-    if (values.password !== values.confirmPassword) {
+    if (password !== confirmPassword) {
       errors.password = 'Your passwords must match'
     }
 
