@@ -1,7 +1,9 @@
 import React from 'react'
-import { Link } from '@reach/router'
+import { Link, navigate, RouteComponentProps } from '@reach/router'
 
 import QRCode from 'qrcode.react'
+
+import { TextLink } from '../../components'
 
 import {
   Category,
@@ -43,7 +45,7 @@ const SplitDetails = ({
   schemeDetails,
   firstSplit,
   historyDetails,
-}: Props) => {
+}: Props & RouteComponentProps) => {
   let ShareData = (firstSplit: any) => {
     let labels: any[] = []
     let size: any[] = []
@@ -110,8 +112,13 @@ const SplitDetails = ({
     ],
   }
 
+  const handleGoBack = () => {
+    navigate('/my-schemes')
+  }
+
   return (
     <Container>
+      <TextLink onClick={handleGoBack}>← My Schemes</TextLink>
       <Header>
         <Title>{schemeDetails.name}</Title>
         <Category>
