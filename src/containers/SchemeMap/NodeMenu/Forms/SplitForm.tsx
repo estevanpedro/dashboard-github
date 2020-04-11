@@ -32,7 +32,7 @@ const SplitForm = ({ onConfirm, initialState }: Props) => {
     ],
   }
 
-  const handleSubmit = (values: typeof splitInitialValues) => {
+  const handleSubmit = (values: FormData) => {
     onConfirm('Split', values)
   }
 
