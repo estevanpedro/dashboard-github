@@ -1,6 +1,6 @@
 import React from 'react'
 import { navigate } from '@reach/router'
-import { Formik } from 'formik'
+import { Formik, FormikErrors } from 'formik'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { Button, Title, Input } from '../../components'
@@ -56,9 +56,9 @@ const MySchemes = ({
     visibility: 'Public',
   }
 
-  const handleNewSchemeSubmit = async (
-    values: typeof initialNewSchemeValues
-  ) => {
+  type NewSchemeValues = typeof initialNewSchemeValues
+
+  const handleNewSchemeSubmit = async (values: NewSchemeValues) => {
     const { name, payout, visibility } = values
 
     const newSchemeInfo: SchemeInfo = {
@@ -87,6 +87,22 @@ const MySchemes = ({
       dispatch(setLoading(false))
       console.error(err)
     }
+  }
+
+  const validadteNewScheme = (values: NewSchemeValues) => {
+    const { name, payout } = values
+
+    const errors: FormikErrors<NewSchemeValues> = {}
+
+    if (name.length < 1) {
+      errors.name = "Name can't be empty!"
+    }
+
+    if (Number(payout) <= 0) {
+      errors.payout = 'Payout has to be more than zero!'
+    }
+
+    return errors
   }
 
   return (
@@ -136,8 +152,9 @@ const MySchemes = ({
           <Formik
             initialValues={initialNewSchemeValues}
             onSubmit={handleNewSchemeSubmit}
+            validate={validadteNewScheme}
           >
-            {({ values, handleChange, handleSubmit }) => {
+            {({ values, errors, touched, handleChange, handleSubmit }) => {
               return (
                 <form onSubmit={handleSubmit}>
                   <Input
@@ -145,16 +162,16 @@ const MySchemes = ({
                     name='name'
                     value={values.name}
                     onChange={handleChange}
-                    // onBlur={handleBlur}
                     type='text'
+                    error={touched.name && errors.name ? errors.name : ''}
                   />
                   <Input
                     label='Payout'
                     name='payout'
                     value={values.payout}
                     onChange={handleChange}
-                    // onBlur={handleBlur}
                     type='number'
+                    error={touched.payout && errors.payout ? errors.payout : ''}
                   />
                   <InfoText>Private or Public?</InfoText>
                   <Select
