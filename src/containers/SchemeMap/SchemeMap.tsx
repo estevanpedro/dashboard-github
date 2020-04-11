@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { RouteComponentProps } from '@reach/router'
+import { RouteComponentProps, navigate } from '@reach/router'
 import ScrollContainer from 'react-indiana-drag-scroll'
 
-import Button from '../../components/Button'
-import FlexContainer from '../../components/FlexContainer'
-import Title from '../../components/Title'
+import { TextLink, Button, FlexContainer, Title } from '../../components'
 
 import { RootState } from '../../redux/rootReducer'
 import { loadRoot } from '../../redux/ducks/schemeMap'
@@ -86,6 +84,10 @@ const SchemeMap = ({ schemeId }: Props & RouteComponentProps) => {
     }
   }
 
+  const handleGoToSchemeDetails = () => {
+    navigate(`/split-details/${schemeId}`)
+  }
+
   const NodeColumn = ({ rootNode, ignoreLeftArrow, last }: NodeColumnProps) => {
     return (
       <FlexContainer
@@ -117,8 +119,13 @@ const SchemeMap = ({ schemeId }: Props & RouteComponentProps) => {
 
   return (
     <>
-      <FlexContainer width='100%' justify='space-between'>
-        <Title>{schemeInfo && schemeInfo.name}</Title>
+      <FlexContainer width='100%' justify='space-between' align='center'>
+        <FlexContainer direction='column'>
+          <TextLink onClick={handleGoToSchemeDetails}>
+            ← Scheme Details
+          </TextLink>
+          <Title>{schemeInfo && schemeInfo.name}</Title>
+        </FlexContainer>
         <Button onClick={handleSave} margin='0 0 20px 0'>
           Save
         </Button>

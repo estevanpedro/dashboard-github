@@ -9,7 +9,10 @@ export default styled.button<ButtonProps>`
       ? props.theme.colors.primary
       : props.theme.colors.secondary};
   outline: none;
-  color: ${props => props.theme.colors.background};
+  color: ${props =>
+    props.isSecondary
+      ? props.theme.colors.contrast
+      : props.theme.colors.background};
   font-size: ${props => props.theme.fontSize.regular};
   font-weight: bold;
   margin: ${props => props.margin || 0};
