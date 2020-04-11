@@ -28,13 +28,13 @@ interface Props {
 
 const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
   const [isOptionsVisible, setIsOptionsVisible] = useState(false)
-  const [isEditActive, setIsEditAcitve] = useState(false)
+  const [isEditActive, setIsEditActive] = useState(false)
 
   const dispatch = useDispatch()
 
   useEffect(() => {
     setIsOptionsVisible(false)
-    setIsEditAcitve(false)
+    setIsEditActive(false)
   }, [nodeInfo])
 
   const handleConfirmEdit = (title: TitleType, FormData: FormData) => {
@@ -64,7 +64,7 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
       }
 
       dispatch(editNode(id, data))
-      setIsEditAcitve(false)
+      setIsEditActive(false)
     }
   }
 
@@ -111,7 +111,7 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
             padding='20px'
           >
             <TextLink
-              onClick={() => setIsEditAcitve(false)}
+              onClick={() => setIsEditActive(false)}
               margin='0 0 20px 0'
             >
               ← {name} info
@@ -139,9 +139,9 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
           padding='20px'
         >
           <SubTitle>{name}</SubTitle>
-          {type !== 'address' && (
+          {type !== 'address' && type !== 'root' && (
             <SmallButton
-              onClick={() => setIsEditAcitve(true)}
+              onClick={() => setIsEditActive(true)}
               margin='0 0 20px 0'
             >
               <MdEdit />
