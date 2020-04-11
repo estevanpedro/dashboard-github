@@ -80,7 +80,7 @@ const SplitForm = ({ onConfirm, initialState }: Props) => {
                               <TextLink
                                 onClick={() => arrayHelpers.remove(index)}
                               >
-                                RemoveE
+                                Remove
                               </TextLink>
                             ) : null}
                           </FlexContainer>
