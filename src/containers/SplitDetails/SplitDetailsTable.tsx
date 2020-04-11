@@ -3,7 +3,7 @@ import { Link, navigate, RouteComponentProps } from '@reach/router'
 
 import QRCode from 'qrcode.react'
 
-import { TextLink } from '../../components'
+import { TextLink, Button } from '../../components'
 
 import {
   Category,
@@ -112,6 +112,10 @@ const SplitDetails = ({
     navigate('/my-schemes')
   }
 
+  const goToScheme = () => {
+    navigate(`/scheme/${schemeDetails && schemeDetails.id}`)
+  }
+
   return (
     <Container>
       <TextLink onClick={handleGoBack}>← My Schemes</TextLink>
@@ -122,9 +126,9 @@ const SplitDetails = ({
             {schemeDetails.visibility === 'public' ? 'Public' : 'Private'}
           </CategoryName>
         </Category>
-        <Link to={`/scheme/${schemeDetails && schemeDetails.id}`}>
-          <EditButton>Edit Scheme</EditButton>
-        </Link>
+        <Button isSecondary onClick={goToScheme}>
+          Edit Scheme
+        </Button>
       </Header>
 
       <Body>
