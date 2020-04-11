@@ -26,8 +26,6 @@ import {
 import { Bar, Pie } from 'react-chartjs-2'
 
 interface Props {
-  SplitExample: any
-  historyExample: any
   createShareList: any
   createTransList: any
   schemeDetails: any
@@ -36,8 +34,6 @@ interface Props {
 }
 
 const SplitDetails = ({
-  SplitExample,
-  historyExample,
   createShareList,
   createTransList,
   schemeDetails,
@@ -119,10 +115,7 @@ const SplitDetails = ({
             {schemeDetails.visibility === 'public' ? 'Public' : 'Private'}
           </CategoryName>
         </Category>
-        <Link
-          to={`/scheme/${schemeDetails && schemeDetails._id}`}
-          state={{ schemeName: SplitExample.schemeName, isPublic: true }}
-        >
+        <Link to={`/scheme/${schemeDetails && schemeDetails.id}`} >
           <EditButton>Edit Scheme</EditButton>
         </Link>
       </Header>
@@ -140,7 +133,7 @@ const SplitDetails = ({
             {schemeDetails.tree ? schemeDetails.tree.address : ''}
           </PayloadText>
           <SubtitleText>Balance</SubtitleText>
-          <PayloadText>{SplitExample.balance} BTC</PayloadText>
+          <PayloadText>{schemeDetails.balance || 0} BTC</PayloadText>
           <SubtitleText>Payout</SubtitleText>
           <PayloadText>{schemeDetails.payout}</PayloadText>
           <SubtitleText>Service Fee</SubtitleText>
