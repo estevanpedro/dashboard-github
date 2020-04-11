@@ -39,6 +39,7 @@ export const NewButton = styled.button`
   border-radius: 2px;
   justify-self: flex-end;
   margin: 30px 40px 0 5px;
+  cursor: pointer;
 `
 export const InfoText = styled.p`
   color: ${props => props.theme.colors.contrast};
