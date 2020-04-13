@@ -45,7 +45,11 @@ const SplitDetails = (props: any) => {
         <>
           <ValuesField pair={id % 2 === 0 ? true : false}>
             <BalanceText>{info.amount_received > 0 ? info.amount_received : '-' + info.amount_sent}</BalanceText>
-            <TableText>{info.created_at}</TableText>
+            <TableText>{
+              new Date(
+                parseFloat(info.created_at) * 1000
+              ).toLocaleString('UTC')
+            }</TableText>
             <TableText>{info.network}</TableText>
           </ValuesField>
         </>
