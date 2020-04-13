@@ -60,30 +60,13 @@ export const Area = styled.div`
   justify-content: center;
   align-self: center;
   align-items: center;
+  
   /* border: 1px solid white; */
   padding: 30px;
   form {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    ::-webkit-scrollbar-track {
-      box-shadow: inset 0 0 5px ${props => props.theme.colors.background};
-      border-radius: 10px;
-    }
-    ::-webkit-scrollbar-corner {
-      background: ${props => props.theme.colors.background};
-    }
-    ::-webkit-scrollbar {
-      width: 13px;
-      background: ${props => props.theme.colors.background};
-    }
-    ::-webkit-scrollbar-thumb {
-      background: ${props => props.theme.colors.primary};
-      border-radius: 10px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: ${props => props.theme.colors.primary};
-    }
   }
 `
 
