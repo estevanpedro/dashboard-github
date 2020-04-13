@@ -145,7 +145,7 @@ const MySchemes = ({
 
       <Modal
         title={'New Scheme'}
-        trigger={<NewButton onClick={() => {}}>New Scheme</NewButton>}
+        trigger={<NewButton onClick={() => { }}>New Scheme</NewButton>}
       >
         <Area>
           <Title>Create new scheme</Title>
