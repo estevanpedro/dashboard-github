@@ -9,8 +9,8 @@ describe('Login', () => {
   it('should correctly change form values', async () => {
     render(<Login />)
 
-    const usernameValue = screen.getByLabelText(/username/i)
-    const passwordValue = screen.getByLabelText(/password/i)
+    const usernameValue = screen.getByLabelText(/^username/i)
+    const passwordValue = screen.getByLabelText(/^password/i)
 
     expect(usernameValue).toHaveValue('')
     expect(passwordValue).toHaveValue('')
@@ -27,23 +27,19 @@ describe('Login', () => {
   it('should output errors when the input is not valid', async () => {
     render(<Login />)
 
-    const usernameValue = screen.getByLabelText(/username/i)
-    const passwordValue = screen.getByLabelText(/password/i)
+    const usernameValue = screen.getByLabelText(/^username/i)
+    const passwordValue = screen.getByLabelText(/^password/i)
     const errors = screen.getAllByTestId('errorMessage')
-
-    await wait(() => {
-      fireEvent.click(screen.getByRole('button'))
-    })
 
     await wait(() => {
       fireEvent.change(usernameValue, { target: { value: 'te' } })
       fireEvent.change(passwordValue, { target: { value: '123' } })
+      fireEvent.click(screen.getByRole('button'))
     })
 
     expect(errors[0]).toHaveTextContent(
       'Your username needs to have at least 3 characters'
     )
-
     expect(errors[1]).toHaveTextContent(
       'Your password needs to have at least 6 characters'
     )
