@@ -30,7 +30,9 @@ const Input = ({
 
   return (
     <Container width={width || '460px'} marginBottom={marginBottom || 20}>
-      <Label isFocused={isFocused}>{label}</Label>
+      <Label isFocused={isFocused} htmlFor={name}>
+        {label}
+      </Label>
       <InputField
         placeholder={placeholder}
         onChange={onChange}
@@ -41,8 +43,14 @@ const Input = ({
         type={type}
         min={min}
         name={name}
+        id={name}
       />
-      {error && error.length && <Error>{error}</Error>}
+      <Error
+        data-testid='errorMessage'
+        active={error && error.length ? true : false}
+      >
+        {error}
+      </Error>
     </Container>
   )
 }

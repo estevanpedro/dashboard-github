@@ -80,9 +80,9 @@ const Login = () => {
       validate={loginValidation}
     >
       {({ values, errors, touched, handleChange, handleSubmit }) => (
-        <LoginContainer onSubmit={handleSubmit}>
+        <LoginForm onSubmit={handleSubmit}>
           <SubTitle>Login with your Splitcoin account</SubTitle>
-          <LoginForm>
+          <LoginContainer>
             <Input
               label='Username'
               name='username'
@@ -105,8 +105,8 @@ const Login = () => {
               Login
             </Button>
             <Link to='/sign-up'>Create an account</Link>
-          </LoginForm>
-        </LoginContainer>
+          </LoginContainer>
+        </LoginForm>
       )}
     </Formik>
   )
