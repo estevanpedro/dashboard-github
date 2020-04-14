@@ -5,7 +5,6 @@ import { render } from './testUtils'
 
 import Login from '../containers/Login/Login'
 
-// Testing
 describe('Login', () => {
   it('should correctly change form values', async () => {
     render(<Login />)
@@ -30,12 +29,16 @@ describe('Login', () => {
 
     const usernameValue = screen.getByLabelText(/username/i)
     const passwordValue = screen.getByLabelText(/password/i)
+    const errors = screen.getAllByTestId('errorMessage')
 
     await wait(() => {
       fireEvent.click(screen.getByRole('button'))
     })
 
-    const errors = screen.getAllByTestId('errorMessage')
+    await wait(() => {
+      fireEvent.change(usernameValue, { target: { value: 'te' } })
+      fireEvent.change(passwordValue, { target: { value: '123' } })
+    })
 
     expect(errors[0]).toHaveTextContent(
       'Your username needs to have at least 3 characters'
