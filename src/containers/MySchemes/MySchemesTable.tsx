@@ -1,6 +1,6 @@
 import React from 'react'
 import { navigate } from '@reach/router'
-import { Formik } from 'formik'
+import { Formik, FormikErrors } from 'formik'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { Button, Title, Input } from '../../components'
@@ -56,9 +56,9 @@ const MySchemes = ({
     visibility: 'Public',
   }
 
-  const handleNewSchemeSubmit = async (
-    values: typeof initialNewSchemeValues
-  ) => {
+  type NewSchemeValues = typeof initialNewSchemeValues
+
+  const handleNewSchemeSubmit = async (values: NewSchemeValues) => {
     const { name, payout, visibility } = values
 
     const newSchemeInfo: SchemeInfo = {
@@ -87,6 +87,22 @@ const MySchemes = ({
       dispatch(setLoading(false))
       console.error(err)
     }
+  }
+
+  const validadteNewScheme = (values: NewSchemeValues) => {
+    const { name, payout } = values
+
+    const errors: FormikErrors<NewSchemeValues> = {}
+
+    if (name.length < 1) {
+      errors.name = "Name can't be empty!"
+    }
+
+    if (Number(payout) <= 0) {
+      errors.payout = 'Payout has to be more than zero!'
+    }
+
+    return errors
   }
 
   return (
@@ -129,15 +145,16 @@ const MySchemes = ({
 
       <Modal
         title={'New Scheme'}
-        trigger={<NewButton onClick={() => {}}>New Scheme</NewButton>}
+        trigger={<NewButton onClick={() => { }}>New Scheme</NewButton>}
       >
         <Area data-testid='newSchemeModal'>
           <Title>Create new scheme</Title>
           <Formik
             initialValues={initialNewSchemeValues}
             onSubmit={handleNewSchemeSubmit}
+            validate={validadteNewScheme}
           >
-            {({ values, handleChange, handleSubmit }) => {
+            {({ values, errors, touched, handleChange, handleSubmit }) => {
               return (
                 <form onSubmit={handleSubmit}>
                   <Input
@@ -146,6 +163,7 @@ const MySchemes = ({
                     value={values.name}
                     onChange={handleChange}
                     type='text'
+                    error={touched.name && errors.name ? errors.name : ''}
                   />
                   <Input
                     label='Payout'
@@ -153,6 +171,7 @@ const MySchemes = ({
                     value={values.payout}
                     onChange={handleChange}
                     type='number'
+                    error={touched.payout && errors.payout ? errors.payout : ''}
                   />
                   <InfoText htmlFor='privateSelector'>
                     Private or Public?

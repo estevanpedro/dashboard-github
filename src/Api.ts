@@ -145,12 +145,13 @@ class Api {
    */
   getMySchemes = async (secretToken: string) => {
     try {
+      console.log('getmyscheme try')
       const response = await axios.get(`${this.url}/scheme`, {
         headers: {
           Authorization: `Bearer ${secretToken}`,
         },
       })
-
+      console.log('getMySchemes response: ', response)
       return response
     } catch (err) {
       throw Error(`Error on get My Schemes request: ${err.message}`)

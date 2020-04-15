@@ -1,7 +1,9 @@
 import React from 'react'
-import { Link } from '@reach/router'
+import { Link, navigate, RouteComponentProps } from '@reach/router'
 
 import QRCode from 'qrcode.react'
+
+import { TextLink, Button } from '../../components'
 
 import {
   Category,
@@ -24,6 +26,7 @@ import {
   SubTitle,
 } from './elements'
 import { Bar, Pie } from 'react-chartjs-2'
+import options from '../SchemeMap/SchemeNode/options'
 
 interface Props {
   createShareList: any
@@ -39,7 +42,7 @@ const SplitDetails = ({
   schemeDetails,
   firstSplit,
   historyDetails,
-}: Props) => {
+}: Props & RouteComponentProps) => {
   let ShareData = (firstSplit: any) => {
     let labels: any[] = []
     let size: any[] = []
@@ -79,7 +82,9 @@ const SplitDetails = ({
     let months: any[] = []
     let amounts: any[] = []
     historyDetails.forEach((info: any) => {
-      months = [info.created_at].concat(months)
+      months = [new Date(
+        parseFloat(info.created_at) * 1000
+      ).toLocaleDateString('UTC')].concat(months)
     })
     historyDetails.forEach((info: any) => {
       amounts = [
@@ -106,8 +111,30 @@ const SplitDetails = ({
     ],
   }
 
+  var chartOptions = {
+    showScale: true,
+    pointDot: true,
+    showLines: false,
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true,
+        }
+      }]
+    }
+  }
+
+  const handleGoBack = () => {
+    navigate('/my-schemes')
+  }
+
+  const goToScheme = () => {
+    navigate(`/scheme/${schemeDetails && schemeDetails.id}`)
+  }
+
   return (
     <Container>
+      <TextLink onClick={handleGoBack}>← My Schemes</TextLink>
       <Header>
         <Title>{schemeDetails.name}</Title>
         <Category>
@@ -115,9 +142,9 @@ const SplitDetails = ({
             {schemeDetails.visibility === 'public' ? 'Public' : 'Private'}
           </CategoryName>
         </Category>
-        <Link to={`/scheme/${schemeDetails && schemeDetails.id}`} >
-          <EditButton>Edit Scheme</EditButton>
-        </Link>
+        <Button isSecondary onClick={goToScheme}>
+          Edit Scheme
+        </Button>
       </Header>
 
       <Body>
@@ -147,15 +174,7 @@ const SplitDetails = ({
         </GraphicField>
 
         <GraphicField>
-          <Bar data={PayoutsChart} options={{ maintainAspectRatio: true }} />
-          {/**
-                   <GraphicText size={'verySmall'}>
-                        Last Month: + 1.33%
-                    </GraphicText>
-                    <GraphicText size={'verySmall'}>
-                        Year to Date: + 33.33%
-                    </GraphicText>
-                    */}
+          <Bar data={PayoutsChart} options={chartOptions} />
         </GraphicField>
       </Body>
 
