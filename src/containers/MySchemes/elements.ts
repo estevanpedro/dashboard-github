@@ -40,7 +40,7 @@ export const NewButton = styled.button`
   justify-self: flex-end;
   margin: 30px 40px 0 5px;
 `
-export const InfoText = styled.p`
+export const InfoText = styled.label`
   color: ${props => props.theme.colors.contrast};
   font-size: 18px;
   margin-bottom: 20px;

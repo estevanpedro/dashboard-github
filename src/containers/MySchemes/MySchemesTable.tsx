@@ -131,7 +131,7 @@ const MySchemes = ({
         title={'New Scheme'}
         trigger={<NewButton onClick={() => {}}>New Scheme</NewButton>}
       >
-        <Area>
+        <Area data-testid='newSchemeModal'>
           <Title>Create new scheme</Title>
           <Formik
             initialValues={initialNewSchemeValues}
@@ -145,7 +145,6 @@ const MySchemes = ({
                     name='name'
                     value={values.name}
                     onChange={handleChange}
-                    // onBlur={handleBlur}
                     type='text'
                   />
                   <Input
@@ -153,26 +152,23 @@ const MySchemes = ({
                     name='payout'
                     value={values.payout}
                     onChange={handleChange}
-                    // onBlur={handleBlur}
                     type='number'
                   />
-                  <InfoText>Private or Public?</InfoText>
+                  <InfoText htmlFor='privateSelector'>
+                    Private or Public?
+                  </InfoText>
                   <Select
                     name='visibility'
                     onChange={handleChange}
                     value={values.visibility}
+                    id='privateSelector'
                   >
                     <option value='public'>Public</option>
                     <option value='private'>Private</option>
                   </Select>
-                  {/* <Link
-                    to={'/scheme/' + schemeName}
-                    state={{ schemeName: schemeName, isPublic: isPublic }}
-                  > */}
                   <Button type='submit' align='flex-end'>
                     Create
                   </Button>
-                  {/* </Link> */}
                 </form>
               )
             }}
