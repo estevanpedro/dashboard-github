@@ -18,12 +18,12 @@ const Table = ({ splitInfo, id }: Props) => {
           {splitInfo.schemeCreator ? (
             <Name>{splitInfo.schemeCreator}</Name>
           ) : (
-            <div />
-          )}
+              <div />
+            )}
         </Colunm>
 
         <Colunm>
-          <PayloadText>{splitInfo.balance || '0'} BTC</PayloadText>
+          <PayloadText>{splitInfo.balance.toFixed(8) || '0'} BTC</PayloadText>
         </Colunm>
 
         <Colunm>
@@ -32,9 +32,9 @@ const Table = ({ splitInfo, id }: Props) => {
 
         <Colunm width={'200px'}>
           <PayloadText>
-            {new Date(
-              parseFloat(splitInfo.lastTransactio || '0.0')
-            ).toLocaleString('en-GB')}
+            {splitInfo.last_transaction != '0' ? new Date(
+              parseFloat(splitInfo.last_transaction) * 1000
+            ).toLocaleString('en-GB') : 'Never'}
           </PayloadText>
         </Colunm>
 
