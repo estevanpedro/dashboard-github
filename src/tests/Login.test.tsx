@@ -24,7 +24,7 @@ describe('Login', () => {
     expect(passwordValue).toHaveValue('123456')
   })
 
-  it('should output errors when the input is not valid', async () => {
+  it('should output errors correctly when the form is not valid', async () => {
     render(<Login />)
 
     const usernameValue = screen.getByLabelText(/^username/i)

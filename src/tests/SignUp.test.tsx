@@ -36,7 +36,7 @@ describe('SignUp', () => {
     expect(confirmPasswordValue).toHaveValue('123456')
   })
 
-  it('should output errros when the input is not valid', async () => {
+  it('should output errros correctly when the form is not valid', async () => {
     render(<SignUp />)
 
     const fullNameValue = screen.getByLabelText(/^full name/i)
