@@ -200,7 +200,6 @@ const SplitDetails = ({
             <TableTitle width='60px'>Address</TableTitle>
             <TableTitle width='25px'>Size</TableTitle>
             <TableTitle width='100px'>Label</TableTitle>
-            <TableTitle width='40px'>Paid</TableTitle>
           </TitleField>
           {createShareList()}
         </BottomField>

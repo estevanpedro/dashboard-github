@@ -157,3 +157,8 @@ export const SubTitle = styled.h1`
   font-size: ${props => props.theme.fontSize.big};
   color: ${props => props.theme.colors.contrast};
 `
+
+export const CopyButton = styled.button`
+  margin-left: 5px;
+  color: ${props => props.theme.colors.confirm};
+`

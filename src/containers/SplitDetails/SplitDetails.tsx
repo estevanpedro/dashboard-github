@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import SplitDetailsTable from './SplitDetailsTable'
-import { ValuesField, TableText, BalanceText } from './elements'
+import { ValuesField, TableText, BalanceText, CopyButton } from './elements'
+import { FaRegCopy } from "react-icons/fa";
 
 import Api from '../../Api'
 import { RootState } from '../../redux/rootReducer'
@@ -44,7 +45,7 @@ const SplitDetails = (props: any) => {
       return (
         <>
           <ValuesField pair={id % 2 === 0 ? true : false}>
-            <BalanceText>{info.amount_received > 0 ? info.amount_received : '-' + info.amount_sent}</BalanceText>
+            <BalanceText width='90px'>{info.amount_received > 0 ? info.amount_received : '-' + info.amount_sent}</BalanceText>
             <TableText>{
               new Date(
                 parseFloat(info.created_at) * 1000
@@ -61,24 +62,29 @@ const SplitDetails = (props: any) => {
     return Map
   }
 
+
   function createShareList() {
     const Table = ({ info, id }: { info: any; id: number }) => {
       return (
         <>
           <ValuesField pair={id % 2 === 0 ? true : false}>
-            <BalanceText width='60px'>
+            <BalanceText width='75px'>
               {info.address.slice(0, 3) +
                 '...' +
                 info.address.slice(
                   info.address.length - 3,
                   info.address.length
                 )}
+              <CopyButton onClick={() => { navigator.clipboard.writeText(info.address) }} >
+                <FaRegCopy />
+              </CopyButton>
             </BalanceText>
+
+
             <TableText width='25px'>{info.info.percentage * 100}</TableText>
             <TableText width='100px'>
               {info.name}
             </TableText>
-            <TableText width='40px'></TableText>
           </ValuesField>
         </>
       )
