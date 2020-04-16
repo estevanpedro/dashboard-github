@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { ThemeContext } from 'styled-components'
 import { navigate, RouteComponentProps } from '@reach/router'
-
+import { FaProjectDiagram } from 'react-icons/fa'
+import { Bar, Pie } from 'react-chartjs-2'
+import ReactJson from 'react-json-view'
 import QRCode from 'qrcode.react'
 
 import { TextLink, Button } from '../../components'
+import Modal from '../../components/Modal'
+import { FirstSplitType, HistoryType } from '../../apiTypes'
 
 import {
   Category,
@@ -20,19 +25,18 @@ import {
   BottomField,
   TableTitle,
   TitleField,
-  EditButton,
   Line,
   Title,
   SubTitle,
+  DiagramButton,
 } from './elements'
-import { Bar, Pie } from 'react-chartjs-2'
 
 interface Props {
-  createShareList: any
-  createTransList: any
+  createShareList: () => JSX.Element[] | undefined
+  createTransList: () => JSX.Element[] | undefined
   schemeDetails: any
-  firstSplit: any
-  historyDetails: any
+  firstSplit: FirstSplitType[]
+  historyDetails: HistoryType[]
 }
 
 const SplitDetails = ({
@@ -42,13 +46,15 @@ const SplitDetails = ({
   firstSplit,
   historyDetails,
 }: Props & RouteComponentProps) => {
-  let ShareData = (firstSplit: any) => {
-    let labels: any[] = []
-    let size: any[] = []
-    firstSplit.forEach((info: any) => {
+  const themeContext = useContext(ThemeContext)
+
+  let ShareData = (firstSplit: FirstSplitType[]) => {
+    let labels: string[] = []
+    let size: number[] = []
+    firstSplit.forEach((info: FirstSplitType) => {
       labels = [info.name].concat(labels)
     })
-    firstSplit.forEach((info: any) => {
+    firstSplit.forEach((info: FirstSplitType) => {
       size = [info.info.percentage].concat(size)
     })
     return [labels, size]
@@ -77,19 +83,19 @@ const SplitDetails = ({
     ],
   }
 
-  let PayoutData = (historyDetails: any) => {
-    let months: any[] = []
-    let amounts: any[] = []
-    historyDetails.forEach((info: any) => {
+  let PayoutData = (historyDetails: HistoryType[]) => {
+    let months: string[] = []
+    let amounts: number[] = []
+    historyDetails.forEach((info: HistoryType) => {
       months = [
-        new Date(parseFloat(info.created_at) * 1000).toLocaleDateString('UTC'),
+        new Date(info.created_at * 1000).toLocaleDateString('UTC'),
       ].concat(months)
     })
-    historyDetails.forEach((info: any) => {
+    historyDetails.forEach((info: HistoryType) => {
       amounts = [
         info.amount_received > 0
           ? info.amount_received
-          : '-' + info.amount_sent,
+          : -Math.abs(info.amount_sent),
       ].concat(amounts)
     })
     return [months, amounts]
@@ -143,18 +149,36 @@ const SplitDetails = ({
             {schemeDetails.visibility === 'public' ? 'Public' : 'Private'}
           </CategoryName>
         </Category>
+
+        <Modal
+          title={'New Scheme'}
+          trigger={
+            <DiagramButton onClick={() => {}}>
+              <FaProjectDiagram size={25} />
+            </DiagramButton>
+          }
+        >
+          <ReactJson
+            theme={
+              themeContext.colors.primary === '#FF9140'
+                ? 'summerfruit:inverted'
+                : 'monokai'
+            }
+            src={schemeDetails}
+            style={{ backgroundColor: themeContext.colors.secondaryBg }}
+          />
+        </Modal>
+
         <Button isSecondary onClick={goToScheme}>
           Edit Scheme
         </Button>
       </Header>
-
       <Body>
         <QRField>
           <QRCode
             value={schemeDetails.tree ? schemeDetails.tree.address : ''}
           />
         </QRField>
-
         <DetailsField>
           <SubtitleText>Wallet Address</SubtitleText>
           <PayloadText>
@@ -201,7 +225,6 @@ const SplitDetails = ({
             <TableTitle width='60px'>Address</TableTitle>
             <TableTitle width='25px'>Size</TableTitle>
             <TableTitle width='100px'>Label</TableTitle>
-            <TableTitle width='40px'>Paid</TableTitle>
           </TitleField>
           {createShareList()}
         </BottomField>
