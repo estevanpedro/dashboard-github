@@ -143,6 +143,7 @@ const SchemeMap = ({ schemeId }: Props & RouteComponentProps) => {
             left='5%'
           >
             <NodeColumn
+              key={1}
               rootNode={rootNode}
               ignoreLeftArrow={true}
               last={true}
