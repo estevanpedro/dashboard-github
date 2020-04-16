@@ -58,7 +58,6 @@ export const addTimer = (
   name: string,
   timerInfo: { hours: number; minutes: number; seconds: number }
 ) => {
-  console.log(timerInfo)
   return addNode({
     id: nodeData.id,
     node: {
