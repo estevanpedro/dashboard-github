@@ -30,7 +30,7 @@ describe('MyScehemes', () => {
     const privateSelector = screen.getByLabelText('Private or Public?')
 
     expect(schemeNameValue).toHaveValue('')
-    expect(payoutValue).toHaveValue(0.1)
+    expect(payoutValue).toHaveValue(0.00001)
     expect(privateSelector).toHaveValue('public')
 
     await wait(() => {
