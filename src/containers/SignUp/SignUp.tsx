@@ -64,7 +64,7 @@ const SignUp = () => {
     const errors: FormikErrors<SignUpValues> = {}
 
     if (fullName.length < 3) {
-      errors.fullName = 'Your name must be bigger than three characters'
+      errors.fullName = 'Your name needs to have at least 3 characters'
     }
 
     if (!email.length) {

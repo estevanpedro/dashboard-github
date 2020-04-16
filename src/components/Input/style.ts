@@ -48,6 +48,11 @@ interface InputFieldProps {
   isFocused: boolean
 }
 
-export const Error = styled.span`
+export const Error = styled.span<ErrorProps>`
   color: ${props => props.theme.colors.cancel};
+  display: ${props => (props.active ? 'inline' : 'none')};
 `
+
+interface ErrorProps {
+  active?: boolean
+}
