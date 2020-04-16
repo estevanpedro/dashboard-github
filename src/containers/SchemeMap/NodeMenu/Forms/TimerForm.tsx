@@ -1,10 +1,11 @@
 import React from 'react'
-import { Formik } from 'formik'
+import { Formik, FormikErrors } from 'formik'
 
 import {
   Button,
   Input,
   FlexContainer,
+  Text,
   FieldTitle,
   TextLink,
 } from '../../../../components'
@@ -36,6 +37,26 @@ const TimerForm = ({ onConfirm, initialState = null }: Props) => {
     onConfirm('Timer', values)
   }
 
+  const validateTimer = (values: TimerData) => {
+    const { name, info } = values
+
+    const errors: FormikErrors<TimerData> = {}
+
+    if (!name.length) {
+      errors.name = "Name can't be empty"
+    }
+
+    if (
+      info.time.hours === '0' &&
+      info.time.minutes === '0' &&
+      info.time.seconds === '0'
+    ) {
+      errors.type = 'Time should not be 0'
+    }
+
+    return errors
+  }
+
   return (
     <Formik
       initialValues={
@@ -43,8 +64,9 @@ const TimerForm = ({ onConfirm, initialState = null }: Props) => {
         timerInitialValues
       }
       onSubmit={handleSubmit}
+      validate={validateTimer}
     >
-      {({ values, handleChange, handleSubmit }) => (
+      {({ values, errors, touched, handleChange, handleSubmit }) => (
         <form onSubmit={handleSubmit}>
           <Input
             label='Timer name'
@@ -53,6 +75,7 @@ const TimerForm = ({ onConfirm, initialState = null }: Props) => {
             onChange={handleChange}
             type='text'
             width='100%'
+            error={touched.name && errors.name ? errors.name : ''}
           />
           <FlexContainer justify='space-between'>
             <Input
@@ -63,6 +86,7 @@ const TimerForm = ({ onConfirm, initialState = null }: Props) => {
               type='number'
               width='28%'
               min={0}
+              marginBottom={1}
             />
             <Input
               label='Minute'
@@ -72,6 +96,7 @@ const TimerForm = ({ onConfirm, initialState = null }: Props) => {
               type='number'
               width='28%'
               min={0}
+              marginBottom={1}
             />
             <Input
               label='Seconds'
@@ -81,8 +106,12 @@ const TimerForm = ({ onConfirm, initialState = null }: Props) => {
               type='number'
               width='28%'
               min={0}
+              marginBottom={1}
             />
           </FlexContainer>
+          <Text color='cancel' size='verySmall' margin='0'>
+            {touched.type && errors.type ? errors.type : ''}
+          </Text>
           <MenuButtonContainer>
             <Button type='submit' align='flex-end' margin='20px 0'>
               Confirm
