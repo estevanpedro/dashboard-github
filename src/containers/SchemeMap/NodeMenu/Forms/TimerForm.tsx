@@ -11,7 +11,7 @@ import {
 
 import { TitleType } from '../../SchemeNode/options'
 
-import { MenuButtonContainer, BorderContainer } from '../elements'
+import { MenuButtonContainer } from '../elements'
 import { FormData, TimerData } from './types'
 
 interface Props {
@@ -25,9 +25,9 @@ const TimerForm = ({ onConfirm, initialState = null }: Props) => {
     name: 'Timer',
     info: {
       time: {
-        hours: 0,
-        minutes: 0,
-        seconds: 0,
+        hours: '0',
+        minutes: '0',
+        seconds: '0',
       },
     },
   }
@@ -54,6 +54,40 @@ const TimerForm = ({ onConfirm, initialState = null }: Props) => {
             type='text'
             width='100%'
           />
+          <FlexContainer justify='space-between'>
+            <Input
+              label='Hours'
+              name='info.time.hours'
+              value={values.info.time.hours}
+              onChange={handleChange}
+              type='number'
+              width='28%'
+              min={0}
+            />
+            <Input
+              label='Minute'
+              name='info.time.minutes'
+              value={values.info.time.minutes}
+              onChange={handleChange}
+              type='number'
+              width='28%'
+              min={0}
+            />
+            <Input
+              label='Seconds'
+              name='info.time.seconds'
+              value={values.info.time.seconds}
+              onChange={handleChange}
+              type='number'
+              width='28%'
+              min={0}
+            />
+          </FlexContainer>
+          <MenuButtonContainer>
+            <Button type='submit' align='flex-end' margin='20px 0'>
+              Confirm
+            </Button>
+          </MenuButtonContainer>
         </form>
       )}
     </Formik>

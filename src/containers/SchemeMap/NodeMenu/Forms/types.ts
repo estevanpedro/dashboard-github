@@ -17,9 +17,9 @@ export interface TimerData {
   name: string
   info: {
     time: {
-      hours: number
-      minutes: number
-      seconds: number
+      hours: string
+      minutes: string
+      seconds: string
     }
   }
 }
