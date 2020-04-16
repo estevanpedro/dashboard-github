@@ -27,8 +27,6 @@ export interface Props {
   Tab: (p: string) => JSX.Element[] | undefined
   colorBalance: string
   setcolorBalance: React.Dispatch<React.SetStateAction<string>>
-  colorCurrency: string
-  setcolorCurrency: React.Dispatch<React.SetStateAction<string>>
   colorTransaction: string
   setColorTransaction: React.Dispatch<React.SetStateAction<string>>
   preference: string
@@ -39,8 +37,6 @@ const MySchemes = ({
   Tab,
   colorBalance,
   setcolorBalance,
-  colorCurrency,
-  setcolorCurrency,
   colorTransaction,
   setColorTransaction,
   preference,
@@ -52,7 +48,7 @@ const MySchemes = ({
 
   const initialNewSchemeValues = {
     name: '',
-    payout: '0.1',
+    payout: '0.00001',
     visibility: 'Public',
   }
 
@@ -115,17 +111,6 @@ const MySchemes = ({
           onClick={() => {
             setPreference('balance')
             setcolorBalance(colorBalance ? '' : '#')
-            setcolorCurrency('')
-            setColorTransaction('')
-          }}
-        />
-        <TableOptions
-          props='Currency'
-          color={colorCurrency}
-          onClick={() => {
-            setPreference('currency')
-            setcolorBalance('')
-            setcolorCurrency(colorCurrency ? '' : '#')
             setColorTransaction('')
           }}
         />
@@ -135,7 +120,6 @@ const MySchemes = ({
           onClick={() => {
             setPreference('lastTransaction')
             setcolorBalance('')
-            setcolorCurrency('')
             setColorTransaction(colorTransaction ? '' : '#')
           }}
         />
