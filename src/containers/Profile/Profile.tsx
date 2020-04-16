@@ -55,22 +55,27 @@ const Profile = () => {
         <SubTitle>Email</SubTitle>
         <Text>{email}</Text>
       </ProfileField>
-      <ProfileField>
-        <SubTitle>Timezone</SubTitle>
-        <Text>{timezone}</Text>
-      </ProfileField>
+
       <ProfileField>
         <SubTitle>Password</SubTitle>
         <Link to='/forgot'>Change Password</Link>
       </ProfileField>
-      <ProfileField>
+
+      {/** 
+        <ProfileField>
+        <SubTitle>Timezone</SubTitle>
+        <Text>{timezone}</Text>
+      </ProfileField>
+              <ProfileField>
         <SubTitle>API Token</SubTitle>
         <Link to='/'>Create Api Token</Link>
       </ProfileField>
-      <ProfileField>
+         <ProfileField>
         <SubTitle>Social Auth</SubTitle>
         <Link to='/'>Manage Connections</Link>
       </ProfileField>
+      */}
+
     </ProfileContainer>
   )
 }

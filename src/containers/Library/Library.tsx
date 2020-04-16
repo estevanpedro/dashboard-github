@@ -4,13 +4,13 @@ import Table from '../../components/Table'
 import Api from '../../Api'
 import { useDispatch } from 'react-redux'
 import { setLoading } from '../../redux/ducks/loading'
+import { SchemeType } from '../../apiTypes'
 
 const Library = () => {
   const [colorBalance, setcolorBalance] = useState('')
-  const [colorCurrency, setcolorCurrency] = useState('')
   const [colorTransaction, setColorTransaction] = useState('#')
   const [preference, setPreference] = useState('lastTransaction')
-  const [library, setLibrary] = useState<any[]>([])
+  const [library, setLibrary] = useState<SchemeType[]>([])
 
   const dispatch = useDispatch()
 
@@ -30,57 +30,30 @@ const Library = () => {
     fetchLibrary()
   }, [dispatch])
 
-  // const compareValues = (valueA: number | string, valueB: number | string) => {
-  //   if (valueA < valueB) return 1
-  //   if (valueA > valueB) return -1
-  //   return 0
-  // }
 
-  // const Tab = (preference: string) => {
-  //   if (preference === 'balance') {
-  //     library.sort((a: any, b: any) =>
-  //       compareValues(a.balance, b.balance)
-  //     )
-
-  //     const balance = library.map((info: any, id: number, key: any) => {
-  //       return <Table splitInfo={info} id={id} key={key} />
-  //     })
-
-  //     return balance
-  //   } else if (preference === 'currency') {
-  //     library.sort((a: any, b: any) =>
-  //       compareValues(a.currency, b.currency)
-  //     )
-
-  //     const currency = library.map((info: any, id: number, key: any) => {
-  //       return <Table splitInfo={info} id={id} key={key} />
-  //     })
-
-  //     return currency
-  //   } else if (preference === 'lastTransaction') {
-  //     library.sort((a: any, b: any) =>
-  //       compareValues(parseInt(a.lastTransaction), parseInt(b.lastTransaction))
-  //     )
-
-  //     const lastTransaction = library.map(
-  //       (info: any, id: number) => {
-  //         return <Table splitInfo={info} id={id} key={info.id} />
-  //       }
-  //     )
-
-  //     return lastTransaction
-  //   }
-  // }
-  // const compareValues = (valueA: number | string, valueB: number | string) => {
-  //   if (valueA < valueB) return 1
-  //   if (valueA > valueB) return -1
-  //   return 0
-  // }
-
-  const handleTab = () => {
-    return library.map((info: any, i: number) => (
-      <Table splitInfo={info} id={i} key={info.id} />
-    ))
+  const handleTab = (preference: string) => {
+    if (preference === 'balance') {
+      library.sort(function compare(a: SchemeType, b: SchemeType) {
+        if (a.balance < b.balance) { return 1 }
+        if (a.balance > b.balance) { return -1 }
+        return 0
+      })
+      const balance = library.map((info: SchemeType, id: number) => {
+        return <Table splitInfo={info} id={id} key={id} />
+      })
+      return balance
+    }
+    else if (preference === 'lastTransaction') {
+      library.sort(function compare(a: SchemeType, b: SchemeType) {
+        if (a.last_transaction < b.last_transaction) { return 1 }
+        if (a.last_transaction > b.last_transaction) { return -1 }
+        return 0
+      })
+      const lastTransaction = library.map((info: SchemeType, id: number) => {
+        return <Table splitInfo={info} id={id} key={id} />
+      })
+      return lastTransaction
+    }
   }
 
   return (
@@ -88,8 +61,6 @@ const Library = () => {
       Tab={handleTab}
       colorBalance={colorBalance}
       setcolorBalance={setcolorBalance}
-      colorCurrency={colorCurrency}
-      setcolorCurrency={setcolorCurrency}
       colorTransaction={colorTransaction}
       setColorTransaction={setColorTransaction}
       preference={preference}

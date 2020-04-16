@@ -40,7 +40,6 @@ class Api {
    */
   login = async (userData: { username: string; password: string }) => {
     const { username, password } = userData
-
     try {
       const response = await axios.post(`${this.url}/login`, {
         username,
@@ -59,7 +58,6 @@ class Api {
    */
   signup = async (createUserData: CreateUserData) => {
     const { username, password, fullname, email } = createUserData
-
     try {
       const response = await axios.post(`${this.url}/signup`, {
         username,
@@ -67,7 +65,6 @@ class Api {
         fullname,
         email,
       })
-
       return response
     } catch (err) {
       throw Error(`Error on Signup request: ${err.message}`)
@@ -119,7 +116,6 @@ class Api {
           Authorization: `Bearer ${secretToken}`,
         },
       })
-
       return response
     } catch (err) {
       throw Error(`Error on get Profile request: ${err.message}`)
@@ -132,7 +128,6 @@ class Api {
   getLibrary = async () => {
     try {
       const response = await axios.get(`${this.url}/library`)
-
       return response
     } catch (err) {
       throw Error(`Error on get Library request: ${err.message}`)
@@ -145,7 +140,6 @@ class Api {
    */
   getMySchemes = async (secretToken: string) => {
     try {
-      console.log('getmyscheme try')
       const response = await axios.get(`${this.url}/scheme`, {
         headers: {
           Authorization: `Bearer ${secretToken}`,
@@ -171,18 +165,20 @@ class Api {
           Authorization: `Bearer ${secretToken}`,
         },
       })
-
       return response
     } catch (err) {
       throw Error(`Error on get SchemeDetails: ${err.message}`)
     }
   }
 
+
   /**
    * Create scheme request
    * @param {string} secretToken user secret token
    * @param {SchemeInfo} newSchemeInfo new scheme data
    */
+
+
   createScheme = async (secretToken: string, newSchemeInfo: SchemeInfo) => {
     try {
       const response = await axios.post(`${this.url}/scheme`, newSchemeInfo, {
@@ -192,7 +188,8 @@ class Api {
       })
 
       return response
-    } catch (err) {
+    }
+    catch (err) {
       throw Error(`Error on Create Scheme: ${err.message}`)
     }
   }
@@ -231,7 +228,6 @@ class Api {
    */
   getHistory = async (data: GetHistoryData) => {
     const { secretToken, address } = data
-
     try {
       const response = await axios.get(`${this.url}/history/${address}`, {
         headers: {

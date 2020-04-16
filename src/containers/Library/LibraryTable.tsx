@@ -8,8 +8,6 @@ export interface Props {
   Tab: (p: string) => JSX.Element[] | undefined
   colorBalance: string
   setcolorBalance: React.Dispatch<React.SetStateAction<string>>
-  colorCurrency: string
-  setcolorCurrency: React.Dispatch<React.SetStateAction<string>>
   colorTransaction: string
   setColorTransaction: React.Dispatch<React.SetStateAction<string>>
   preference: string
@@ -20,8 +18,6 @@ const LibraryTable = ({
   Tab,
   colorBalance,
   setcolorBalance,
-  colorCurrency,
-  setcolorCurrency,
   colorTransaction,
   setColorTransaction,
   preference,
@@ -37,17 +33,6 @@ const LibraryTable = ({
           onClick={() => {
             setPreference('balance')
             setcolorBalance(colorBalance ? '' : '#')
-            setcolorCurrency('')
-            setColorTransaction('')
-          }}
-        />
-        <TableOptions
-          props='Currency'
-          color={colorCurrency}
-          onClick={() => {
-            setPreference('currency')
-            setcolorBalance('')
-            setcolorCurrency(colorCurrency ? '' : '#')
             setColorTransaction('')
           }}
         />
@@ -57,7 +42,6 @@ const LibraryTable = ({
           onClick={() => {
             setPreference('lastTransaction')
             setcolorBalance('')
-            setcolorCurrency('')
             setColorTransaction(colorTransaction ? '' : '#')
           }}
         />

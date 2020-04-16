@@ -71,7 +71,8 @@ export const Area = styled.div`
 `
 
 export const Select = styled.select`
-  width: 100px;
+  width: 200px;
+  height: 35px;
   background-color: transparent;
   border: 2px solid ${props => props.theme.colors.primary};
   border-radius: 4px;
@@ -80,6 +81,7 @@ export const Select = styled.select`
   align-items: center;
   margin-bottom: 20px;
   option {
-    padding: 20px;
+    padding: 30px;
+    font-size: 18px;
   }
 `
