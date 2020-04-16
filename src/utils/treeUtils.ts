@@ -92,7 +92,6 @@ export const updateTreeNode = (
     n.name = value.name
     n.address = value.address
     n.children = value.children
-    console.log(rootCopy)
     return rootCopy
   })
 }

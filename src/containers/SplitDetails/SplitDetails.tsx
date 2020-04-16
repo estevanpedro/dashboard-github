@@ -10,7 +10,7 @@ import { setLoading } from '../../redux/ducks/loading'
 
 const SplitDetails = (props: any) => {
   const dispatch = useDispatch()
-  const [schemeId, setSchemeId] = useState(props.schemeId) // splitId is coming from the Library or from the MyScheme throuth routes
+  const [schemeId] = useState(props.schemeId) // splitId is coming from the Library or from the MyScheme throuth routes
   const [schemeDetails, setSchemeDetails] = useState<any[]>([]) // Need to connect splitDetails to the component...
   const [firstSplit, setFirstSplit] = useState<any[]>([])
   const { secretToken } = useSelector((state: RootState) => state.auth)
@@ -31,25 +31,28 @@ const SplitDetails = (props: any) => {
         setSchemeDetails(response.data)
         setFirstSplit(response.data.tree.children[0].children)
         setHistoryDetails(response.data.transactions)
-
       } catch (e) {
         console.error(e)
       }
     }
     fetchSchemeDetails()
-  }, [dispatch, props.splitId])
+  }, [dispatch, props.splitId, schemeId, secretToken])
 
   function createTransList() {
     const Table = ({ info, id }: { info: any; id: number }) => {
       return (
         <>
           <ValuesField pair={id % 2 === 0 ? true : false}>
-            <BalanceText>{info.amount_received > 0 ? info.amount_received : '-' + info.amount_sent}</BalanceText>
-            <TableText>{
-              new Date(
-                parseFloat(info.created_at) * 1000
-              ).toLocaleString('UTC')
-            }</TableText>
+            <BalanceText>
+              {info.amount_received > 0
+                ? info.amount_received
+                : '-' + info.amount_sent}
+            </BalanceText>
+            <TableText>
+              {new Date(parseFloat(info.created_at) * 1000).toLocaleString(
+                'UTC'
+              )}
+            </TableText>
             <TableText>{info.network}</TableText>
           </ValuesField>
         </>
@@ -75,9 +78,7 @@ const SplitDetails = (props: any) => {
                 )}
             </BalanceText>
             <TableText width='25px'>{info.info.percentage * 100}</TableText>
-            <TableText width='100px'>
-              {info.name}
-            </TableText>
+            <TableText width='100px'>{info.name}</TableText>
             <TableText width='40px'></TableText>
           </ValuesField>
         </>

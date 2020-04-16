@@ -107,6 +107,7 @@ const SchemeMap = ({ schemeId }: Props & RouteComponentProps) => {
             rootNode.children &&
             rootNode.children.map((node: SchemeNodeType, index) => (
               <NodeColumn
+                key={node.id}
                 rootNode={node}
                 last={index === rootNode.children.length - 1}
                 setNodeInfo={setMenuInfo}

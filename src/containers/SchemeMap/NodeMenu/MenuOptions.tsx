@@ -74,6 +74,7 @@ const MenuOptions = ({ data, returnToInfo }: Props) => {
         <FlexContainer wrap='wrap' width='100%' justify='center'>
           {options.map(option => (
             <NewNodeOption
+              key={option.id}
               title={option.title}
               icon={option.icon}
               onClick={() => setOptionActive(option)}

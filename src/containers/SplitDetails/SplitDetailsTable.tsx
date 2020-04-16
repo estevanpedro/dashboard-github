@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, navigate, RouteComponentProps } from '@reach/router'
+import { navigate, RouteComponentProps } from '@reach/router'
 
 import QRCode from 'qrcode.react'
 
@@ -26,7 +26,6 @@ import {
   SubTitle,
 } from './elements'
 import { Bar, Pie } from 'react-chartjs-2'
-import options from '../SchemeMap/SchemeNode/options'
 
 interface Props {
   createShareList: any
@@ -82,9 +81,9 @@ const SplitDetails = ({
     let months: any[] = []
     let amounts: any[] = []
     historyDetails.forEach((info: any) => {
-      months = [new Date(
-        parseFloat(info.created_at) * 1000
-      ).toLocaleDateString('UTC')].concat(months)
+      months = [
+        new Date(parseFloat(info.created_at) * 1000).toLocaleDateString('UTC'),
+      ].concat(months)
     })
     historyDetails.forEach((info: any) => {
       amounts = [
@@ -116,12 +115,14 @@ const SplitDetails = ({
     pointDot: true,
     showLines: false,
     scales: {
-      yAxes: [{
-        ticks: {
-          beginAtZero: true,
-        }
-      }]
-    }
+      yAxes: [
+        {
+          ticks: {
+            beginAtZero: true,
+          },
+        },
+      ],
+    },
   }
 
   const handleGoBack = () => {
