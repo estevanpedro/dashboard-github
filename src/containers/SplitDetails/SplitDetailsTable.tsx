@@ -6,7 +6,7 @@ import { Bar, Pie } from 'react-chartjs-2'
 import ReactJson from 'react-json-view'
 import QRCode from 'qrcode.react'
 
-import { TextLink, Button } from '../../components'
+import { TextLink, SmallButton, Button } from '../../components'
 import Modal from '../../components/Modal'
 import { FirstSplitType, HistoryType } from '../../apiTypes'
 
@@ -153,9 +153,9 @@ const SplitDetails = ({
         <Modal
           title={'New Scheme'}
           trigger={
-            <DiagramButton onClick={() => {}}>
+            <SmallButton onClick={() => {}} margin='0 20px 0 0' align='center'>
               <FaProjectDiagram size={25} />
-            </DiagramButton>
+            </SmallButton>
           }
         >
           <ReactJson
