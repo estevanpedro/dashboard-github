@@ -162,3 +162,18 @@ export const CopyButton = styled.button`
   margin-left: 5px;
   color: ${props => props.theme.colors.confirm};
 `
+
+export const DiagramButton = styled.button`
+  margin-left: 5px;
+  color: ${props => props.theme.colors.white};
+  width: 40px;
+  height: 40px;
+  background-color: ${props => props.theme.colors.primary};
+  border-radius: 20px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  align-self: center;
+  margin-right: 30px;
+  outline: none;
+`

@@ -8,14 +8,15 @@ import { FaRegCopy } from "react-icons/fa";
 import Api from '../../Api'
 import { RootState } from '../../redux/rootReducer'
 import { setLoading } from '../../redux/ducks/loading'
+import { FirstSplitType, HistoryType } from '../../apiTypes'
 
 const SplitDetails = (props: any) => {
   const dispatch = useDispatch()
   const [schemeId, setSchemeId] = useState(props.schemeId) // splitId is coming from the Library or from the MyScheme throuth routes
   const [schemeDetails, setSchemeDetails] = useState<any[]>([]) // Need to connect splitDetails to the component...
-  const [firstSplit, setFirstSplit] = useState<any[]>([])
+  const [firstSplit, setFirstSplit] = useState<FirstSplitType[]>([])
   const { secretToken } = useSelector((state: RootState) => state.auth)
-  const [historyDetails, setHistoryDetails] = useState<any[]>([])
+  const [historyDetails, setHistoryDetails] = useState<HistoryType[]>([])
 
   useEffect(() => {
     const fetchSchemeDetails = async () => {
@@ -41,14 +42,14 @@ const SplitDetails = (props: any) => {
   }, [dispatch, props.splitId])
 
   function createTransList() {
-    const Table = ({ info, id }: { info: any; id: number }) => {
+    const Table = ({ info, id }: { info: HistoryType; id: number }) => {
       return (
         <>
           <ValuesField pair={id % 2 === 0 ? true : false}>
             <BalanceText width='90px'>{info.amount_received > 0 ? info.amount_received : '-' + info.amount_sent}</BalanceText>
             <TableText>{
               new Date(
-                parseFloat(info.created_at) * 1000
+                info.created_at * 1000
               ).toLocaleString('UTC')
             }</TableText>
             <TableText>{info.network}</TableText>
@@ -56,7 +57,7 @@ const SplitDetails = (props: any) => {
         </>
       )
     }
-    const Map = historyDetails.reverse().map((info: any, id: number) => {
+    const Map = historyDetails.reverse().map((info: HistoryType, id: number) => {
       return <Table info={info} id={id} key={id} />
     })
     return Map
@@ -64,11 +65,11 @@ const SplitDetails = (props: any) => {
 
 
   function createShareList() {
-    const Table = ({ info, id }: { info: any; id: number }) => {
+    const Table = ({ info, id }: { info: FirstSplitType; id: number }) => {
       return (
         <>
           <ValuesField pair={id % 2 === 0 ? true : false}>
-            <BalanceText width='75px'>
+            <BalanceText width='79px'>
               {info.address.slice(0, 3) +
                 '...' +
                 info.address.slice(
@@ -89,8 +90,7 @@ const SplitDetails = (props: any) => {
         </>
       )
     }
-    console.log('firstSplit: ', firstSplit)
-    const Map = firstSplit.map((info: any, id: number) => {
+    const Map = firstSplit.map((info: FirstSplitType, id: number) => {
       return <Table info={info} id={id} key={id} />
     })
     return Map
