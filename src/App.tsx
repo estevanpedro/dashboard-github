@@ -27,7 +27,7 @@ const App = (): JSX.Element => (
       <ThemeService>
         <PersistGate persistor={persistor} loading={null}>
           <Router id='router-container'>
-            <Redirect from='/' to='/my-schemes' />
+            <Redirect from='/' to='/login' />
             <Route path='/login' component={Login} />
             <Route path='/sign-up' component={SignUp} />
             <LoggedRoute path='/my-schemes' component={MySchemes} />
@@ -38,7 +38,6 @@ const App = (): JSX.Element => (
             <Route path='/split-details/:schemeId' component={SplitDetails} />
             <Route path='/forgot' component={ForgotPassword} />
             <Route path='/reset' component={ResetPassword} />
-            {/* <Route path="/" component={}/> */}
           </Router>
         </PersistGate>
       </ThemeService>
