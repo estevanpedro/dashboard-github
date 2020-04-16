@@ -67,6 +67,13 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
             }),
           }
           dispatch(editNode(id, data))
+
+        case 'timer':
+          data = {
+            ...nodeInfo,
+            name: FormData.name,
+            info: FormData.info,
+          }
         default:
           data = null
       }
@@ -111,6 +118,22 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
                       : 0,
                 }
               }),
+            }
+
+          case 'timer':
+            if (nodeInfo.info) {
+              console.log(nodeInfo)
+              initialState = {
+                type: 'timer',
+                name: nodeInfo.name,
+                info: {
+                  time: {
+                    hours: nodeInfo.info.time.hours || '0',
+                    minutes: nodeInfo.info.time.minutes || '0',
+                    seconds: nodeInfo.info.time.seconds || '0',
+                  },
+                },
+              }
             }
         }
 

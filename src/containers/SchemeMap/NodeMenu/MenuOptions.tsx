@@ -31,9 +31,9 @@ const MenuOptions = ({ data, returnToInfo }: Props) => {
           case 'Timer':
             dispatch(
               addTimer(data, formData.name, {
-                hours: Number(formData.info.hours),
-                minutes: Number(formData.info.minutes),
-                seconds: Number(formData.info.seconds),
+                hours: Number(formData.info.time.hours),
+                minutes: Number(formData.info.time.minutes),
+                seconds: Number(formData.info.time.seconds),
               })
             )
         }

@@ -1,14 +1,7 @@
 import React from 'react'
 import { Formik, FormikErrors } from 'formik'
 
-import {
-  Button,
-  Input,
-  FlexContainer,
-  Text,
-  FieldTitle,
-  TextLink,
-} from '../../../../components'
+import { Button, Input, FlexContainer, Text } from '../../../../components'
 
 import { TitleType } from '../../SchemeNode/options'
 
@@ -89,7 +82,7 @@ const TimerForm = ({ onConfirm, initialState = null }: Props) => {
               marginBottom={1}
             />
             <Input
-              label='Minute'
+              label='Minutes'
               name='info.time.minutes'
               value={values.info.time.minutes}
               onChange={handleChange}
@@ -109,7 +102,12 @@ const TimerForm = ({ onConfirm, initialState = null }: Props) => {
               marginBottom={1}
             />
           </FlexContainer>
-          <Text color='cancel' size='verySmall' margin='0'>
+          <Text
+            color='cancel'
+            size='verySmall'
+            margin='0'
+            data-testid='errorMessage'
+          >
             {touched.type && errors.type ? errors.type : ''}
           </Text>
           <MenuButtonContainer>

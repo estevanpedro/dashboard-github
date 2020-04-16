@@ -3,12 +3,14 @@ export interface SplitData {
   id?: number
   name: string
   address: string
+  info?: any
   splits: {
     id?: number
     name: string
     address: string
     share: number
   }[]
+
 }
 
 export interface TimerData {
