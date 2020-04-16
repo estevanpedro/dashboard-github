@@ -158,9 +158,11 @@ const SplitDetails = ({
           }
         >
           <ReactJson
-            theme={themeContext.colors.primary === '#FF9140' ? 'summerfruit:inverted' : 'monokai'}
+            theme={themeContext.colors.primary === '#FF9140' ? 'summerfruit:inverted' : 'ashes'}
             src={schemeDetails}
             style={{ backgroundColor: themeContext.colors.secondaryBg }}
+            displayObjectSize={false}
+            displayDataTypes={false}
           />
         </Modal>
 
