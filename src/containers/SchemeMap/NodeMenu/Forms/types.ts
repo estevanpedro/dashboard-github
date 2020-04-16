@@ -1,4 +1,5 @@
 export interface SplitData {
+  type: 'split'
   id?: number
   name: string
   address: string
@@ -10,4 +11,17 @@ export interface SplitData {
   }[]
 }
 
-export type FormData = SplitData
+export interface TimerData {
+  type: 'timer'
+  id?: number
+  name: string
+  info: {
+    time: {
+      hours: number
+      minutes: number
+      seconds: number
+    }
+  }
+}
+
+export type FormData = SplitData | TimerData

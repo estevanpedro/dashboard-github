@@ -35,7 +35,7 @@ export interface NodeOption {
   icon: IconType
   content: FunctionComponent<{
     onConfirm: (type: TitleType, data: any) => void
-    initialState?: FormData
+    initialState?: FormData | null
   }>
 }
 
