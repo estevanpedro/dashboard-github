@@ -38,7 +38,6 @@ const App = (): JSX.Element => (
             <Route path='/split-details/:schemeId' component={SplitDetails} />
             <Route path='/forgot' component={ForgotPassword} />
             <Route path='/reset' component={ResetPassword} />
-            {/* <Route path="/" component={}/> */}
           </Router>
         </PersistGate>
       </ThemeService>
