@@ -47,12 +47,12 @@ const options: NodeOption[] = [
     icon: MdCallSplit,
     content: SplitForm,
   },
-  {
-    id: 2,
-    title: 'Timer',
-    icon: MdAccessAlarms,
-    content: TimerForm,
-  },
+  // {
+  //   id: 2,
+  //   title: 'Timer',
+  //   icon: MdAccessAlarms,
+  //   content: TimerForm,
+  // },
   // {
   //   id: 3,
   //   title: 'Notify',
