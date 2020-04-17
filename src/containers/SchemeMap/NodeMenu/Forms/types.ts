@@ -1,7 +1,13 @@
-export interface SplitData {
-  type: 'split'
+import { NodeType } from '../../SchemeNode/utils/nodeType'
+
+export interface DefaultData {
+  type: NodeType
   id?: number
   name: string
+}
+
+export interface SplitData extends DefaultData {
+  type: 'split'
   address: string
   info?: any
   splits: {
@@ -10,13 +16,10 @@ export interface SplitData {
     address: string
     share: number
   }[]
-
 }
 
-export interface TimerData {
+export interface TimerData extends DefaultData {
   type: 'timer'
-  id?: number
-  name: string
   info: {
     time: {
       hours: string
@@ -26,4 +29,11 @@ export interface TimerData {
   }
 }
 
-export type FormData = SplitData | TimerData
+export interface NotifyData extends DefaultData {
+  type: 'notify'
+  info: {
+    emails: string[]
+  }
+}
+
+export type FormData = SplitData | TimerData | NotifyData

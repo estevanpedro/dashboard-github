@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react'
 import {
   MdCallSplit,
   MdAccessAlarms,
-  // MdNotificationsActive,
+  MdNotificationsActive,
   // MdSend,
   // MdSwapHoriz,
   // MdEventAvailable,
@@ -27,6 +27,7 @@ import { FormData } from '../NodeMenu/Forms/types'
 
 import SplitForm from '../NodeMenu/Forms/SplitForm'
 import TimerForm from '../NodeMenu/Forms/TimerForm'
+import NotifyForm from '../NodeMenu/Forms/NotifyForm'
 
 export type TitleType = 'Split' | 'Timer' | 'Notify' | 'Send' | 'Swap' | 'Event'
 
@@ -53,12 +54,12 @@ const options: NodeOption[] = [
   //   icon: MdAccessAlarms,
   //   content: TimerForm,
   // },
-  // {
-  //   id: 3,
-  //   title: 'Notify',
-  //   icon: MdNotificationsActive,
-  //   content: NotifyContent,
-  // },
+  {
+    id: 3,
+    title: 'Notify',
+    icon: MdNotificationsActive,
+    content: NotifyForm,
+  },
   // {
   //   id: 4,
   //   title: 'Send',

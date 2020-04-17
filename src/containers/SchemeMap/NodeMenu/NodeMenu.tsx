@@ -74,6 +74,17 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
             name: FormData.name,
             info: FormData.info,
           }
+          dispatch(editNode(id, data))
+
+        case 'notify':
+          data = {
+            ...nodeInfo,
+            name: FormData.name,
+            info: FormData.info,
+          }
+
+          dispatch(editNode(id, data))
+
         default:
           data = null
       }
@@ -122,7 +133,6 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
 
           case 'timer':
             if (nodeInfo.info) {
-              console.log(nodeInfo)
               initialState = {
                 type: 'timer',
                 name: nodeInfo.name,
@@ -132,6 +142,17 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
                     minutes: nodeInfo.info.time.minutes || '0',
                     seconds: nodeInfo.info.time.seconds || '0',
                   },
+                },
+              }
+            }
+
+          case 'notify':
+            if (nodeInfo.info) {
+              initialState = {
+                type: 'notify',
+                name: nodeInfo.name,
+                info: {
+                  emails: nodeInfo.info.emails || [''],
                 },
               }
             }
