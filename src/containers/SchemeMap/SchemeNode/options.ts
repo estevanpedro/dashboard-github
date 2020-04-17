@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react'
 import {
   MdCallSplit,
-  // MdAccessAlarms,
+  MdAccessAlarms,
   // MdNotificationsActive,
   // MdSend,
   // MdSwapHoriz,
@@ -26,6 +26,7 @@ import { FormData } from '../NodeMenu/Forms/types'
 // } from './ModalContents'
 
 import SplitForm from '../NodeMenu/Forms/SplitForm'
+import TimerForm from '../NodeMenu/Forms/TimerForm'
 
 export type TitleType = 'Split' | 'Timer' | 'Notify' | 'Send' | 'Swap' | 'Event'
 
@@ -35,7 +36,7 @@ export interface NodeOption {
   icon: IconType
   content: FunctionComponent<{
     onConfirm: (type: TitleType, data: any) => void
-    initialState?: FormData
+    initialState?: FormData | null
   }>
 }
 
@@ -50,7 +51,7 @@ const options: NodeOption[] = [
   //   id: 2,
   //   title: 'Timer',
   //   icon: MdAccessAlarms,
-  //   content: TimerContent,
+  //   content: TimerForm,
   // },
   // {
   //   id: 3,

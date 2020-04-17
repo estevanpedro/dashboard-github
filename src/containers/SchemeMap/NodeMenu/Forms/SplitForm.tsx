@@ -13,14 +13,16 @@ import {
 import { TitleType } from '../../SchemeNode/options'
 
 import { MenuButtonContainer, BorderContainer } from '../elements'
-import { FormData } from './types'
+import { FormData, SplitData } from './types'
 
 interface Props {
-  onConfirm: (title: TitleType, FormData: FormData) => void
-  initialState?: FormData
+  onConfirm: (type: TitleType, FormData: FormData) => void
+  initialState?: FormData | null
 }
-const SplitForm = ({ onConfirm, initialState }: Props) => {
-  const splitInitialValues: FormData = {
+
+const SplitForm = ({ onConfirm, initialState = null }: Props) => {
+  const splitInitialValues: SplitData = {
+    type: 'split',
     name: 'Split',
     address: '',
     splits: [
@@ -32,13 +34,16 @@ const SplitForm = ({ onConfirm, initialState }: Props) => {
     ],
   }
 
-  const handleSubmit = (values: FormData) => {
+  const handleSubmit = (values: SplitData) => {
     onConfirm('Split', values)
   }
 
   return (
     <Formik
-      initialValues={initialState || splitInitialValues}
+      initialValues={
+        (initialState && initialState.type === 'split' && initialState) ||
+        splitInitialValues
+      }
       onSubmit={handleSubmit}
     >
       {({ values, handleChange, handleSubmit, setFieldValue }) => (
@@ -54,7 +59,7 @@ const SplitForm = ({ onConfirm, initialState }: Props) => {
           <Input
             label='Address (optional)'
             name='address'
-            value={values.address}
+            value={values.type === 'split' ? values.address : ''}
             onChange={handleChange}
             type='text'
             width='100%'
@@ -64,7 +69,9 @@ const SplitForm = ({ onConfirm, initialState }: Props) => {
             name='splits'
             render={(arrayHelpers: ArrayHelpers) => (
               <FlexContainer direction='column'>
-                {values.splits && values.splits.length > 0
+                {values.type === 'split' &&
+                values.splits &&
+                values.splits.length > 0
                   ? values.splits.map((split, index) => {
                       return (
                         <BorderContainer key={index}>
@@ -117,11 +124,15 @@ const SplitForm = ({ onConfirm, initialState }: Props) => {
                 <TextLink
                   alignSelf='flex-end'
                   onClick={() =>
-                    arrayHelpers.insert(values.splits.length, {
-                      name: `Share ${values.splits.length + 1}`,
-                      address: '',
-                      share: 0,
-                    })
+                    arrayHelpers.insert(
+                      values.type === 'split' ? values.splits.length : 0,
+                      {
+                        name: `Share ${values.type === 'split' &&
+                          values.splits.length + 1}`,
+                        address: '',
+                        share: 0,
+                      }
+                    )
                   }
                 >
                   Add share

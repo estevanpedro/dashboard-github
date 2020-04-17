@@ -1,12 +1,12 @@
 import React, { useContext } from 'react'
 import { ThemeContext } from 'styled-components'
 import { navigate, RouteComponentProps } from '@reach/router'
-import { FaProjectDiagram } from "react-icons/fa";
+import { FaProjectDiagram } from 'react-icons/fa'
 import { Bar, Pie } from 'react-chartjs-2'
 import ReactJson from 'react-json-view'
 import QRCode from 'qrcode.react'
 
-import { TextLink, Button } from '../../components'
+import { TextLink, SmallButton, Button } from '../../components'
 import Modal from '../../components/Modal'
 import { FirstSplitType, HistoryType } from '../../apiTypes'
 
@@ -30,7 +30,6 @@ import {
   SubTitle,
   DiagramButton,
 } from './elements'
-
 
 interface Props {
   createShareList: () => JSX.Element[] | undefined
@@ -88,9 +87,9 @@ const SplitDetails = ({
     let months: string[] = []
     let amounts: number[] = []
     historyDetails.forEach((info: HistoryType) => {
-      months = [new Date(
-        info.created_at * 1000
-      ).toLocaleDateString('UTC')].concat(months)
+      months = [
+        new Date(info.created_at * 1000).toLocaleDateString('UTC'),
+      ].concat(months)
     })
     historyDetails.forEach((info: HistoryType) => {
       amounts = [
@@ -122,12 +121,14 @@ const SplitDetails = ({
     pointDot: true,
     showLines: false,
     scales: {
-      yAxes: [{
-        ticks: {
-          beginAtZero: true,
-        }
-      }]
-    }
+      yAxes: [
+        {
+          ticks: {
+            beginAtZero: true,
+          },
+        },
+      ],
+    },
   }
 
   const handleGoBack = () => {
@@ -152,13 +153,17 @@ const SplitDetails = ({
         <Modal
           title={'New Scheme'}
           trigger={
-            <DiagramButton onClick={() => { }}>
+            <SmallButton onClick={() => {}} margin='0 20px 0 0' align='center'>
               <FaProjectDiagram size={25} />
-            </DiagramButton>
+            </SmallButton>
           }
         >
           <ReactJson
-            theme={themeContext.colors.primary === '#FF9140' ? 'summerfruit:inverted' : 'monokai'}
+            theme={
+              themeContext.colors.primary === '#FF9140'
+                ? 'summerfruit:inverted'
+                : 'monokai'
+            }
             src={schemeDetails}
             style={{ backgroundColor: themeContext.colors.secondaryBg }}
           />

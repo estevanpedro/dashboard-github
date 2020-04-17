@@ -107,6 +107,7 @@ const SchemeMap = ({ schemeId }: Props & RouteComponentProps) => {
             rootNode.children &&
             rootNode.children.map((node: SchemeNodeType, index) => (
               <NodeColumn
+                key={node.id}
                 rootNode={node}
                 last={index === rootNode.children.length - 1}
                 setNodeInfo={setMenuInfo}
@@ -142,6 +143,7 @@ const SchemeMap = ({ schemeId }: Props & RouteComponentProps) => {
             left='5%'
           >
             <NodeColumn
+              key={1}
               rootNode={rootNode}
               ignoreLeftArrow={true}
               last={true}

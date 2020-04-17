@@ -33,6 +33,9 @@ export const MenuContainer = styled.menu`
   ::-webkit-scrollbar-thumb:hover {
     background: ${props => props.theme.colors.primary};
   }
+  form {
+    width: 100%;
+  }
 `
 
 export const OptionContainer = styled.div`

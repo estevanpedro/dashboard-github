@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import SplitDetailsTable from './SplitDetailsTable'
 import { ValuesField, TableText, BalanceText, CopyButton } from './elements'
-import { FaRegCopy } from "react-icons/fa";
+import { FaRegCopy } from 'react-icons/fa'
 
 import Api from '../../Api'
 import { RootState } from '../../redux/rootReducer'
@@ -12,7 +12,7 @@ import { FirstSplitType, HistoryType } from '../../apiTypes'
 
 const SplitDetails = (props: any) => {
   const dispatch = useDispatch()
-  const [schemeId, setSchemeId] = useState(props.schemeId) // splitId is coming from the Library or from the MyScheme throuth routes
+  const [schemeId] = useState(props.schemeId) // splitId is coming from the Library or from the MyScheme throuth routes
   const [schemeDetails, setSchemeDetails] = useState<any[]>([]) // Need to connect splitDetails to the component...
   const [firstSplit, setFirstSplit] = useState<FirstSplitType[]>([])
   const { secretToken } = useSelector((state: RootState) => state.auth)
@@ -33,36 +33,38 @@ const SplitDetails = (props: any) => {
         setSchemeDetails(response.data)
         setFirstSplit(response.data.tree.children[0].children)
         setHistoryDetails(response.data.transactions)
-
       } catch (e) {
         console.error(e)
       }
     }
     fetchSchemeDetails()
-  }, [dispatch, props.splitId])
+  }, [dispatch, props.splitId, schemeId, secretToken])
 
   function createTransList() {
     const Table = ({ info, id }: { info: HistoryType; id: number }) => {
       return (
         <>
           <ValuesField pair={id % 2 === 0 ? true : false}>
-            <BalanceText width='90px'>{info.amount_received > 0 ? info.amount_received : '-' + info.amount_sent}</BalanceText>
-            <TableText>{
-              new Date(
-                info.created_at * 1000
-              ).toLocaleString('UTC')
-            }</TableText>
+            <BalanceText width='90px'>
+              {info.amount_received > 0
+                ? info.amount_received
+                : '-' + info.amount_sent}
+            </BalanceText>
+            <TableText>
+              {new Date(info.created_at * 1000).toLocaleString('UTC')}
+            </TableText>
             <TableText>{info.network}</TableText>
           </ValuesField>
         </>
       )
     }
-    const Map = historyDetails.reverse().map((info: HistoryType, id: number) => {
-      return <Table info={info} id={id} key={id} />
-    })
+    const Map = historyDetails
+      .reverse()
+      .map((info: HistoryType, id: number) => {
+        return <Table info={info} id={id} key={id} />
+      })
     return Map
   }
-
 
   function createShareList() {
     const Table = ({ info, id }: { info: FirstSplitType; id: number }) => {
@@ -76,16 +78,17 @@ const SplitDetails = (props: any) => {
                   info.address.length - 3,
                   info.address.length
                 )}
-              <CopyButton onClick={() => { navigator.clipboard.writeText(info.address) }} >
+              <CopyButton
+                onClick={() => {
+                  navigator.clipboard.writeText(info.address)
+                }}
+              >
                 <FaRegCopy />
               </CopyButton>
             </BalanceText>
 
-
             <TableText width='25px'>{info.info.percentage * 100}</TableText>
-            <TableText width='100px'>
-              {info.name}
-            </TableText>
+            <TableText width='100px'>{info.name}</TableText>
           </ValuesField>
         </>
       )

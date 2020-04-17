@@ -30,7 +30,6 @@ const reducer = createSlice({
       action: PayloadAction<{ root: SchemeNodeType }>
     ) {
       const { root } = action.payload
-      console.log(root)
       state.rootNode = action.payload.root
     },
     addNode(
