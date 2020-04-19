@@ -30,8 +30,6 @@ const NotifyForm = ({ onConfirm, initialState = null }: Props) => {
     const { name, info } = values
 
     const errors: FormikErrors<NotifyData> = {}
-    console.log(errors)
-
     if (!name.length) {
       errors.name = "Name can't be empty"
     }
@@ -96,6 +94,13 @@ const NotifyForm = ({ onConfirm, initialState = null }: Props) => {
                                   : ''
                               }
                             />
+                            {index ? (
+                              <TextLink
+                                onClick={() => arrayHelpers.remove(index)}
+                              >
+                                Remove
+                              </TextLink>
+                            ) : null}
                           </BorderContainer>
                         )
                       })
