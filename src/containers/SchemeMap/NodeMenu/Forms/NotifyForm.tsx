@@ -42,7 +42,10 @@ const NotifyForm = ({ onConfirm, initialState = null }: Props) => {
       return ''
     })
 
-    errors.info = { emails: emailsErrors }
+    if (emailsErrors.find(error => error !== '')) {
+      errors.info = { emails: emailsErrors }
+    }
+
     return errors
   }
 

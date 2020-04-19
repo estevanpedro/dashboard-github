@@ -63,6 +63,7 @@ describe('TimerForm', () => {
 
   it('should send correct information on confirm', async () => {
     const mockConfirm = jest.fn((title: TitleType, data: FormData) => data)
+
     render(<TimerForm onConfirm={mockConfirm} />)
 
     const nameValue = screen.getByLabelText(/name/i)
