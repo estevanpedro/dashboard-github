@@ -27,14 +27,24 @@ const NotifyForm = ({ onConfirm, initialState = null }: Props) => {
   }
 
   const validateNotify = (values: NotifyData) => {
-    const { name } = values
+    const { name, info } = values
 
     const errors: FormikErrors<NotifyData> = {}
+    console.log(errors)
 
     if (!name.length) {
       errors.name = "Name can't be empty"
     }
 
+    const emailsErrors = info.emails.map((email: string, index: number) => {
+      if (!email.length) {
+        return "Email can't be empty"
+      }
+
+      return ''
+    })
+
+    errors.info = { emails: emailsErrors }
     return errors
   }
 
@@ -56,6 +66,7 @@ const NotifyForm = ({ onConfirm, initialState = null }: Props) => {
             onChange={handleChange}
             type='text'
             width='100%'
+            error={touched.name && errors.name ? errors.name : ''}
           />
           <FieldArray
             name='info.emails'
@@ -75,6 +86,15 @@ const NotifyForm = ({ onConfirm, initialState = null }: Props) => {
                               onChange={handleChange}
                               type='email'
                               width='100%'
+                              error={
+                                touched.info &&
+                                touched.info.emails &&
+                                errors.info &&
+                                errors.info.emails &&
+                                errors.info.emails[index]
+                                  ? errors.info.emails[index]
+                                  : ''
+                              }
                             />
                           </BorderContainer>
                         )
