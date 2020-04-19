@@ -26,7 +26,17 @@ const NotifyForm = ({ onConfirm, initialState = null }: Props) => {
     onConfirm('Notify', values)
   }
 
-  const validateNotify = (values: NotifyData) => {}
+  const validateNotify = (values: NotifyData) => {
+    const { name } = values
+
+    const errors: FormikErrors<NotifyData> = {}
+
+    if (!name.length) {
+      errors.name = "Name can't be empty"
+    }
+
+    return errors
+  }
 
   return (
     <Formik
