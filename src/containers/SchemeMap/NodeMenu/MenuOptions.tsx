@@ -4,7 +4,11 @@ import { useDispatch } from 'react-redux'
 import { FlexContainer, SubTitle, TextLink } from '../../../components'
 
 import options, { NodeOption, TitleType } from '../SchemeNode/options'
-import { addSplit, addTimer } from '../SchemeNode/utils/toolsFuncions'
+import {
+  addSplit,
+  addTimer,
+  addNotify,
+} from '../SchemeNode/utils/toolsFuncions'
 import { SchemeNodeType } from '../SchemeNode/utils/nodeType'
 
 import NewNodeOption from './NewNodeOption'
@@ -36,6 +40,9 @@ const MenuOptions = ({ data, returnToInfo }: Props) => {
                 seconds: Number(formData.info.time.seconds),
               })
             )
+
+          case 'Notify':
+            dispatch(addNotify(data, formData.name, formData.info.emails))
         }
         returnToInfo()
       }
