@@ -8,6 +8,7 @@ import {
   addSplit,
   addTimer,
   addNotify,
+  addSend,
 } from '../SchemeNode/utils/toolsFuncions'
 import { SchemeNodeType } from '../SchemeNode/utils/nodeType'
 
@@ -43,6 +44,9 @@ const MenuOptions = ({ data, returnToInfo }: Props) => {
 
           case 'Notify':
             dispatch(addNotify(data, formData.name, formData.info.emails))
+
+          case 'Send':
+            dispatch(addSend(data, formData.name, formData.addresses))
         }
         returnToInfo()
       }

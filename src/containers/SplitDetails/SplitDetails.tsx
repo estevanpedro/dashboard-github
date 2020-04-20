@@ -3,8 +3,14 @@ import { useSelector, useDispatch } from 'react-redux'
 import { ThemeContext } from 'styled-components'
 
 import SplitDetailsTable from './SplitDetailsTable'
-import { ValuesField, TableText, BalanceText, CopyButton, AddressText } from './elements'
-import { FaRegCopy } from "react-icons/fa";
+import {
+  ValuesField,
+  TableText,
+  BalanceText,
+  CopyButton,
+  AddressText,
+} from './elements'
+import { FaRegCopy } from 'react-icons/fa'
 
 import Api from '../../Api'
 import { RootState } from '../../redux/rootReducer'
@@ -18,8 +24,8 @@ const SplitDetails = (props: any) => {
   const [firstSplit, setFirstSplit] = useState<FirstSplitType[]>([])
   const { secretToken } = useSelector((state: RootState) => state.auth)
   const [historyDetails, setHistoryDetails] = useState<HistoryType[]>([])
-  console.log('historyDetails: ', historyDetails)
   const themeContext = useContext(ThemeContext)
+
   useEffect(() => {
     const fetchSchemeDetails = async () => {
       const detailsData = {
@@ -47,18 +53,21 @@ const SplitDetails = (props: any) => {
       return (
         <>
           <ValuesField pair={id % 2 === 0 ? true : false}>
-            <BalanceText width='90px' color={info.amount_received > 0 ? themeContext.colors.confirm : themeContext.colors.cancel} >
-              {
-                info.amount_received > 0 ?
-                  info.amount_received
-                  : '-' + info.amount_sent
+            <BalanceText
+              width='90px'
+              color={
+                info.amount_received > 0
+                  ? themeContext.colors.confirm
+                  : themeContext.colors.cancel
               }
+            >
+              {info.amount_received > 0
+                ? info.amount_received
+                : '-' + info.amount_sent}
             </BalanceText>
-            <TableText>{
-              new Date(
-                info.created_at * 1000
-              ).toLocaleString('UTC')
-            }</TableText>
+            <TableText>
+              {new Date(info.created_at * 1000).toLocaleString('UTC')}
+            </TableText>
             <TableText>{info.network}</TableText>
           </ValuesField>
         </>
