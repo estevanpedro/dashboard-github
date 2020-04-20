@@ -113,9 +113,16 @@ export const TableText = styled(Text) <WidthProps>`
 `
 interface WidthProps {
   width?: string
+  color?: any
 }
 
 export const BalanceText = styled(Text) <WidthProps>`
+  color: ${props => (props.color ? props.color : props.theme.colors.confirm)};
+  font-size: 14px;
+  position: initial;
+  width: ${props => (props.width ? props.width : '')};
+`
+export const AddressText = styled(Text) <WidthProps>`
   color: ${props => props.theme.colors.confirm};
   font-size: 14px;
   position: initial;

@@ -98,7 +98,7 @@ const SplitDetails = ({
           : -Math.abs(info.amount_sent),
       ].concat(amounts)
     })
-    return [months, amounts]
+    return [months.reverse(), amounts]
   }
 
   const PayoutsChart = {
@@ -153,19 +153,17 @@ const SplitDetails = ({
         <Modal
           title={'New Scheme'}
           trigger={
-            <SmallButton onClick={() => {}} margin='0 20px 0 0' align='center'>
+            <SmallButton onClick={() => { }} margin='0 20px 0 0' align='center'>
               <FaProjectDiagram size={25} />
             </SmallButton>
           }
         >
           <ReactJson
-            theme={
-              themeContext.colors.primary === '#FF9140'
-                ? 'summerfruit:inverted'
-                : 'monokai'
-            }
+            theme={themeContext.colors.primary === '#FF9140' ? 'summerfruit:inverted' : 'ashes'}
             src={schemeDetails}
             style={{ backgroundColor: themeContext.colors.secondaryBg }}
+            displayObjectSize={false}
+            displayDataTypes={false}
           />
         </Modal>
 
@@ -222,7 +220,7 @@ const SplitDetails = ({
             <SubTitle>Shares</SubTitle>
           </Header>
           <TitleField>
-            <TableTitle width='60px'>Address</TableTitle>
+            <TableTitle width='100px'>Address</TableTitle>
             <TableTitle width='25px'>Size</TableTitle>
             <TableTitle width='100px'>Label</TableTitle>
           </TitleField>
