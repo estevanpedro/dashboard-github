@@ -85,6 +85,35 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
 
           dispatch(editNode(id, data))
 
+        case 'send':
+          data = {
+            ...nodeInfo,
+            name: FormData.name,
+            children:
+              FormData.type === 'send'
+                ? FormData.addresses.map((address, i) => {
+                    return {
+                      ...nodeInfo.children[i],
+                      name: address.name,
+                      address: address.address,
+                      type: 'address',
+                      info: nodeInfo.children[i]
+                        ? {
+                            ...nodeInfo.children[i].info,
+                            percentage: address.percentage / 100,
+                            value: address.value,
+                          }
+                        : {
+                            percentage: address.percentage / 100,
+                            value: address.value,
+                          },
+                    }
+                  })
+                : [],
+          }
+
+          dispatch(editNode(id, data))
+
         default:
           data = null
       }
@@ -155,6 +184,23 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
                   emails: nodeInfo.info.emails || [''],
                 },
               }
+            }
+
+          case 'send':
+            initialState = {
+              type: 'send',
+              name: nodeInfo.name,
+              addresses: nodeInfo.children.map(child => {
+                return {
+                  name: child.name,
+                  address: child.info.address || '',
+                  percentage:
+                    child.info && child.info.percentage
+                      ? child.info.percentage * 100
+                      : 0,
+                  value: child.info && child.info.value ? child.info.value : 0,
+                }
+              }),
             }
         }
 
