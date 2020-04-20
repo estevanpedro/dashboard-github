@@ -69,11 +69,11 @@ const SplitDetails = (props: any) => {
       return (
         <>
           <ValuesField pair={id % 2 === 0 ? true : false}>
-            <BalanceText width='79px'>
-              {info.address.slice(0, 3) +
+            <BalanceText width='110px'>
+              {info.address.slice(0, 5) +
                 '...' +
                 info.address.slice(
-                  info.address.length - 3,
+                  info.address.length - 5,
                   info.address.length
                 )}
               <CopyButton onClick={() => { navigator.clipboard.writeText(info.address) }} >

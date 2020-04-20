@@ -219,7 +219,7 @@ const SplitDetails = ({
             <SubTitle>Shares</SubTitle>
           </Header>
           <TitleField>
-            <TableTitle width='60px'>Address</TableTitle>
+            <TableTitle width='100px'>Address</TableTitle>
             <TableTitle width='25px'>Size</TableTitle>
             <TableTitle width='100px'>Label</TableTitle>
           </TitleField>
