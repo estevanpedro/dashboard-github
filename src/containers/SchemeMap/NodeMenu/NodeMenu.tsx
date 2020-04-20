@@ -41,29 +41,43 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
     if (nodeInfo) {
       const { id } = nodeInfo
 
-      const data: SchemeNodeType = {
-        ...nodeInfo,
-        name: FormData.name,
-        address: FormData.address,
-        children: FormData.splits.map((split, i) => {
-          return {
-            ...nodeInfo.children[i],
-            name: split.name,
-            address: split.address,
-            type: 'address',
-            info: nodeInfo.children[i]
-              ? {
-                  ...nodeInfo.children[i].info,
-                  percentage: split.share / 100,
-                }
-              : {
-                  percentage: split.share / 100,
-                },
+      let data: SchemeNodeType | null = null
+
+      switch (FormData.type) {
+        case 'split':
+          data = {
+            ...nodeInfo,
+            name: FormData.name,
+            address: FormData.address,
+            children: FormData.splits.map((split, i) => {
+              return {
+                ...nodeInfo.children[i],
+                name: split.name,
+                address: split.address,
+                type: 'address',
+                info: nodeInfo.children[i]
+                  ? {
+                      ...nodeInfo.children[i].info,
+                      percentage: split.share / 100,
+                    }
+                  : {
+                      percentage: split.share / 100,
+                    },
+              }
+            }),
           }
-        }),
+          dispatch(editNode(id, data))
+
+        case 'timer':
+          data = {
+            ...nodeInfo,
+            name: FormData.name,
+            info: FormData.info,
+          }
+        default:
+          data = null
       }
 
-      dispatch(editNode(id, data))
       setIsEditActive(false)
     }
   }
@@ -86,19 +100,41 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
           option => option.title.toLowerCase() === type
         )
 
-        const initialState: FormData = {
-          name: nodeInfo.name,
-          address: nodeInfo.address || '',
-          splits: nodeInfo.children.map(child => {
-            return {
-              name: child.name,
-              address: child.address || '',
-              share:
-                child.info && child.info.percentage
-                  ? child.info.percentage * 100
-                  : 0,
+        let initialState: FormData | null = null
+
+        switch (nodeInfo.type) {
+          case 'split':
+            initialState = {
+              type: 'split',
+              name: nodeInfo.name,
+              address: nodeInfo.address || '',
+              splits: nodeInfo.children.map(child => {
+                return {
+                  name: child.name,
+                  address: child.address || '',
+                  share:
+                    child.info && child.info.percentage
+                      ? child.info.percentage * 100
+                      : 0,
+                }
+              }),
             }
-          }),
+
+          case 'timer':
+            if (nodeInfo.info) {
+              console.log(nodeInfo)
+              initialState = {
+                type: 'timer',
+                name: nodeInfo.name,
+                info: {
+                  time: {
+                    hours: nodeInfo.info.time.hours || '0',
+                    minutes: nodeInfo.info.time.minutes || '0',
+                    seconds: nodeInfo.info.time.seconds || '0',
+                  },
+                },
+              }
+            }
         }
 
         return (

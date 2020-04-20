@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import { FlexContainer, SubTitle, TextLink } from '../../../components'
 
 import options, { NodeOption, TitleType } from '../SchemeNode/options'
-import { addSplit } from '../SchemeNode/utils/toolsFuncions'
+import { addSplit, addTimer } from '../SchemeNode/utils/toolsFuncions'
 import { SchemeNodeType } from '../SchemeNode/utils/nodeType'
 
 import NewNodeOption from './NewNodeOption'
@@ -21,11 +21,20 @@ const MenuOptions = ({ data, returnToInfo }: Props) => {
 
   const handleMenuRender = () => {
     if (optionActive) {
-      const handleConfirm = (type: TitleType, FormData: any) => {
+      const handleConfirm = (type: TitleType, formData: any) => {
         switch (type) {
           case 'Split':
             dispatch(
-              addSplit(data, FormData.name, FormData.address, FormData.splits)
+              addSplit(data, formData.name, formData.address, formData.splits)
+            )
+
+          case 'Timer':
+            dispatch(
+              addTimer(data, formData.name, {
+                hours: Number(formData.info.time.hours),
+                minutes: Number(formData.info.time.minutes),
+                seconds: Number(formData.info.time.seconds),
+              })
             )
         }
         returnToInfo()
@@ -65,6 +74,7 @@ const MenuOptions = ({ data, returnToInfo }: Props) => {
         <FlexContainer wrap='wrap' width='100%' justify='center'>
           {options.map(option => (
             <NewNodeOption
+              key={option.id}
               title={option.title}
               icon={option.icon}
               onClick={() => setOptionActive(option)}
