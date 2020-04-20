@@ -8,7 +8,7 @@ import { render } from './testUtils'
 
 import NotifyForm from '../containers/SchemeMap/NodeMenu/Forms/NotifyForm'
 
-describe('TimerForm', () => {
+describe('Notify', () => {
   it('should correctly change form values', async () => {
     render(<NotifyForm onConfirm={() => {}} />)
 

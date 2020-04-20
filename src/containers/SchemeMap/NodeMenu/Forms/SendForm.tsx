@@ -154,7 +154,7 @@ const SendForm = ({ onConfirm, initialState = null }: Props) => {
                         name: `Address ${values.type === 'send' &&
                           values.addresses.length + 1}`,
                         address: '',
-                        number: 0,
+                        value: 0,
                         percentage: 0,
                       }
                     )
