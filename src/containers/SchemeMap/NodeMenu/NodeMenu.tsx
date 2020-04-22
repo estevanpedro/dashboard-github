@@ -114,6 +114,14 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
 
           dispatch(editNode(id, data))
 
+        case 'swap':
+          data = {
+            ...nodeInfo,
+            name: FormData.name,
+          }
+
+          dispatch(editNode(id, data))
+
         default:
           data = null
       }
@@ -201,6 +209,12 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
                   value: child.info && child.info.value ? child.info.value : 0,
                 }
               }),
+            }
+
+          case 'swap':
+            initialState = {
+              type: 'swap',
+              name: nodeInfo.name,
             }
         }
 

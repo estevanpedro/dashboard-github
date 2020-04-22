@@ -128,6 +128,17 @@ export const addSend = (
 }
 
 /**
+ * Add swap helper
+ * @param {SchemeNodeType} nodeData Data from the node to get appended
+ * @param {string} name Swap name
+ */
+export const addSwap = (nodeData: SchemeNodeType, name: string) => {
+  return addNode({
+    id: nodeData.id,
+    node: { id: uniqid(), type: 'swap', name: name, children: [] },
+  })
+}
+/**
  * Delete node helper
  * @param {string} id Deleted node id
  */

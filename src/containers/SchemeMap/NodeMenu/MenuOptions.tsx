@@ -9,6 +9,7 @@ import {
   addTimer,
   addNotify,
   addSend,
+  addSwap,
 } from '../SchemeNode/utils/toolsFuncions'
 import { SchemeNodeType } from '../SchemeNode/utils/nodeType'
 
@@ -47,6 +48,9 @@ const MenuOptions = ({ data, returnToInfo }: Props) => {
 
           case 'Send':
             dispatch(addSend(data, formData.name, formData.addresses))
+
+          case 'Swap':
+            dispatch(addSwap(data, formData.name))
         }
         returnToInfo()
       }
