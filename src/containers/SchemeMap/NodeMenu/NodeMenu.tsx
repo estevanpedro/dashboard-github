@@ -114,6 +114,14 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
 
           dispatch(editNode(id, data))
 
+        case 'swap':
+          data = {
+            ...nodeInfo,
+            name: FormData.name,
+          }
+
+          dispatch(editNode(id, data))
+
         default:
           data = null
       }
@@ -202,6 +210,12 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
                 }
               }),
             }
+
+          case 'swap':
+            initialState = {
+              type: 'swap',
+              name: nodeInfo.name,
+            }
         }
 
         return (
@@ -249,6 +263,12 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
             >
               <MdEdit />
             </SmallButton>
+          )}
+          {nodeInfo.address && (
+            <FlexContainer margin='0 0 20px 0' direction='column'>
+              <Text weight='bold'>Address:</Text>
+              <Text size='verySmall'>{nodeInfo.address}</Text>
+            </FlexContainer>
           )}
 
           <Line margin='0 0 20px 0' />
