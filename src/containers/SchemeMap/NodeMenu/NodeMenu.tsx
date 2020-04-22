@@ -27,7 +27,6 @@ interface Props {
 }
 
 const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
-  console.log(nodeInfo)
   const [isOptionsVisible, setIsOptionsVisible] = useState(false)
   const [isEditActive, setIsEditActive] = useState(false)
 
