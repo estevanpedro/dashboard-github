@@ -204,17 +204,20 @@ class Api {
     schemeId: string,
     schemeInfo: SchemeInfo
   ) => {
+    console.log('schemeInfo: ', schemeInfo)
     try {
       const response = await axios.patch(
-        `${this.url}/scheme/${schemeId}`,
+        // `${this.url}/scheme/${schemeId}`,
+        `http://127.0.0.1:8000/scheme/${schemeId}`,
         schemeInfo,
         {
           headers: {
             Authorization: `Bearer ${secretToken}`,
+            'Access-Control-Allow-Origin': '*',
           },
         }
       )
-
+      console.log('updateScheme response: ', response)
       return response
     } catch (err) {
       throw Error(`Error on Update Scheme: ${err.message}`)

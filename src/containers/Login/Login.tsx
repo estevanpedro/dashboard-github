@@ -2,13 +2,15 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { navigate } from '@reach/router'
 import { Formik, FormikErrors } from 'formik'
+import { RiBankLine } from 'react-icons/ri';
+import { TiTick } from 'react-icons/ti'
 
 import Button from '../../components/Button'
 import Input from '../../components/Input'
 import Link from '../../components/Link'
 import LinkToInputs from '../../components/LinkToInputs'
 import Error from '../../components/Error'
-
+import logoCDA from '../../assets/logo/logo-cda.png'
 import { SubTitle } from '../../components/Title'
 
 import Api from '../../Api'
@@ -16,16 +18,17 @@ import Api from '../../Api'
 import { changeSecretToken } from '../../redux/ducks/auth'
 import { setLoading } from '../../redux/ducks/loading'
 
-import { LoginContainer, LoginForm } from './elements'
+import { LoginContainer, LoginForm, LoginCDA, SmallText, CDAText } from './elements'
 
 const Login = () => {
   const [apiError, setApiError] = useState('')
-
+  const [CDA, setCDA] = useState<boolean>(false)
   const dispatch = useDispatch()
 
   const formInitialValues = {
     username: '',
     password: '',
+    user_type: '',
   }
 
   type LoginValues = typeof formInitialValues
@@ -34,6 +37,7 @@ const Login = () => {
     const userData = {
       username: values.username,
       password: values.password,
+      user_type: values.user_type
     }
 
     try {
@@ -58,7 +62,7 @@ const Login = () => {
   }
 
   const loginValidation = (values: LoginValues) => {
-    const { username, password } = values
+    const { username, password, user_type } = values
     // TODO: improve validation
     const errors: FormikErrors<LoginValues> = {}
 
@@ -81,8 +85,14 @@ const Login = () => {
     >
       {({ values, errors, touched, handleChange, handleSubmit }) => (
         <LoginForm onSubmit={handleSubmit}>
-          <SubTitle>Login with your Splitcoin account</SubTitle>
+          {
+            CDA ?
+              <SubTitle>Login with your CDA account</SubTitle>
+              :
+              <SubTitle>Login with your Splitcoin account</SubTitle>
+          }
           <LoginContainer>
+
             <Input
               label='Username'
               name='username'
@@ -105,6 +115,24 @@ const Login = () => {
               Login
             </Button>
             <Link to='/sign-up'>Create an account</Link>
+
+            <SmallText> or login with CDA </SmallText>
+            <LoginCDA type="button" hover={CDA} onClick={() => { setCDA(last => !last) }}>
+              {
+                CDA ?
+                  <>
+                    <CDAText>Alright to login with CDA</CDAText>
+                    <TiTick size={25} />
+                  </>
+                  :
+                  <>
+                    <CDAText>Capital Digital Aberto</CDAText>
+                    <RiBankLine size={25} />
+                  </>
+              }
+
+            </LoginCDA>
+
           </LoginContainer>
         </LoginForm>
       )}
