@@ -118,7 +118,7 @@ export const addSend = (
           children: [],
           info: {
             address: address.address,
-            percentage: address.percentage,
+            percentage: address.percentage / 100,
             value: address.value,
           },
         }

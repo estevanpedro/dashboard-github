@@ -3,8 +3,9 @@ import {
   MdCallSplit,
   MdAccessAlarms,
   MdNotificationsActive,
-  // MdSend,
+  MdSend,
   MdSwapHoriz,
+  // MdSwapHoriz,
   // MdEventAvailable,
   // MdModeEdit,
   // MdDelete,
@@ -14,20 +15,10 @@ import { IconType } from 'react-icons/lib/cjs'
 
 import { FormData } from '../NodeMenu/Forms/types'
 
-// import {
-//   SplitContent,
-//   TimerContent,
-//   NotifyContent,
-//   SendContent,
-//   SwapContent,
-//   EventContent,
-//   EditContent,
-//   DeleteContent,
-// } from './ModalContents'
-
 import SplitForm from '../NodeMenu/Forms/SplitForm'
 import TimerForm from '../NodeMenu/Forms/TimerForm'
 import NotifyForm from '../NodeMenu/Forms/NotifyForm'
+import SendForm from '../NodeMenu/Forms/SendForm'
 import SwapForm from '../NodeMenu/Forms/SwapForm'
 
 export type TitleType = 'Split' | 'Timer' | 'Notify' | 'Send' | 'Swap' | 'Event'
@@ -49,30 +40,37 @@ const options: NodeOption[] = [
     icon: MdCallSplit,
     content: SplitForm,
   },
-  // {
-  //   id: 2,
-  //   title: 'Timer',
-  //   icon: MdAccessAlarms,
-  //   content: TimerForm,
-  // },
+  {
+    id: 2,
+    title: 'Timer',
+    icon: MdAccessAlarms,
+    content: TimerForm,
+  },
   {
     id: 3,
     title: 'Notify',
     icon: MdNotificationsActive,
     content: NotifyForm,
   },
-  // {
-  //   id: 4,
-  //   title: 'Send',
-  //   icon: MdSend,
-  //   content: SendContent,
-  // },
+  {
+    id: 4,
+    title: 'Send',
+    icon: MdSend,
+    content: SendForm,
+  },
   {
     id: 5,
     title: 'Swap',
     icon: MdSwapHoriz,
     content: SwapForm,
   },
+
+  // {
+  //   id: 5,
+  //   title: 'Swap',
+  //   icon: MdSwapHoriz,
+  //   content: SwapContent,
+  // },
   // {
   //   id: 6,
   //   title: 'Event',

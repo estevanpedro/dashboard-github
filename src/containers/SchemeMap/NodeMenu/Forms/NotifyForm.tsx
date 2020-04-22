@@ -34,7 +34,7 @@ const NotifyForm = ({ onConfirm, initialState = null }: Props) => {
       errors.name = "Name can't be empty"
     }
 
-    const emailsErrors = info.emails.map((email: string, index: number) => {
+    const emailsErrors = info.emails.map((email: string) => {
       if (!email.length) {
         return "Email can't be empty"
       }

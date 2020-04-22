@@ -36,8 +36,19 @@ export interface NotifyData extends DefaultData {
   }
 }
 
+export interface SendData extends DefaultData {
+  type: 'send'
+  addresses: {
+    id?: number
+    name: string
+    address: string
+    percentage: number
+    value: number
+  }[]
+}
+
 export interface SwapData extends DefaultData {
   type: 'swap'
 }
 
-export type FormData = SplitData | TimerData | NotifyData | SwapData
+export type FormData = SplitData | TimerData | NotifyData | SendData | SwapData

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Formik, FormikErrors } from 'formik'
 
-import { Button, Text, FlexContainer } from '../../../../components'
+import { Button, Input, Text, FlexContainer } from '../../../../components'
 import { MenuButtonContainer } from '../elements'
 
 import { TitleType } from '../../SchemeNode/options'
@@ -19,15 +19,25 @@ const SwapForm = ({ onConfirm, initialState }: Props) => {
     name: 'Swap',
   }
 
-  const handleSubmit = (values: FormData) => {
+  const handleSubmit = (values: SwapData) => {
     onConfirm('Swap', values)
   }
 
-  const validateSwap = (values: FormData) => {}
+  const validateSwap = (values: SwapData) => {
+    const { name } = values
+
+    const errors: FormikErrors<SwapData> = {}
+
+    if (!name.length) {
+      errors.name = "Name can't be empty!"
+    }
+
+    return errors
+  }
 
   return (
     <>
-      <FlexContainer direction='column'>
+      <FlexContainer direction='column' margin='0 0 20px 0'>
         <Text>Minimum of 0.001</Text>
         <Text>Bitcoin (BTC) to REAL (BRL)</Text>
       </FlexContainer>
@@ -39,11 +49,24 @@ const SwapForm = ({ onConfirm, initialState }: Props) => {
         onSubmit={handleSubmit}
         validate={validateSwap}
       >
-        <MenuButtonContainer>
-          <Button type='submit' align='flex-end' margin='20px 0'>
-            Confirm
-          </Button>
-        </MenuButtonContainer>
+        {({ values, errors, touched, handleChange, handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <Input
+              label='Swap name'
+              name='name'
+              value={values.name}
+              onChange={handleChange}
+              type='text'
+              width='100%'
+              error={touched.name && errors.name ? errors.name : ''}
+            />
+            <MenuButtonContainer>
+              <Button type='submit' align='flex-end' margin='20px 0'>
+                Confirm
+              </Button>
+            </MenuButtonContainer>
+          </form>
+        )}
       </Formik>
     </>
   )
