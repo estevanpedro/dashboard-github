@@ -4,7 +4,7 @@ import {
   MdAccessAlarms,
   MdNotificationsActive,
   // MdSend,
-  // MdSwapHoriz,
+  MdSwapHoriz,
   // MdEventAvailable,
   // MdModeEdit,
   // MdDelete,
@@ -28,6 +28,7 @@ import { FormData } from '../NodeMenu/Forms/types'
 import SplitForm from '../NodeMenu/Forms/SplitForm'
 import TimerForm from '../NodeMenu/Forms/TimerForm'
 import NotifyForm from '../NodeMenu/Forms/NotifyForm'
+import SwapForm from '../NodeMenu/Forms/SwapForm'
 
 export type TitleType = 'Split' | 'Timer' | 'Notify' | 'Send' | 'Swap' | 'Event'
 
@@ -66,12 +67,12 @@ const options: NodeOption[] = [
   //   icon: MdSend,
   //   content: SendContent,
   // },
-  // {
-  //   id: 5,
-  //   title: 'Swap',
-  //   icon: MdSwapHoriz,
-  //   content: SwapContent,
-  // },
+  {
+    id: 5,
+    title: 'Swap',
+    icon: MdSwapHoriz,
+    content: SwapForm,
+  },
   // {
   //   id: 6,
   //   title: 'Event',

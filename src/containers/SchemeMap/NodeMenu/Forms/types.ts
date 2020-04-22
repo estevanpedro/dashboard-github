@@ -36,4 +36,8 @@ export interface NotifyData extends DefaultData {
   }
 }
 
-export type FormData = SplitData | TimerData | NotifyData
+export interface SwapData extends DefaultData {
+  type: 'swap'
+}
+
+export type FormData = SplitData | TimerData | NotifyData | SwapData
