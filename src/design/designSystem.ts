@@ -4,6 +4,7 @@ const common = {
     vertical: '30px',
   },
   fontSize: {
+    micro: '14px',
     verySmall: '16px;',
     small: '18px',
     regular: '20px',

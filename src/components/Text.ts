@@ -16,7 +16,14 @@ export default styled.span<TextProps>`
 `
 
 interface TextProps {
-  size?: 'verySmall' | 'small' | 'regular' | 'medium' | 'big' | 'title'
+  size?:
+    | 'micro'
+    | 'verySmall'
+    | 'small'
+    | 'regular'
+    | 'medium'
+    | 'big'
+    | 'title'
   color?:
     | 'primary'
     | 'secondary'

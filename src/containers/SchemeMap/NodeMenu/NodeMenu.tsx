@@ -27,6 +27,7 @@ interface Props {
 }
 
 const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
+  console.log(nodeInfo)
   const [isOptionsVisible, setIsOptionsVisible] = useState(false)
   const [isEditActive, setIsEditActive] = useState(false)
 
@@ -263,6 +264,12 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
             >
               <MdEdit />
             </SmallButton>
+          )}
+          {nodeInfo.address && (
+            <FlexContainer margin='0 0 20px 0' direction='column'>
+              <Text weight='bold'>Address:</Text>
+              <Text size='verySmall'>{nodeInfo.address}</Text>
+            </FlexContainer>
           )}
 
           <Line margin='0 0 20px 0' />
