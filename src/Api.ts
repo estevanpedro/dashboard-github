@@ -37,13 +37,15 @@ class Api {
    * User login request
    * @param {string} username
    * @param {string} password
+   * @param {string} user_type
    */
-  login = async (userData: { username: string; password: string }) => {
-    const { username, password } = userData
+  login = async (userData: { username: string; password: string, user_type: string }) => {
+    const { username, password, user_type } = userData
     try {
       const response = await axios.post(`${this.url}/login`, {
         username,
         password,
+        user_type
       })
 
       return response

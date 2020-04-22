@@ -28,16 +28,22 @@ const Login = () => {
   const formInitialValues = {
     username: '',
     password: '',
-    user_type: '',
+    user_type: 'splitmaster',
   }
 
   type LoginValues = typeof formInitialValues
 
   const handleSubmit = async (values: LoginValues) => {
+
+    let userType = 'splitmaster'
+    if (CDA === true) {
+      userType = 'cda'
+    }
+
     const userData = {
       username: values.username,
       password: values.password,
-      user_type: values.user_type
+      user_type: userType
     }
 
     try {
