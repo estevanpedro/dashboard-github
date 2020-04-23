@@ -15,9 +15,11 @@ export const findTreeNode = (
     return callback(root)
   }
 
-  for (let n = 0; n < root.children.length; n++) {
-    const node = findTreeNode(id, root.children[n], callback)
-    if (node) return node
+  if (root.children) {
+    for (let n = 0; n < root.children.length; n++) {
+      const node = findTreeNode(id, root.children[n], callback)
+      if (node) return node
+    }
   }
 }
 

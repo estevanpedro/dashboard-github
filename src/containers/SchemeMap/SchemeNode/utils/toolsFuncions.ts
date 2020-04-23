@@ -65,7 +65,7 @@ export const addTimer = (
       type: 'timer',
       name: name,
       children: [],
-      info: { name, time: timerInfo },
+      info: { time: timerInfo },
     },
   })
 }

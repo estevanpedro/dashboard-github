@@ -9,6 +9,8 @@ import { RootState } from '../../redux/rootReducer'
 import { loadRoot } from '../../redux/ducks/schemeMap'
 import { setLoading } from '../../redux/ducks/loading'
 
+import { findTreeNode } from '../../utils/treeUtils'
+
 import Api from '../../Api'
 import { SchemeInfo } from '../../apiTypes'
 
@@ -29,10 +31,10 @@ interface Props {
 }
 
 const SchemeMap = ({ schemeId }: Props & RouteComponentProps) => {
-  const { secretToken } = useSelector((state: RootState) => state.auth)
   const [schemeInfo, setSchemeInfo] = useState<SchemeInfo | null>(null)
+  const [menuId, setMenuId] = useState('')
+  const { secretToken } = useSelector((state: RootState) => state.auth)
   const { rootNode } = useSelector((state: RootState) => state.schemeMap)
-  const [menuInfo, setMenuInfo] = useState<SchemeNodeType | null>(null)
 
   const dispatch = useDispatch()
 
@@ -88,6 +90,10 @@ const SchemeMap = ({ schemeId }: Props & RouteComponentProps) => {
     navigate(`/split-details/${schemeId}`)
   }
 
+  const handleMenuInfo = (info: SchemeNodeType) => {
+    setMenuId(info.id)
+  }
+
   const NodeColumn = ({ rootNode, ignoreLeftArrow, last }: NodeColumnProps) => {
     return (
       <FlexContainer
@@ -96,7 +102,7 @@ const SchemeMap = ({ schemeId }: Props & RouteComponentProps) => {
         position='relative'
       >
         <SchemeNode
-          onClick={() => setMenuInfo(rootNode)}
+          onClick={() => handleMenuInfo(rootNode)}
           nodeData={rootNode}
           ignoreLeftArrow={ignoreLeftArrow}
           last={last}
@@ -110,7 +116,7 @@ const SchemeMap = ({ schemeId }: Props & RouteComponentProps) => {
                 key={node.id}
                 rootNode={node}
                 last={index === rootNode.children.length - 1}
-                setNodeInfo={setMenuInfo}
+                setNodeInfo={handleMenuInfo}
               />
             ))}
         </FlexContainer>
@@ -147,11 +153,14 @@ const SchemeMap = ({ schemeId }: Props & RouteComponentProps) => {
               rootNode={rootNode}
               ignoreLeftArrow={true}
               last={true}
-              setNodeInfo={setMenuInfo}
+              setNodeInfo={handleMenuInfo}
             />
           </FlexContainer>
         </ScrollContainer>
-        <NodeMenu nodeInfo={menuInfo} updateMenuInfo={setMenuInfo} />
+        <NodeMenu
+          nodeInfo={findTreeNode(menuId, rootNode, n => n) || null}
+          updateMenuInfo={handleMenuInfo}
+        />
       </SchemeContainer>
     </>
   )
