@@ -33,8 +33,7 @@ const MenuOptions = ({ data, returnToInfo }: Props) => {
             dispatch(
               addSplit(data, formData.name, formData.address, formData.splits)
             )
-            returnToInfo()
-            return
+            break
 
           case 'Timer':
             dispatch(
@@ -45,23 +44,24 @@ const MenuOptions = ({ data, returnToInfo }: Props) => {
               })
             )
             returnToInfo()
-            return
+            break
 
           case 'Notify':
             dispatch(addNotify(data, formData.name, formData.info.emails))
             returnToInfo()
-            return
+            break
 
           case 'Send':
             dispatch(addSend(data, formData.name, formData.addresses))
             returnToInfo()
-            return
+            break
 
           case 'Swap':
             dispatch(addSwap(data, formData.name))
             returnToInfo()
-            return
+            break
         }
+        returnToInfo()
       }
 
       return (

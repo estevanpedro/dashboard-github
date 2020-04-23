@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Formik, FormikErrors } from 'formik'
 
 import { Button, Input, FlexContainer, Text } from '../../../../components'
@@ -14,6 +14,9 @@ interface Props {
 }
 
 const TimerForm = ({ onConfirm, initialState = null }: Props) => {
+  useEffect(() => {
+    console.log(initialState)
+  }, [])
   const timerInitialValues: FormData = {
     type: 'timer',
     name: 'Timer',

@@ -91,8 +91,6 @@ const SchemeMap = ({ schemeId }: Props & RouteComponentProps) => {
   }
 
   const handleMenuInfo = (info: SchemeNodeType) => {
-    console.log(info)
-    // dispatch(updateMenuInfo(info))
     setMenuId(info.id)
   }
 
