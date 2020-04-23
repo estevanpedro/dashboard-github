@@ -47,7 +47,7 @@ class Api {
         password,
         user_type
       })
-
+      console.log('login response: ', response)
       return response
     } catch (err) {
       throw Error(`Error on Login request: ${err.message}`)

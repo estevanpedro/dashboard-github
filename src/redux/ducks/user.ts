@@ -4,12 +4,14 @@ export interface UserState {
   username: string
   email: string
   timezone: string
+  user_type: string
 }
 
 const initialState: UserState = {
   username: '',
   email: '',
   timezone: '',
+  user_type: '',
 }
 
 const reducer = createSlice({
@@ -20,6 +22,7 @@ const reducer = createSlice({
       state.username = action.payload.username
       state.email = action.payload.email
       state.timezone = action.payload.timezone
+      state.user_type = action.payload.user_type
     },
   },
 })

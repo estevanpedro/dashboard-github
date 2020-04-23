@@ -16,7 +16,7 @@ import { ProfileContainer, ProfileField } from './elements'
 
 const Profile = () => {
   const { secretToken } = useSelector((state: RootState) => state.auth)
-  const { username, email, timezone } = useSelector(
+  const { username, email, timezone, user_type } = useSelector(
     (state: RootState) => state.user
   )
 
@@ -33,6 +33,7 @@ const Profile = () => {
           username: response.data.user.username || 'USERNAME_NOT_FOUND',
           email: response.data.user.email || 'EMAIL_NOT_FOUND',
           timezone: response.data.user.timezone || 'TIMEZONE_NOT_FOUND',
+          user_type: response.data.user.user_type || 'USER_TYPE_NOT_FOUND',
         }
 
         dispatch(updateUserInfo(userData))
@@ -59,6 +60,11 @@ const Profile = () => {
       <ProfileField>
         <SubTitle>Password</SubTitle>
         <Link to='/forgot'>Change Password</Link>
+      </ProfileField>
+
+      <ProfileField>
+        <SubTitle>User type</SubTitle>
+        <Text>{user_type}</Text>
       </ProfileField>
 
       {/** 
