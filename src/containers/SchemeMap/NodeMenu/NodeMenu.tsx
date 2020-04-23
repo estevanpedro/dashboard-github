@@ -67,6 +67,7 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
             }),
           }
           dispatch(editNode(id, data))
+          break
 
         case 'timer':
           data = {
@@ -75,6 +76,7 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
             info: FormData.info,
           }
           dispatch(editNode(id, data))
+          break
 
         case 'notify':
           data = {
@@ -84,6 +86,7 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
           }
 
           dispatch(editNode(id, data))
+          break
 
         case 'send':
           data = {
@@ -113,6 +116,7 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
           }
 
           dispatch(editNode(id, data))
+          break
 
         case 'swap':
           data = {
@@ -121,6 +125,7 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
           }
 
           dispatch(editNode(id, data))
+          break
 
         default:
           data = null
@@ -167,6 +172,7 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
                 }
               }),
             }
+            break
 
           case 'timer':
             if (nodeInfo.info) {
@@ -182,6 +188,7 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
                 },
               }
             }
+            break
 
           case 'notify':
             if (nodeInfo.info) {
@@ -193,6 +200,7 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
                 },
               }
             }
+            break
 
           case 'send':
             initialState = {
@@ -210,12 +218,14 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
                 }
               }),
             }
+            break
 
           case 'swap':
             initialState = {
               type: 'swap',
               name: nodeInfo.name,
             }
+            break
         }
 
         return (
