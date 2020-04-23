@@ -45,7 +45,6 @@ class Api {
         username,
         password,
       })
-
       return response
     } catch (err) {
       throw Error(`Error on Login request: ${err.message}`)
@@ -65,6 +64,7 @@ class Api {
         fullname,
         email,
       })
+
       return response
     } catch (err) {
       throw Error(`Error on Signup request: ${err.message}`)
@@ -170,13 +170,11 @@ class Api {
     }
   }
 
-
   /**
    * Create scheme request
    * @param {string} secretToken user secret token
    * @param {SchemeInfo} newSchemeInfo new scheme data
    */
-
 
   createScheme = async (secretToken: string, newSchemeInfo: SchemeInfo) => {
     try {
@@ -187,14 +185,13 @@ class Api {
       })
 
       return response
-    }
-    catch (err) {
+    } catch (err) {
       throw Error(`Error on Create Scheme: ${err.message}`)
     }
   }
 
   /**
-   * Updatte scheme request
+   * Update scheme request
    * @param {string} secretToken user secret token
    * @param {string} schemeId scheme to be updated id
    * @param {ScehemInfo} schemeInfo update scheme data
