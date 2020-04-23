@@ -14,9 +14,6 @@ interface Props {
 }
 
 const TimerForm = ({ onConfirm, initialState = null }: Props) => {
-  useEffect(() => {
-    console.log(initialState)
-  }, [])
   const timerInitialValues: FormData = {
     type: 'timer',
     name: 'Timer',
