@@ -138,35 +138,55 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
 
   const filterOptions = () => {
     let possibleOptions: NodeType[] = []
-    switch (nodeInfo && nodeInfo.type) {
-      case 'split':
-        possibleOptions = []
-        break
 
-      case 'address':
-        possibleOptions = ['split', 'notify', 'timer', 'swap', 'event', 'send']
-        break
+    if (nodeInfo) {
+      switch (nodeInfo.type) {
+        case 'root':
+          if (!nodeInfo.children.length) {
+            possibleOptions = ['split']
+            break
+          }
 
-      case 'timer':
-        possibleOptions = ['split', 'send']
-        break
+          possibleOptions = []
+          break
 
-      case 'notify':
-        possibleOptions = []
-        break
+        case 'split':
+          possibleOptions = []
+          break
 
-      case 'send':
-        possibleOptions = []
-        break
+        case 'address':
+          possibleOptions = [
+            'split',
+            'notify',
+            'timer',
+            'swap',
+            'event',
+            'send',
+          ]
+          break
 
-      case 'swap':
-        possibleOptions = []
-        break
+        case 'timer':
+          possibleOptions = ['split', 'send']
+          break
 
-      case 'event':
-        possibleOptions = ['split', 'swap', 'notify']
-        break
+        case 'notify':
+          possibleOptions = []
+          break
+
+        case 'send':
+          possibleOptions = []
+          break
+
+        case 'swap':
+          possibleOptions = []
+          break
+
+        case 'event':
+          possibleOptions = ['split', 'swap', 'notify']
+          break
+      }
     }
+
     return options.filter(option => possibleOptions.includes(option.type))
   }
 
