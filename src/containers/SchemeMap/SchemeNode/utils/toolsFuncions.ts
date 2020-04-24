@@ -109,7 +109,6 @@ export const addSend = (
       id: uniqid(),
       type: 'send',
       name: name,
-      payout: '0.01',
       children: addresses.map(address => {
         return {
           id: uniqid(),
@@ -123,6 +122,9 @@ export const addSend = (
           },
         }
       }),
+      info: {
+        payout: '0.01', //  TTODO: PLACEHOLDER
+      },
     },
   })
 }
