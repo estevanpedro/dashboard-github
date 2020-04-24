@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 
 import { FlexContainer, SubTitle, TextLink } from '../../../components'
 
-import options, { NodeOption, TitleType } from '../SchemeNode/options'
+import { NodeOption, TitleType } from '../SchemeNode/options'
 import {
   addSplit,
   addTimer,
@@ -11,16 +11,17 @@ import {
   addSend,
   addSwap,
 } from '../SchemeNode/utils/toolsFuncions'
-import { SchemeNodeType } from '../SchemeNode/utils/nodeType'
+import { SchemeNodeType, NodeType } from '../SchemeNode/utils/nodeType'
 
 import NewNodeOption from './NewNodeOption'
 
 interface Props {
   data: SchemeNodeType
   returnToInfo: () => void
+  options: NodeOption[]
 }
 
-const MenuOptions = ({ data, returnToInfo }: Props) => {
+const MenuOptions = ({ data, returnToInfo, options }: Props) => {
   const [optionActive, setOptionActive] = useState<NodeOption | null>(null)
 
   const dispatch = useDispatch()
