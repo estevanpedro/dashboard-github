@@ -11,7 +11,7 @@ export interface SplitData extends DefaultData {
   address: string
   info?: any
   splits: {
-    id?: number
+    id?: string
     name: string
     address: string
     share: number

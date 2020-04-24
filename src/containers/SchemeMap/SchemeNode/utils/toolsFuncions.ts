@@ -28,7 +28,6 @@ export const addSplit = (
     id: nodeData.id,
     node: {
       id: uniqid(),
-      address,
       name,
       type: 'split',
       children: splits.map(split => {
@@ -110,6 +109,7 @@ export const addSend = (
       id: uniqid(),
       type: 'send',
       name: name,
+      payout: '0.01',
       children: addresses.map(address => {
         return {
           id: uniqid(),

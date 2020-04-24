@@ -39,15 +39,18 @@ class Api {
    * @param {string} password
    * @param {string} user_type
    */
-  login = async (userData: { username: string; password: string, user_type: string }) => {
+  login = async (userData: {
+    username: string
+    password: string
+    user_type: string
+  }) => {
     const { username, password, user_type } = userData
     try {
       const response = await axios.post(`${this.url}/login`, {
         username,
         password,
-        user_type
+        user_type,
       })
-      console.log('login response: ', response)
       return response
     } catch (err) {
       throw Error(`Error on Login request: ${err.message}`)
@@ -207,8 +210,8 @@ class Api {
     console.log('schemeInfo: ', schemeInfo)
     try {
       const response = await axios.patch(
-        // `${this.url}/scheme/${schemeId}`,
-        `http://127.0.0.1:8000/scheme/${schemeId}`,
+        `${this.url}/scheme/${schemeId}`,
+        // `http://127.0.0.1:8000/scheme/${schemeId}`,
         schemeInfo,
         {
           headers: {
