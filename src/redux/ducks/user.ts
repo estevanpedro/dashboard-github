@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export interface UserState {
+  user_id: string
   username: string
   email: string
   timezone: string
@@ -8,6 +9,7 @@ export interface UserState {
 }
 
 const initialState: UserState = {
+  user_id: '',
   username: '',
   email: '',
   timezone: '',
@@ -19,6 +21,7 @@ const reducer = createSlice({
   initialState,
   reducers: {
     updateUserInfo(state: UserState, action: PayloadAction<UserState>) {
+      state.user_id = action.payload.username
       state.username = action.payload.username
       state.email = action.payload.email
       state.timezone = action.payload.timezone
