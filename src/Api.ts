@@ -37,13 +37,19 @@ class Api {
    * User login request
    * @param {string} username
    * @param {string} password
+   * @param {string} user_type
    */
-  login = async (userData: { username: string; password: string }) => {
-    const { username, password } = userData
+  login = async (userData: {
+    username: string
+    password: string
+    user_type: string
+  }) => {
+    const { username, password, user_type } = userData
     try {
       const response = await axios.post(`${this.url}/login`, {
         username,
         password,
+        user_type,
       })
       return response
     } catch (err) {
@@ -201,17 +207,20 @@ class Api {
     schemeId: string,
     schemeInfo: SchemeInfo
   ) => {
+    console.log('schemeInfo: ', schemeInfo)
     try {
       const response = await axios.patch(
         `${this.url}/scheme/${schemeId}`,
+        // `http://127.0.0.1:8000/scheme/${schemeId}`,
         schemeInfo,
         {
           headers: {
             Authorization: `Bearer ${secretToken}`,
+            'Access-Control-Allow-Origin': '*',
           },
         }
       )
-
+      console.log('updateScheme response: ', response)
       return response
     } catch (err) {
       throw Error(`Error on Update Scheme: ${err.message}`)

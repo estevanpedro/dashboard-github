@@ -29,6 +29,7 @@ const light = {
     header: '#1D1D1D',
     grey: 'rgb(242, 242, 242,0.8)',
     contrastOpacity: 'rgba(29, 29, 29, 0.1)',
+    cda: '#1B83E0',
   },
   ...common,
 }
@@ -47,6 +48,7 @@ const dark = {
     header: '#1D1D1D',
     grey: 'rgb(242, 242, 242,0.1)',
     contrastOpacity: 'rgba(250, 250, 250, 0.1)',
+    cda: '#1B83E0',
   },
   ...common,
 }

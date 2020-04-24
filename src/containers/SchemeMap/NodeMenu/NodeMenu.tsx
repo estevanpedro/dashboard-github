@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { MdEdit } from 'react-icons/md'
+import uniqid from 'uniqid'
 
 import {
   FlexContainer,
@@ -53,9 +54,11 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
             children: FormData.splits.map((split, i) => {
               return {
                 ...nodeInfo.children[i],
+                id: split.id || uniqid(),
                 name: split.name,
                 address: split.address,
                 type: 'address',
+                // children: nodeInfo.children[i].children || [],
                 info: nodeInfo.children[i]
                   ? {
                       ...nodeInfo.children[i].info,
