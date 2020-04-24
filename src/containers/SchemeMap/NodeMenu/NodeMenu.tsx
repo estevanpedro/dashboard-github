@@ -16,6 +16,7 @@ import { SchemeNodeType } from '../SchemeNode/utils/nodeType'
 
 import options, { TitleType } from '../SchemeNode/options'
 import { editNode } from '../SchemeNode/utils/toolsFuncions'
+import { NodeType } from '../SchemeNode/utils/nodeType'
 
 import { MenuContainer } from './elements'
 import MenuOptions from './MenuOptions'
@@ -135,6 +136,40 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
     }
   }
 
+  const filterOptions = () => {
+    let possibleOptions: NodeType[] = []
+    switch (nodeInfo && nodeInfo.type) {
+      case 'split':
+        possibleOptions = []
+        break
+
+      case 'address':
+        possibleOptions = ['split', 'notify', 'timer', 'swap', 'event', 'send']
+        break
+
+      case 'timer':
+        possibleOptions = ['split', 'send']
+        break
+
+      case 'notify':
+        possibleOptions = []
+        break
+
+      case 'send':
+        possibleOptions = []
+        break
+
+      case 'swap':
+        possibleOptions = []
+        break
+
+      case 'event':
+        possibleOptions = ['split', 'swap', 'notify']
+        break
+    }
+    return options.filter(option => possibleOptions.includes(option.type))
+  }
+
   const renderMenu = () => {
     if (nodeInfo) {
       const { name, children, type } = nodeInfo
@@ -144,6 +179,7 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
           <MenuOptions
             data={nodeInfo}
             returnToInfo={() => setIsOptionsVisible(false)}
+            options={filterOptions()}
           />
         )
       }
@@ -292,9 +328,11 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
                 {child.name}
               </TextLink>
             ))}
-          <TextLink onClick={() => setIsOptionsVisible(true)}>
-            + Add new node
-          </TextLink>
+          {filterOptions().length ? (
+            <TextLink onClick={() => setIsOptionsVisible(true)}>
+              + Add new node
+            </TextLink>
+          ) : null}
         </FlexContainer>
       )
     }
