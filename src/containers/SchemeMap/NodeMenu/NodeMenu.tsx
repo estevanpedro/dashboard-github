@@ -160,7 +160,7 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
             'notify',
             'timer',
             'swap',
-            'event',
+            // 'event',
             'send',
           ]
           break
