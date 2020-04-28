@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { RouteComponentProps, navigate } from '@reach/router'
 import ScrollContainer from 'react-indiana-drag-scroll'
 
-import { TextLink, Button, FlexContainer, Title } from '../../components'
+import { TextLink, Button, FlexContainer, Title, Text } from '../../components'
 
 import { RootState } from '../../redux/rootReducer'
 import { loadRoot } from '../../redux/ducks/schemeMap'
@@ -30,9 +30,18 @@ interface Props {
   schemeId?: string
 }
 
+interface SaveMessage {
+  status: 'error' | 'success'
+  message: string
+}
+
 const SchemeMap = ({ schemeId }: Props & RouteComponentProps) => {
   const [schemeInfo, setSchemeInfo] = useState<SchemeInfo | null>(null)
   const [menuId, setMenuId] = useState('')
+  const [saveMessage, setSaveMessage] = useState<SaveMessage>({
+    status: 'success',
+    message: '',
+  })
   const { secretToken } = useSelector((state: RootState) => state.auth)
   const { rootNode } = useSelector((state: RootState) => state.schemeMap)
 
@@ -79,7 +88,15 @@ const SchemeMap = ({ schemeId }: Props & RouteComponentProps) => {
           dispatch(setLoading(true))
           await Api.updateScheme(secretToken, schemeId, schemeCopy)
           dispatch(setLoading(false))
+          setSaveMessage({
+            status: 'success',
+            message: 'Scheme saved successfully!',
+          })
         } catch (err) {
+          setSaveMessage({
+            status: 'error',
+            message: 'Oops! Something went wrong!',
+          })
           dispatch(setLoading(false))
           console.error(err)
         }
@@ -139,9 +156,15 @@ const SchemeMap = ({ schemeId }: Props & RouteComponentProps) => {
           </TextLink>
           <Title>{schemeInfo && schemeInfo.name}</Title>
         </FlexContainer>
-        <Button onClick={handleSave} margin='0 0 20px 0'>
-          Save
-        </Button>
+        <FlexContainer justify='space-between' align='center'>
+          <Text
+            color={saveMessage.status === 'success' ? 'confirm' : 'cancel'}
+            margin='0 15px 0 0 '
+          >
+            {saveMessage.message}
+          </Text>
+          <Button onClick={handleSave}>Save</Button>
+        </FlexContainer>
       </FlexContainer>
 
       <SchemeContainer>
