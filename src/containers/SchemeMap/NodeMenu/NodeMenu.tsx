@@ -187,6 +187,10 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
         case 'event':
           possibleOptions = ['split', 'swap', 'notify']
           break
+
+        case 'scheme':
+          possibleOptions = []
+          break
       }
     }
 
@@ -325,7 +329,7 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
           padding='20px'
         >
           <SubTitle>{name}</SubTitle>
-          {type !== 'address' && type !== 'root' && (
+          {type !== 'address' && type !== 'root' && type !== 'scheme' && (
             <SmallButton
               onClick={() => setIsEditActive(true)}
               margin='0 0 20px 0'
@@ -341,7 +345,7 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
           )}
 
           <Line margin='0 0 20px 0' />
-          <FieldTitle>Children Nodes</FieldTitle>
+          {type !== 'scheme' && <FieldTitle>Children Nodes</FieldTitle>}
           {children &&
             children.map(child => (
               <TextLink
