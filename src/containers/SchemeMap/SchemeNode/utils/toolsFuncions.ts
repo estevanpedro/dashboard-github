@@ -141,6 +141,34 @@ export const addSwap = (nodeData: SchemeNodeType, name: string) => {
   })
 }
 
+/**
+ * Add event helper
+ * @param nodeData Data from the node to get appended
+ * @param name Event name
+ * @param value Event price value
+ * @param direction Direction of price check
+ */
+export const addEvent = (
+  nodeData: SchemeNodeType,
+  name: string,
+  value: number,
+  direction: 'above' | 'bellow'
+) => {
+  return addNode({
+    id: nodeData.id,
+    node: {
+      id: uniqid(),
+      type: 'event',
+      name,
+      children: [],
+      info: {
+        event_price: value,
+        direction,
+      },
+    },
+  })
+}
+
 export const addScheme = (
   nodeData: SchemeNodeType,
   name: string,
