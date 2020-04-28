@@ -66,11 +66,7 @@ const ImportSplitForm = ({ onConfirm }: Props) => {
             onChange={handleChange}
             type='text'
             width='100%'
-            error={
-              touched.schemeId && schemeNotFound
-                ? 'Scheme not found'
-                : undefined
-            }
+            error={touched.schemeId && schemeNotFound ? 'Scheme not found' : ''}
           />
           <MenuButtonContainer>
             <Button type='submit' align='flex-end' margin='20px 0'>

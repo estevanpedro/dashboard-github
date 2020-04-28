@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Container, Label, InputField, Error } from './style'
 
 interface Props {
-  label: string
+  label?: string
   value: string
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
   type: string
