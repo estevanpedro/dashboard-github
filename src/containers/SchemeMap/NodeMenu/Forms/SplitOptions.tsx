@@ -22,12 +22,14 @@ const SplitOptions = ({ onConfirm, initialState = null }: Props) => {
       case 'default':
         return (
           <>
-            <FieldTitle>Do you want to import an existent split?</FieldTitle>
+            <FieldTitle>
+              Do you want to import an existent split scheme?
+            </FieldTitle>
             <Button
               margin='0 0 20px 0'
               onClick={() => setOptionStatus('import')}
             >
-              Import split
+              Import scheme
             </Button>
             <Button onClick={() => setOptionStatus('new')}>
               Create new split

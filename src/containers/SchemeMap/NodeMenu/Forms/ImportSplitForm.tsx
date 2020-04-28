@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Formik } from 'formik'
+import { Formik, FormikErrors } from 'formik'
 
 import { Button, Input } from '../../../../components'
 
@@ -20,20 +20,22 @@ interface Props {
 }
 
 const ImportSplitForm = ({ onConfirm }: Props) => {
+  const [schemeNotFound, setSchemeNotFound] = useState(false)
   const { secretToken } = useSelector((state: RootState) => state.auth)
   const dispatch = useDispatch()
+
   const importSplitInitialValues = {
-    splitId: '',
+    schemeId: '',
   }
 
-  type importValues = typeof importSplitInitialValues
+  type ImportValues = typeof importSplitInitialValues
 
-  const handleSubmit = async (values: importValues) => {
+  const handleSubmit = async (values: ImportValues) => {
     try {
       dispatch(setLoading(true))
       const response = await Api.getSchemeDetails({
         secretToken,
-        schemeId: values.splitId,
+        schemeId: values.schemeId,
       })
 
       const { name, id } = response.data
@@ -48,21 +50,27 @@ const ImportSplitForm = ({ onConfirm }: Props) => {
       dispatch(setLoading(false))
     } catch (err) {
       dispatch(setLoading(false))
+      setSchemeNotFound(true)
       console.error(err)
     }
   }
 
   return (
     <Formik initialValues={importSplitInitialValues} onSubmit={handleSubmit}>
-      {({ values, handleChange, handleSubmit }) => (
+      {({ values, touched, handleChange, handleSubmit }) => (
         <form onSubmit={handleSubmit}>
           <Input
-            label='Split address'
-            name='splitId'
-            value={values.splitId}
+            label='Scheme address'
+            name='schemeId'
+            value={values.schemeId}
             onChange={handleChange}
             type='text'
             width='100%'
+            error={
+              touched.schemeId && schemeNotFound
+                ? 'Scheme not found'
+                : undefined
+            }
           />
           <MenuButtonContainer>
             <Button type='submit' align='flex-end' margin='20px 0'>
