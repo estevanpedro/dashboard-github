@@ -15,7 +15,7 @@ import { SubTitle } from '../../components/Title'
 
 import Api from '../../Api'
 
-import { changeSecretToken } from '../../redux/ducks/auth'
+import { changeSecretToken, setUserId } from '../../redux/ducks/auth'
 import { setLoading } from '../../redux/ducks/loading'
 
 import {
@@ -63,6 +63,7 @@ const Login = () => {
 
       if (response.data.access_token) {
         dispatch(changeSecretToken(response.data.access_token))
+        dispatch(setUserId(response.data.user.id))
         navigate('/my-schemes')
       }
     } catch (err) {
