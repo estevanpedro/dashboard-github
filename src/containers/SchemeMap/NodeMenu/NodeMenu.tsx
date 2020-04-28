@@ -131,6 +131,18 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
           dispatch(editNode(id, data))
           break
 
+        case 'event':
+          data = {
+            ...nodeInfo,
+            name: FormData.name,
+            info: {
+              event_price: FormData.value,
+              direction: FormData.direction,
+            },
+          }
+          dispatch(editNode(id, data))
+          break
+
         default:
           data = null
       }
@@ -158,7 +170,7 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
             'notify',
             'timer',
             'swap',
-            // 'event',
+            'event',
             'send',
           ]
           break
@@ -281,6 +293,15 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
             initialState = {
               type: 'swap',
               name: nodeInfo.name,
+            }
+            break
+
+          case 'event':
+            initialState = {
+              type: 'event',
+              name: nodeInfo.name,
+              value: nodeInfo.info.event_price,
+              direction: nodeInfo.info.direction,
             }
             break
         }

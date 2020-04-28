@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { FlexContainer, SubTitle, TextLink } from '../../../components'
 
@@ -10,11 +10,13 @@ import {
   addNotify,
   addSend,
   addSwap,
+  addEvent,
   addScheme,
 } from '../SchemeNode/utils/toolsFuncions'
-import { SchemeNodeType, NodeType } from '../SchemeNode/utils/nodeType'
+import { SchemeNodeType } from '../SchemeNode/utils/nodeType'
 
 import NewNodeOption from './NewNodeOption'
+import { RootState } from '../../../redux/rootReducer'
 
 interface Props {
   data: SchemeNodeType
@@ -24,6 +26,7 @@ interface Props {
 
 const MenuOptions = ({ data, returnToInfo, options }: Props) => {
   const [optionActive, setOptionActive] = useState<NodeOption | null>(null)
+  const { userId } = useSelector((state: RootState) => state.auth)
 
   const dispatch = useDispatch()
 
@@ -59,8 +62,14 @@ const MenuOptions = ({ data, returnToInfo, options }: Props) => {
             break
 
           case 'Swap':
-            dispatch(addSwap(data, formData.name))
+            dispatch(addSwap(data, formData.name, userId))
             returnToInfo()
+            break
+
+          case 'Event':
+            dispatch(
+              addEvent(data, formData.name, formData.value, formData.direction)
+            )
             break
 
           case 'ImportSplit':

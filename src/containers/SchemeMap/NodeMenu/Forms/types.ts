@@ -50,6 +50,12 @@ export interface SwapData extends DefaultData {
   type: 'swap'
 }
 
+export interface EventData extends DefaultData {
+  type: 'event'
+  value: number
+  direction: 'above' | 'bellow'
+}
+
 export interface ImportSplit extends DefaultData {
   type: 'scheme'
 }
@@ -60,4 +66,5 @@ export type FormData =
   | NotifyData
   | SendData
   | SwapData
+  | EventData
   | ImportSplit

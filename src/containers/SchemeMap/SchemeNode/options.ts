@@ -18,6 +18,7 @@ import SplitForm from '../NodeMenu/Forms/SplitForm'
 import TimerForm from '../NodeMenu/Forms/TimerForm'
 import NotifyForm from '../NodeMenu/Forms/NotifyForm'
 import SwapForm from '../NodeMenu/Forms/SwapForm'
+import EventForm from '../NodeMenu/Forms/EventForm'
 
 import { NodeType } from './utils/nodeType'
 
@@ -82,7 +83,7 @@ const options: NodeOption[] = [
     title: 'Event',
     type: 'event',
     icon: MdEventAvailable,
-    content: SwapForm, // TODO: Event form
+    content: EventForm,
   },
 ]
 
