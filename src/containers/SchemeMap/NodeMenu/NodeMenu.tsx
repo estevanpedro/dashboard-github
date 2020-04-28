@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { MdEdit } from 'react-icons/md'
+import { navigate } from '@reach/router'
+import { MdEdit, MdLink } from 'react-icons/md'
 import uniqid from 'uniqid'
 
 import {
@@ -335,6 +336,14 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
               margin='0 0 20px 0'
             >
               <MdEdit />
+            </SmallButton>
+          )}
+          {type === 'scheme' && (
+            <SmallButton
+              onClick={() => navigate(`/split-details/${nodeInfo.info.id}`)}
+              margin='0 0 20px 0'
+            >
+              <MdLink />
             </SmallButton>
           )}
           {nodeInfo.address && (
