@@ -27,9 +27,10 @@ import { FormData } from './Forms/types'
 interface Props {
   nodeInfo: SchemeNodeType | null
   updateMenuInfo: (data: SchemeNodeType) => void
+  ownAddresses: string[]
 }
 
-const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
+const NodeMenu = ({ nodeInfo, updateMenuInfo, ownAddresses }: Props) => {
   const [isOptionsVisible, setIsOptionsVisible] = useState(false)
   const [isEditActive, setIsEditActive] = useState(false)
 
@@ -165,14 +166,20 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
           break
 
         case 'address':
-          possibleOptions = [
-            'split',
-            'notify',
-            'timer',
-            'swap',
-            'event',
-            'send',
-          ]
+          if (
+            ownAddresses.includes(nodeInfo.address || '') ||
+            nodeInfo.address === ''
+          ) {
+            possibleOptions = [
+              'split',
+              'notify',
+              'timer',
+              'swap',
+              'event',
+              'send',
+            ]
+          }
+
           break
 
         case 'timer':

@@ -62,6 +62,7 @@ const MySchemes = ({
       fee: false,
       payout,
       visibility: visibility === 'Public' ? 'public' : 'private',
+      own_addresses: [],
       tree: {
         id: '1',
         name: 'root',
@@ -129,7 +130,7 @@ const MySchemes = ({
 
       <Modal
         title={'New Scheme'}
-        trigger={<NewButton onClick={() => { }}>New Scheme</NewButton>}
+        trigger={<NewButton onClick={() => {}}>New Scheme</NewButton>}
       >
         <Area data-testid='newSchemeModal'>
           <Title>Create new scheme</Title>
