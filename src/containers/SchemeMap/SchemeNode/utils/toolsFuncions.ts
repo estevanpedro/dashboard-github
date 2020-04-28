@@ -153,7 +153,13 @@ export const addScheme = (
 ) => {
   return addNode({
     id: nodeData.id,
-    node: { id: uniqid(), type: 'scheme', name, children: [], info: { id } },
+    node: {
+      id: uniqid(),
+      type: 'scheme',
+      name,
+      children: [],
+      info: { schemeId: id },
+    },
   })
 }
 /**
