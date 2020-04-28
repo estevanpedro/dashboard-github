@@ -10,6 +10,7 @@ import {
   addNotify,
   addSend,
   addSwap,
+  addScheme,
 } from '../SchemeNode/utils/toolsFuncions'
 import { SchemeNodeType, NodeType } from '../SchemeNode/utils/nodeType'
 
@@ -59,6 +60,11 @@ const MenuOptions = ({ data, returnToInfo, options }: Props) => {
 
           case 'Swap':
             dispatch(addSwap(data, formData.name))
+            returnToInfo()
+            break
+
+          case 'ImportSplit':
+            dispatch(addScheme(data, formData.name, formData.id))
             returnToInfo()
             break
         }

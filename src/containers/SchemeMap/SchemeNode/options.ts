@@ -14,7 +14,7 @@ import { IconType } from 'react-icons/lib/cjs'
 
 import { FormData } from '../NodeMenu/Forms/types'
 
-import SplitForm from '../NodeMenu/Forms/SplitForm'
+import SplitOptions from '../NodeMenu/Forms/SplitOptions'
 import TimerForm from '../NodeMenu/Forms/TimerForm'
 import NotifyForm from '../NodeMenu/Forms/NotifyForm'
 import SendForm from '../NodeMenu/Forms/SendForm'
@@ -22,7 +22,14 @@ import SwapForm from '../NodeMenu/Forms/SwapForm'
 
 import { NodeType } from './utils/nodeType'
 
-export type TitleType = 'Split' | 'Timer' | 'Notify' | 'Send' | 'Swap' | 'Event'
+export type TitleType =
+  | 'Split'
+  | 'Timer'
+  | 'Notify'
+  | 'Send'
+  | 'Swap'
+  | 'Event'
+  | 'ImportSplit'
 
 export interface NodeOption {
   id: number
@@ -41,7 +48,7 @@ const options: NodeOption[] = [
     title: 'Split',
     type: 'split',
     icon: MdCallSplit,
-    content: SplitForm,
+    content: SplitOptions,
   },
   {
     id: 2,

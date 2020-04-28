@@ -7,6 +7,7 @@ export type NodeType =
   | 'swap'
   | 'event'
   | 'address'
+  | 'scheme'
 
 export declare type SchemeNodeType = {
   id: string

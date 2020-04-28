@@ -137,7 +137,18 @@ export const addSend = (
 export const addSwap = (nodeData: SchemeNodeType, name: string) => {
   return addNode({
     id: nodeData.id,
-    node: { id: uniqid(), type: 'swap', name: name, children: [] },
+    node: { id: uniqid(), type: 'swap', name, children: [] },
+  })
+}
+
+export const addScheme = (
+  nodeData: SchemeNodeType,
+  name: string,
+  id: string
+) => {
+  return addNode({
+    id: nodeData.id,
+    node: { id: uniqid(), type: 'scheme', name, children: [], info: { id } },
   })
 }
 /**
