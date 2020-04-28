@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { navigate } from '@reach/router'
 import { Formik, FormikErrors } from 'formik'
-import { RiBankLine } from 'react-icons/ri';
+import { RiBankLine } from 'react-icons/ri'
 import { TiTick } from 'react-icons/ti'
 
 import Button from '../../components/Button'
@@ -18,7 +18,13 @@ import Api from '../../Api'
 import { changeSecretToken } from '../../redux/ducks/auth'
 import { setLoading } from '../../redux/ducks/loading'
 
-import { LoginContainer, LoginForm, LoginCDA, SmallText, CDAText } from './elements'
+import {
+  LoginContainer,
+  LoginForm,
+  LoginCDA,
+  SmallText,
+  CDAText,
+} from './elements'
 
 const Login = () => {
   const [apiError, setApiError] = useState('')
@@ -34,7 +40,6 @@ const Login = () => {
   type LoginValues = typeof formInitialValues
 
   const handleSubmit = async (values: LoginValues) => {
-
     let userType = 'splitmaster'
     if (CDA === true) {
       userType = 'cda'
@@ -43,7 +48,7 @@ const Login = () => {
     const userData = {
       username: values.username,
       password: values.password,
-      user_type: userType
+      user_type: userType,
     }
 
     try {
@@ -91,14 +96,12 @@ const Login = () => {
     >
       {({ values, errors, touched, handleChange, handleSubmit }) => (
         <LoginForm onSubmit={handleSubmit}>
-          {
-            CDA ?
-              <SubTitle>Login with your CDA account</SubTitle>
-              :
-              <SubTitle>Login with your Splitcoin account</SubTitle>
-          }
+          {CDA ? (
+            <SubTitle>Login with your CDA account</SubTitle>
+          ) : (
+            <SubTitle>Login with your Splitcoin account</SubTitle>
+          )}
           <LoginContainer>
-
             <Input
               label='Username'
               name='username'
@@ -123,22 +126,25 @@ const Login = () => {
             <Link to='/sign-up'>Create an account</Link>
 
             <SmallText> or login with CDA </SmallText>
-            <LoginCDA type="button" hover={CDA} onClick={() => { setCDA(last => !last) }}>
-              {
-                CDA ?
-                  <>
-                    <CDAText>Alright to login with CDA</CDAText>
-                    <TiTick size={25} />
-                  </>
-                  :
-                  <>
-                    <CDAText>Capital Digital Aberto</CDAText>
-                    <RiBankLine size={25} />
-                  </>
-              }
-
+            <LoginCDA
+              type='button'
+              hover={CDA}
+              onClick={() => {
+                setCDA(last => !last)
+              }}
+            >
+              {CDA ? (
+                <>
+                  <CDAText>Alright to login with CDA</CDAText>
+                  <TiTick size={25} />
+                </>
+              ) : (
+                <>
+                  <CDAText>Capital Digital Aberto</CDAText>
+                  <RiBankLine size={25} />
+                </>
+              )}
             </LoginCDA>
-
           </LoginContainer>
         </LoginForm>
       )}

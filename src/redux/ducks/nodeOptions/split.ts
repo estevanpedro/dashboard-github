@@ -1,11 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import uniqid from 'uniqid'
+import { SchemeNodeType } from '../../../containers/SchemeMap/SchemeNode/utils/nodeType'
 
 export interface Split {
   name: string
   id: string
   address: string
   share: number
+  children?: SchemeNodeType[]
 }
 
 export interface SplitState {

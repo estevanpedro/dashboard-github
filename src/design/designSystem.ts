@@ -19,6 +19,7 @@ const light = {
   colors: {
     primary: '#FF9140',
     secondary: '#5B5F97',
+    tertiary: '#63e4a6',
     background: '#E6E6E6',
     secondaryBg: '#DBDBDB',
     contrast: '#1D1D1D',
@@ -38,6 +39,7 @@ const dark = {
   colors: {
     primary: '#63e4a6',
     secondary: '#5B5F97',
+    tertiary: '#FF9140',
     background: '#262626',
     secondaryBg: '#262E33',
     contrast: '#fafafa',

@@ -207,7 +207,6 @@ class Api {
     schemeId: string,
     schemeInfo: SchemeInfo
   ) => {
-    console.log('schemeInfo: ', schemeInfo)
     try {
       const response = await axios.patch(
         `${this.url}/scheme/${schemeId}`,
@@ -220,7 +219,6 @@ class Api {
           },
         }
       )
-      console.log('updateScheme response: ', response)
       return response
     } catch (err) {
       throw Error(`Error on Update Scheme: ${err.message}`)

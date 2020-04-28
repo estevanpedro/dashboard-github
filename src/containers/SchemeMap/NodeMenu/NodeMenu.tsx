@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { MdEdit } from 'react-icons/md'
+import { navigate } from '@reach/router'
+import { MdEdit, MdLink } from 'react-icons/md'
 import uniqid from 'uniqid'
 
 import {
@@ -187,6 +188,10 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
         case 'event':
           possibleOptions = ['split', 'swap', 'notify']
           break
+
+        case 'scheme':
+          possibleOptions = []
+          break
       }
     }
 
@@ -325,12 +330,20 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
           padding='20px'
         >
           <SubTitle>{name}</SubTitle>
-          {type !== 'address' && type !== 'root' && (
+          {type !== 'address' && type !== 'root' && type !== 'scheme' && (
             <SmallButton
               onClick={() => setIsEditActive(true)}
               margin='0 0 20px 0'
             >
               <MdEdit />
+            </SmallButton>
+          )}
+          {type === 'scheme' && (
+            <SmallButton
+              onClick={() => navigate(`/split-details/${nodeInfo.info.id}`)}
+              margin='0 0 20px 0'
+            >
+              <MdLink />
             </SmallButton>
           )}
           {nodeInfo.address && (
@@ -341,7 +354,7 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
           )}
 
           <Line margin='0 0 20px 0' />
-          <FieldTitle>Children Nodes</FieldTitle>
+          {type !== 'scheme' && <FieldTitle>Children Nodes</FieldTitle>}
           {children &&
             children.map(child => (
               <TextLink

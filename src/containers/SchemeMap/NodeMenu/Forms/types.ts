@@ -1,8 +1,8 @@
-import { NodeType } from '../../SchemeNode/utils/nodeType'
+import { NodeType, SchemeNodeType } from '../../SchemeNode/utils/nodeType'
 
 export interface DefaultData {
   type: NodeType
-  id?: number
+  id?: string
   name: string
 }
 
@@ -51,4 +51,14 @@ export interface SwapData extends DefaultData {
   type: 'swap'
 }
 
-export type FormData = SplitData | TimerData | NotifyData | SendData | SwapData
+export interface ImportSplit extends DefaultData {
+  type: 'scheme'
+}
+
+export type FormData =
+  | SplitData
+  | TimerData
+  | NotifyData
+  | SendData
+  | SwapData
+  | ImportSplit

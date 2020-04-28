@@ -9,10 +9,9 @@ export const Header = styled.div`
   justify-content: space-between;
 `
 export const Body = styled.div`
-  flex-direction: row;
-  display: inline-block;
-  justify-content: space-around;
-  align-items: stretch;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `
 
 export const Bottom = styled.div`
@@ -51,12 +50,15 @@ export const QRField = styled.div`
   margin: 25px;
   padding: 15px;
   background-color: white;
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 150px;
 `
 export const DetailsField = styled.div`
   margin: 20px 5px 5px 5px;
   padding: 10px;
-  flex-direction: row;
   display: inline-block;
 `
 export const GraphicField = styled.div`
@@ -98,7 +100,7 @@ export const ValuesField = styled.div<ValuesProps>`
     props.pair ? props.theme.colors.grey : props.theme.colors.secondaryBg};
 `
 
-export const TableTitle = styled(Text) <WidthProps>`
+export const TableTitle = styled(Text)<WidthProps>`
   color: ${props => props.theme.colors.contrast};
   font-size: 16px;
   /* padding: 0 10px 0 10px;  */
@@ -106,7 +108,7 @@ export const TableTitle = styled(Text) <WidthProps>`
   width: ${props => (props.width ? props.width : '')};
 `
 
-export const TableText = styled(Text) <WidthProps>`
+export const TableText = styled(Text)<WidthProps>`
   color: ${props => props.theme.colors.contrast};
   font-size: 14px;
   width: ${props => (props.width ? props.width : '')};
@@ -116,13 +118,13 @@ interface WidthProps {
   color?: any
 }
 
-export const BalanceText = styled(Text) <WidthProps>`
+export const BalanceText = styled(Text)<WidthProps>`
   color: ${props => (props.color ? props.color : props.theme.colors.confirm)};
   font-size: 14px;
   position: initial;
   width: ${props => (props.width ? props.width : '')};
 `
-export const AddressText = styled(Text) <WidthProps>`
+export const AddressText = styled(Text)<WidthProps>`
   color: ${props => props.theme.colors.confirm};
   font-size: 14px;
   position: initial;

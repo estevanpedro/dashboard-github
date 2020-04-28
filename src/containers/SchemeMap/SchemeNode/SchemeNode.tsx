@@ -35,6 +35,9 @@ const SchemeNode = ({ nodeData, ignoreLeftArrow, last, onClick }: Props) => {
       case 'root':
         return 'root'
 
+      case 'scheme':
+        return 'scheme'
+
       default:
         return
     }

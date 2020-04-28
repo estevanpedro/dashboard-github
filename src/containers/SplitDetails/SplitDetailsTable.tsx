@@ -6,7 +6,7 @@ import { Bar, Pie } from 'react-chartjs-2'
 import ReactJson from 'react-json-view'
 import QRCode from 'qrcode.react'
 
-import { TextLink, SmallButton, Button } from '../../components'
+import { TextLink, SmallButton, Button, FlexContainer } from '../../components'
 import Modal from '../../components/Modal'
 import { FirstSplitType, HistoryType } from '../../apiTypes'
 
@@ -153,13 +153,17 @@ const SplitDetails = ({
         <Modal
           title={'New Scheme'}
           trigger={
-            <SmallButton onClick={() => { }} margin='0 20px 0 0' align='center'>
+            <SmallButton onClick={() => {}} margin='0 20px 0 0' align='center'>
               <FaProjectDiagram size={25} />
             </SmallButton>
           }
         >
           <ReactJson
-            theme={themeContext.colors.primary === '#FF9140' ? 'summerfruit:inverted' : 'ashes'}
+            theme={
+              themeContext.colors.primary === '#FF9140'
+                ? 'summerfruit:inverted'
+                : 'ashes'
+            }
             src={schemeDetails}
             style={{ backgroundColor: themeContext.colors.secondaryBg }}
             displayObjectSize={false}
@@ -172,25 +176,29 @@ const SplitDetails = ({
         </Button>
       </Header>
       <Body>
-        <QRField>
-          <QRCode
-            value={schemeDetails.tree ? schemeDetails.tree.address : ''}
-          />
-        </QRField>
-        <DetailsField>
-          <SubtitleText>Wallet Address</SubtitleText>
-          <PayloadText>
-            {schemeDetails.tree ? schemeDetails.tree.address : ''}
-          </PayloadText>
-          <SubtitleText>Balance</SubtitleText>
-          <PayloadText>{schemeDetails.balance || 0} BTC</PayloadText>
-          <SubtitleText>Payout</SubtitleText>
-          <PayloadText>{schemeDetails.payout}</PayloadText>
-          <SubtitleText>Service Fee</SubtitleText>
-          <PayloadText>
-            {schemeDetails.serviceFee === 'True' ? 'Yes' : 'No'}
-          </PayloadText>
-        </DetailsField>
+        <FlexContainer align='center'>
+          <QRField>
+            <QRCode
+              value={schemeDetails.tree ? schemeDetails.tree.address : ''}
+            />
+          </QRField>
+          <DetailsField>
+            <SubtitleText>Scheme ID</SubtitleText>
+            <PayloadText>{schemeDetails.id}</PayloadText>
+            <SubtitleText>Wallet Address</SubtitleText>
+            <PayloadText>
+              {schemeDetails.tree ? schemeDetails.tree.address : ''}
+            </PayloadText>
+            <SubtitleText>Balance</SubtitleText>
+            <PayloadText>{schemeDetails.balance || 0} BTC</PayloadText>
+            <SubtitleText>Payout</SubtitleText>
+            <PayloadText>{schemeDetails.payout}</PayloadText>
+            <SubtitleText>Service Fee</SubtitleText>
+            <PayloadText>
+              {schemeDetails.serviceFee === 'True' ? 'Yes' : 'No'}
+            </PayloadText>
+          </DetailsField>
+        </FlexContainer>
 
         <GraphicField>
           <Pie data={ShareChart} />

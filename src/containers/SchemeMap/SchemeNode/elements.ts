@@ -46,6 +46,9 @@ export const Node = styled.button<NodeProps>`
     height: 60px;
     border-radius: 50%;
   }
+  &.scheme {
+    background-color: ${props => props.theme.colors.tertiary};
+  }
 `
 
 export interface NodeProps {
@@ -59,23 +62,23 @@ export const OverflowContainer = styled.div`
   border: 1px solid ${props => props.theme.colors.contrast};
   border-radius: 4px;
   ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px ${props => props.theme.colors.secondaryBg};
-  border-radius: 10px;
-}
-::-webkit-scrollbar-corner{
-  background: ${props => props.theme.colors.secondaryBg};
-}
-::-webkit-scrollbar {
-  width: 13px;
-  background: ${props => props.theme.colors.secondaryBg};
-}
-::-webkit-scrollbar-thumb {
-  background: ${props => props.theme.colors.primary};
-  border-radius: 10px;
-}
+    box-shadow: inset 0 0 5px ${props => props.theme.colors.secondaryBg};
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-corner {
+    background: ${props => props.theme.colors.secondaryBg};
+  }
+  ::-webkit-scrollbar {
+    width: 13px;
+    background: ${props => props.theme.colors.secondaryBg};
+  }
+  ::-webkit-scrollbar-thumb {
+    background: ${props => props.theme.colors.primary};
+    border-radius: 10px;
+  }
   ::-webkit-scrollbar-thumb:hover {
-  background: ${props => props.theme.colors.primary};
-}
+    background: ${props => props.theme.colors.primary};
+  }
 `
 
 export const SplitContainer = styled.div`
@@ -138,8 +141,8 @@ export const OptionNode = styled(Node)`
     props.primary ? props.theme.colors.contrast : props.theme.colors.secondary};
   border: 2px solid
     ${props =>
-    props.primary
-      ? props.theme.colors.primary
-      : props.theme.colors.secondary};
+      props.primary
+        ? props.theme.colors.primary
+        : props.theme.colors.secondary};
   flex-direction: column;
 `
