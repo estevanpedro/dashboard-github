@@ -11,7 +11,7 @@ import Title from '../../components/Title'
 import Error from '../../components/Error'
 
 import Api from '../../Api'
-import { changeSecretToken } from '../../redux/ducks/auth'
+import { changeSecretToken, setUserId } from '../../redux/ducks/auth'
 import { setLoading } from '../../redux/ducks/loading'
 
 import { SignUpContainer, SignUpForm, ReturnText } from './elements'
@@ -49,6 +49,7 @@ const SignUp = () => {
 
       if (response.data.access_token) {
         dispatch(changeSecretToken(response.data.access_token))
+        dispatch(setUserId(response.data.user.id))
         navigate('/profile')
       }
     } catch (err) {
