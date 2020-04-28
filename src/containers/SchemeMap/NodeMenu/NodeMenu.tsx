@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { navigate } from '@reach/router'
-import { MdEdit, MdLink } from 'react-icons/md'
+import { MdEdit, MdDelete } from 'react-icons/md'
 import uniqid from 'uniqid'
 
 import {
@@ -23,10 +22,11 @@ import { NodeType } from '../SchemeNode/utils/nodeType'
 import { MenuContainer } from './elements'
 import MenuOptions from './MenuOptions'
 import { FormData } from './Forms/types'
+import { deleteNode } from '../SchemeNode/utils/toolsFuncions'
 
 interface Props {
   nodeInfo: SchemeNodeType | null
-  updateMenuInfo: (data: SchemeNodeType) => void
+  updateMenuInfo: (data: SchemeNodeType | null) => void
 }
 
 const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
@@ -210,6 +210,13 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
     return options.filter(option => possibleOptions.includes(option.type))
   }
 
+  const handleDelete = () => {
+    if (nodeInfo) {
+      dispatch(deleteNode(nodeInfo.id))
+      updateMenuInfo(null)
+    }
+  }
+
   const renderMenu = () => {
     if (nodeInfo) {
       const { name, children, type } = nodeInfo
@@ -352,21 +359,19 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
         >
           <SubTitle>{name}</SubTitle>
           {type !== 'address' && type !== 'root' && type !== 'scheme' && (
-            <SmallButton
-              onClick={() => setIsEditActive(true)}
-              margin='0 0 20px 0'
-            >
-              <MdEdit />
-            </SmallButton>
+            <FlexContainer width='30%' justify='space-between'>
+              <SmallButton
+                onClick={() => setIsEditActive(true)}
+                margin='0 0 20px 0'
+              >
+                <MdEdit />
+              </SmallButton>
+              <SmallButton onClick={handleDelete} margin='0 0 20px 0'>
+                <MdDelete />
+              </SmallButton>
+            </FlexContainer>
           )}
-          {type === 'scheme' && (
-            <SmallButton
-              onClick={() => navigate(`/split-details/${nodeInfo.info.id}`)}
-              margin='0 0 20px 0'
-            >
-              <MdLink />
-            </SmallButton>
-          )}
+
           {nodeInfo.address && (
             <FlexContainer margin='0 0 20px 0' direction='column'>
               <Text weight='bold'>Address:</Text>

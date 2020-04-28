@@ -90,7 +90,12 @@ const SchemeMap = ({ schemeId }: Props & RouteComponentProps) => {
     navigate(`/split-details/${schemeId}`)
   }
 
-  const handleMenuInfo = (info: SchemeNodeType) => {
+  const handleMenuInfo = (info: SchemeNodeType | null) => {
+    if (!info) {
+      setMenuId('')
+      return
+    }
+
     setMenuId(info.id)
   }
 
