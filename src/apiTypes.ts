@@ -6,6 +6,7 @@ export interface SchemeInfo {
   payout: string
   visibility: 'public' | 'private'
   tree: SchemeNodeType
+  own_addresses: string[]
 }
 
 export interface SchemeType {

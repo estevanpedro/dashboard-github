@@ -35,7 +35,7 @@ const App = (): JSX.Element => (
             <Route path='/api' component={Api} />
             <LoggedRoute path='/profile' component={Profile} />
             <LoggedRoute path='/scheme/:schemeId' component={SchemeMap} />
-            <Route path='/split-details/:schemeId' component={SplitDetails} />
+            <Route path='/scheme-details/:schemeId' component={SplitDetails} />
             <Route path='/forgot' component={ForgotPassword} />
             <Route path='/reset' component={ResetPassword} />
           </Router>
