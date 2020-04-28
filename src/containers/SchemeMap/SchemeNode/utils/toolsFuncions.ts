@@ -133,11 +133,16 @@ export const addSend = (
  * Add swap helper
  * @param {SchemeNodeType} nodeData Data from the node to get appended
  * @param {string} name Swap name
+ * @param {string} userId User id
  */
-export const addSwap = (nodeData: SchemeNodeType, name: string) => {
+export const addSwap = (
+  nodeData: SchemeNodeType,
+  name: string,
+  userId: string
+) => {
   return addNode({
     id: nodeData.id,
-    node: { id: uniqid(), type: 'swap', name, children: [] },
+    node: { id: uniqid(), type: 'swap', name, children: [], info: { userId } },
   })
 }
 
@@ -169,6 +174,12 @@ export const addEvent = (
   })
 }
 
+/**
+ * Adds a reference to another existent scheme
+ * @param nodeData Data from the node to get appended
+ * @param name Imported cheme name
+ * @param id Scheme id
+ */
 export const addScheme = (
   nodeData: SchemeNodeType,
   name: string,
@@ -176,9 +187,16 @@ export const addScheme = (
 ) => {
   return addNode({
     id: nodeData.id,
-    node: { id: uniqid(), type: 'scheme', name, children: [], info: { id } },
+    node: {
+      id: uniqid(),
+      type: 'scheme',
+      name,
+      children: [],
+      info: { schemeId: id },
+    },
   })
 }
+
 /**
  * Delete node helper
  * @param {string} id Deleted node id
