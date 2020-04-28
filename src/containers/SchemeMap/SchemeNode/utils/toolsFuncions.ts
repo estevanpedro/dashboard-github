@@ -146,6 +146,12 @@ export const addSwap = (
   })
 }
 
+/**
+ * Adds a reference to another existent scheme
+ * @param nodeData Data from the node to get appended
+ * @param name Imported cheme name
+ * @param id Scheme id
+ */
 export const addScheme = (
   nodeData: SchemeNodeType,
   name: string,
