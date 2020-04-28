@@ -14,10 +14,9 @@ import { IconType } from 'react-icons/lib/cjs'
 
 import { FormData } from '../NodeMenu/Forms/types'
 
-import SplitOptions from '../NodeMenu/Forms/SplitOptions'
+import SplitForm from '../NodeMenu/Forms/SplitForm'
 import TimerForm from '../NodeMenu/Forms/TimerForm'
 import NotifyForm from '../NodeMenu/Forms/NotifyForm'
-import SendForm from '../NodeMenu/Forms/SendForm'
 import SwapForm from '../NodeMenu/Forms/SwapForm'
 import EventForm from '../NodeMenu/Forms/EventForm'
 
@@ -49,7 +48,7 @@ const options: NodeOption[] = [
     title: 'Split',
     type: 'split',
     icon: MdCallSplit,
-    content: SplitOptions,
+    content: SplitForm,
   },
   {
     id: 2,
@@ -65,13 +64,13 @@ const options: NodeOption[] = [
     icon: MdNotificationsActive,
     content: NotifyForm,
   },
-  {
-    id: 4,
-    title: 'Send',
-    type: 'send',
-    icon: MdSend,
-    content: SendForm,
-  },
+  // {
+  //   id: 4,
+  //   title: 'Send',
+  //   type: 'send',
+  //   icon: MdSend,
+  //   content: SendForm,
+  // },
   {
     id: 5,
     title: 'Swap',

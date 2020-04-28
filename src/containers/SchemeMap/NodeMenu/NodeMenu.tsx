@@ -27,9 +27,10 @@ import { FormData } from './Forms/types'
 interface Props {
   nodeInfo: SchemeNodeType | null
   updateMenuInfo: (data: SchemeNodeType) => void
+  ownAddresses: string[]
 }
 
-const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
+const NodeMenu = ({ nodeInfo, updateMenuInfo, ownAddresses }: Props) => {
   const [isOptionsVisible, setIsOptionsVisible] = useState(false)
   const [isEditActive, setIsEditActive] = useState(false)
 
@@ -51,7 +52,6 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
           data = {
             ...nodeInfo,
             name: FormData.name,
-            address: FormData.address,
             children: FormData.splits.map((split, i) => {
               return {
                 ...nodeInfo.children[i],
@@ -158,12 +158,7 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
     if (nodeInfo) {
       switch (nodeInfo.type) {
         case 'root':
-          if (!nodeInfo.children.length) {
-            possibleOptions = ['split']
-            break
-          }
-
-          possibleOptions = []
+          possibleOptions = ['split', 'timer', 'notify', 'swap', 'event']
           break
 
         case 'split':
@@ -171,14 +166,20 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
           break
 
         case 'address':
-          possibleOptions = [
-            'split',
-            'notify',
-            'timer',
-            'swap',
-            'event',
-            'send',
-          ]
+          if (
+            ownAddresses.includes(nodeInfo.address || '') ||
+            nodeInfo.address === ''
+          ) {
+            possibleOptions = [
+              'split',
+              'notify',
+              'timer',
+              'swap',
+              'event',
+              'send',
+            ]
+          }
+
           break
 
         case 'timer':
@@ -189,9 +190,9 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
           possibleOptions = []
           break
 
-        case 'send':
-          possibleOptions = []
-          break
+        // case 'send':
+        //   possibleOptions = []
+        //   break
 
         case 'swap':
           possibleOptions = []
@@ -236,7 +237,6 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
             initialState = {
               type: 'split',
               name: nodeInfo.name,
-              address: nodeInfo.address || '',
               splits: nodeInfo.children.map(child => {
                 return {
                   name: child.name,

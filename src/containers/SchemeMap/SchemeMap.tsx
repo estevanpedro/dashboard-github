@@ -71,6 +71,7 @@ const SchemeMap = ({ schemeId }: Props & RouteComponentProps) => {
         payout: schemeInfo.payout,
         visibility: schemeInfo.visibility,
         tree: rootNode,
+        own_addresses: schemeInfo.own_addresses,
       }
 
       if (schemeId) {
@@ -87,7 +88,7 @@ const SchemeMap = ({ schemeId }: Props & RouteComponentProps) => {
   }
 
   const handleGoToSchemeDetails = () => {
-    navigate(`/split-details/${schemeId}`)
+    navigate(`/scheme-details/${schemeId}`)
   }
 
   const handleMenuInfo = (info: SchemeNodeType) => {
@@ -160,6 +161,7 @@ const SchemeMap = ({ schemeId }: Props & RouteComponentProps) => {
         <NodeMenu
           nodeInfo={findTreeNode(menuId, rootNode, n => n) || null}
           updateMenuInfo={handleMenuInfo}
+          ownAddresses={schemeInfo ? schemeInfo.own_addresses : []}
         />
       </SchemeContainer>
     </>
