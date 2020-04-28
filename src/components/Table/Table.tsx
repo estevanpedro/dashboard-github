@@ -18,8 +18,8 @@ const Table = ({ splitInfo, id }: Props) => {
           {splitInfo.schemeCreator ? (
             <Name>{splitInfo.schemeCreator}</Name>
           ) : (
-              <div />
-            )}
+            <div />
+          )}
         </Colunm>
 
         <Colunm>
@@ -32,14 +32,16 @@ const Table = ({ splitInfo, id }: Props) => {
 
         <Colunm width={'200px'}>
           <PayloadText>
-            {splitInfo.last_transaction != '0' ? new Date(
-              parseFloat(splitInfo.last_transaction) * 1000
-            ).toLocaleString('en-GB') : 'Never'}
+            {splitInfo.last_transaction != '0'
+              ? new Date(
+                  parseFloat(splitInfo.last_transaction) * 1000
+                ).toLocaleString('en-GB')
+              : 'Never'}
           </PayloadText>
         </Colunm>
 
         <Colunm width={'50px'}>
-          <Link to={'/split-details/' + splitInfo.id}>
+          <Link to={'/scheme-details/' + splitInfo.id}>
             <IconButton
               icon={Arrow}
               onClick={() => {

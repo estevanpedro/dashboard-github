@@ -8,7 +8,6 @@ export interface DefaultData {
 
 export interface SplitData extends DefaultData {
   type: 'split'
-  address: string
   info?: any
   splits: {
     id?: string

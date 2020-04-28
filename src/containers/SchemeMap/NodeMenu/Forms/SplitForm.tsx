@@ -25,7 +25,6 @@ const SplitForm = ({ onConfirm, initialState = null }: Props) => {
   const splitInitialValues: SplitData = {
     type: 'split',
     name: 'Split',
-    address: '',
     splits: [
       {
         name: 'Share 1',
@@ -53,14 +52,6 @@ const SplitForm = ({ onConfirm, initialState = null }: Props) => {
             label='Split Name'
             name='name'
             value={values.name}
-            onChange={handleChange}
-            type='text'
-            width='100%'
-          />
-          <Input
-            label='Address (optional)'
-            name='address'
-            value={values.type === 'split' ? values.address : ''}
             onChange={handleChange}
             type='text'
             width='100%'

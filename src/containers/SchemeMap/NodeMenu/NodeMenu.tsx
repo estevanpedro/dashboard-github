@@ -51,7 +51,6 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
           data = {
             ...nodeInfo,
             name: FormData.name,
-            address: FormData.address,
             children: FormData.splits.map((split, i) => {
               return {
                 ...nodeInfo.children[i],
@@ -146,12 +145,7 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
     if (nodeInfo) {
       switch (nodeInfo.type) {
         case 'root':
-          if (!nodeInfo.children.length) {
-            possibleOptions = ['split']
-            break
-          }
-
-          possibleOptions = []
+          possibleOptions = ['split', 'timer', 'notify', 'swap', 'event']
           break
 
         case 'split':
@@ -177,9 +171,9 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
           possibleOptions = []
           break
 
-        case 'send':
-          possibleOptions = []
-          break
+        // case 'send':
+        //   possibleOptions = []
+        //   break
 
         case 'swap':
           possibleOptions = []
@@ -224,7 +218,6 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo }: Props) => {
             initialState = {
               type: 'split',
               name: nodeInfo.name,
-              address: nodeInfo.address || '',
               splits: nodeInfo.children.map(child => {
                 return {
                   name: child.name,

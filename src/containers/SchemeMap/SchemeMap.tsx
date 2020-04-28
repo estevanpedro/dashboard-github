@@ -87,7 +87,7 @@ const SchemeMap = ({ schemeId }: Props & RouteComponentProps) => {
   }
 
   const handleGoToSchemeDetails = () => {
-    navigate(`/split-details/${schemeId}`)
+    navigate(`/scheme-details/${schemeId}`)
   }
 
   const handleMenuInfo = (info: SchemeNodeType) => {
