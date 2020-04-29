@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { navigate } from '@reach/router'
+import { useSelector } from 'react-redux'
 import { Formik, FormikErrors } from 'formik'
 import { RiBankLine } from 'react-icons/ri'
 import { TiTick } from 'react-icons/ti'
@@ -10,13 +11,14 @@ import Input from '../../components/Input'
 import Link from '../../components/Link'
 import LinkToInputs from '../../components/LinkToInputs'
 import Error from '../../components/Error'
-import logoCDA from '../../assets/logo/logo-cda.png'
 import { SubTitle } from '../../components/Title'
 
 import Api from '../../Api'
 
 import { changeSecretToken, setUserId } from '../../redux/ducks/auth'
 import { setLoading } from '../../redux/ducks/loading'
+
+import { RootState } from '../../redux/rootReducer'
 
 import {
   LoginContainer,
@@ -29,7 +31,14 @@ import {
 const Login = () => {
   const [apiError, setApiError] = useState('')
   const [CDA, setCDA] = useState<boolean>(false)
+  const { secretToken } = useSelector((state: RootState) => state.auth)
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (secretToken) {
+      navigate('/my-schemes')
+    }
+  }, [secretToken])
 
   const formInitialValues = {
     username: '',
