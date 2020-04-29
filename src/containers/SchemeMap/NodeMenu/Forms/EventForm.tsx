@@ -44,7 +44,6 @@ const EventForm = ({ onConfirm, initialState }: Props) => {
     value: string,
     setFieldValue: (field: string, value: any) => void
   ) => {
-    console.log(value)
     setFieldValue('direction', value)
   }
 

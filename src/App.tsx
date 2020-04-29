@@ -27,7 +27,10 @@ const App = (): JSX.Element => (
       <ThemeService>
         <PersistGate persistor={persistor} loading={null}>
           <Router id='router-container'>
-            <Redirect from='/' to='/login' />
+            <Redirect
+              from='/'
+              to={store.getState().auth.secretToken ? '/my-schemes' : '/login'}
+            />
             <Route path='/login' component={Login} />
             <Route path='/sign-up' component={SignUp} />
             <LoggedRoute path='/my-schemes' component={MySchemes} />
