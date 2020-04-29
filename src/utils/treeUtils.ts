@@ -52,6 +52,7 @@ export const addTreeNode = (
   const rootCopy = JSON.parse(JSON.stringify(root))
 
   return findTreeNode(id, rootCopy, n => {
+    console.log(n)
     n.children = [...n.children, node]
     return rootCopy
   })
