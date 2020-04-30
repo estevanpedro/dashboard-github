@@ -27,21 +27,17 @@ describe('MyScehemes', () => {
 
     const schemeNameValue = screen.getByLabelText(/^scheme name/i)
     const payoutValue = screen.getByLabelText(/^payout/i)
-    const privateSelector = screen.getByLabelText('Private or Public?')
 
     expect(schemeNameValue).toHaveValue('')
     expect(payoutValue).toHaveValue(0.00001)
-    expect(privateSelector).toHaveValue('public')
 
     await wait(() => {
       fireEvent.change(schemeNameValue, { target: { value: 'Test name' } })
       fireEvent.change(payoutValue, { target: { value: 0.008 } })
-      fireEvent.change(privateSelector, { target: { value: 'private' } })
     })
 
     expect(schemeNameValue).toHaveValue('Test name')
     expect(payoutValue).toHaveValue(0.008)
-    expect(privateSelector).toHaveValue('private')
   })
 
   it('should output errors correctly when the form is not valid', async () => {

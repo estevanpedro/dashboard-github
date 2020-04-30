@@ -3,13 +3,12 @@ import styled from 'styled-components'
 import ds from '../../design/designSystem'
 
 const CommonStyle = {
-  width: 700,
+  width: 550,
   height: '70vh',
   borderRadius: 4,
   border: 'none',
   display: 'flex',
   padding: '10px 0',
-
 }
 
 export const PopupStyleLight = {
@@ -28,23 +27,23 @@ export const Container = styled.div`
   height: 100%;
   overflow: scroll;
   ::-webkit-scrollbar-track {
-      box-shadow: inset 0 0 5px ${props => props.theme.colors.secondaryBg};
-      border-radius: 10px;
-    }
-    ::-webkit-scrollbar-corner {
-      background: ${props => props.theme.colors.secondaryBg};
-    }
-    ::-webkit-scrollbar {
-      width: 13px;
-      background: ${props => props.theme.colors.secondaryBg};
-    }
-    ::-webkit-scrollbar-thumb {
-      background: ${props => props.theme.colors.primary};
-      border-radius: 10px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: ${props => props.theme.colors.primary};
-    }
+    box-shadow: inset 0 0 5px ${props => props.theme.colors.secondaryBg};
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-corner {
+    background: ${props => props.theme.colors.secondaryBg};
+  }
+  ::-webkit-scrollbar {
+    width: 13px;
+    background: ${props => props.theme.colors.secondaryBg};
+  }
+  ::-webkit-scrollbar-thumb {
+    background: ${props => props.theme.colors.primary};
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: ${props => props.theme.colors.primary};
+  }
 `
 
 export const Close = styled.a`

@@ -17,6 +17,7 @@ import {
 import TableTitles from '../../components/Table/TableTitles'
 import TableOptions from '../../components/Table/TableOptions'
 import Modal from '../../components/Modal'
+import { Selector } from '../../components'
 
 import Api from '../../Api'
 import { SchemeInfo } from '../../apiTypes'
@@ -86,6 +87,13 @@ const MySchemes = ({
     }
   }
 
+  const handleVisibilityValue = (
+    value: string,
+    setFieldValue: (field: string, value: any) => void
+  ) => {
+    setFieldValue('visibility', value)
+  }
+
   const validadteNewScheme = (values: NewSchemeValues) => {
     const { name, payout } = values
 
@@ -139,7 +147,14 @@ const MySchemes = ({
             onSubmit={handleNewSchemeSubmit}
             validate={validadteNewScheme}
           >
-            {({ values, errors, touched, handleChange, handleSubmit }) => {
+            {({
+              values,
+              errors,
+              touched,
+              handleChange,
+              handleSubmit,
+              setFieldValue,
+            }) => {
               return (
                 <form onSubmit={handleSubmit}>
                   <Input
@@ -158,18 +173,14 @@ const MySchemes = ({
                     type='number'
                     error={touched.payout && errors.payout ? errors.payout : ''}
                   />
-                  <InfoText htmlFor='privateSelector'>
-                    Private or Public?
-                  </InfoText>
-                  <Select
-                    name='visibility'
-                    onChange={handleChange}
-                    value={values.visibility}
-                    id='privateSelector'
-                  >
-                    <option value='public'>Public</option>
-                    <option value='private'>Private</option>
-                  </Select>
+                  <Selector
+                    label='Visibility'
+                    values={['Public', 'Private']}
+                    selectedValue={String(values.visibility)}
+                    onChange={(value: string) =>
+                      handleVisibilityValue(value, setFieldValue)
+                    }
+                  />
                   <Button type='submit' align='flex-end'>
                     Create
                   </Button>
