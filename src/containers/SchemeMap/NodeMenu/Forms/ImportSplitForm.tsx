@@ -8,7 +8,7 @@ import Api from '../../../../Api'
 
 import { setLoading } from '../../../../redux/ducks/loading'
 
-import { TitleType } from '../../SchemeNode/options'
+import { TitleType } from '../../options'
 
 import { MenuButtonContainer } from '../elements'
 import { FormData, ImportSplit } from './types'

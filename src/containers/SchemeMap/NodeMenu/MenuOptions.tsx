@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { FlexContainer, SubTitle, TextLink } from '../../../components'
 
-import { NodeOption, TitleType } from '../SchemeNode/options'
+import { NodeOption, TitleType } from '../options'
 import {
   addSplit,
   addTimer,
@@ -12,8 +12,8 @@ import {
   addSwap,
   addEvent,
   addScheme,
-} from '../SchemeNode/utils/toolsFuncions'
-import { SchemeNodeType } from '../SchemeNode/utils/nodeType'
+} from '../utils/toolsFuncions'
+import { SchemeNodeType } from '../utils/nodeType'
 
 import NewNodeOption from './NewNodeOption'
 import { RootState } from '../../../redux/rootReducer'

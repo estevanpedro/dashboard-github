@@ -1,7 +1,7 @@
 import React from 'react'
 import { fireEvent, screen, wait } from '@testing-library/react'
 
-import { TitleType } from '../containers/SchemeMap/SchemeNode/options'
+import { TitleType } from '../containers/SchemeMap/options'
 import { FormData } from '../containers/SchemeMap/NodeMenu/Forms/types'
 
 import { render } from './testUtils'

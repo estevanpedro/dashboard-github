@@ -32,7 +32,7 @@ const Table = ({ splitInfo, id }: Props) => {
 
         <Colunm width={'200px'}>
           <PayloadText>
-            {splitInfo.last_transaction != '0'
+            {splitInfo.last_transaction !== '0'
               ? new Date(
                   parseFloat(splitInfo.last_transaction) * 1000
                 ).toLocaleString('en-GB')

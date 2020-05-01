@@ -7,7 +7,7 @@ import {
   VerticalArrow,
   Arrow,
 } from './elements'
-import { SchemeNodeType } from './utils/nodeType'
+import { SchemeNodeType } from '../utils/nodeType'
 
 interface Props {
   nodeData: SchemeNodeType

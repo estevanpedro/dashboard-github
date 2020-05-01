@@ -55,37 +55,6 @@ export interface NodeProps {
   primary?: boolean
 }
 
-export const OverflowContainer = styled.div`
-  width: 99%;
-  height: 280px;
-  overflow: scroll;
-  border: 1px solid ${props => props.theme.colors.contrast};
-  border-radius: 4px;
-  ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px ${props => props.theme.colors.secondaryBg};
-    border-radius: 10px;
-  }
-  ::-webkit-scrollbar-corner {
-    background: ${props => props.theme.colors.secondaryBg};
-  }
-  ::-webkit-scrollbar {
-    width: 13px;
-    background: ${props => props.theme.colors.secondaryBg};
-  }
-  ::-webkit-scrollbar-thumb {
-    background: ${props => props.theme.colors.primary};
-    border-radius: 10px;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: ${props => props.theme.colors.primary};
-  }
-`
-
-export const SplitContainer = styled.div`
-  border-bottom: 4px solid ${props => props.theme.colors.primary};
-  padding: 20px;
-`
-
 const arrowPointerMixin = css`
   ::after {
     content: '';

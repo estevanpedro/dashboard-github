@@ -4,7 +4,7 @@ import { Formik, FormikErrors } from 'formik'
 import { Button, Input, Text, FlexContainer } from '../../../../components'
 import { MenuButtonContainer } from '../elements'
 
-import { TitleType } from '../../SchemeNode/options'
+import { TitleType } from '../../options'
 
 import { FormData, SwapData } from './types'
 

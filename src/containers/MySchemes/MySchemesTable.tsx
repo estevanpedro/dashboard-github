@@ -4,15 +4,7 @@ import { Formik, FormikErrors } from 'formik'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { Button, Title, Input } from '../../components'
-import {
-  TableContainner,
-  Menu,
-  Containner,
-  NewButton,
-  InfoText,
-  Area,
-  Select,
-} from './elements'
+import { TableContainner, Menu, Containner, NewButton, Area } from './elements'
 
 import TableTitles from '../../components/Table/TableTitles'
 import TableOptions from '../../components/Table/TableOptions'

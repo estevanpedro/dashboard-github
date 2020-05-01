@@ -1,4 +1,4 @@
-import { NodeType, SchemeNodeType } from '../../SchemeNode/utils/nodeType'
+import { NodeType } from '../../utils/nodeType'
 
 export interface DefaultData {
   type: NodeType

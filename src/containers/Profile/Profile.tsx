@@ -16,7 +16,7 @@ import { ProfileContainer, ProfileField } from './elements'
 
 const Profile = () => {
   const { secretToken } = useSelector((state: RootState) => state.auth)
-  const { user_id, username, email, timezone, user_type } = useSelector(
+  const { user_id, username, email, user_type } = useSelector(
     (state: RootState) => state.user
   )
 
@@ -72,22 +72,6 @@ const Profile = () => {
         <SubTitle>User ID</SubTitle>
         <Text>{user_id}</Text>
       </ProfileField>
-
-      {/** 
-        <ProfileField>
-        <SubTitle>Timezone</SubTitle>
-        <Text>{timezone}</Text>
-      </ProfileField>
-              <ProfileField>
-        <SubTitle>API Token</SubTitle>
-        <Link to='/'>Create Api Token</Link>
-      </ProfileField>
-         <ProfileField>
-        <SubTitle>Social Auth</SubTitle>
-        <Link to='/'>Manage Connections</Link>
-      </ProfileField>
-      */}
-
     </ProfileContainer>
   )
 }
