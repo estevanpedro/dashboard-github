@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Formik, FormikErrors } from 'formik'
 
 import { Button, Input, FlexContainer, Text } from '../../../../components'
 
-import { TitleType } from '../../SchemeNode/options'
+import { TitleType } from '../../options'
 
 import { MenuButtonContainer } from '../elements'
 import { FormData, TimerData } from './types'

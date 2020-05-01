@@ -3,7 +3,7 @@ import { Formik, FormikErrors, FieldArray, ArrayHelpers } from 'formik'
 
 import { Button, Input, FlexContainer, TextLink } from '../../../../components'
 
-import { TitleType } from '../../SchemeNode/options'
+import { TitleType } from '../../options'
 
 import { MenuButtonContainer, BorderContainer } from '../elements'
 import { FormData, NotifyData } from './types'

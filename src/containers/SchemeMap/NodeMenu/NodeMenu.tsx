@@ -14,11 +14,11 @@ import {
   SmallButton,
 } from '../../../components'
 
-import { SchemeNodeType } from '../SchemeNode/utils/nodeType'
+import { SchemeNodeType } from '../utils/nodeType'
 
-import options, { TitleType } from '../SchemeNode/options'
-import { editNode } from '../SchemeNode/utils/toolsFuncions'
-import { NodeType } from '../SchemeNode/utils/nodeType'
+import options, { TitleType } from '../options'
+import { editNode } from '../utils/toolsFuncions'
+import { NodeType } from '../utils/nodeType'
 
 import { MenuContainer } from './elements'
 import MenuOptions from './MenuOptions'

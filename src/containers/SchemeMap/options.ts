@@ -3,22 +3,19 @@ import {
   MdCallSplit,
   MdAccessAlarms,
   MdNotificationsActive,
-  MdSend,
   MdSwapHoriz,
   MdEventAvailable,
-  // MdModeEdit,
-  // MdDelete,
 } from 'react-icons/md'
 
 import { IconType } from 'react-icons/lib/cjs'
 
-import { FormData } from '../NodeMenu/Forms/types'
+import { FormData } from './NodeMenu/Forms/types'
 
-import SplitForm from '../NodeMenu/Forms/SplitForm'
-import TimerForm from '../NodeMenu/Forms/TimerForm'
-import NotifyForm from '../NodeMenu/Forms/NotifyForm'
-import SwapForm from '../NodeMenu/Forms/SwapForm'
-import EventForm from '../NodeMenu/Forms/EventForm'
+import SplitForm from './NodeMenu/Forms/SplitForm'
+import TimerForm from './NodeMenu/Forms/TimerForm'
+import NotifyForm from './NodeMenu/Forms/NotifyForm'
+import SwapForm from './NodeMenu/Forms/SwapForm'
+import EventForm from './NodeMenu/Forms/EventForm'
 
 import { NodeType } from './utils/nodeType'
 
@@ -64,13 +61,6 @@ const options: NodeOption[] = [
     icon: MdNotificationsActive,
     content: NotifyForm,
   },
-  // {
-  //   id: 4,
-  //   title: 'Send',
-  //   type: 'send',
-  //   icon: MdSend,
-  //   content: SendForm,
-  // },
   {
     id: 5,
     title: 'Swap',

@@ -28,7 +28,6 @@ import {
   Line,
   Title,
   SubTitle,
-  DiagramButton,
 } from './elements'
 
 interface Props {

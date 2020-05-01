@@ -83,7 +83,7 @@ const Login = () => {
   }
 
   const loginValidation = (values: LoginValues) => {
-    const { username, password, user_type } = values
+    const { username, password } = values
     // TODO: improve validation
     const errors: FormikErrors<LoginValues> = {}
 

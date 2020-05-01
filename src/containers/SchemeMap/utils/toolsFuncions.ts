@@ -1,15 +1,27 @@
 import uniqid from 'uniqid'
-
-import {
-  addNode,
-  removeNode,
-  updateNode,
-} from '../../../../redux/ducks/schemeMap'
-import { Split } from '../../../../redux/ducks/nodeOptions/split'
-import { Email } from '../../../../redux/ducks/nodeOptions/notify'
-import { Address } from '../../../../redux/ducks/nodeOptions/send'
-
+import { addNode, removeNode, updateNode } from '../../../redux/ducks/schemeMap'
 import { SchemeNodeType } from './nodeType'
+
+export interface Split {
+  name: string
+  id: string
+  address: string
+  share: number
+  children?: SchemeNodeType[]
+}
+
+export interface Email {
+  id: string
+  email: string
+}
+
+export interface Address {
+  id: string
+  name: string
+  address: string
+  value: number
+  percentage: number
+}
 
 /**
  * Add split helper

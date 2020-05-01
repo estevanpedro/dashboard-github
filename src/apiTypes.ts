@@ -1,4 +1,4 @@
-import { SchemeNodeType } from './containers/SchemeMap/SchemeNode/utils/nodeType'
+import { SchemeNodeType } from './containers/SchemeMap/utils/nodeType'
 
 export interface SchemeInfo {
   name: string

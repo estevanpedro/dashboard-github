@@ -4,7 +4,7 @@ import SplitForm from './SplitForm'
 import ImportSplitForm from './ImportSplitForm'
 
 import { Button, FieldTitle } from '../../../../components'
-import { TitleType } from '../../SchemeNode/options'
+import { TitleType } from '../../options'
 import { FormData } from './types'
 
 interface Props {

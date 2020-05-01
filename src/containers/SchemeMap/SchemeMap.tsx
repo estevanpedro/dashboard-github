@@ -17,7 +17,7 @@ import { SchemeInfo } from '../../apiTypes'
 import SchemeNode from './SchemeNode'
 import NodeMenu from './NodeMenu'
 import { SchemeContainer } from './elements'
-import { SchemeNodeType } from './SchemeNode/utils/nodeType'
+import { SchemeNodeType } from './utils/nodeType'
 
 interface NodeColumnProps {
   rootNode: SchemeNodeType
