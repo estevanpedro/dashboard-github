@@ -30,7 +30,7 @@ const Api = () => {
 
       <ApiTitles>How to create a new scheme using the API</ApiTitles>
       <Text>
-        To create a scheme, use post in /scheme endpoint passing, <CodeText>name</CodeText>, <CodeText>payout</CodeText>, <CodeText>visibility</CodeText> and <CodeText>tree</CodeText> in the <CodeText>root</CodeText> object, and the Splitmaster Token in the <CodeText>headers</CodeText> using <CodeText>Autorization</CodeText> as showed in the Postman Documentation.
+        To create an scheme, use post in /scheme endpoint passing, <CodeText>name</CodeText>, <CodeText>payout</CodeText>, <CodeText>visibility</CodeText> and <CodeText>tree</CodeText> in the <CodeText>root</CodeText> object, and the Splitmaster Token in the <CodeText>headers</CodeText> using <CodeText>Autorization</CodeText> as showed in the Postman Documentation.
       </Text>
 
       <Paragraph />
@@ -46,7 +46,7 @@ const Api = () => {
 
       <ApiTitles>Split</ApiTitles>
       <Text>
-        After the node type split been added, after his father node (always a <CodeText>root</CodeText> node or an <CodeText>address</CodeText> node, it will divide with all his children all bitcoin in the father balance, proportionally to the percentages passed.
+        After the node type split been added, after his father node (always a <CodeText>root</CodeText> node or an <CodeText>address</CodeText> node), it will divide with all his childrens all bitcoin in the father balance, proportionally to the percentages passed.
       </Text>
       <Paragraph />
       {ReactJsons(split_example)}
@@ -79,7 +79,7 @@ const Api = () => {
       <ApiTitles>Event</ApiTitles>
       <Text>
         The Tool Event is used to execute the next node after the price of Bitcoin reach a specific price,
-      It requires the fields <CodeText>event_price</CodeText> and the <CodeText>direction</CodeText> in the <CodeText>info</CodeText> object of event node. An simple example, if the user select <CodeText>event_price</CodeText> equal to US$ 8,000.00, and the <CodeText>direction</CodeText> equal to <CodeText>above</CodeText>. When the node is processed, it will create a job in the Splitmaster background, checking the price every 10 minutes, until the price is above of the selected price, then, the next node will be executed.
+      It requires the fields <CodeText>event_price</CodeText> and the <CodeText>direction</CodeText> in the <CodeText>info</CodeText> object of event node. A simple example, if the user select <CodeText>event_price</CodeText> equal to US$ 8,000.00, and the <CodeText>direction</CodeText> equal to <CodeText>above</CodeText>. When the node is processed, it will create a job in the Splitmaster background, checking the price every 10 minutes, until the price is above of the selected price, then, the next node will be executed.
       </Text>
       <Paragraph />
       <ItalicText>The only available childrens are <CodeText>split</CodeText>, <CodeText>swap</CodeText> and <CodeText>notify</CodeText>.</ItalicText>
