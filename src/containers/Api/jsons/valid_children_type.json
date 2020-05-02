@@ -1,0 +1,9 @@
+{
+    "root": ["split", "notify", "timer", "swap", "event"],
+    "address": ["split", "notify", "timer", "swap", "event"],
+    "event": ["split", "swap", "notify"],
+    "split": ["address"],
+    "timer": ["split"],
+    "swap": ["notify"],
+    "notify": []
+}

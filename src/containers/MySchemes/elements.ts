@@ -85,3 +85,12 @@ export const Select = styled.select`
     font-size: 18px;
   }
 `
+export const TitleDiv = styled.div`
+  flex-direction: row;
+  display: flex;
+`
+export const TitleLittle = styled.h2`
+  margin: 17px 0 0 5px;
+  font-size: ${props => props.theme.fontSize.regular};
+  color: ${props => props.theme.colors.contrast};
+`

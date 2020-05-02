@@ -13,7 +13,7 @@ export default [
   },
   {
     id: 2,
-    title: 'My Schemes',
+    title: 'My Splits',
     needsLogin: true,
     to: '/my-schemes',
   },
