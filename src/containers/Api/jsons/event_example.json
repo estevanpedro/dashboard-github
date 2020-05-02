@@ -1,0 +1,11 @@
+{
+    "id": "k9a1n6fq",
+    "type": "event",
+    "name": "Event",
+    "children": [],
+    "info": {
+        "name": "Notify",
+        "event_price": 8000,
+        "direction": "bellow"
+    }
+}

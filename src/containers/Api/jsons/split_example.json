@@ -1,0 +1,24 @@
+{
+        "name": "Split 1",
+        "type": "split",
+        "children": [
+            {
+                "id": 1,
+                "name": "Split 30%",
+                "info": {
+                    "percentage": "0.3"
+                },
+                "type": "address",
+                "address": "2NAHXLgUdWX1D2hCoRcunF5bgaxECprhSV9"
+            },
+            {
+                "id": 2,
+                "name": "Split 70%",
+                "info": {
+                    "percentage": "0.7"
+                },
+                "type": "address",
+                "address": "2NEVahngW9SWMPXhuFwjiD56WCCw2fwD96Z"
+            }
+        ]
+    }

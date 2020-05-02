@@ -1,0 +1,14 @@
+{
+    "id": "k9a1n6fq",
+    "type": "timer",
+    "name": "Timer",
+    "children": [],
+    "info": {
+        "name": "Timer",
+        "time": {
+            "hours": 1,
+            "minutes": 0,
+            "seconds": 0
+        }
+    }
+}
