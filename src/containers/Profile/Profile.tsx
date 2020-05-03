@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import Link from '../../components/Link'
@@ -12,9 +12,10 @@ import { RootState } from '../../redux/rootReducer'
 import { updateUserInfo } from '../../redux/ducks/user'
 import { setLoading } from '../../redux/ducks/loading'
 
-import { ProfileContainer, ProfileField } from './elements'
+import { ProfileContainer, ProfileField, TextColored, TextColoredSmall, ButtonSimple } from './elements'
 
 const Profile = () => {
+  const [showToken, setShowToken] = useState(false)
   const { secretToken } = useSelector((state: RootState) => state.auth)
   const { user_id, username, email, user_type } = useSelector(
     (state: RootState) => state.user
@@ -72,7 +73,18 @@ const Profile = () => {
         <SubTitle>User ID</SubTitle>
         <Text>{user_id}</Text>
       </ProfileField>
+
+      <ProfileField>
+        <SubTitle>API TOKEN</SubTitle>
+
+        <ButtonSimple onClick={() => { setShowToken(OldState => !OldState) }}>
+          {showToken ? <TextColoredSmall>{secretToken}</TextColoredSmall> : <TextColored>Find token</TextColored>}
+        </ButtonSimple>
+      </ProfileField>
+
     </ProfileContainer>
+
+
   )
 }
 
