@@ -1,5 +1,6 @@
 import React from 'react'
 import { Formik, FieldArray, ArrayHelpers } from 'formik'
+import { Range } from 'react-input-range'
 
 import {
   Button,
@@ -31,6 +32,43 @@ const SplitForm = ({ onConfirm, initialState = null }: Props) => {
         share: 100,
       },
     ],
+  }
+
+  const handlePercentageChange = (
+    index: number,
+    value: number | Range,
+    setFieldValue: (field: string, value: any) => void,
+    values: SplitData
+  ) => {
+    const splitsLength = values.splits.length
+
+    if (splitsLength > 1) {
+      const valueDiff = values.splits[index].share - Number(value)
+      const reversedSplits = values.splits
+
+      let targetSplit: number | undefined
+
+      if (valueDiff < 0) {
+        targetSplit = reversedSplits.findIndex(
+          (split, i) => split.share > 0 && i !== index
+        )
+      } else if (valueDiff >= 0) {
+        targetSplit = reversedSplits.findIndex(
+          (split, i) => split.share < 100 && i !== index
+        )
+      }
+
+      if (
+        targetSplit !== undefined &&
+        reversedSplits[targetSplit].share + valueDiff >= 0
+      ) {
+        setFieldValue(`splits.${index}.share`, value)
+        setFieldValue(
+          `splits.${targetSplit}.share`,
+          reversedSplits[targetSplit].share + valueDiff
+        )
+      }
+    }
   }
 
   const handleSubmit = (values: SplitData) => {
@@ -102,7 +140,13 @@ const SplitForm = ({ onConfirm, initialState = null }: Props) => {
                             name={`splits.${index}.share`}
                             value={split.share}
                             onChange={value =>
-                              setFieldValue(`splits.${index}.share`, value)
+                              // setFieldValue(`splits.${index}.share`, value)
+                              handlePercentageChange(
+                                index,
+                                value,
+                                setFieldValue,
+                                values
+                              )
                             }
                             formatLabel={value => `${value}%`}
                             minValue={0}

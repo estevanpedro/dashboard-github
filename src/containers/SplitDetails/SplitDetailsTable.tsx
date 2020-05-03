@@ -192,7 +192,6 @@ const SplitDetails = ({
             <PayloadText>{schemeDetails.balance || 0} BTC</PayloadText>
             <SubtitleText>Payout</SubtitleText>
             <PayloadText>{schemeDetails.payout}</PayloadText>
-            <SubtitleText>Service Fee</SubtitleText>
             <PayloadText>
               {schemeDetails.serviceFee === 'True' ? 'Yes' : 'No'}
             </PayloadText>
