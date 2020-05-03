@@ -1,0 +1,9 @@
+{
+    "root": [],
+    "split": [],
+    "address": ["percentage"],
+    "timer": ["hours", "minutes", "seconds"],
+    "event": ["event_price", "direction"],
+    "notify": ["emails"],
+    "swap": ["user_id"]
+}

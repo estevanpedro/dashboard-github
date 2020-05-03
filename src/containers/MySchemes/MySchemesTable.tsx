@@ -3,8 +3,8 @@ import { navigate } from '@reach/router'
 import { Formik, FormikErrors } from 'formik'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { Button, Title, Input } from '../../components'
-import { TableContainner, Menu, Containner, NewButton, Area } from './elements'
+import { Button, Title, Input, SubTitle } from '../../components'
+import { TableContainner, Menu, Containner, NewButton, Area, TitleDiv, TitleLittle } from './elements'
 
 import TableTitles from '../../components/Table/TableTitles'
 import TableOptions from '../../components/Table/TableOptions'
@@ -104,7 +104,10 @@ const MySchemes = ({
 
   return (
     <Containner>
-      <Title>My Schemes</Title>
+      <TitleDiv>
+        <Title>My Splits</Title>
+        <TitleLittle> and Schemes</TitleLittle>
+      </TitleDiv>
       <Menu>
         <TableOptions
           props='Balance'
@@ -130,7 +133,7 @@ const MySchemes = ({
 
       <Modal
         title={'New Scheme'}
-        trigger={<NewButton onClick={() => {}}>New Scheme</NewButton>}
+        trigger={<NewButton onClick={() => { }}>New Scheme</NewButton>}
       >
         <Area data-testid='newSchemeModal'>
           <Title>Create new scheme</Title>

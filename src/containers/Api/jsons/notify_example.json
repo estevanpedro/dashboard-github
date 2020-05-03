@@ -1,0 +1,10 @@
+{
+    "type": "notify",
+    "name": "Notify",
+    "children": [],
+    "info": {
+        "emails": [
+            "estevanpwr@outlook.com"
+        ]
+    }
+}
