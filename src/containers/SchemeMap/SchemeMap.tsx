@@ -86,8 +86,13 @@ const SchemeMap = ({ schemeId }: Props & RouteComponentProps) => {
       if (schemeId) {
         try {
           dispatch(setLoading(true))
-          await Api.updateScheme(secretToken, schemeId, schemeCopy)
+          const response = await Api.updateScheme(
+            secretToken,
+            schemeId,
+            schemeCopy
+          )
           dispatch(setLoading(false))
+          console.log(response)
           setSaveMessage({
             status: 'success',
             message: 'Scheme saved successfully!',
@@ -98,7 +103,7 @@ const SchemeMap = ({ schemeId }: Props & RouteComponentProps) => {
             message: 'Oops! Something went wrong!',
           })
           dispatch(setLoading(false))
-          console.error(err)
+          console.error(JSON.stringify(err))
         }
       }
     }
