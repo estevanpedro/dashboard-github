@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { navigate } from '@reach/router'
-import { MdEdit, MdLink } from 'react-icons/md'
+import { MdEdit, MdDelete } from 'react-icons/md'
 import uniqid from 'uniqid'
 
 import {
@@ -17,7 +16,7 @@ import {
 import { SchemeNodeType } from '../utils/nodeType'
 
 import options, { TitleType } from '../options'
-import { editNode } from '../utils/toolsFuncions'
+import { editNode, deleteNode } from '../utils/toolsFuncions'
 import { NodeType } from '../utils/nodeType'
 
 import { MenuContainer } from './elements'
@@ -26,7 +25,7 @@ import { FormData } from './Forms/types'
 
 interface Props {
   nodeInfo: SchemeNodeType | null
-  updateMenuInfo: (data: SchemeNodeType) => void
+  updateMenuInfo: (data: SchemeNodeType | null) => void
   ownAddresses: string[]
 }
 
@@ -213,6 +212,13 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo, ownAddresses }: Props) => {
     return options.filter(option => possibleOptions.includes(option.type))
   }
 
+  const handleDelete = () => {
+    if (nodeInfo) {
+      dispatch(deleteNode(nodeInfo.id))
+      updateMenuInfo(null)
+    }
+  }
+
   const renderMenu = () => {
     if (nodeInfo) {
       const { name, children, type } = nodeInfo
@@ -353,22 +359,22 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo, ownAddresses }: Props) => {
           padding='20px'
         >
           <SubTitle>{name}</SubTitle>
-          {type !== 'address' && type !== 'root' && type !== 'scheme' && (
-            <SmallButton
-              onClick={() => setIsEditActive(true)}
-              margin='0 0 20px 0'
-            >
-              <MdEdit />
-            </SmallButton>
-          )}
-          {type === 'scheme' && (
-            <SmallButton
-              onClick={() => navigate(`/split-details/${nodeInfo.info.id}`)}
-              margin='0 0 20px 0'
-            >
-              <MdLink />
-            </SmallButton>
-          )}
+          <FlexContainer width='30%' justify='space-between'>
+            {type !== 'address' && type !== 'root' && (
+              <>
+                <SmallButton
+                  onClick={() => setIsEditActive(true)}
+                  margin='0 0 20px 0'
+                >
+                  <MdEdit />
+                </SmallButton>
+                <SmallButton onClick={handleDelete} margin='0 0 20px 0'>
+                  <MdDelete />
+                </SmallButton>
+              </>
+            )}
+          </FlexContainer>
+
           {nodeInfo.address && (
             <FlexContainer margin='0 0 20px 0' direction='column'>
               <Text weight='bold'>Address:</Text>
@@ -383,6 +389,7 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo, ownAddresses }: Props) => {
               <TextLink
                 margin='0 0 20px 0'
                 onClick={() => updateMenuInfo(child)}
+                key={child.id}
               >
                 {child.name}
               </TextLink>

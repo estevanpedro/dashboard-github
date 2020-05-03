@@ -84,22 +84,24 @@ const SchemeMap = ({ schemeId }: Props & RouteComponentProps) => {
       }
 
       if (schemeId) {
-        try {
-          dispatch(setLoading(true))
-          await Api.updateScheme(secretToken, schemeId, schemeCopy)
-          dispatch(setLoading(false))
+        dispatch(setLoading(true))
+        const response = await Api.updateScheme(
+          secretToken,
+          schemeId,
+          schemeCopy
+        )
+        dispatch(setLoading(false))
+        if (response.status) {
           setSaveMessage({
             status: 'success',
             message: 'Scheme saved successfully!',
           })
-        } catch (err) {
-          setSaveMessage({
-            status: 'error',
-            message: 'Oops! Something went wrong!',
-          })
-          dispatch(setLoading(false))
-          console.error(err)
+          return
         }
+        setSaveMessage({
+          status: 'error',
+          message: response,
+        })
       }
     }
   }
