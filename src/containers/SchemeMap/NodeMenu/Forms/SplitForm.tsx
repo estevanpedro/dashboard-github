@@ -49,7 +49,6 @@ const SplitForm = ({ onConfirm, initialState = null }: Props) => {
       let targetSplit: number | undefined
 
       if (valueDiff < 0) {
-        console.log(reversedSplits)
         targetSplit = reversedSplits.findIndex(
           (split, i) => split.share > 0 && i !== index
         )
@@ -58,8 +57,6 @@ const SplitForm = ({ onConfirm, initialState = null }: Props) => {
           (split, i) => split.share < 100 && i !== index
         )
       }
-
-      console.log(targetSplit, valueDiff)
 
       if (
         targetSplit !== undefined &&
