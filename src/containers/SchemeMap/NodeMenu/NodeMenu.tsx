@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { navigate } from '@reach/router'
-import { MdEdit, MdLink, MdDelete } from 'react-icons/md'
+import { MdEdit, MdDelete } from 'react-icons/md'
 import uniqid from 'uniqid'
 
 import {
@@ -390,6 +389,7 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo, ownAddresses }: Props) => {
               <TextLink
                 margin='0 0 20px 0'
                 onClick={() => updateMenuInfo(child)}
+                key={child.id}
               >
                 {child.name}
               </TextLink>

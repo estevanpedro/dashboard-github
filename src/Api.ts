@@ -124,7 +124,7 @@ class Api {
       })
       return response
     } catch (err) {
-      throw Error(`Error on get Profile request: ${err.message}`)
+      throw Error(err)
     }
   }
 
@@ -221,7 +221,7 @@ class Api {
       )
       return response
     } catch (err) {
-      throw Error(`Error on Update Scheme: ${err.message}`)
+      return err.response.data.errors[0].message
     }
   }
 
