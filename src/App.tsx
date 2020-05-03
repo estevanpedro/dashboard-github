@@ -21,6 +21,13 @@ import ResetPassword from './containers/ResetPassword'
 
 dotenv.config()
 
+// HIDE CONSOLES IN PRODUCTION
+if (process.env.NODE_ENV === 'production') {
+  console.log = function () { }
+  console.warn = function () { }
+  console.error = function () { }
+}
+
 const App = (): JSX.Element => (
   <>
     <Provider store={store}>
