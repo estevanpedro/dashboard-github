@@ -1,6 +1,5 @@
 import React from 'react'
-import { Formik, FieldArray, ArrayHelpers } from 'formik'
-import { Range } from 'react-input-range'
+import { Formik, FieldArray, ArrayHelpers, FormikErrors } from 'formik'
 import { useTranslation } from 'react-i18next'
 
 import {
@@ -14,7 +13,7 @@ import {
 
 import { TitleType } from '../../options'
 
-import { MenuButtonContainer, BorderContainer } from '../elements'
+import { MenuButtonContainer, BorderContainer, Error } from '../elements'
 import { FormData, SplitData } from './types'
 
 interface Props {
@@ -36,45 +35,34 @@ const SplitForm = ({ onConfirm, initialState = null }: Props) => {
     ],
   }
 
-  const handlePercentageChange = (
-    index: number,
-    value: number | Range,
-    setFieldValue: (field: string, value: any) => void,
-    values: SplitData
-  ) => {
-    const splitsLength = values.splits.length
-
-    if (splitsLength > 1) {
-      const valueDiff = values.splits[index].share - Number(value)
-      const reversedSplits = values.splits
-
-      let targetSplit: number | undefined
-
-      if (valueDiff < 0) {
-        targetSplit = reversedSplits.findIndex(
-          (split, i) => split.share > 0 && i !== index
-        )
-      } else if (valueDiff >= 0) {
-        targetSplit = reversedSplits.findIndex(
-          (split, i) => split.share < 100 && i !== index
-        )
-      }
-
-      if (
-        targetSplit !== undefined &&
-        reversedSplits[targetSplit].share + valueDiff >= 0
-      ) {
-        setFieldValue(`splits.${index}.share`, value)
-        setFieldValue(
-          `splits.${targetSplit}.share`,
-          reversedSplits[targetSplit].share + valueDiff
-        )
-      }
-    }
-  }
-
   const handleSubmit = (values: SplitData) => {
     onConfirm('Split', values)
+  }
+
+  const validateSplit = (values: SplitData) => {
+    const { name, splits } = values
+
+    const errors: FormikErrors<SplitData> = {}
+
+    interface Split {
+      name: string
+      address: string
+      share: number
+    }
+
+    if (!name.length) {
+      errors.name = t('errors.namecantbeempty')
+    }
+
+    const shareSum = splits.reduce((a: Split, b: Split) => {
+      return { name: '', address: '', share: a.share + b.share }
+    }).share
+
+    if (shareSum !== 100) {
+      errors.splits = t('errors.sumNeedstoBe100')
+    }
+
+    return errors
   }
 
   return (
@@ -84,8 +72,16 @@ const SplitForm = ({ onConfirm, initialState = null }: Props) => {
         splitInitialValues
       }
       onSubmit={handleSubmit}
+      validate={validateSplit}
     >
-      {({ values, handleChange, handleSubmit, setFieldValue }) => (
+      {({
+        values,
+        errors,
+        touched,
+        handleChange,
+        handleSubmit,
+        setFieldValue,
+      }) => (
         <form onSubmit={handleSubmit}>
           <Input
             label={t('split.splitName')}
@@ -94,6 +90,7 @@ const SplitForm = ({ onConfirm, initialState = null }: Props) => {
             onChange={handleChange}
             type='text'
             width='100%'
+            error={touched.name && errors.name ? errors.name : ''}
           />
           <FieldTitle>{t('split.shares')}</FieldTitle>
           <FieldArray
@@ -101,63 +98,60 @@ const SplitForm = ({ onConfirm, initialState = null }: Props) => {
             render={(arrayHelpers: ArrayHelpers) => (
               <FlexContainer direction='column'>
                 {values.type === 'split' &&
-                  values.splits &&
-                  values.splits.length > 0
+                values.splits &&
+                values.splits.length > 0
                   ? values.splits.map((split, index) => {
-                    return (
-                      <BorderContainer key={index}>
-                        <FlexContainer
-                          width='100%'
-                          justify='space-between'
-                          align='center'
-                          margin='0 0 15px 0'
-                        >
-                          <FieldTitle margin='0'>{`Share ${index +
-                            1}`}</FieldTitle>
-                          {index ? (
-                            <TextLink
-                              onClick={() => arrayHelpers.remove(index)}
-                            >
-                              Remove
+                      return (
+                        <BorderContainer key={index}>
+                          <FlexContainer
+                            width='100%'
+                            justify='space-between'
+                            align='center'
+                            margin='0 0 15px 0'
+                          >
+                            <FieldTitle margin='0'>{`Share ${index +
+                              1}`}</FieldTitle>
+                            {index ? (
+                              <TextLink
+                                onClick={() => arrayHelpers.remove(index)}
+                              >
+                                Remove
                               </TextLink>
-                          ) : null}
-                        </FlexContainer>
-                        <Input
-                          label={t('split.shareName')}
-                          name={`splits.${index}.name`}
-                          value={split.name}
-                          onChange={handleChange}
-                          type='text'
-                          width='100%'
-                        />
-                        <Input
-                          label={t('split.shareAddress')}
-                          name={`splits.${index}.address`}
-                          value={split.address}
-                          onChange={handleChange}
-                          type='text'
-                          width='100%'
-                        />
-                        <Slider
-                          name={`splits.${index}.share`}
-                          value={split.share}
-                          onChange={value =>
-                            // setFieldValue(`splits.${index}.share`, value)
-                            handlePercentageChange(
-                              index,
-                              value,
-                              setFieldValue,
-                              values
-                            )
-                          }
-                          formatLabel={value => `${value}%`}
-                          minValue={0}
-                          maxValue={100}
-                        />
-                      </BorderContainer>
-                    )
-                  })
+                            ) : null}
+                          </FlexContainer>
+                          <Input
+                            label={t('split.shareName')}
+                            name={`splits.${index}.name`}
+                            value={split.name}
+                            onChange={handleChange}
+                            type='text'
+                            width='100%'
+                          />
+                          <Input
+                            label={t('split.shareAddress')}
+                            name={`splits.${index}.address`}
+                            value={split.address}
+                            onChange={handleChange}
+                            type='text'
+                            width='100%'
+                          />
+                          <Slider
+                            name={`splits.${index}.share`}
+                            value={split.share}
+                            onChange={value =>
+                              setFieldValue(`splits.${index}.share`, value)
+                            }
+                            formatLabel={value => `${value}%`}
+                            minValue={0}
+                            maxValue={100}
+                          />
+                        </BorderContainer>
+                      )
+                    })
                   : null}
+                <Error>
+                  {touched.splits && errors.splits ? errors.splits : ''}
+                </Error>
                 <TextLink
                   alignSelf='flex-end'
                   onClick={() =>

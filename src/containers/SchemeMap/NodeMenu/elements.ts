@@ -70,3 +70,7 @@ export const BorderContainer = styled.div`
   flex-direction: column;
   align-items: center;
 `
+
+export const Error = styled.span`
+  color: ${props => props.theme.colors.cancel};
+`
