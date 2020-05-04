@@ -2,6 +2,7 @@ import React from 'react'
 import { navigate } from '@reach/router'
 import { Formik, FormikErrors } from 'formik'
 import { useSelector, useDispatch } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 
 import { Button, Title, Input, SubTitle } from '../../components'
 import { TableContainner, Menu, Containner, NewButton, Area, TitleDiv, TitleLittle } from './elements'
@@ -35,6 +36,7 @@ const MySchemes = ({
   preference,
   setPreference,
 }: Props) => {
+  const { t } = useTranslation()
   const { secretToken } = useSelector((state: RootState) => state.auth)
 
   const dispatch = useDispatch()

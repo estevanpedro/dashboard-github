@@ -5,8 +5,7 @@ import { useSelector } from 'react-redux'
 import { Formik, FormikErrors } from 'formik'
 import { RiBankLine } from 'react-icons/ri'
 import { TiTick } from 'react-icons/ti'
-import { useTranslation } from 'react-i18next';
-import i18n from "i18next";
+import { useTranslation } from 'react-i18next'
 
 import Button from '../../components/Button'
 import Input from '../../components/Input'
@@ -37,7 +36,7 @@ const Login = () => {
   const [CDA, setCDA] = useState<boolean>(false)
   const { secretToken } = useSelector((state: RootState) => state.auth)
   const dispatch = useDispatch()
-  const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation()
 
   useEffect(() => {
     if (secretToken) {

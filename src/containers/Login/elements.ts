@@ -47,5 +47,5 @@ export const LanguageField = styled.div`
 align-self: flex-end;
 `
 export const ButtonLanguage = styled.button`
-margin: 5px;
+margin: -30px 10px 0 0;
 `

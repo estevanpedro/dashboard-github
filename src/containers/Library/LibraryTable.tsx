@@ -24,7 +24,7 @@ const LibraryTable = ({
   preference,
   setPreference,
 }: Props) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation()
   return (
     <Containner>
       <Title>Library</Title>

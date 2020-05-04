@@ -1,6 +1,7 @@
 import React from 'react'
 import { Formik, FieldArray, ArrayHelpers } from 'formik'
 import { Range } from 'react-input-range'
+import { useTranslation } from 'react-i18next'
 
 import {
   Button,
@@ -22,6 +23,7 @@ interface Props {
 }
 
 const SplitForm = ({ onConfirm, initialState = null }: Props) => {
+  const { t } = useTranslation()
   const splitInitialValues: SplitData = {
     type: 'split',
     name: 'Split',
@@ -99,62 +101,62 @@ const SplitForm = ({ onConfirm, initialState = null }: Props) => {
             render={(arrayHelpers: ArrayHelpers) => (
               <FlexContainer direction='column'>
                 {values.type === 'split' &&
-                values.splits &&
-                values.splits.length > 0
+                  values.splits &&
+                  values.splits.length > 0
                   ? values.splits.map((split, index) => {
-                      return (
-                        <BorderContainer key={index}>
-                          <FlexContainer
-                            width='100%'
-                            justify='space-between'
-                            align='center'
-                            margin='0 0 15px 0'
-                          >
-                            <FieldTitle margin='0'>{`Share ${index +
-                              1}`}</FieldTitle>
-                            {index ? (
-                              <TextLink
-                                onClick={() => arrayHelpers.remove(index)}
-                              >
-                                Remove
+                    return (
+                      <BorderContainer key={index}>
+                        <FlexContainer
+                          width='100%'
+                          justify='space-between'
+                          align='center'
+                          margin='0 0 15px 0'
+                        >
+                          <FieldTitle margin='0'>{`Share ${index +
+                            1}`}</FieldTitle>
+                          {index ? (
+                            <TextLink
+                              onClick={() => arrayHelpers.remove(index)}
+                            >
+                              Remove
                               </TextLink>
-                            ) : null}
-                          </FlexContainer>
-                          <Input
-                            label='Share name'
-                            name={`splits.${index}.name`}
-                            value={split.name}
-                            onChange={handleChange}
-                            type='text'
-                            width='100%'
-                          />
-                          <Input
-                            label='Share address (optional)'
-                            name={`splits.${index}.address`}
-                            value={split.address}
-                            onChange={handleChange}
-                            type='text'
-                            width='100%'
-                          />
-                          <Slider
-                            name={`splits.${index}.share`}
-                            value={split.share}
-                            onChange={value =>
-                              // setFieldValue(`splits.${index}.share`, value)
-                              handlePercentageChange(
-                                index,
-                                value,
-                                setFieldValue,
-                                values
-                              )
-                            }
-                            formatLabel={value => `${value}%`}
-                            minValue={0}
-                            maxValue={100}
-                          />
-                        </BorderContainer>
-                      )
-                    })
+                          ) : null}
+                        </FlexContainer>
+                        <Input
+                          label='Share name'
+                          name={`splits.${index}.name`}
+                          value={split.name}
+                          onChange={handleChange}
+                          type='text'
+                          width='100%'
+                        />
+                        <Input
+                          label='Share address (optional)'
+                          name={`splits.${index}.address`}
+                          value={split.address}
+                          onChange={handleChange}
+                          type='text'
+                          width='100%'
+                        />
+                        <Slider
+                          name={`splits.${index}.share`}
+                          value={split.share}
+                          onChange={value =>
+                            // setFieldValue(`splits.${index}.share`, value)
+                            handlePercentageChange(
+                              index,
+                              value,
+                              setFieldValue,
+                              values
+                            )
+                          }
+                          formatLabel={value => `${value}%`}
+                          minValue={0}
+                          maxValue={100}
+                        />
+                      </BorderContainer>
+                    )
+                  })
                   : null}
                 <TextLink
                   alignSelf='flex-end'

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Formik, FormikErrors } from 'formik'
+import { useTranslation } from 'react-i18next'
 
 import { Button, Input, Text, FlexContainer } from '../../../../components'
 import { MenuButtonContainer } from '../elements'
@@ -14,6 +15,7 @@ interface Props {
 }
 
 const SwapForm = ({ onConfirm, initialState }: Props) => {
+  const { t } = useTranslation()
   const swapInitialValues: FormData = {
     type: 'swap',
     name: 'Swap',

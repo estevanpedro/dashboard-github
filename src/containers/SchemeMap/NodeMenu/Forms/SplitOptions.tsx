@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import SplitForm from './SplitForm'
 import ImportSplitForm from './ImportSplitForm'
@@ -13,6 +14,7 @@ interface Props {
 }
 
 const SplitOptions = ({ onConfirm, initialState = null }: Props) => {
+  const { t } = useTranslation()
   const [optionStatus, setOptionStatus] = useState<
     'default' | 'import' | 'new'
   >(initialState ? 'new' : 'default')

@@ -5,6 +5,7 @@ import { FaProjectDiagram } from 'react-icons/fa'
 import { Bar, Pie } from 'react-chartjs-2'
 import ReactJson from 'react-json-view'
 import QRCode from 'qrcode.react'
+import { useTranslation } from 'react-i18next'
 
 import { TextLink, SmallButton, Button, FlexContainer } from '../../components'
 import Modal from '../../components/Modal'
@@ -45,6 +46,7 @@ const SplitDetails = ({
   firstSplit,
   historyDetails,
 }: Props & RouteComponentProps) => {
+  const { t } = useTranslation()
   const themeContext = useContext(ThemeContext)
 
   let ShareData = (firstSplit: FirstSplitType[]) => {
@@ -152,7 +154,7 @@ const SplitDetails = ({
         <Modal
           title={'New Scheme'}
           trigger={
-            <SmallButton onClick={() => {}} margin='0 20px 0 0' align='center'>
+            <SmallButton onClick={() => { }} margin='0 20px 0 0' align='center'>
               <FaProjectDiagram size={25} />
             </SmallButton>
           }

@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { navigate } from '@reach/router'
 import { Formik, FormikErrors } from 'formik'
+import { useTranslation } from 'react-i18next'
 
 import { setLoading } from '../../redux/ducks/loading'
 
@@ -12,6 +13,7 @@ import Api from '../../Api'
 import { Text, ForgotContainer } from './elements'
 
 const ResetPassword = () => {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
 
   const resetInitialValues = {

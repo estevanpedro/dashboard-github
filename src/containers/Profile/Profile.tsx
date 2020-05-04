@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import i18n from "i18next";
 import { useTranslation } from 'react-i18next';
 
 import Link from '../../components/Link'
@@ -17,6 +16,7 @@ import { setLoading } from '../../redux/ducks/loading'
 import { ProfileContainer, ProfileField, TextColored, TextColoredSmall, ButtonSimple, LanguageField, ButtonLanguage } from './elements'
 
 const Profile = () => {
+  const { t, i18n } = useTranslation()
   const [showToken, setShowToken] = useState(false)
   const { secretToken } = useSelector((state: RootState) => state.auth)
   const { user_id, username, email, user_type } = useSelector(

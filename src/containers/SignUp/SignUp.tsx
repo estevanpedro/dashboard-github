@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { navigate } from '@reach/router'
 import { Formik, FormikErrors } from 'formik'
+import { useTranslation } from 'react-i18next'
 
 import Button from '../../components/Button'
 import Input from '../../components/Input'
@@ -17,6 +18,7 @@ import { setLoading } from '../../redux/ducks/loading'
 import { SignUpContainer, SignUpForm, ReturnText } from './elements'
 
 const SignUp = () => {
+  const { t } = useTranslation()
   const [apiError, setApiError] = useState('')
 
   const dispatch = useDispatch()

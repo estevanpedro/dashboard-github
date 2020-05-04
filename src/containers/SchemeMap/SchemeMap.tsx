@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { RouteComponentProps, navigate } from '@reach/router'
 import ScrollContainer from 'react-indiana-drag-scroll'
+import { useTranslation } from 'react-i18next'
 
 import { TextLink, Button, FlexContainer, Title, Text } from '../../components'
 
@@ -36,6 +37,7 @@ interface SaveMessage {
 }
 
 const SchemeMap = ({ schemeId }: Props & RouteComponentProps) => {
+  const { t } = useTranslation()
   const [schemeInfo, setSchemeInfo] = useState<SchemeInfo | null>(null)
   const [menuId, setMenuId] = useState('')
   const [saveMessage, setSaveMessage] = useState<SaveMessage>({

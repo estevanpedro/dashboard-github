@@ -1,5 +1,8 @@
 import React from 'react'
 import Title, { SubTitle } from '../../components/Title'
+import ReactJsons from './ReactJsons'
+import { useTranslation } from 'react-i18next'
+
 import {
   Text,
   ApiTitles,
@@ -18,9 +21,10 @@ import swap_example from './jsons/swap_example.json'
 import timer_example from './jsons/timer_example.json'
 import tree_example from './jsons/tree_example.json'
 import valid_children_type from './jsons/valid_children_type.json'
-import ReactJsons from './ReactJsons'
+
 
 const Api = () => {
+  const { t } = useTranslation()
   return (
     <Container>
       <Title>Api</Title>

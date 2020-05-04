@@ -1,5 +1,6 @@
 import React from 'react'
 import { Formik, FormikErrors } from 'formik'
+import { useTranslation } from 'react-i18next'
 
 import { Button, Input, FlexContainer, Text } from '../../../../components'
 
@@ -14,6 +15,7 @@ interface Props {
 }
 
 const TimerForm = ({ onConfirm, initialState = null }: Props) => {
+  const { t } = useTranslation()
   const timerInitialValues: FormData = {
     type: 'timer',
     name: 'Timer',
