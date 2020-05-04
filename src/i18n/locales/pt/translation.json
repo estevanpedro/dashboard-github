@@ -184,5 +184,18 @@
         "Create now": "Criar agora",
         "If you already have an account": "Se você já possui uma conta",
         "login": "entrar"
+    },
+    "forgotPassword": {
+        "You must use a valid email": "Você deve ter um email válido",
+        "Change your password": "Mudar a senha"
+    },
+    "recoverPassword": {
+        "Your reset token must be valid": "Seu token de redefinição deve ser válido",
+        "Your password needs to have at least 6 character": "Sua senha precisa ter pelo menos 6 caracteres",
+        "Your passwords must match": "Suas senhas devem corresponder",
+        "newPassword": "Nova senha",
+        "Password": "Senha",
+        "Confirm Password": "Confirmar senha",
+        "Check your e-mail to get the token": "Verifique seu e-mail para obter o token"
     }
 }

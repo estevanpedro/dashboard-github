@@ -184,5 +184,18 @@
         "Create now": "Create now",
         "If you already have an account": "If you already have an account",
         "login": "login"
+    },
+    "forgotPassword": {
+        "You must use a valid email": "You must use a valid email",
+        "Change your password": "Change your password"
+    },
+    "recoverPassword": {
+        "Your reset token must be valid": "Your reset token must be valid",
+        "Your password needs to have at least 6 character": "Your password needs to have at least 6 character",
+        "Your passwords must match": "Your passwords must match",
+        "newPassword": "New Password",
+        "Password": "Password",
+        "Confirm Password": "Confirm Password",
+        "Check your e-mail to get the token": "Check your e-mail to get the token"
     }
 }

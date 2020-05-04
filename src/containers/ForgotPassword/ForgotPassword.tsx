@@ -43,7 +43,7 @@ const ResetPassword = () => {
     const errors: FormikErrors<ForgotValues> = {}
 
     if (!email.length) {
-      errors.email = 'You must use a valid email'
+      errors.email = t('forgotPassword.You must use a valid email')
     }
 
     return errors
@@ -58,7 +58,7 @@ const ResetPassword = () => {
       >
         {({ values, errors, touched, handleChange, handleSubmit }) => (
           <form onSubmit={handleSubmit}>
-            <Title>Change your password</Title>
+            <Title>{t('forgotPassword.Change your password')}</Title>
 
             <Input
               label='Email'
@@ -69,7 +69,7 @@ const ResetPassword = () => {
               error={touched.email && errors.email ? errors.email : ''}
             />
             <Button type='submit' margin='0 0 20px 0'>
-              Confirm
+              {t('form.confirm')}
             </Button>
           </form>
         )}
