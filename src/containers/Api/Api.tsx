@@ -82,7 +82,7 @@ const Api = () => {
       <ApiTitles>{t('api.Timer')}</ApiTitles>
       <Text>
         {t('api.The Tool Timer is used to')} <CodeText>name</CodeText> and <CodeText>time</CodeText> {t('api.object with')}{' '}
-        <CodeText>hours</CodeText>, <CodeText>minutes</CodeText> and{' '}
+        <CodeText>hours</CodeText>, <CodeText>minutes</CodeText> {t('and')}{' '}
         <CodeText>seconds</CodeText> {t('api.fields in the')} <CodeText>info</CodeText>{' '}
         {t('api.object Theses values')}{' '}
         <CodeText>time</CodeText> {t('api.is equal to')}{' '}
@@ -108,7 +108,7 @@ const Api = () => {
       <ApiTitles>{t('api.Event')}</ApiTitles>
       <Text>
         {t('api.The Tool Event is used to execute the next')}{' '}
-        <CodeText>event_price</CodeText> and the <CodeText>direction</CodeText>{' '}
+        <CodeText>event_price</CodeText> {t('api.andthe')} <CodeText>direction</CodeText>{' '}
         {t('api.in the')} <CodeText>info</CodeText> {t('api.object of event node A simple example')} <CodeText>event_price</CodeText> {t('api.equal to US$ 8,00000, and the')} <CodeText>direction</CodeText> {t('api.equal to')}{' '}
         <CodeText>above</CodeText>. {t('api.When the node is processed, it will create')}
       </Text>
@@ -144,8 +144,7 @@ const Api = () => {
       <Paragraph />
       <ApiTitles>Address</ApiTitles>
       <Text>
-        {t('api.The')} <CodeText>address</CodeText> {t('api.If the user let the')}{' '}
-        <CodeText>split</CodeText> {t('api.node is used after the')} <CodeText>split</CodeText>,{' '}
+        {t('api.The')} <CodeText>address</CodeText> {t('api.can use')} <CodeText>split</CodeText>,{' '}
         <CodeText>notify</CodeText>, <CodeText>timer</CodeText>,{' '}
         <CodeText>swap</CodeText> {t('api.and')} <CodeText>event</CodeText>. {t('api.It has the')}{' '}
         <CodeText>percentage</CodeText> {t('api.in the')} <CodeText>info</CodeText> {t('api.object')} .
