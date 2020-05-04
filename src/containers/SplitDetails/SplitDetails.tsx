@@ -21,7 +21,7 @@ const SplitDetails = (props: any) => {
   const dispatch = useDispatch()
   const [schemeId] = useState(props.schemeId) // splitId is coming from the Library or from the MyScheme throuth routes
   const [schemeDetails, setSchemeDetails] = useState<any[]>([]) // Need to connect splitDetails to the component...
-  const [firstSplit, setFirstSplit] = useState<any[]>([])
+  const [firstSplit, setFirstSplit] = useState<FirstSplitType[]>([])
   const { secretToken } = useSelector((state: RootState) => state.auth)
   const [historyDetails, setHistoryDetails] = useState<HistoryType[]>([])
   const themeContext = useContext(ThemeContext)

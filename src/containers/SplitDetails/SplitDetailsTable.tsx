@@ -34,8 +34,8 @@ interface Props {
   createShareList: () => JSX.Element[] | undefined
   createTransList: () => JSX.Element[] | undefined
   schemeDetails: any
-  // firstSplit: FirstSplitType[]
-  firstSplit: any
+  firstSplit: FirstSplitType[]
+  // firstSplit: any
   historyDetails: HistoryType[]
 }
 
