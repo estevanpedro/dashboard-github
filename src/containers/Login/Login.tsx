@@ -28,7 +28,7 @@ import {
   SmallText,
   CDAText,
   LanguageField,
-  ButtonLanguage
+  ButtonLanguage,
 } from './elements'
 
 const Login = () => {
@@ -110,22 +110,31 @@ const Login = () => {
     >
       {({ values, errors, touched, handleChange, handleSubmit }) => (
         <LoginForm onSubmit={handleSubmit}>
-
-          <LanguageField >
-            <ButtonLanguage type='button' onClick={() => { i18n.changeLanguage('en'); }}>
-              <img src={require('../../assets/icons/en.svg')} width="40" ></img>
+          <LanguageField>
+            <ButtonLanguage
+              type='button'
+              onClick={() => {
+                i18n.changeLanguage('en')
+              }}
+            >
+              <img src={require('../../assets/icons/en.svg')} width='40'></img>
             </ButtonLanguage>
 
-            <ButtonLanguage type='button' onClick={() => { i18n.changeLanguage('pt'); }}>
-              <img src={require('../../assets/icons/pt.svg')} width="40" ></img>
+            <ButtonLanguage
+              type='button'
+              onClick={() => {
+                i18n.changeLanguage('pt')
+              }}
+            >
+              <img src={require('../../assets/icons/pt.svg')} width='40'></img>
             </ButtonLanguage>
           </LanguageField>
 
           {CDA ? (
             <SubTitle>{t('Login with your Splitcoin account')}</SubTitle>
           ) : (
-              <SubTitle>{t('Login with your CDA account')}</SubTitle>
-            )}
+            <SubTitle>{t('Login with your CDA account')}</SubTitle>
+          )}
 
           <LoginContainer>
             <Input
@@ -165,11 +174,11 @@ const Login = () => {
                   <TiTick size={25} />
                 </>
               ) : (
-                  <>
-                    <CDAText>Capital Digital Aberto</CDAText>
-                    <RiBankLine size={25} />
-                  </>
-                )}
+                <>
+                  <CDAText>Capital Digital Aberto</CDAText>
+                  <RiBankLine size={25} />
+                </>
+              )}
             </LoginCDA>
           </LoginContainer>
         </LoginForm>

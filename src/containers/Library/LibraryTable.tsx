@@ -3,7 +3,7 @@ import Title from '../../components/Title'
 import { TableContainner, Menu, Containner } from './elements'
 import TableTitles from '../../components/Table/TableTitles'
 import TableOptions from '../../components/Table/TableOptions'
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next'
 
 export interface Props {
   Tab: (p: string) => JSX.Element[] | undefined
@@ -30,7 +30,7 @@ const LibraryTable = ({
       <Title>Library</Title>
       <Menu>
         <TableOptions
-          props='Balance'
+          props={t('library.balance')}
           color={colorBalance}
           onClick={() => {
             setPreference('balance')
@@ -39,7 +39,7 @@ const LibraryTable = ({
           }}
         />
         <TableOptions
-          props='Last Transaction'
+          props={t('library.lastTransaction')}
           color={colorTransaction}
           onClick={() => {
             setPreference('lastTransaction')
