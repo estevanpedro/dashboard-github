@@ -160,5 +160,14 @@
         "User ID": "User ID,",
         "Language": "Language",
         "findToken": "Find Token"
+    },
+    "login": {
+        "Title": "Login",
+        "username": "Username",
+        "password": "Password",
+        "createanaccount": "Create an account",
+        "forgotPassword": "Forgot Password",
+        "orLoginWithCda": "or login with CDA",
+        "readytoLoginCda": "Alright to login with CDA"
     }
 }

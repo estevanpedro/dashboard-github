@@ -133,12 +133,12 @@ const Login = () => {
           {CDA ? (
             <SubTitle>{t('Login with your Splitcoin account')}</SubTitle>
           ) : (
-            <SubTitle>{t('Login with your CDA account')}</SubTitle>
-          )}
+              <SubTitle>{t('Login with your CDA account')}</SubTitle>
+            )}
 
           <LoginContainer>
             <Input
-              label='Username'
+              label={t('login.username')}
               name='username'
               value={values.username}
               onChange={handleChange}
@@ -146,21 +146,21 @@ const Login = () => {
               error={touched.username && errors.username ? errors.username : ''}
             />
             <Input
-              label='Password'
+              label={t('login.password')}
               name='password'
               value={values.password}
               onChange={handleChange}
               type='password'
               error={touched.password && errors.password ? errors.password : ''}
             />
-            <LinkToInputs to='/forgot'>Forgot Password</LinkToInputs>
+            <LinkToInputs to='/forgot'>{t('login.forgotPassword')}</LinkToInputs>
             <Error>{apiError}</Error>
             <Button type='submit' margin='0 0 20px 0'>
-              Login
+              {t('login.Title')}
             </Button>
-            <Link to='/sign-up'>Create an account</Link>
+            <Link to='/sign-up'>{t('login.createanaccount')}</Link>
 
-            <SmallText> or login with CDA </SmallText>
+            <SmallText> {t('login.orLoginWithCda')} </SmallText>
             <LoginCDA
               type='button'
               hover={CDA}
@@ -170,15 +170,15 @@ const Login = () => {
             >
               {CDA ? (
                 <>
-                  <CDAText>Alright to login with CDA</CDAText>
+                  <CDAText>{t('login.readytoLoginCda')}</CDAText>
                   <TiTick size={25} />
                 </>
               ) : (
-                <>
-                  <CDAText>Capital Digital Aberto</CDAText>
-                  <RiBankLine size={25} />
-                </>
-              )}
+                  <>
+                    <CDAText>Capital Digital Aberto</CDAText>
+                    <RiBankLine size={25} />
+                  </>
+                )}
             </LoginCDA>
           </LoginContainer>
         </LoginForm>
