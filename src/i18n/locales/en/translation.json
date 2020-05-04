@@ -105,7 +105,7 @@
         "fields in the": "fields in the",
         "object Theses values": "object. Theses values will be added to time when the node is processed. A simple example, if the date is 01/01/2020 07:00:00, and the",
         "is equal to": "is equal to",
-        "then the next node will execute at 01/01/2020 08:00:00": "then the next node will execute at 01/01/2020 08:00:00.",
+        "then the next node will execute": "then the next node will execute at 01/01/2020 08:00:00.",
         "The only children node available is the split": "The only children node available is the split.",
         "The Tool Swap is experimental, needs CDA": "The Tool Swap is experimental, needs CDA account logged in the Splitmaster to get the token and the splitmaster",
         "to create the scheme with it": "to create the scheme with it. In the background, we save your CDA account to generate CDA Token and the Splitmaster Token, it will be used when Splitmaster API calls the CDA API Endpoint /trade, to create the swap request, converting all bitcoin above 0.01 BTC to BRL (Reais).",

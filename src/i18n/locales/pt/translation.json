@@ -105,7 +105,7 @@
         "fields in the": "campos no",
         "object Theses values": "objeto. Esses valores serão adicionados ao tempo em que o nó for processado. Um exemplo simples, se a data for 01/01/2020 07:00:00 e a data",
         "is equal to": "é igual a",
-        "then the next node will execute at 01/01/2020 08:00:00": "o próximo nó será executado em 01/01/2020 08:00:00.",
+        "then the next node will execute": "o próximo nó será executado em 01/01/2020 08:00:00.",
         "The only children node available is the split": "O único nó children disponível é a divisão.",
         "The Tool Swap is experimental, needs CDA": "A troca de ferramentas é experimental, precisa da conta CDA registrada no Splitmaster para obter o token e o splitmaster",
         "to create the scheme with it": "para criar o esquema com ele. Em segundo plano, salvamos sua conta CDA para gerar o CDA Token e o Splitmaster Token, que será usado quando a API Splitmaster chamar o CDA API Endpoint / trade, para criar a solicitação de troca, convertendo todo bitcoin acima de 0,01 BTC para BRL (Reais).",

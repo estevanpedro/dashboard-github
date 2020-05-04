@@ -86,7 +86,7 @@ const Api = () => {
         <CodeText>seconds</CodeText> {t('api.fields in the')} <CodeText>info</CodeText>{' '}
         {t('api.object Theses values')}{' '}
         <CodeText>time</CodeText> {t('api.is equal to')}{' '}
-        <CodeText>"hour": 1, "minutes": 0, "seconds": 0</CodeText>, {t('api.then the next node will execute at 01/01/2020 08:00:00')}.
+        <CodeText>"hour": 1, "minutes": 0, "seconds": 0</CodeText>, {t('api.then the next node will execute')}.
       </Text>
       <Paragraph />
       <ItalicText>{t('api.The only children node available is the split')}</ItalicText>
