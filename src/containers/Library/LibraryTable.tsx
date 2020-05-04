@@ -3,6 +3,7 @@ import Title from '../../components/Title'
 import { TableContainner, Menu, Containner } from './elements'
 import TableTitles from '../../components/Table/TableTitles'
 import TableOptions from '../../components/Table/TableOptions'
+import { useTranslation } from 'react-i18next';
 
 export interface Props {
   Tab: (p: string) => JSX.Element[] | undefined
@@ -23,6 +24,7 @@ const LibraryTable = ({
   preference,
   setPreference,
 }: Props) => {
+  const { t, i18n } = useTranslation();
   return (
     <Containner>
       <Title>Library</Title>

@@ -5,6 +5,8 @@ import { useSelector } from 'react-redux'
 import { Formik, FormikErrors } from 'formik'
 import { RiBankLine } from 'react-icons/ri'
 import { TiTick } from 'react-icons/ti'
+import { useTranslation } from 'react-i18next';
+import i18n from "i18next";
 
 import Button from '../../components/Button'
 import Input from '../../components/Input'
@@ -26,6 +28,8 @@ import {
   LoginCDA,
   SmallText,
   CDAText,
+  LanguageField,
+  ButtonLanguage
 } from './elements'
 
 const Login = () => {
@@ -33,6 +37,7 @@ const Login = () => {
   const [CDA, setCDA] = useState<boolean>(false)
   const { secretToken } = useSelector((state: RootState) => state.auth)
   const dispatch = useDispatch()
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     if (secretToken) {
@@ -106,11 +111,23 @@ const Login = () => {
     >
       {({ values, errors, touched, handleChange, handleSubmit }) => (
         <LoginForm onSubmit={handleSubmit}>
+
+          <LanguageField >
+            <ButtonLanguage type='button' onClick={() => { i18n.changeLanguage('en'); }}>
+              <img src={require('../../assets/icons/en.svg')} width="40" ></img>
+            </ButtonLanguage>
+
+            <ButtonLanguage type='button' onClick={() => { i18n.changeLanguage('pt'); }}>
+              <img src={require('../../assets/icons/pt.svg')} width="40" ></img>
+            </ButtonLanguage>
+          </LanguageField>
+
           {CDA ? (
-            <SubTitle>Login with your CDA account</SubTitle>
+            <SubTitle>{t('Login with your Splitcoin account')}</SubTitle>
           ) : (
-            <SubTitle>Login with your Splitcoin account</SubTitle>
-          )}
+              <SubTitle>{t('Login with your CDA account')}</SubTitle>
+            )}
+
           <LoginContainer>
             <Input
               label='Username'
@@ -149,11 +166,11 @@ const Login = () => {
                   <TiTick size={25} />
                 </>
               ) : (
-                <>
-                  <CDAText>Capital Digital Aberto</CDAText>
-                  <RiBankLine size={25} />
-                </>
-              )}
+                  <>
+                    <CDAText>Capital Digital Aberto</CDAText>
+                    <RiBankLine size={25} />
+                  </>
+                )}
             </LoginCDA>
           </LoginContainer>
         </LoginForm>

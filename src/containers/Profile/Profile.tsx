@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import i18n from "i18next";
+import { useTranslation } from 'react-i18next';
 
 import Link from '../../components/Link'
 import Title, { SubTitle } from '../../components/Title'
@@ -12,7 +14,7 @@ import { RootState } from '../../redux/rootReducer'
 import { updateUserInfo } from '../../redux/ducks/user'
 import { setLoading } from '../../redux/ducks/loading'
 
-import { ProfileContainer, ProfileField, TextColored, TextColoredSmall, ButtonSimple } from './elements'
+import { ProfileContainer, ProfileField, TextColored, TextColoredSmall, ButtonSimple, LanguageField, ButtonLanguage } from './elements'
 
 const Profile = () => {
   const [showToken, setShowToken] = useState(false)
@@ -81,6 +83,20 @@ const Profile = () => {
           {showToken ? <TextColoredSmall>{secretToken}</TextColoredSmall> : <TextColored>Find token</TextColored>}
         </ButtonSimple>
       </ProfileField>
+
+      <ProfileField>
+        <SubTitle>Language</SubTitle>
+        <LanguageField >
+          <ButtonLanguage type='button' onClick={() => { i18n.changeLanguage('en'); }}>
+            <img src={require('../../assets/icons/en.svg')} width="40" ></img>
+          </ButtonLanguage>
+
+          <ButtonLanguage type='button' onClick={() => { i18n.changeLanguage('pt'); }}>
+            <img src={require('../../assets/icons/pt.svg')} width="40" ></img>
+          </ButtonLanguage>
+        </LanguageField>
+      </ProfileField>
+
 
     </ProfileContainer>
 
