@@ -142,12 +142,14 @@ const SplitDetails = ({
 
   return (
     <Container>
-      <TextLink onClick={handleGoBack}>← My Schemes</TextLink>
+      <TextLink onClick={handleGoBack}>← {t('mySchemes.title')}</TextLink>
       <Header>
         <Title>{schemeDetails.name}</Title>
         <Category>
           <CategoryName size='verySmall'>
-            {schemeDetails.visibility === 'public' ? 'Public' : 'Private'}
+            {schemeDetails.visibility === 'public'
+              ? t('schemeDetails.public')
+              : t('schemeDetails.private')}
           </CategoryName>
         </Category>
 
@@ -173,7 +175,7 @@ const SplitDetails = ({
         </Modal>
 
         <Button isSecondary onClick={goToScheme}>
-          Edit Scheme
+          {t('schemeDetails.editScheme')}
         </Button>
       </Header>
       <Body>
@@ -184,19 +186,16 @@ const SplitDetails = ({
             />
           </QRField>
           <DetailsField>
-            <SubtitleText>Scheme ID</SubtitleText>
+            <SubtitleText>{t('schemeDetails.schemeId')}</SubtitleText>
             <PayloadText>{schemeDetails.id}</PayloadText>
-            <SubtitleText>Wallet Address</SubtitleText>
+            <SubtitleText>{t('schemeDetails.walletAddress')}</SubtitleText>
             <PayloadText>
               {schemeDetails.tree ? schemeDetails.tree.address : ''}
             </PayloadText>
-            <SubtitleText>Balance</SubtitleText>
+            <SubtitleText>{t('schemeDetails.balance')}</SubtitleText>
             <PayloadText>{schemeDetails.balance || 0} BTC</PayloadText>
-            <SubtitleText>Payout</SubtitleText>
+            <SubtitleText>{t('schemeDetails.payout')}</SubtitleText>
             <PayloadText>{schemeDetails.payout}</PayloadText>
-            <PayloadText>
-              {schemeDetails.serviceFee === 'True' ? 'Yes' : 'No'}
-            </PayloadText>
           </DetailsField>
         </FlexContainer>
 
@@ -213,12 +212,12 @@ const SplitDetails = ({
 
       <Bottom>
         <BottomField>
-          <SubTitle>Transactions</SubTitle>
+          <SubTitle>{t('schemeDetails.transactions')}</SubTitle>
 
           <TitleField>
-            <TableTitle width='70px'>Balance</TableTitle>
-            <TableTitle>Time UTC</TableTitle>
-            <TableTitle>Info</TableTitle>
+            <TableTitle width='70px'>{t('schemeDetails.balance')}</TableTitle>
+            <TableTitle>{t('schemeDetails.time')} UTC</TableTitle>
+            <TableTitle>{t('schemeDetails.info')}</TableTitle>
           </TitleField>
           {createTransList()}
         </BottomField>
@@ -228,9 +227,9 @@ const SplitDetails = ({
             <SubTitle>Shares</SubTitle>
           </Header>
           <TitleField>
-            <TableTitle width='100px'>Address</TableTitle>
-            <TableTitle width='25px'>Size</TableTitle>
-            <TableTitle width='100px'>Label</TableTitle>
+            <TableTitle width='100px'>{t('schemeDetails.address')}</TableTitle>
+            <TableTitle width='25px'>{t('schemeDetails.size')}</TableTitle>
+            <TableTitle width='100px'>{t('schemeDetails.label')}</TableTitle>
           </TitleField>
           {createShareList()}
         </BottomField>

@@ -41,6 +41,22 @@
         "visibility": "Visibility",
         "create": "Create"
     },
+    "schemeDetails": {
+        "schemeId": "Scheme ID",
+        "walletAddress": "Wallet Address",
+        "balance": "Balance",
+        "payout": "Payout",
+        "editScheme": "Edit Scheme",
+        "transactions": "Transactions",
+        "shares": "Shares",
+        "time": "Time",
+        "info": "Info",
+        "address": "Address",
+        "size": "Size",
+        "label": "Label",
+        "public": "Public",
+        "private": "Private"
+    },
     "errors": {
         "emailcantbeempty": "Email can't be empty",
         "namecantbeempty": "Name can't be empty",
@@ -83,7 +99,7 @@
         "eventName": "Event Name",
         "value": "Value",
         "above": "above",
-        "bellow": "belos"
+        "below": "below"
     },
     "api": {
         "readTheDoc": "Read the documentation in Postman:",

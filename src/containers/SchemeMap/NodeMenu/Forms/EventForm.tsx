@@ -78,7 +78,7 @@ const EventForm = ({ onConfirm, initialState }: Props) => {
             />
             <Selector
               label={t('event.value')}
-              values={[t('event.above'), t('event.bellow')]}
+              values={[t('event.above'), t('event.below')]}
               selectedValue={values.direction}
               onChange={(value: string) =>
                 handleDirectionValue(value, setFieldValue)

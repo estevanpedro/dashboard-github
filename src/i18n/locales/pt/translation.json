@@ -41,6 +41,22 @@
         "visibility": "Visibilidade",
         "create": "Criar"
     },
+    "schemeDetails": {
+        "schemeId": "ID do Esquema",
+        "walletAddress": "Endereço da Carteira",
+        "balance": "Balanço",
+        "payout": "Payout",
+        "editScheme": "Editar esquema",
+        "transactions": "Transações",
+        "shares": "Shares",
+        "time": "Hora",
+        "info": "Info",
+        "address": "Endereço",
+        "size": "Tamanho",
+        "label": "Rótulo",
+        "public": "Publico",
+        "private": "Privado"
+    },
     "errors": {
         "emailcantbeempty": "Email não pode estar em branco",
         "namecantbeempty": "Nome não pode estar em branco",
@@ -83,7 +99,7 @@
         "eventName": "Nome do evento",
         "value": "Valor",
         "above": "acima",
-        "bellow": "abaixo"
+        "below": "abaixo"
     },
     "api": {
         "readTheDoc": "Leia a documentação no Postman:",
