@@ -137,7 +137,7 @@
         "The Tool Swap is experimental, needs CDA": "A troca de ferramentas é experimental, precisa da conta CDA registrada no Splitmaster para obter o token e o splitmaster",
         "to create the scheme with it": "para criar o esquema com ele. Em segundo plano, salvamos sua conta CDA para gerar o CDA Token e o Splitmaster Token, que será usado quando a API Splitmaster chamar o CDA API Endpoint / trade, para criar a solicitação de troca, convertendo todo bitcoin acima de 0,01 BTC para BRL (Reais).",
         "The only children available is notify": "Os únicos childrens disponíveis são notify.",
-        "Event": "Event",
+        "Event": "Evento",
         "The Tool Event is used to execute the next": "O Tool Event é usado para executar o próximo nó após o preço do Bitcoin atingir um preço específico. Requer os campos",
         "object of event node A simple example": " objeto do nó do evento. Um exemplo simples, se o usuário selecionar ",
         "equal to US$ 8,00000, and the": " igual a US $ 8.000,00, ea ",
