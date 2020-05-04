@@ -6,9 +6,12 @@ import { Bar, Pie } from 'react-chartjs-2'
 import ReactJson from 'react-json-view'
 import QRCode from 'qrcode.react'
 import { useTranslation } from 'react-i18next'
+import { useSelector } from 'react-redux'
+
 
 import { TextLink, SmallButton, Button, FlexContainer } from '../../components'
 import Modal from '../../components/Modal'
+import { RootState } from '../../redux/rootReducer'
 import { FirstSplitType, HistoryType } from '../../apiTypes'
 
 import {
@@ -48,6 +51,7 @@ const SplitDetails = ({
 }: Props & RouteComponentProps) => {
   const { t } = useTranslation()
   const themeContext = useContext(ThemeContext)
+  const { secretToken } = useSelector((state: RootState) => state.auth)
 
   let ShareData = (firstSplit: FirstSplitType[]) => {
     let labels: string[] = []
@@ -140,6 +144,18 @@ const SplitDetails = ({
     navigate(`/scheme/${schemeDetails && schemeDetails.id}`)
   }
 
+  const checkTokenToEditScheme = () => {
+    if (secretToken) {
+      return (
+        <Button isSecondary onClick={goToScheme}>
+          {t('schemeDetails.editScheme')}
+        </Button>
+      )
+    }
+    else {
+      return <></>
+    }
+  }
   return (
     <Container>
       <TextLink onClick={handleGoBack}>← {t('mySchemes.title')}</TextLink>
@@ -174,9 +190,7 @@ const SplitDetails = ({
           />
         </Modal>
 
-        <Button isSecondary onClick={goToScheme}>
-          {t('schemeDetails.editScheme')}
-        </Button>
+        {checkTokenToEditScheme()}
       </Header>
       <Body>
         <FlexContainer align='center'>
