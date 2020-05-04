@@ -185,5 +185,20 @@
     "forgotPassword": "Forgot Password",
     "orLoginWithCda": "or login with CDA",
     "readytoLoginCda": "Alright to login with CDA"
+  },
+  "signup": {
+    "Your name needs to have at least 3 characters": "Your name needs to have at least 3 characters",
+    "You must use a valid email": "You must use a valid email",
+    "Your username needs to have at least 3 characters": "Your username needs to have at least 3 characters",
+    "Your password needs to have at least 6 characters": "Your password needs to have at least 6 characters",
+    "Your passwords must match": "Your passwords must match",
+    "Create an account": "Create an account",
+    "Full Name": "Full Name",
+    "Username": "Username",
+    "Password": "Password",
+    "Confirm Password": "Confirm Password",
+    "Create now": "Create now",
+    "If you already have an account": "If you already have an account",
+    "login": "login"
   }
 }
