@@ -27,7 +27,7 @@ const LibraryTable = ({
   const { t } = useTranslation()
   return (
     <Containner>
-      <Title>Library</Title>
+      <Title>{t('library.title')}</Title>
       <Menu>
         <TableOptions
           props={t('library.balance')}

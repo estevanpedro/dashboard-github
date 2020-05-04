@@ -107,12 +107,12 @@ const MySchemes = ({
   return (
     <Containner>
       <TitleDiv>
-        <Title>My Splits</Title>
-        <TitleLittle> and Schemes</TitleLittle>
+        <Title>{t('mySchemes.title')}</Title>
+        <TitleLittle> {t('mySchemes.subTitle')}</TitleLittle>
       </TitleDiv>
       <Menu>
         <TableOptions
-          props='Balance'
+          props={t('mySchemes.balance')}
           color={colorBalance}
           onClick={() => {
             setPreference('balance')
@@ -121,7 +121,7 @@ const MySchemes = ({
           }}
         />
         <TableOptions
-          props='Last Transaction'
+          props={t('mySchemes.lastTransaction')}
           color={colorTransaction}
           onClick={() => {
             setPreference('lastTransaction')
@@ -134,11 +134,11 @@ const MySchemes = ({
       <TableContainner>{Tab(preference)}</TableContainner>
 
       <Modal
-        title={'New Scheme'}
-        trigger={<NewButton onClick={() => { }}>New Scheme</NewButton>}
+        title={t('mySchemes.newScheme')}
+        trigger={<NewButton onClick={() => { }}>{t('mySchemes.newScheme')}</NewButton>}
       >
         <Area data-testid='newSchemeModal'>
-          <Title>Create new scheme</Title>
+          <Title>{t('mySchemes.Create new scheme')}</Title>
           <Formik
             initialValues={initialNewSchemeValues}
             onSubmit={handleNewSchemeSubmit}
@@ -155,7 +155,7 @@ const MySchemes = ({
               return (
                 <form onSubmit={handleSubmit}>
                   <Input
-                    label='Scheme Name'
+                    label={t('mySchemes.schemeName')}
                     name='name'
                     value={values.name}
                     onChange={handleChange}
@@ -171,7 +171,7 @@ const MySchemes = ({
                     error={touched.payout && errors.payout ? errors.payout : ''}
                   />
                   <Selector
-                    label='Visibility'
+                    label={t('mySchemes.visibility')}
                     values={['Public', 'Private']}
                     selectedValue={String(values.visibility)}
                     onChange={(value: string) =>
@@ -179,7 +179,7 @@ const MySchemes = ({
                     }
                   />
                   <Button type='submit' align='flex-end'>
-                    Create
+                    {t('mySchemes.create')}
                   </Button>
                 </form>
               )

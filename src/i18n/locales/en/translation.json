@@ -30,6 +30,17 @@
         "payout": "Payout",
         "lastTransaction": "Last Transaction"
     },
+    "mySchemes": {
+        "title": "My Splits",
+        "subTitle": "and Schemes",
+        "newScheme": "New Scheme",
+        "balance": "Balance",
+        "lastTransaction": "Last Transaction",
+        "Create new scheme": "Create new scheme",
+        "schemeName": "Scheme Name",
+        "visibility": "Visibility",
+        "create": "Create"
+    },
     "errors": {
         "emailcantbeempty": "Email can't be empty",
         "namecantbeempty": "Name can't be empty",

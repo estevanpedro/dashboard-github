@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next'
 
 import Link from '../../components/Link'
 import Title, { SubTitle } from '../../components/Title'
