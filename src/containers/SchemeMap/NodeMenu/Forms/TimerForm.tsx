@@ -1,5 +1,6 @@
 import React from 'react'
 import { Formik, FormikErrors } from 'formik'
+import { useTranslation } from 'react-i18next'
 
 import { Button, Input, FlexContainer, Text } from '../../../../components'
 
@@ -14,6 +15,7 @@ interface Props {
 }
 
 const TimerForm = ({ onConfirm, initialState = null }: Props) => {
+  const { t } = useTranslation()
   const timerInitialValues: FormData = {
     type: 'timer',
     name: 'Timer',
@@ -36,7 +38,7 @@ const TimerForm = ({ onConfirm, initialState = null }: Props) => {
     const errors: FormikErrors<TimerData> = {}
 
     if (!name.length) {
-      errors.name = "Name can't be empty"
+      errors.name = t('errors.namecantbeempty')
     }
 
     if (
@@ -44,7 +46,7 @@ const TimerForm = ({ onConfirm, initialState = null }: Props) => {
       info.time.minutes === '0' &&
       info.time.seconds === '0'
     ) {
-      errors.type = 'Time should not be 0'
+      errors.type = t('timer.Timeshouldnotbe0')
     }
 
     return errors
@@ -62,7 +64,7 @@ const TimerForm = ({ onConfirm, initialState = null }: Props) => {
       {({ values, errors, touched, handleChange, handleSubmit }) => (
         <form onSubmit={handleSubmit}>
           <Input
-            label='Timer name'
+            label={t('timer.timerName')}
             name='name'
             value={values.name}
             onChange={handleChange}
@@ -72,7 +74,7 @@ const TimerForm = ({ onConfirm, initialState = null }: Props) => {
           />
           <FlexContainer justify='space-between'>
             <Input
-              label='Hours'
+              label={t('timer.hours')}
               name='info.time.hours'
               value={values.info.time.hours}
               onChange={handleChange}
@@ -82,7 +84,7 @@ const TimerForm = ({ onConfirm, initialState = null }: Props) => {
               marginBottom={1}
             />
             <Input
-              label='Minutes'
+              label={t('timer.minutes')}
               name='info.time.minutes'
               value={values.info.time.minutes}
               onChange={handleChange}
@@ -92,7 +94,7 @@ const TimerForm = ({ onConfirm, initialState = null }: Props) => {
               marginBottom={1}
             />
             <Input
-              label='Seconds'
+              label={t('timer.seconds')}
               name='info.time.seconds'
               value={values.info.time.seconds}
               onChange={handleChange}
@@ -112,7 +114,7 @@ const TimerForm = ({ onConfirm, initialState = null }: Props) => {
           </Text>
           <MenuButtonContainer>
             <Button type='submit' align='flex-end' margin='20px 0'>
-              Confirm
+              {t('form.confirm')}
             </Button>
           </MenuButtonContainer>
         </form>

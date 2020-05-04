@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Formik, FormikErrors } from 'formik'
+import { useTranslation } from 'react-i18next'
 
 import { Button, Input } from '../../../../components'
 
@@ -20,6 +21,7 @@ interface Props {
 }
 
 const ImportSplitForm = ({ onConfirm }: Props) => {
+  const { t } = useTranslation()
   const [schemeNotFound, setSchemeNotFound] = useState(false)
   const { secretToken } = useSelector((state: RootState) => state.auth)
   const dispatch = useDispatch()

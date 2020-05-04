@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 
 import Logo from '../../components/Logo'
 import { NavbarContainer, LinksWrapper, NavLink, ThemeButton } from './elements'
@@ -10,6 +11,7 @@ import { changeSecretToken } from '../../redux/ducks/auth'
 import { MdInvertColors } from 'react-icons/md'
 
 const Navbar = () => {
+  const { t } = useTranslation()
   const { secretToken } = useSelector((state: RootState) => state.auth)
 
   const dispatch = useDispatch()
@@ -44,7 +46,7 @@ const Navbar = () => {
                 Logout(option.id)
               }}
             >
-              {option.title}
+              {t(`navBar.${option.title}`)}
             </NavLink>,
             option.needsLogin
           )

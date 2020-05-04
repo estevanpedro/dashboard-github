@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { navigate } from '@reach/router'
 import { Formik, FormikErrors } from 'formik'
+import { useTranslation } from 'react-i18next'
 
 import { setLoading } from '../../redux/ducks/loading'
 
@@ -12,6 +13,7 @@ import Api from '../../Api'
 import { Text, ForgotContainer } from './elements'
 
 const ResetPassword = () => {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
 
   const resetInitialValues = {
@@ -46,15 +48,15 @@ const ResetPassword = () => {
     const errors: FormikErrors<ResetValues> = {}
 
     if (resetToken.length < 10) {
-      errors.resetToken = 'Your reset token must be valid'
+      errors.resetToken = t('recoverPassword.Your reset token must be valid')
     }
 
     if (password.length < 6) {
-      errors.password = 'Your password needs to have at least 6 character'
+      errors.password = t('recoverPassword.Your password needs to have at least 6 character')
     }
 
     if (password !== confirmPassword) {
-      errors.password = 'Your passwords must match'
+      errors.password = t('recoverPassword.Your passwords must match')
     }
 
     return errors
@@ -69,7 +71,7 @@ const ResetPassword = () => {
       >
         {({ values, errors, touched, handleChange, handleSubmit }) => (
           <form onSubmit={handleSubmit}>
-            <Title>New Password</Title>
+            <Title>{t('recoverPassword.newPassword')}</Title>
             <Input
               label='Token'
               name='resetToken'
@@ -81,7 +83,7 @@ const ResetPassword = () => {
               }
             />
             <Input
-              label='Password'
+              label={t('recoverPassword.Password')}
               name='password'
               value={values.password}
               onChange={handleChange}
@@ -89,14 +91,14 @@ const ResetPassword = () => {
               error={touched.password && errors.password ? errors.password : ''}
             />
             <Input
-              label='Confirm Password'
+              label={t('recoverPassword.Confirm Password')}
               name='confirmPassword'
               value={values.confirmPassword}
               onChange={handleChange}
               type='text'
             />
             <Button type='submit' margin='0 0 20px 0'>
-              Confirm
+              {t('form.confirm')}
             </Button>
           </form>
         )}

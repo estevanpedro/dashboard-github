@@ -42,3 +42,10 @@ export const CDAText = styled.p`
 font-size: ${props => props.theme.fontSize.verySmall};
 margin-right: 15px;
 `
+
+export const LanguageField = styled.div`
+align-self: flex-end;
+`
+export const ButtonLanguage = styled.button`
+margin: -30px 10px 0 0;
+`

@@ -18,3 +18,9 @@ export const TextColored = styled(Text)`
 export const ButtonSimple = styled.button`
   outline: none;
 `
+export const LanguageField = styled.div`
+align-self: flex-end;
+`
+export const ButtonLanguage = styled.button`
+margin: 5px;
+`
