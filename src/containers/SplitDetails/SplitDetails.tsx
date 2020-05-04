@@ -21,7 +21,7 @@ const SplitDetails = (props: any) => {
   const dispatch = useDispatch()
   const [schemeId] = useState(props.schemeId) // splitId is coming from the Library or from the MyScheme throuth routes
   const [schemeDetails, setSchemeDetails] = useState<any[]>([]) // Need to connect splitDetails to the component...
-  const [firstSplit, setFirstSplit] = useState<FirstSplitType[]>([])
+  const [firstSplit, setFirstSplit] = useState<any[]>([])
   const { secretToken } = useSelector((state: RootState) => state.auth)
   const [historyDetails, setHistoryDetails] = useState<HistoryType[]>([])
   const themeContext = useContext(ThemeContext)
@@ -36,17 +36,30 @@ const SplitDetails = (props: any) => {
         dispatch(setLoading(true))
         const response = await Api.getSchemeDetails(detailsData)
 
+        if (response.data.tree.children) {
+          for (var children in response.data.tree.children) {
+            if (response.data.tree.children[children].type != "split") {
+            }
+            else {
+              setFirstSplit(response.data.tree.children[0].children)
+            }
+          }
+        }
+
         dispatch(setLoading(false))
 
         setSchemeDetails(response.data)
-        setFirstSplit(response.data.tree.children[0].children)
+
         setHistoryDetails(response.data.transactions)
+
+
       } catch (e) {
         console.error(e)
       }
     }
     fetchSchemeDetails()
   }, [dispatch, props.splitId, schemeId, secretToken])
+
 
   function createTransList() {
     const Table = ({ info, id }: { info: HistoryType; id: number }) => {
@@ -82,7 +95,7 @@ const SplitDetails = (props: any) => {
   }
 
   function createShareList() {
-    const Table = ({ info, id }: { info: FirstSplitType; id: number }) => {
+    const Table = ({ info, id }: { info: any; id: number }) => {
       return (
         <>
           <ValuesField pair={id % 2 === 0 ? true : false}>
@@ -108,7 +121,7 @@ const SplitDetails = (props: any) => {
         </>
       )
     }
-    const Map = firstSplit.map((info: FirstSplitType, id: number) => {
+    const Map = firstSplit.map((info: any, id: number) => {
       return <Table info={info} id={id} key={id} />
     })
     return Map

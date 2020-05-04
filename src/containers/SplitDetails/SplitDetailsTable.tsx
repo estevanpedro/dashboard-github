@@ -34,7 +34,8 @@ interface Props {
   createShareList: () => JSX.Element[] | undefined
   createTransList: () => JSX.Element[] | undefined
   schemeDetails: any
-  firstSplit: FirstSplitType[]
+  // firstSplit: FirstSplitType[]
+  firstSplit: any
   historyDetails: HistoryType[]
 }
 
@@ -152,7 +153,7 @@ const SplitDetails = ({
         <Modal
           title={'New Scheme'}
           trigger={
-            <SmallButton onClick={() => {}} margin='0 20px 0 0' align='center'>
+            <SmallButton onClick={() => { }} margin='0 20px 0 0' align='center'>
               <FaProjectDiagram size={25} />
             </SmallButton>
           }

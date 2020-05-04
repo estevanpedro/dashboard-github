@@ -219,6 +219,7 @@ class Api {
           },
         }
       )
+      console.log('updateScheme: ', response)
       return response
     } catch (err) {
       return err.response.data.errors[0].message
