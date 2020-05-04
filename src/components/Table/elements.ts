@@ -21,7 +21,7 @@ interface ContainerProps {
   pair: boolean
 }
 export const Colunm = styled.div<ColunmField>`
-  width: ${props => (props.width ? props.width : '150px')};
+  width: ${props => (props.width ? props.width : '200px')};
   flex-direction: column;
   display: flex;
   padding: 0 20px;
@@ -32,7 +32,7 @@ interface ColunmField {
 }
 
 export const Column = styled(FlexContainer)<ColumnProps>`
-  width: ${props => props.width || '150px'};
+  width: ${props => props.width || '200px'};
   flex-direction: column;
   padding: 0 20px;
   margin: 5px;

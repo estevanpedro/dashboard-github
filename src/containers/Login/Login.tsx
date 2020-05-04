@@ -5,8 +5,7 @@ import { useSelector } from 'react-redux'
 import { Formik, FormikErrors } from 'formik'
 import { RiBankLine } from 'react-icons/ri'
 import { TiTick } from 'react-icons/ti'
-import { useTranslation } from 'react-i18next';
-import i18n from "i18next";
+import { useTranslation } from 'react-i18next'
 
 import Button from '../../components/Button'
 import Input from '../../components/Input'
@@ -29,7 +28,7 @@ import {
   SmallText,
   CDAText,
   LanguageField,
-  ButtonLanguage
+  ButtonLanguage,
 } from './elements'
 
 const Login = () => {
@@ -37,7 +36,7 @@ const Login = () => {
   const [CDA, setCDA] = useState<boolean>(false)
   const { secretToken } = useSelector((state: RootState) => state.auth)
   const dispatch = useDispatch()
-  const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation()
 
   useEffect(() => {
     if (secretToken) {
@@ -111,14 +110,23 @@ const Login = () => {
     >
       {({ values, errors, touched, handleChange, handleSubmit }) => (
         <LoginForm onSubmit={handleSubmit}>
-
-          <LanguageField >
-            <ButtonLanguage type='button' onClick={() => { i18n.changeLanguage('en'); }}>
-              <img src={require('../../assets/icons/en.svg')} width="40" ></img>
+          <LanguageField>
+            <ButtonLanguage
+              type='button'
+              onClick={() => {
+                i18n.changeLanguage('en')
+              }}
+            >
+              <img src={require('../../assets/icons/en.svg')} width='40'></img>
             </ButtonLanguage>
 
-            <ButtonLanguage type='button' onClick={() => { i18n.changeLanguage('pt'); }}>
-              <img src={require('../../assets/icons/pt.svg')} width="40" ></img>
+            <ButtonLanguage
+              type='button'
+              onClick={() => {
+                i18n.changeLanguage('pt')
+              }}
+            >
+              <img src={require('../../assets/icons/pt.svg')} width='40'></img>
             </ButtonLanguage>
           </LanguageField>
 
@@ -130,7 +138,7 @@ const Login = () => {
 
           <LoginContainer>
             <Input
-              label='Username'
+              label={t('login.username')}
               name='username'
               value={values.username}
               onChange={handleChange}
@@ -138,21 +146,21 @@ const Login = () => {
               error={touched.username && errors.username ? errors.username : ''}
             />
             <Input
-              label='Password'
+              label={t('login.password')}
               name='password'
               value={values.password}
               onChange={handleChange}
               type='password'
               error={touched.password && errors.password ? errors.password : ''}
             />
-            <LinkToInputs to='/forgot'>Forgot Password</LinkToInputs>
+            <LinkToInputs to='/forgot'>{t('login.forgotPassword')}</LinkToInputs>
             <Error>{apiError}</Error>
             <Button type='submit' margin='0 0 20px 0'>
-              Login
+              {t('login.Title')}
             </Button>
-            <Link to='/sign-up'>Create an account</Link>
+            <Link to='/sign-up'>{t('login.createanaccount')}</Link>
 
-            <SmallText> or login with CDA </SmallText>
+            <SmallText> {t('login.orLoginWithCda')} </SmallText>
             <LoginCDA
               type='button'
               hover={CDA}
@@ -162,7 +170,7 @@ const Login = () => {
             >
               {CDA ? (
                 <>
-                  <CDAText>Alright to login with CDA</CDAText>
+                  <CDAText>{t('login.readytoLoginCda')}</CDAText>
                   <TiTick size={25} />
                 </>
               ) : (

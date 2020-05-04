@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 
 import { FlexContainer, SubTitle, TextLink } from '../../../components'
 
@@ -25,6 +26,7 @@ interface Props {
 }
 
 const MenuOptions = ({ data, returnToInfo, options }: Props) => {
+  const { t } = useTranslation()
   const [optionActive, setOptionActive] = useState<NodeOption | null>(null)
   const { userId } = useSelector((state: RootState) => state.auth)
 
@@ -90,7 +92,7 @@ const MenuOptions = ({ data, returnToInfo, options }: Props) => {
           padding='20px'
         >
           <TextLink onClick={() => setOptionActive(null)} margin='0 0 20px 0'>
-            ← Add new node
+            ← {t('schemeMap.addNewNode')}
           </TextLink>
           <SubTitle>{optionActive.title}</SubTitle>
           <optionActive.content onConfirm={handleConfirm} />

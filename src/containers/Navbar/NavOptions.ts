@@ -1,37 +1,37 @@
 export default [
   {
     id: 0,
-    title: 'API',
+    title: 'api',
     needsLogin: false,
     to: '/api',
   },
   {
     id: 1,
-    title: 'Library',
+    title: 'library',
     needsLogin: false,
     to: '/library',
   },
   {
     id: 2,
-    title: 'My Splits',
+    title: 'mySplits',
     needsLogin: true,
     to: '/my-schemes',
   },
   {
     id: 3,
-    title: 'Profile',
+    title: 'profile',
     needsLogin: true,
     to: '/profile',
   },
   {
     id: 4,
-    title: 'Logout',
+    title: 'logout',
     needsLogin: true,
     to: '/login',
   },
   {
     id: 5,
-    title: 'Login',
+    title: 'login',
     needsLogin: false,
     to: '/login',
   },

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Formik, FieldArray, ArrayHelpers, FormikErrors } from 'formik'
+import { useTranslation } from 'react-i18next'
 
 import {
   Button,
@@ -21,6 +22,7 @@ interface Props {
 }
 
 const SendForm = ({ onConfirm, initialState = null }: Props) => {
+  const { t } = useTranslation()
   const sendInitialValues: SendData = {
     type: 'send',
     name: 'Send',
@@ -67,25 +69,25 @@ const SendForm = ({ onConfirm, initialState = null }: Props) => {
         handleSubmit,
         setFieldValue,
       }) => (
-        <form onSubmit={handleSubmit}>
-          <Input
-            label='Send Name'
-            name='name'
-            value={values.name}
-            onChange={handleChange}
-            type='text'
-            width='100%'
-            error={touched.name && errors.name ? errors.name : ''}
-          />
-          <FieldTitle>Addresses</FieldTitle>
-          <FieldArray
-            name='addresses'
-            render={(arrayHelpers: ArrayHelpers) => (
-              <FlexContainer direction='column'>
-                {values.type === 'send' &&
-                values.addresses &&
-                values.addresses.length > 0
-                  ? values.addresses.map((address, index) => {
+          <form onSubmit={handleSubmit}>
+            <Input
+              label='Send Name'
+              name='name'
+              value={values.name}
+              onChange={handleChange}
+              type='text'
+              width='100%'
+              error={touched.name && errors.name ? errors.name : ''}
+            />
+            <FieldTitle>Addresses</FieldTitle>
+            <FieldArray
+              name='addresses'
+              render={(arrayHelpers: ArrayHelpers) => (
+                <FlexContainer direction='column'>
+                  {values.type === 'send' &&
+                    values.addresses &&
+                    values.addresses.length > 0
+                    ? values.addresses.map((address, index) => {
                       return (
                         <BorderContainer key={index}>
                           <FlexContainer
@@ -144,34 +146,34 @@ const SendForm = ({ onConfirm, initialState = null }: Props) => {
                         </BorderContainer>
                       )
                     })
-                  : null}
-                <TextLink
-                  alignSelf='flex-end'
-                  onClick={() =>
-                    arrayHelpers.insert(
-                      values.type === 'send' ? values.addresses.length : 0,
-                      {
-                        name: `Address ${values.type === 'send' &&
-                          values.addresses.length + 1}`,
-                        address: '',
-                        value: 0,
-                        percentage: 0,
-                      }
-                    )
-                  }
-                >
-                  Add address
+                    : null}
+                  <TextLink
+                    alignSelf='flex-end'
+                    onClick={() =>
+                      arrayHelpers.insert(
+                        values.type === 'send' ? values.addresses.length : 0,
+                        {
+                          name: `Address ${values.type === 'send' &&
+                            values.addresses.length + 1}`,
+                          address: '',
+                          value: 0,
+                          percentage: 0,
+                        }
+                      )
+                    }
+                  >
+                    Add address
                 </TextLink>
-              </FlexContainer>
-            )}
-          />
-          <MenuButtonContainer>
-            <Button type='submit' align='flex-end' margin='20px 0'>
-              Confirm
+                </FlexContainer>
+              )}
+            />
+            <MenuButtonContainer>
+              <Button type='submit' align='flex-end' margin='20px 0'>
+                Confirm
             </Button>
-          </MenuButtonContainer>
-        </form>
-      )}
+            </MenuButtonContainer>
+          </form>
+        )}
     </Formik>
   )
 }

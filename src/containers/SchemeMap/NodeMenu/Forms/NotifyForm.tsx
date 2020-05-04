@@ -1,5 +1,6 @@
 import React from 'react'
 import { Formik, FormikErrors, FieldArray, ArrayHelpers } from 'formik'
+import { useTranslation } from 'react-i18next'
 
 import { Button, Input, FlexContainer, TextLink } from '../../../../components'
 
@@ -14,6 +15,7 @@ interface Props {
 }
 
 const NotifyForm = ({ onConfirm, initialState = null }: Props) => {
+  const { t } = useTranslation()
   const notifyInitialValues: FormData = {
     type: 'notify',
     name: 'Notify',
@@ -31,12 +33,12 @@ const NotifyForm = ({ onConfirm, initialState = null }: Props) => {
 
     const errors: FormikErrors<NotifyData> = {}
     if (!name.length) {
-      errors.name = "Name can't be empty"
+      errors.name = t('errors.namecantbeempty')
     }
 
     const emailsErrors = info.emails.map((email: string) => {
       if (!email.length) {
-        return "Email can't be empty"
+        return t('errors.emailcantbeempty')
       }
 
       return ''
@@ -61,7 +63,7 @@ const NotifyForm = ({ onConfirm, initialState = null }: Props) => {
       {({ values, errors, touched, handleChange, handleSubmit }) => (
         <form onSubmit={handleSubmit}>
           <Input
-            label='Name'
+            label={t('notify.notifyName')}
             name='name'
             value={values.name}
             onChange={handleChange}
@@ -75,38 +77,38 @@ const NotifyForm = ({ onConfirm, initialState = null }: Props) => {
               <>
                 <FlexContainer direction='column'>
                   {values.type === 'notify' &&
-                  values.info.emails &&
-                  values.info.emails.length > 0
+                    values.info.emails &&
+                    values.info.emails.length > 0
                     ? values.info.emails.map((email, index) => {
-                        return (
-                          <BorderContainer key={index}>
-                            <Input
-                              label={`Email ${index + 1}`}
-                              name={`info.emails.${index}`}
-                              value={email}
-                              onChange={handleChange}
-                              type='email'
-                              width='100%'
-                              error={
-                                touched.info &&
+                      return (
+                        <BorderContainer key={index}>
+                          <Input
+                            label={`Email ${index + 1}`}
+                            name={`info.emails.${index}`}
+                            value={email}
+                            onChange={handleChange}
+                            type='email'
+                            width='100%'
+                            error={
+                              touched.info &&
                                 touched.info.emails &&
                                 errors.info &&
                                 errors.info.emails &&
                                 errors.info.emails[index]
-                                  ? errors.info.emails[index]
-                                  : ''
-                              }
-                            />
-                            {index ? (
-                              <TextLink
-                                onClick={() => arrayHelpers.remove(index)}
-                              >
-                                Remove
+                                ? errors.info.emails[index]
+                                : ''
+                            }
+                          />
+                          {index ? (
+                            <TextLink
+                              onClick={() => arrayHelpers.remove(index)}
+                            >
+                              Remove
                               </TextLink>
-                            ) : null}
-                          </BorderContainer>
-                        )
-                      })
+                          ) : null}
+                        </BorderContainer>
+                      )
+                    })
                     : null}
                 </FlexContainer>
                 <TextLink
@@ -118,7 +120,7 @@ const NotifyForm = ({ onConfirm, initialState = null }: Props) => {
                     )
                   }
                 >
-                  Add email
+                  {t('notify.addEmail')}
                 </TextLink>
               </>
             )}
@@ -126,7 +128,7 @@ const NotifyForm = ({ onConfirm, initialState = null }: Props) => {
 
           <MenuButtonContainer>
             <Button type='submit' align='flex-end' margin='20px 0'>
-              Confirm
+              {t('form.confirm')}
             </Button>
           </MenuButtonContainer>
         </form>

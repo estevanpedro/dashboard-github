@@ -1,5 +1,6 @@
 import React from 'react'
 import { Formik, FormikErrors } from 'formik'
+import { useTranslation } from 'react-i18next'
 
 import { Button, Input, Selector } from '../../../../components'
 import { MenuButtonContainer } from '../elements'
@@ -14,9 +15,10 @@ interface Props {
 }
 
 const EventForm = ({ onConfirm, initialState }: Props) => {
+  const { t } = useTranslation()
   const eventInitialValues: FormData = {
     type: 'event',
-    name: 'Event',
+    name: t('event.title'),
     value: 0,
     direction: 'above',
   }
@@ -30,11 +32,11 @@ const EventForm = ({ onConfirm, initialState }: Props) => {
     const errors: FormikErrors<EventData> = {}
 
     if (!name.length) {
-      errors.name = "Name can't be empty!"
+      errors.name = t('errors.namecantbeempty')
     }
 
     if (!value) {
-      errors.value = "Value can't be zero"
+      errors.value = t('errors.valuecantbezero')
     }
 
     return errors
@@ -64,39 +66,39 @@ const EventForm = ({ onConfirm, initialState }: Props) => {
         handleSubmit,
         setFieldValue,
       }) => (
-        <form onSubmit={handleSubmit}>
-          <Input
-            label='Event name'
-            name='name'
-            value={values.name}
-            onChange={handleChange}
-            type='text'
-            width='100%'
-            error={touched.name && errors.name ? errors.name : ''}
-          />
-          <Selector
-            label='Value'
-            values={['above', 'bellow']}
-            selectedValue={values.direction}
-            onChange={(value: string) =>
-              handleDirectionValue(value, setFieldValue)
-            }
-          />
-          <Input
-            name='value'
-            value={String(values.value)}
-            onChange={handleChange}
-            type='number'
-            width='100%'
-            error={touched.value && errors.value ? errors.value : ''}
-          />
-          <MenuButtonContainer>
-            <Button type='submit' align='flex-end' margin='20px 0'>
-              Confirm
-            </Button>
-          </MenuButtonContainer>
-        </form>
-      )}
+          <form onSubmit={handleSubmit}>
+            <Input
+              label={t('event.eventName')}
+              name='name'
+              value={values.name}
+              onChange={handleChange}
+              type='text'
+              width='100%'
+              error={touched.name && errors.name ? errors.name : ''}
+            />
+            <Selector
+              label={t('event.value')}
+              values={[t('event.above'), t('event.below')]}
+              selectedValue={values.direction}
+              onChange={(value: string) =>
+                handleDirectionValue(value, setFieldValue)
+              }
+            />
+            <Input
+              name='value'
+              value={String(values.value)}
+              onChange={handleChange}
+              type='number'
+              width='100%'
+              error={touched.value && errors.value ? errors.value : ''}
+            />
+            <MenuButtonContainer>
+              <Button type='submit' align='flex-end' margin='20px 0'>
+                {t('form.confirm')}
+              </Button>
+            </MenuButtonContainer>
+          </form>
+        )}
     </Formik>
   )
 }

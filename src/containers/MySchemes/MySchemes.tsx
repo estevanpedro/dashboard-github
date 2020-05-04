@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
+
 import MySchemesTable from './MySchemesTable'
 import Table from '../../components/Table'
 import Api from '../../Api'
@@ -10,6 +12,7 @@ import { setLoading } from '../../redux/ducks/loading'
 import { SchemeType } from '../../apiTypes'
 
 const MySchemes = () => {
+  const { t } = useTranslation()
   const [colorBalance, setcolorBalance] = useState('')
   const [colorTransaction, setColorTransaction] = useState('#')
   const [preference, setPreference] = useState('lastTransaction')

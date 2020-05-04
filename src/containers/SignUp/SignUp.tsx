@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { navigate } from '@reach/router'
 import { Formik, FormikErrors } from 'formik'
+import { useTranslation } from 'react-i18next'
 
 import Button from '../../components/Button'
 import Input from '../../components/Input'
@@ -17,6 +18,7 @@ import { setLoading } from '../../redux/ducks/loading'
 import { SignUpContainer, SignUpForm, ReturnText } from './elements'
 
 const SignUp = () => {
+  const { t } = useTranslation()
   const [apiError, setApiError] = useState('')
 
   const dispatch = useDispatch()
@@ -65,23 +67,23 @@ const SignUp = () => {
     const errors: FormikErrors<SignUpValues> = {}
 
     if (fullName.length < 3) {
-      errors.fullName = 'Your name needs to have at least 3 characters'
+      errors.fullName = t('signup.Your name needs to have at least 3 characters')
     }
 
     if (!email.length) {
-      errors.email = 'You must use a valid email'
+      errors.email = t('signup.You must use a valid email')
     }
 
     if (username.length < 3) {
-      errors.username = 'Your username needs to have at least 3 characters'
+      errors.username = t('signup.Your password needs to have at least 6 characters')
     }
 
     if (password.length < 6) {
-      errors.password = 'Your password needs to have at least 6 characters'
+      errors.password = t('')
     }
 
     if (password !== confirmPassword) {
-      errors.password = 'Your passwords must match'
+      errors.password = t('signup.Your passwords must match')
     }
 
     return errors
@@ -89,7 +91,7 @@ const SignUp = () => {
 
   return (
     <SignUpContainer>
-      <Title>Create an account</Title>
+      <Title>{t('signup.Create an account')}</Title>
       <Formik
         initialValues={signupInitialValues}
         onSubmit={handleSubmit}
@@ -98,7 +100,7 @@ const SignUp = () => {
         {({ values, errors, touched, handleChange, handleSubmit }) => (
           <SignUpForm onSubmit={handleSubmit}>
             <Input
-              label='Full Name'
+              label={t('signup.Full Name')}
               name='fullName'
               value={values.fullName}
               onChange={handleChange}
@@ -106,7 +108,7 @@ const SignUp = () => {
               type='text'
             />
             <Input
-              label='Username'
+              label={t('signup.Username')}
               name='username'
               value={values.username}
               onChange={handleChange}
@@ -122,7 +124,7 @@ const SignUp = () => {
               type='email'
             />
             <Input
-              label='Password'
+              label={t('signup.Password')}
               name='password'
               value={values.password}
               onChange={handleChange}
@@ -130,16 +132,16 @@ const SignUp = () => {
               type='password'
             />
             <Input
-              label='Confirm Password'
+              label={t('signup.Confirm Password')}
               name='confirmPassword'
               value={values.confirmPassword}
               onChange={handleChange}
               type='password'
             />
             <Error>{apiError}</Error>
-            <Button type='submit'>Create now</Button>
+            <Button type='submit'>{t('signup.Create now')}</Button>
             <ReturnText size='regular'>
-              If you already have an account, <Link to='/login'>login</Link>
+              {t('signup.If you already have an account')}, <Link to='/login'>{t('signup.login')}</Link>
             </ReturnText>
           </SignUpForm>
         )}

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { RouteComponentProps, navigate } from '@reach/router'
 import ScrollContainer from 'react-indiana-drag-scroll'
+import { useTranslation } from 'react-i18next'
 
 import { TextLink, Button, FlexContainer, Title, Text } from '../../components'
 
@@ -36,6 +37,7 @@ interface SaveMessage {
 }
 
 const SchemeMap = ({ schemeId }: Props & RouteComponentProps) => {
+  const { t } = useTranslation()
   const [schemeInfo, setSchemeInfo] = useState<SchemeInfo | null>(null)
   const [menuId, setMenuId] = useState('')
   const [saveMessage, setSaveMessage] = useState<SaveMessage>({
@@ -94,7 +96,7 @@ const SchemeMap = ({ schemeId }: Props & RouteComponentProps) => {
         if (response.status) {
           setSaveMessage({
             status: 'success',
-            message: 'Scheme saved successfully!',
+            message: t('schemeMap.SchemeSavedSuccessfully'),
           })
           return
         }
@@ -154,7 +156,7 @@ const SchemeMap = ({ schemeId }: Props & RouteComponentProps) => {
       <FlexContainer width='100%' justify='space-between' align='center'>
         <FlexContainer direction='column'>
           <TextLink onClick={handleGoToSchemeDetails}>
-            ← Scheme Details
+            ← {t('schemeMap.SchemeDetails')}
           </TextLink>
           <Title>{schemeInfo && schemeInfo.name}</Title>
         </FlexContainer>
@@ -165,7 +167,9 @@ const SchemeMap = ({ schemeId }: Props & RouteComponentProps) => {
           >
             {saveMessage.message}
           </Text>
-          <Button onClick={handleSave}>Save</Button>
+          <Button onClick={handleSave}>
+            {t('schemeMap.save')}
+          </Button>
         </FlexContainer>
       </FlexContainer>
 

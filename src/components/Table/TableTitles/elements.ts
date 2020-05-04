@@ -10,7 +10,7 @@ export const ContainerTitles = styled.div`
 `
 
 export const Colunm = styled.div<ColunmField>`
-  width: ${props => (props.width ? props.width : '150px')};
+  width: ${props => (props.width ? props.width : '200px')};
   flex-direction: column;
   display: flex;
   padding-left: 10px;
@@ -23,4 +23,5 @@ interface ColunmField {
 
 export const Title = styled(Text)`
   font-weight: bold;
+  padding-left: 20px;
 `

@@ -5,9 +5,13 @@ import { FaProjectDiagram } from 'react-icons/fa'
 import { Bar, Pie } from 'react-chartjs-2'
 import ReactJson from 'react-json-view'
 import QRCode from 'qrcode.react'
+import { useTranslation } from 'react-i18next'
+import { useSelector } from 'react-redux'
+
 
 import { TextLink, SmallButton, Button, FlexContainer } from '../../components'
 import Modal from '../../components/Modal'
+import { RootState } from '../../redux/rootReducer'
 import { FirstSplitType, HistoryType } from '../../apiTypes'
 
 import {
@@ -46,7 +50,9 @@ const SplitDetails = ({
   firstSplit,
   historyDetails,
 }: Props & RouteComponentProps) => {
+  const { t } = useTranslation()
   const themeContext = useContext(ThemeContext)
+  const { secretToken } = useSelector((state: RootState) => state.auth)
 
   let ShareData = (firstSplit: FirstSplitType[]) => {
     let labels: string[] = []
@@ -139,14 +145,28 @@ const SplitDetails = ({
     navigate(`/scheme/${schemeDetails && schemeDetails.id}`)
   }
 
+  const checkTokenToEditScheme = () => {
+    if (secretToken) {
+      return (
+        <Button isSecondary onClick={goToScheme}>
+          {t('schemeDetails.editScheme')}
+        </Button>
+      )
+    }
+    else {
+      return <></>
+    }
+  }
   return (
     <Container>
-      <TextLink onClick={handleGoBack}>← My Schemes</TextLink>
+      <TextLink onClick={handleGoBack}>← {t('mySchemes.title')}</TextLink>
       <Header>
         <Title>{schemeDetails.name}</Title>
         <Category>
           <CategoryName size='verySmall'>
-            {schemeDetails.visibility === 'public' ? 'Public' : 'Private'}
+            {schemeDetails.visibility === 'public'
+              ? t('schemeDetails.public')
+              : t('schemeDetails.private')}
           </CategoryName>
         </Category>
 
@@ -171,9 +191,7 @@ const SplitDetails = ({
           />
         </Modal>
 
-        <Button isSecondary onClick={goToScheme}>
-          Edit Scheme
-        </Button>
+        {checkTokenToEditScheme()}
       </Header>
       <Body>
         <FlexContainer align='center'>
@@ -183,19 +201,16 @@ const SplitDetails = ({
             />
           </QRField>
           <DetailsField>
-            <SubtitleText>Scheme ID</SubtitleText>
+            <SubtitleText>{t('schemeDetails.schemeId')}</SubtitleText>
             <PayloadText>{schemeDetails.id}</PayloadText>
-            <SubtitleText>Wallet Address</SubtitleText>
+            <SubtitleText>{t('schemeDetails.walletAddress')}</SubtitleText>
             <PayloadText>
               {schemeDetails.tree ? schemeDetails.tree.address : ''}
             </PayloadText>
-            <SubtitleText>Balance</SubtitleText>
+            <SubtitleText>{t('schemeDetails.balance')}</SubtitleText>
             <PayloadText>{schemeDetails.balance || 0} BTC</PayloadText>
-            <SubtitleText>Payout</SubtitleText>
+            <SubtitleText>{t('schemeDetails.payout')}</SubtitleText>
             <PayloadText>{schemeDetails.payout}</PayloadText>
-            <PayloadText>
-              {schemeDetails.serviceFee === 'True' ? 'Yes' : 'No'}
-            </PayloadText>
           </DetailsField>
         </FlexContainer>
 
@@ -212,12 +227,12 @@ const SplitDetails = ({
 
       <Bottom>
         <BottomField>
-          <SubTitle>Transactions</SubTitle>
+          <SubTitle>{t('schemeDetails.transactions')}</SubTitle>
 
           <TitleField>
-            <TableTitle width='70px'>Balance</TableTitle>
-            <TableTitle>Time UTC</TableTitle>
-            <TableTitle>Info</TableTitle>
+            <TableTitle width='70px'>{t('schemeDetails.balance')}</TableTitle>
+            <TableTitle>{t('schemeDetails.time')} UTC</TableTitle>
+            <TableTitle>{t('schemeDetails.info')}</TableTitle>
           </TitleField>
           {createTransList()}
         </BottomField>
@@ -227,9 +242,9 @@ const SplitDetails = ({
             <SubTitle>Shares</SubTitle>
           </Header>
           <TitleField>
-            <TableTitle width='100px'>Address</TableTitle>
-            <TableTitle width='25px'>Size</TableTitle>
-            <TableTitle width='100px'>Label</TableTitle>
+            <TableTitle width='100px'>{t('schemeDetails.address')}</TableTitle>
+            <TableTitle width='25px'>{t('schemeDetails.size')}</TableTitle>
+            <TableTitle width='100px'>{t('schemeDetails.label')}</TableTitle>
           </TitleField>
           {createShareList()}
         </BottomField>
