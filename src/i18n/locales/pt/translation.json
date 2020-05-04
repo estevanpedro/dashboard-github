@@ -169,5 +169,20 @@
         "forgotPassword": "Esqueci a senha",
         "orLoginWithCda": "Ou entrar com CDA",
         "readytoLoginCda": "Tudo certo para entrar com CDA"
+    },
+    "signup": {
+        "Your name needs to have at least 3 characters": "Seu nome precisa ter pelo menos 3 caracteres",
+        "You must use a valid email": "Você deve usar um email válido",
+        "Your username needs to have at least 3 characters": "Seu nome de usuário precisa ter pelo menos 3 caracteres",
+        "Your password needs to have at least 6 characters": "Sua senha precisa ter pelo menos 6 caracteres",
+        "Your passwords must match": "Suas senhas devem corresponder",
+        "Create an account": "Crie a sua conta",
+        "Full Name": "Nome completo",
+        "Username": "Usuário",
+        "Password": "Senha",
+        "Confirm Password": "Confirmar senha",
+        "Create now": "Criar agora",
+        "If you already have an account": "Se você já possui uma conta",
+        "login": "entrar"
     }
 }
