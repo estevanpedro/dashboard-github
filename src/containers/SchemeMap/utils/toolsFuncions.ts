@@ -154,7 +154,13 @@ export const addSwap = (
 ) => {
   return addNode({
     id: nodeData.id,
-    node: { id: uniqid(), type: 'swap', name, children: [], info: { userId } },
+    node: {
+      id: uniqid(),
+      type: 'swap',
+      name,
+      children: [],
+      info: { user_id: userId },
+    },
   })
 }
 
