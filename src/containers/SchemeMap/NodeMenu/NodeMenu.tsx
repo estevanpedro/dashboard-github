@@ -65,12 +65,12 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo, ownAddresses }: Props) => {
                   : [],
                 info: nodeInfo.children[i]
                   ? {
-                    ...nodeInfo.children[i].info,
-                    percentage: split.share / 100,
-                  }
+                      ...nodeInfo.children[i].info,
+                      percentage: split.share / 100,
+                    }
                   : {
-                    percentage: split.share / 100,
-                  },
+                      percentage: split.share / 100,
+                    },
               }
             }),
           }
@@ -103,23 +103,23 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo, ownAddresses }: Props) => {
             children:
               FormData.type === 'send'
                 ? FormData.addresses.map((address, i) => {
-                  return {
-                    ...nodeInfo.children[i],
-                    name: address.name,
-                    address: address.address,
-                    type: 'address',
-                    info: nodeInfo.children[i]
-                      ? {
-                        ...nodeInfo.children[i].info,
-                        percentage: address.percentage / 100,
-                        value: address.value,
-                      }
-                      : {
-                        percentage: address.percentage / 100,
-                        value: address.value,
-                      },
-                  }
-                })
+                    return {
+                      ...nodeInfo.children[i],
+                      name: address.name,
+                      address: address.address,
+                      type: 'address',
+                      info: nodeInfo.children[i]
+                        ? {
+                            ...nodeInfo.children[i].info,
+                            percentage: address.percentage / 100,
+                            value: address.value,
+                          }
+                        : {
+                            percentage: address.percentage / 100,
+                            value: address.value,
+                          },
+                    }
+                  })
                 : [],
           }
 
@@ -193,12 +193,8 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo, ownAddresses }: Props) => {
           possibleOptions = []
           break
 
-        // case 'send':
-        //   possibleOptions = []
-        //   break
-
         case 'swap':
-          possibleOptions = []
+          possibleOptions = ['notify']
           break
 
         case 'event':
@@ -345,8 +341,8 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo, ownAddresses }: Props) => {
                 onConfirm={handleConfirmEdit}
               />
             ) : (
-                <Text>Something went wrong</Text>
-              )}
+              <Text>Something went wrong</Text>
+            )}
           </FlexContainer>
         )
       }
@@ -385,7 +381,9 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo, ownAddresses }: Props) => {
           )}
 
           <Line margin='0 0 20px 0' />
-          {type !== 'scheme' && <FieldTitle>{t('schemeMap.childrenNodes')}</FieldTitle>}
+          {type !== 'scheme' && (
+            <FieldTitle>{t('schemeMap.childrenNodes')}</FieldTitle>
+          )}
           {children &&
             children.map(child => (
               <TextLink
@@ -407,9 +405,7 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo, ownAddresses }: Props) => {
 
     return (
       <FlexContainer padding='20px'>
-        <Text align='center'>
-          {t('schemeMap.menuDefaultMessage')}
-        </Text>
+        <Text align='center'>{t('schemeMap.menuDefaultMessage')}</Text>
       </FlexContainer>
     )
   }
