@@ -46,7 +46,7 @@ const Navbar = () => {
                 Logout(option.id)
               }}
             >
-              {option.title}
+              {t(`navBar.${option.title}`)}
             </NavLink>,
             option.needsLogin
           )

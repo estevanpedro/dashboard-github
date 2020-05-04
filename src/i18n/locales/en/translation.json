@@ -4,6 +4,14 @@
     "form": {
         "confirm": "Confirm"
     },
+    "navBar": {
+        "api": "API",
+        "library": "Library",
+        "mySplits": "My Splits",
+        "profile": "Profile",
+        "logout": "Logout",
+        "login": "Login"
+    },
     "schemeMap": {
         "save": "Save",
         "menuDefaultMessage": "Click on a node to edit it or to add a new one",
@@ -14,6 +22,13 @@
         "edit": "Edit",
         "SchemeSavedSuccessfully": "Scheme saved successfully!",
         "SchemeDetails": "Scheme Details"
+    },
+    "library": {
+        "title": "Library",
+        "name": "Name",
+        "balance": "Balance",
+        "payout": "Payout",
+        "lastTransaction": "Last Transaction"
     },
     "errors": {
         "emailcantbeempty": "Email can't be empty",
@@ -57,7 +72,7 @@
         "eventName": "Event Name",
         "value": "Value",
         "above": "above",
-        "below": "belos"
+        "bellow": "belos"
     },
     "api": {
         "readTheDoc": "Read the documentation in Postman:",

@@ -4,16 +4,31 @@
     "form": {
         "confirm": "Confirmar"
     },
+    "navBar": {
+        "api": "API",
+        "library": "Biblioteca",
+        "mySplits": "Meus splits",
+        "profile": "Perfil",
+        "logout": "Sair",
+        "login": "Entrar"
+    },
     "schemeMap": {
         "save": "Salvar",
         "menuDefaultMessage": "Clique em um nó para editar ou adicionar um novo.",
         "address": "Address",
-        "addNewNode": "Add new node",
-        "childrenNodes": "Children Nodes",
+        "addNewNode": "Adicionar novo nó",
+        "childrenNodes": "Nós filhos",
         "info": "info",
         "edit": "Edit",
         "SchemeSavedSuccessfully": "Esquema salvo com sucesso!",
         "SchemeDetails": "Detalhes do Esquema"
+    },
+    "library": {
+        "title": "Biblioteca",
+        "name": "Nome",
+        "balance": "Balanço",
+        "payout": "Payout",
+        "lastTransaction": "Ultima transação"
     },
     "errors": {
         "emailcantbeempty": "Email can't be empty",
@@ -57,7 +72,7 @@
         "eventName": "Nome do evento",
         "value": "Valor",
         "above": "acima",
-        "below": "abaixo"
+        "bellow": "abaixo"
     },
     "api": {
         "readTheDoc": "Leia a documentação no Postman:",

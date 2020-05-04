@@ -30,8 +30,8 @@ const Api = () => {
       <Title>Api</Title>
 
       <ApiTitles>
-        {t('api.readTheDoc')}
-        https://www.getpostman.com/collections/95da206e74f9db89503'
+        {t('api.readTheDoc')} {' '}
+        https://documenter.getpostman.com/view/10015561/Szmb5JkF?version=latest
       </ApiTitles>
 
       <ApiTitles>{t('api.What is Split Master')}?</ApiTitles>
@@ -176,8 +176,8 @@ const Api = () => {
       <Paragraph />
 
       <Text>
-        {t('api.Any other question about the API')}
-        https://www.getpostman.com/collections/95da206e74f9db895034
+        {t('api.Any other question about the API')} {' '}
+        https://documenter.getpostman.com/view/10015561/Szmb5JkF?version=latest
       </Text>
       <Paragraph />
       <Paragraph />
