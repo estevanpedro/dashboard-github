@@ -18,7 +18,7 @@ const EventForm = ({ onConfirm, initialState }: Props) => {
   const { t } = useTranslation()
   const eventInitialValues: FormData = {
     type: 'event',
-    name: 'Event',
+    name: t('event.title'),
     value: 0,
     direction: 'above',
   }
@@ -32,11 +32,11 @@ const EventForm = ({ onConfirm, initialState }: Props) => {
     const errors: FormikErrors<EventData> = {}
 
     if (!name.length) {
-      errors.name = "Name can't be empty!"
+      errors.name = t('errors.namecantbeempty')
     }
 
     if (!value) {
-      errors.value = "Value can't be zero"
+      errors.value = t('errors.valuecantbezero')
     }
 
     return errors
@@ -68,7 +68,7 @@ const EventForm = ({ onConfirm, initialState }: Props) => {
       }) => (
           <form onSubmit={handleSubmit}>
             <Input
-              label='Event name'
+              label={t('event.eventName')}
               name='name'
               value={values.name}
               onChange={handleChange}
@@ -77,8 +77,8 @@ const EventForm = ({ onConfirm, initialState }: Props) => {
               error={touched.name && errors.name ? errors.name : ''}
             />
             <Selector
-              label='Value'
-              values={['above', 'bellow']}
+              label={t('event.value')}
+              values={[t('event.above'), t('event.bellow')]}
               selectedValue={values.direction}
               onChange={(value: string) =>
                 handleDirectionValue(value, setFieldValue)
@@ -94,8 +94,8 @@ const EventForm = ({ onConfirm, initialState }: Props) => {
             />
             <MenuButtonContainer>
               <Button type='submit' align='flex-end' margin='20px 0'>
-                Confirm
-            </Button>
+                {t('form.confirm')}
+              </Button>
             </MenuButtonContainer>
           </form>
         )}

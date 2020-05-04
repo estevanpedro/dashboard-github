@@ -1,4 +1,62 @@
 {
     "Login with your Splitcoin account": "Entre com sua conta Splitcoin",
-    "Login with your CDA account": "Faça login com sua conta CDA"
+    "Login with your CDA account": "Faça login com sua conta CDA",
+    "form": {
+        "confirm": "Confirmar"
+    },
+    "schemeMap": {
+        "save": "Salvar",
+        "menuDefaultMessage": "Clique em um nó para editar ou adicionar um novo.",
+        "address": "Address",
+        "addNewNode": "Add new node",
+        "childrenNodes": "Children Nodes",
+        "info": "info",
+        "edit": "Edit",
+        "SchemeSavedSuccessfully": "Esquema salvo com sucesso!",
+        "SchemeDetails": "Detalhes do Esquema"
+    },
+    "errors": {
+        "emailcantbeempty": "Email can't be empty",
+        "namecantbeempty": "Name can't be empty",
+        "valuecantbezero": "Valor não pode ser zero"
+    },
+    "root": {
+        "title": "root"
+    },
+    "split": {
+        "title": "Split",
+        "splitName": "Nome do split",
+        "share": "Share",
+        "shares": "Shares",
+        "shareName": "Nome do share",
+        "shareAddress": "Endreço do share (opcional)",
+        "addShare": "Adicionar endereço"
+    },
+    "timer": {
+        "title": "Timer",
+        "timerName": "Nome do timer",
+        "hours": "Horas",
+        "minutes": "Minutos",
+        "seconds": "Segundos",
+        "Timeshouldnotbe0": "Time não pode ser zero 0"
+    },
+    "notify": {
+        "title": "Notificar",
+        "notifyName": "Nome do notificar",
+        "email": "Email",
+        "addEmail": "Adicionar email"
+    },
+    "swap": {
+        "title": "Swap",
+        "swapName": "Nome do swap",
+        "minimunOf": "Mínimo de",
+        "to": "para"
+    },
+    "event": {
+        "title": "Evento",
+        "eventName": "Nome do evento",
+        "value": "Valor",
+        "above": "acima",
+        "bellow": "abaixo"
+    }
 }

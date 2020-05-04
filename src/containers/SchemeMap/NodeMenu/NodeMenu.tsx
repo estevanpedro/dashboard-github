@@ -385,7 +385,7 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo, ownAddresses }: Props) => {
           )}
 
           <Line margin='0 0 20px 0' />
-          {type !== 'scheme' && <FieldTitle>Children Nodes</FieldTitle>}
+          {type !== 'scheme' && <FieldTitle>{t('schemeMap.childrenNodes')}</FieldTitle>}
           {children &&
             children.map(child => (
               <TextLink
@@ -408,7 +408,7 @@ const NodeMenu = ({ nodeInfo, updateMenuInfo, ownAddresses }: Props) => {
     return (
       <FlexContainer padding='20px'>
         <Text align='center'>
-          Click on a node to edit it or to add a new one
+          {t('schemeMap.menuDefaultMessage')}
         </Text>
       </FlexContainer>
     )

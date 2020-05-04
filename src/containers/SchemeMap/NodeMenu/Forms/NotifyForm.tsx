@@ -33,12 +33,12 @@ const NotifyForm = ({ onConfirm, initialState = null }: Props) => {
 
     const errors: FormikErrors<NotifyData> = {}
     if (!name.length) {
-      errors.name = "Name can't be empty"
+      errors.name = t('errors.namecantbeempty')
     }
 
     const emailsErrors = info.emails.map((email: string) => {
       if (!email.length) {
-        return "Email can't be empty"
+        return t('errors.emailcantbeempty')
       }
 
       return ''
@@ -63,7 +63,7 @@ const NotifyForm = ({ onConfirm, initialState = null }: Props) => {
       {({ values, errors, touched, handleChange, handleSubmit }) => (
         <form onSubmit={handleSubmit}>
           <Input
-            label='Name'
+            label={t('notify.notifyName')}
             name='name'
             value={values.name}
             onChange={handleChange}
@@ -120,7 +120,7 @@ const NotifyForm = ({ onConfirm, initialState = null }: Props) => {
                     )
                   }
                 >
-                  Add email
+                  {t('notify.addEmail')}
                 </TextLink>
               </>
             )}
@@ -128,7 +128,7 @@ const NotifyForm = ({ onConfirm, initialState = null }: Props) => {
 
           <MenuButtonContainer>
             <Button type='submit' align='flex-end' margin='20px 0'>
-              Confirm
+              {t('form.confirm')}
             </Button>
           </MenuButtonContainer>
         </form>

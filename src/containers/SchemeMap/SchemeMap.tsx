@@ -96,7 +96,7 @@ const SchemeMap = ({ schemeId }: Props & RouteComponentProps) => {
         if (response.status) {
           setSaveMessage({
             status: 'success',
-            message: 'Scheme saved successfully!',
+            message: t('schemeMap.SchemeSavedSuccessfully'),
           })
           return
         }
@@ -156,7 +156,7 @@ const SchemeMap = ({ schemeId }: Props & RouteComponentProps) => {
       <FlexContainer width='100%' justify='space-between' align='center'>
         <FlexContainer direction='column'>
           <TextLink onClick={handleGoToSchemeDetails}>
-            ← Scheme Details
+            ← {t('schemeMap.SchemeDetails')}
           </TextLink>
           <Title>{schemeInfo && schemeInfo.name}</Title>
         </FlexContainer>
@@ -167,7 +167,9 @@ const SchemeMap = ({ schemeId }: Props & RouteComponentProps) => {
           >
             {saveMessage.message}
           </Text>
-          <Button onClick={handleSave}>Save</Button>
+          <Button onClick={handleSave}>
+            {t('schemeMap.save')}
+          </Button>
         </FlexContainer>
       </FlexContainer>
 

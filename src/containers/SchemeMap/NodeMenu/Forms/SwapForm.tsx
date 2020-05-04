@@ -31,7 +31,7 @@ const SwapForm = ({ onConfirm, initialState }: Props) => {
     const errors: FormikErrors<SwapData> = {}
 
     if (!name.length) {
-      errors.name = "Name can't be empty!"
+      errors.name = t('errors.namecantbeempty')
     }
 
     return errors
@@ -40,8 +40,8 @@ const SwapForm = ({ onConfirm, initialState }: Props) => {
   return (
     <>
       <FlexContainer direction='column' margin='0 0 20px 0'>
-        <Text>Minimum of 0.001</Text>
-        <Text>Bitcoin (BTC) to REAL (BRL)</Text>
+        <Text>{t('swap.minimunOf')}</Text>
+        <Text>Bitcoin (BTC) {t('swap.to')} REAL (BRL)</Text>
       </FlexContainer>
       <Formik
         initialValues={
@@ -54,7 +54,7 @@ const SwapForm = ({ onConfirm, initialState }: Props) => {
         {({ values, errors, touched, handleChange, handleSubmit }) => (
           <form onSubmit={handleSubmit}>
             <Input
-              label='Swap name'
+              label={t('swap.swapName')}
               name='name'
               value={values.name}
               onChange={handleChange}
@@ -64,7 +64,7 @@ const SwapForm = ({ onConfirm, initialState }: Props) => {
             />
             <MenuButtonContainer>
               <Button type='submit' align='flex-end' margin='20px 0'>
-                Confirm
+                {t('form.confirm')}
               </Button>
             </MenuButtonContainer>
           </form>

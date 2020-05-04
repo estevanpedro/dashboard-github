@@ -88,14 +88,14 @@ const SplitForm = ({ onConfirm, initialState = null }: Props) => {
       {({ values, handleChange, handleSubmit, setFieldValue }) => (
         <form onSubmit={handleSubmit}>
           <Input
-            label='Split Name'
+            label={t('split.splitName')}
             name='name'
             value={values.name}
             onChange={handleChange}
             type='text'
             width='100%'
           />
-          <FieldTitle>Shares</FieldTitle>
+          <FieldTitle>{t('split.shares')}</FieldTitle>
           <FieldArray
             name='splits'
             render={(arrayHelpers: ArrayHelpers) => (
@@ -123,7 +123,7 @@ const SplitForm = ({ onConfirm, initialState = null }: Props) => {
                           ) : null}
                         </FlexContainer>
                         <Input
-                          label='Share name'
+                          label={t('split.shareName')}
                           name={`splits.${index}.name`}
                           value={split.name}
                           onChange={handleChange}
@@ -131,7 +131,7 @@ const SplitForm = ({ onConfirm, initialState = null }: Props) => {
                           width='100%'
                         />
                         <Input
-                          label='Share address (optional)'
+                          label={t('split.shareAddress')}
                           name={`splits.${index}.address`}
                           value={split.address}
                           onChange={handleChange}
@@ -172,7 +172,7 @@ const SplitForm = ({ onConfirm, initialState = null }: Props) => {
                     )
                   }
                 >
-                  Add share
+                  {t('split.addShare')}
                 </TextLink>
               </FlexContainer>
             )}
