@@ -51,28 +51,28 @@ const Profile = () => {
 
   return (
     <ProfileContainer>
-      <Title>Profile</Title>
+      <Title>{t('profile.Profile')}</Title>
       <ProfileField>
-        <SubTitle>Username</SubTitle>
+        <SubTitle>{t('profile.Username')}</SubTitle>
         <Text>{username}</Text>
       </ProfileField>
       <ProfileField>
-        <SubTitle>Email</SubTitle>
+        <SubTitle>{t('profile.Email')}</SubTitle>
         <Text>{email}</Text>
       </ProfileField>
 
       <ProfileField>
-        <SubTitle>Password</SubTitle>
-        <Link to='/forgot'>Change Password</Link>
+        <SubTitle>{t('profile.Password')}</SubTitle>
+        <Link to='/forgot'>{t('profile.ChangePassword')}</Link>
       </ProfileField>
 
       <ProfileField>
-        <SubTitle>User type</SubTitle>
+        <SubTitle>{t('profile.User type')}</SubTitle>
         <Text>{user_type}</Text>
       </ProfileField>
 
       <ProfileField>
-        <SubTitle>User ID</SubTitle>
+        <SubTitle>{t('profile.User ID')}</SubTitle>
         <Text>{user_id}</Text>
       </ProfileField>
 
@@ -80,12 +80,12 @@ const Profile = () => {
         <SubTitle>API TOKEN</SubTitle>
 
         <ButtonSimple onClick={() => { setShowToken(OldState => !OldState) }}>
-          {showToken ? <TextColoredSmall>{secretToken}</TextColoredSmall> : <TextColored>Find token</TextColored>}
+          {showToken ? <TextColoredSmall>{secretToken}</TextColoredSmall> : <TextColored>{t('profile.findToken')}</TextColored>}
         </ButtonSimple>
       </ProfileField>
 
       <ProfileField>
-        <SubTitle>Language</SubTitle>
+        <SubTitle>{t('profile.Language')}</SubTitle>
         <LanguageField >
           <ButtonLanguage type='button' onClick={() => { i18n.changeLanguage('en'); }}>
             <img src={require('../../assets/icons/en.svg')} width="40" ></img>

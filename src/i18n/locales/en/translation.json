@@ -138,5 +138,16 @@
         "All fields required in the": "All fields required in the",
         "object, is shown below": "object, is shown below.",
         "Any other question about the API": "Any other question about the API, can be found in the Postman documentation"
+    },
+    "profile": {
+        "Profile": "Profile",
+        "Username": "Username",
+        "Email": "Email",
+        "Password": "Password",
+        "ChangePassword": "Change Password",
+        "User type": "User type",
+        "User ID": "User ID,",
+        "Language": "Language",
+        "findToken": "Find Token"
     }
 }
