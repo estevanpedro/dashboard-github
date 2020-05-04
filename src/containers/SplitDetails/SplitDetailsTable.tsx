@@ -39,6 +39,7 @@ interface Props {
   createTransList: () => JSX.Element[] | undefined
   schemeDetails: any
   firstSplit: FirstSplitType[]
+  // firstSplit: any
   historyDetails: HistoryType[]
 }
 
