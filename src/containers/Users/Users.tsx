@@ -1,28 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import Title, { SubTitle } from '../../components/Title'
+import Title from '../../components/Title'
 import { Container, TableText, ValuesField, IdText, Colunm } from './elements'
 import IconButton from '../../components/IconButton'
 import Api from '../../Api';
 import { Link } from '@reach/router'
-import ReactPaginate from 'react-paginate';
 import Arrow from '../../assets/icons/right-arrow.svg'
 import { setUsername } from '../../redux/ducks/username'
 import { useDispatch } from 'react-redux'
-
-const example = [
-  {
-    id: 101,
-    login: "jvantuyl"
-  },
-  {
-    id: 102,
-    login: "jvantuyl2",
-  },
-  {
-    id: 103,
-    login: "jvantuyl3",
-  }
-]
 
 const Users = () => {
   const dispatch = useDispatch()
@@ -90,12 +74,3 @@ const Users = () => {
 }
 
 export default Users
-
-// <ReactPaginate
-//         pageCount={10}
-//         pageRangeDisplayed={5}
-//         marginPagesDisplayed={5}
-
-//       >
-
-//       </ReactPaginate>
