@@ -1,32 +1,30 @@
 import React, { useState, useEffect } from 'react'
-import Title, { SubTitle } from '../../components/Title'
+import Title from '../../components/Title'
 import { TableText, ValuesField, IdText, Colunm } from '../Users/elements'
-import { Link } from '@reach/router'
 import Arrow from '../../assets/icons/right-arrow.svg'
 import IconButton from '../../components/IconButton'
 import {
-  Form,
   Container,
 } from './elements'
 import Api from '../../Api';
 import { RootState } from '../../redux/rootReducer'
 import { useSelector, useDispatch } from 'react-redux'
-const example = {
-  id: 157354846,
-  name: "estevanpedro",
-  html_url: "https://avatars0.githubusercontent.com/u/34717111?v=4",
-}
+import { setLoading } from '../../redux/ducks/loading'
 
 const Repos = () => {
+  const dispatch = useDispatch()
   const { username } = useSelector((state: RootState) => state.username)
   const [userRepos, setUserRepos] = useState([])
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
+        dispatch(setLoading(true))
         const response = await Api.getUserRepos(username)
         setUserRepos(response)
+        dispatch(setLoading(false))
         console.log(response)
       } catch (e) {
+        dispatch(setLoading(false))
         console.error(e)
       }
     }

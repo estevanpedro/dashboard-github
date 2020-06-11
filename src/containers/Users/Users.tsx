@@ -7,6 +7,7 @@ import { Link } from '@reach/router'
 import Arrow from '../../assets/icons/right-arrow.svg'
 import { setUsername } from '../../redux/ducks/username'
 import { useDispatch } from 'react-redux'
+import { setLoading } from '../../redux/ducks/loading'
 
 const Users = () => {
   const dispatch = useDispatch()
@@ -17,10 +18,13 @@ const Users = () => {
   useEffect(() => {
     const fetchUserList = async () => {
       try {
+        dispatch(setLoading(true))
         const response = await Api.getUserList(130)
+        dispatch(setLoading(false))
         setUserList(response.users_list)
         setUserListToUpdate(response.users_list.slice(0, 15))
       } catch (e) {
+        dispatch(setLoading(false))
         console.error(e)
       }
     }
