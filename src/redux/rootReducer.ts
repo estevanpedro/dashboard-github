@@ -1,15 +1,11 @@
 import { combineReducers } from '@reduxjs/toolkit'
 
-import authReducer from './ducks/auth'
+import usernameReducer from './ducks/username'
 import loadingReducer from './ducks/loading'
-import userReducer from './ducks/user'
-import schemeMapReducer from './ducks/schemeMap'
 
 const rootReducer = combineReducers({
-  auth: authReducer,
+  username: usernameReducer,
   loading: loadingReducer,
-  user: userReducer,
-  schemeMap: schemeMapReducer,
 })
 
 export type RootState = ReturnType<typeof rootReducer>

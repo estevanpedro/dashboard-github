@@ -9,7 +9,7 @@ const initialState: LoadingState = {
 }
 
 const reducer = createSlice({
-  name: 'auth',
+  name: 'username',
   initialState,
   reducers: {
     setLoading(state: LoadingState, action: PayloadAction<boolean>) {
