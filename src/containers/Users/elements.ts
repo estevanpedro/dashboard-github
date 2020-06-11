@@ -47,3 +47,8 @@ export const Colunm = styled.div<ColunmField>`
 interface ColunmField {
   width?: string
 }
+
+export const Row = styled.div<ColunmField>`
+  flex-direction: row;
+  display: flex;
+`
