@@ -7,11 +7,11 @@ const ButtonContainer = styled(Button)`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 20px;
+  height: 20px;
   img {
-    width: 24px;
-    height: 24px;
+    width: 10px;
+    height: 10px;
   }
 `
 

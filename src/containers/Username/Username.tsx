@@ -25,13 +25,6 @@ const Username = () => {
   const handleSubmit = async (values: any) => {
     dispatch(setUsername(values.username))
     navigate('/details')
-    // se aparecer o erro de novo volta atras...
-    // try {
-    //   dispatch(setUsername(values.username))
-    //   navigate('/details')
-    // } catch (err) {
-    //   setUsernameError(err.message)
-    // }
   }
 
   return (
@@ -41,7 +34,7 @@ const Username = () => {
     >
       {({ values, errors, touched, handleChange, handleSubmit }) => (
         <Form onSubmit={handleSubmit}>
-          <SubTitle>Enter the Github username</SubTitle>
+          <Title>Enter the Github username</Title>
           <Container>
             <Input
               label="Username"
