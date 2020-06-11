@@ -17,7 +17,6 @@ import Username from './containers/Username'
 
 dotenv.config()
 
-// HIDE CONSOLES IN PRODUCTION
 if (process.env.NODE_ENV === 'production') {
   console.log = function () { }
   console.warn = function () { }
