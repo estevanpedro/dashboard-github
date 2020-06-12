@@ -5,6 +5,8 @@ import { Container } from './elements'
 import Api from '../../Api';
 import { RootState } from '../../redux/rootReducer'
 import { setLoading } from '../../redux/ducks/loading'
+import Button from '../../components/Button'
+import { navigate } from '@reach/router'
 
 const example = {
   id: 34717111,
@@ -46,6 +48,10 @@ const Details = () => {
       <SubTitle>Login: {userDetails.login}</SubTitle>
       <SubTitle>Avatar URL: {userDetails.avatar_url}</SubTitle>
       <SubTitle>Created at: {userDetails.created_at}</SubTitle>
+      <Button type='submit' margin='0 0 20px 0' onClick={() => { navigate('/repos') }}>
+        Repositories
+  </Button>
+
     </Container>
   )
 }
