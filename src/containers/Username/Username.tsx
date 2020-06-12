@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import Title, { SubTitle } from '../../components/Title'
+import Title from '../../components/Title'
 import { useDispatch } from 'react-redux'
-import { Formik, FormikErrors } from 'formik'
+import { Formik } from 'formik'
 import { navigate } from '@reach/router'
 import Button from '../../components/Button'
 import Input from '../../components/Input';
@@ -9,7 +9,6 @@ import {
   Form,
   Container,
 } from './elements'
-import Api from '../../Api';
 import { setUsername } from '../../redux/ducks/username'
 
 
